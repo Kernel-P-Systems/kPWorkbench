@@ -1,0 +1,33 @@
+delimiters "$", "$"
+StartFunctions(name) ::= <<
+
+int $name$_show()
+{
+	if(STRUCTURE_RULE != -1)
+	{
+		printf("[Divided] ");
+	}
+	$name$_showObjects();
+	return 0; /* Returning zero means the agent is not removed */
+}
+
+
+int $name$_initialization()
+{
+	if(SEED == 0)
+	{
+		SEED = time(NULL) + ID + INSTANCEID;
+		srand(SEED);
+	}
+	else
+	{
+		SEED += ID + INSTANCEID + rand();
+		srand(SEED);
+	}
+
+	STRUCTURE_RULE = -1;
+	RULE_TYPE_SELECTED = 0;
+	init_Multiset(&NEWBAG);
+	return 0; /* Returning zero means the agent is not removed */
+}
+>>

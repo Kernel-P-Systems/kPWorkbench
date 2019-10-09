@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\kPCore\kPCore.csproj" />
+    <ProjectReference Include="..\kPLingua\kPLingua.csproj" />
+    <ProjectReference Include="..\kPUtil\kPUtil.csproj" />
+  </ItemGroup>
+
+</Project>

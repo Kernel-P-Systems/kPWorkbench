@@ -1,0 +1,98 @@
+delimiters "$", "$"
+
+Functions(a) ::= <<
+            <functions>
+$a:Function()$
+            </functions>
+>>
+
+Function(a) ::= <<
+
+                <function>
+                    <name>$a.Name$</name>
+                    <description>$a.Description$</description>
+                    <currentState>$a.CurrentState$</currentState>
+                    <nextState>$a.NextState$</nextState>
+$if(a.Condition)$$Condition(a.Condition)$$endif$
+$if(a.Inputs)$$Inputs(a.Inputs)$$endif$
+$if(a.Outputs)$$Outputs(a.Outputs)$$endif$
+                </function>
+>>
+
+Condition(c) ::= <<
+                    <condition>
+                        <lhs>
+                            <value>$c.Lhs$</value>
+                        </lhs>
+                        <op>$c.Op$</op>
+                        <rhs>
+                            <value>$c.Rhs$</value>
+                        </rhs>
+                    </condition>
+>>
+
+Inputs(m) ::= <<
+                    <inputs>
+$m.Messages:Input()$
+                    </inputs>
+>>
+
+Input(m) ::= <<
+
+                        <input>
+                            <messageName>$m.Name$</messageName>
+$if(m.Filter)$$Filters(m)$$endif$
+                        </input>
+>>
+
+Filters(m) ::= <<
+                            <filter>
+$if(m.IsLogicOperators)$
+$m.Filter:FilterWithLogicOperators()$
+$else$
+$m.Filter:FilterWithoutLogicOperators()$
+$endif$
+                            </filter>
+>>
+
+FilterWithLogicOperators(c) ::= <<
+$if(c.LOp)$
+                                <lhs>
+                                    <lhs><value>$c.Lhs$</value></lhs>
+                                    <op>$c.Op$</op>
+                                    <rhs><value>$c.Rhs$</value></rhs>
+                                </lhs>
+$else$
+                                <rhs>
+                                    <lhs><value>$c.Lhs$</value></lhs>
+                                    <op>$c.Op$</op>
+                                    <rhs><value>$c.Rhs$</value></rhs>
+                                </rhs>
+$endif$
+$if(c.LOp)$
+                                <op>$c.LOp$</op>
+$endif$
+>>
+
+FilterWithoutLogicOperators(c) ::= <<
+                                <lhs>
+                                    <value>$c.Lhs$</value>
+                                </lhs>
+                                <op>$c.Op$</op>
+                                <rhs>
+                                    <value>$c.Rhs$</value>
+                                </rhs>
+>>
+
+Outputs(m) ::= <<
+                    <outputs>
+$m.Messages:Output()$
+                    </outputs>
+>>
+
+Output(m) ::= <<
+
+                        <output>
+                            <messageName>$m$</messageName>
+                        </output>
+>>

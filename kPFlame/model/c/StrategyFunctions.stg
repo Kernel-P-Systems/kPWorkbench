@@ -1,0 +1,104 @@
+delimiters "$", "$"
+StrategyFunctions(a) ::= <<
+
+$a.Functions:SF()$
+$CreateNewCell(a)$
+>>
+
+SF(f) ::= <<
+
+$if(f.Number)$$StrategyFunction(f)$$endif$
+>>
+
+StrategyFunction(f) ::= <<
+
+
+int $f.Name$()
+{
+	int Rules[] = {$f.Rules; separator = ", "$};
+	int Guards[] = {$f.Guards; separator = ", "$};
+	$a.Name$_$f.StrategyName$(Rules, Guards);
+
+	return 0; /* Returning zero means the agent is not removed */
+}
+>>
+
+CreateNewCell(a) ::= <<
+
+int $a.Name$_PrepareTheNewMembrane()
+{
+	if(RULE.size > 0)
+	{
+		int bagSize = RULE.array[0];
+		int current = bagSize * 2 + 1;
+		int size = RULE.array[current];
+		if(size > 0)
+		{
+			int n = size;
+			add_msgRequestId_message($a.TypeId$, INSTANCEID, n);
+		}
+	}
+	return 0; /* Returning zero means the agent is not removed */
+}
+
+int $a.Name$_CreateNewMembrane()
+{
+	int start_from = -1;
+	msgReceiveId_message = get_first_msgReceiveId_message();
+	while(msgReceiveId_message)
+	{
+		if(start_from == -1)
+			start_from = msgReceiveId_message->start_from;
+		msgReceiveId_message = get_next_msgReceiveId_message(msgReceiveId_message);
+	}
+	//printf("\n ok %d  %d \n", start_from, INSTANCEID);
+	if(RULE.size > 0 && start_from != -1)
+	{
+		$a.Name$_deleteObjects();
+		int objectId, objectMultiplicity, index;
+		int current = 2;
+		int size = RULE.size;
+		int RulesParameter[size + 2];
+		for(int i = 0;i<size;i++){
+			RulesParameter[i + 2] = RULE.array[i];
+		}
+		reset_int_array(&RULE);
+		int bagSize = RulesParameter[current++];
+		current += bagSize * 2 + 1;
+		size = RulesParameter[current++];
+		Multiset emptyBag;
+		init_Multiset(&emptyBag);
+		for(int i = 0;i<size;i++)
+		{
+			Multiset newBag;
+			init_Multiset(&newBag);
+			copy_Multiset(&BAG, &newBag);
+			bagSize = RulesParameter[current++];
+			for(int j = 0;j<bagSize;j++)
+			{
+				objectId = RulesParameter[current++];
+				objectMultiplicity = RulesParameter[current++];
+				index = $a.Name$_findObjectInBag(&newBag, objectId);
+				if(index == -1)
+				{
+					add_Object(&newBag.bag, objectId, objectMultiplicity);
+				}
+				else
+					newBag.bag.array[index].n += objectMultiplicity;
+			}
+			//printf("\n %d - %d \n", INSTANCEID, start_from + j);
+			add_main_agent($a.TypeId$, start_from + i, newBag, emptyBag, &RULE, &CONNECTIONS, -1, 0, 0, SEED + 1);
+		}
+		printf("\nApply division rule in membrane %d, instance %d\n", ID, INSTANCEID);
+		//main_showRule(i);
+		printf("\n");
+	}
+	return 0; /* Returning zero means the agent is not removed */
+}
+
+int $a.Name$_removeMembrane()
+{
+	STRUCTURE_RULE = 0;
+	return 0; /* Returning zero means the agent is not removed */
+}
+>>

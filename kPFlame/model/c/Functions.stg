@@ -1,0 +1,15 @@
+delimiters "$", "$"
+import "Headers.stg"
+import "Code.stg"
+import "StartFunctions.stg"
+import "StrategyFunctions.stg"
+import "EndFunctions.stg"
+import "InstanceManagerFunctions.stg"
+Functions(agent) ::= <<
+$Headers(agent.Name)$
+$Code(agent.Name, agent.RulesNumber)$
+$StartFunctions(agent.Name)$
+$StrategyFunctions(agent)$
+$EndFunctions(agent.Name)$
+$InstanceManagerFunctions(agent)$
+>>

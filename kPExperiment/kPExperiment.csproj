@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Antlr4.Runtime.Standard" Version="4.7.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\kPCore\kPCore.csproj" />
+    <ProjectReference Include="..\kPExperiment.Model\kPExperiment.Model.csproj" />
+    <ProjectReference Include="..\kPUtil\kPUtil.csproj" />
+  </ItemGroup>
+
+</Project>

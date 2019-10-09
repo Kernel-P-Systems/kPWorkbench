@@ -1,0 +1,68 @@
+delimiters "$", "$"
+import "AgentInstanceManager.stg"
+import "Functions.stg"
+Agent(a) ::= <<
+
+        <xagent>
+            <name>$a.Name$</name>
+            <description>$a.Description$</description>
+$AgentMemory()$
+$Functions(a.Functions)$
+        </xagent>
+$AgentInstanceManager(a)$
+>>
+
+AgentMemory() ::= <<
+            <memory>
+                <variable>
+                    <type>int</type>
+                    <name>id</name>
+                    <description></description>
+                </variable>
+                <variable>
+                    <type>int</type>
+                    <name>instanceId</name>
+                    <description></description>
+                </variable>
+                <variable>
+                    <type>Multiset</type>
+                    <name>bag</name>
+                    <description></description>
+                </variable>
+                <variable>
+                    <type>Multiset</type>
+                    <name>newbag</name>
+                    <description></description>
+                </variable>
+                <variable>
+                    <type>int_array</type>
+                    <name>rule</name>
+                    <description></description>
+                </variable>
+                <variable>
+                    <type>TypeInstanceIds_array</type>
+                    <name>connections</name>
+                    <description></description>
+                </variable>
+                <variable>
+                    <type>int</type>
+                    <name>structure_rule</name>
+                    <description></description>
+                </variable>
+                <variable>
+                    <type>int</type>
+                    <name>rule_type_selected</name>
+                    <description></description>
+                </variable>
+                <variable>
+                    <type>int</type>
+                    <name>stop</name>
+                    <description></description>
+                </variable>
+                <variable>
+                    <type>int</type>
+                    <name>seed</name>
+                    <description></description>
+                </variable>
+            </memory>
+>>

@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\kPCore\kPCore.csproj" />
+    <ProjectReference Include="..\kPExperiment.Model\kPExperiment.Model.csproj" />
+    <ProjectReference Include="..\kPExperiment\kPExperiment.csproj" />
+    <ProjectReference Include="..\kPFlame\kPFlame.csproj" />
+    <ProjectReference Include="..\kPLingua\kPLingua.csproj" />
+    <ProjectReference Include="..\kPSimulation\kPSimulation.csproj" />
+    <ProjectReference Include="..\kPSpin\kPSpin.csproj" />
+    <ProjectReference Include="..\kPUtil\kPUtil.csproj" />
+    <ProjectReference Include="..\kPXML\kPXML.csproj" />
+    <ProjectReference Include="..\NuSMV\NuSMV.csproj" />
+  </ItemGroup>
+
+</Project>

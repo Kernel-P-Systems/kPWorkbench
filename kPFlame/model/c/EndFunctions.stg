@@ -1,0 +1,37 @@
+delimiters "$", "$"
+EndFunctions(name) ::= <<
+
+int $name$_applyChanges()
+{
+	if(NEWBAG.bag.size > 0)
+		$name$_addRewriteObjects();
+	free_Multiset(&NEWBAG);
+	
+	return 0; /* Returning zero means the agent is not removed */
+}
+
+int $name$_receive()
+{
+
+	msgSendObject_message = get_first_msgSendObject_message();
+	while(msgSendObject_message)
+	{
+		Object o;
+		o.id = msgSendObject_message->objectID;
+		o.n = msgSendObject_message->n;
+		int p = $name$_findObjectInBag(&BAG, &o);
+		if(p >= 0)
+		{
+			BAG.bag.array[p].n += msgSendObject_message->n;
+		}
+		//printf("\n %d %d*%d \n", ID, msgSendObject_message->objectID, msgSendObject_message->n);
+		if(p == -1)
+		{
+			add_Object(&BAG.bag, msgSendObject_message->objectID, msgSendObject_message->n);
+		}
+		msgSendObject_message = get_next_msgSendObject_message(msgSendObject_message);
+	}
+	$name$_deleteObjects();
+	return 0; /* Returning zero means the agent is not removed */
+}
+>>

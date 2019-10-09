@@ -1,0 +1,6 @@
+delimiters "$", "$"
+Environment() ::= <<
+<environment>
+<show>0</show>
+</environment>
+>>

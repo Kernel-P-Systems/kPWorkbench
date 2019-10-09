@@ -1,0 +1,7 @@
+delimiters "$", "$"
+import "Agent.stg"
+Agents(agents) ::= <<
+    <agents>
+$agents:Agent()$
+    </agents>
+>>

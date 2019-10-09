@@ -1,0 +1,86 @@
+delimiters "$", "$"
+AgentInstanceManager(a) ::= <<
+
+        <xagent>
+            <name>$a.Name$InstanceManager</name>
+            <description>$a.Description$InstanceManager</description>
+$AgentInstanceManagerMemory()$
+$AgentFunctions(a)$
+        </xagent>
+>>
+
+AgentFunctions(a) ::= <<
+            <functions>
+                <function>
+                    <name>$a.Name$_instance_manager_receive</name>
+                    <description>$a.Name$_instance_manager_receive</description>
+                    <currentState>$a.Name$_instance_manager_start</currentState>
+                    <nextState>$a.Name$_instance_manager_receive</nextState>
+                    <inputs>
+                        <input>
+                            <messageName>msgRequestId</messageName>
+                            <filter>
+                                <lhs><value>$a.TypeId$</value></lhs>
+                                <op>EQ</op>
+                                <rhs><value>m.type_id</value></rhs>
+                            </filter>
+                        </input>
+                    </inputs>
+                </function>
+                <function>
+                    <name>$a.Name$_instance_manager_send</name>
+                    <description>$a.Name$_instance_manager_send</description>
+                    <currentState>$a.Name$_instance_manager_receive</currentState>
+                    <nextState>$a.Name$_instance_manager_end</nextState>
+                    <condition>
+                        <lhs>
+                            <value>a.is_new_instances</value>
+                        </lhs>
+                        <op>NEQ</op>
+                        <rhs>
+                            <value>0</value>
+                        </rhs>
+                    </condition>
+                    <outputs>
+                        <output>
+                            <messageName>msgReceiveId</messageName>
+                        </output>
+                    </outputs>
+                </function>
+                <function>
+                    <name>idle</name>
+                    <description>idle</description>
+                    <currentState>$a.Name$_instance_manager_receive</currentState>
+                    <nextState>$a.Name$_instance_manager_end</nextState>
+                    <condition>
+                        <lhs>
+                            <value>a.is_new_instances</value>
+                        </lhs>
+                        <op>EQ</op>
+                        <rhs>
+                            <value>0</value>
+                        </rhs>
+                    </condition>
+                </function>
+            </functions>
+>>
+
+AgentInstanceManagerMemory() ::= <<
+            <memory>
+                <variable>
+                    <type>int</type>
+                    <name>instance_number</name>
+                    <description></description>
+                </variable>
+                <variable>
+                    <type>int</type>
+                    <name>is_new_instances</name>
+                    <description></description>
+                </variable>
+                <variable>
+                    <type>int_array</type>
+                    <name>new_instances</name>
+                    <description></description>
+                </variable>
+            </memory>
+>>

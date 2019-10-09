@@ -1,0 +1,557 @@
+delimiters "$", "$"
+Code(name, rulesNumber) ::= <<
+
+
+int $name$_findObjectInBag(Multiset *multiset, int objectId)
+{
+    int index = -1;
+    int i = 0;
+    while(i < multiset->bag.size)
+    {
+        if(objectId == multiset->bag.array[i].id)
+        {
+            index = i;
+            break;
+        }
+        i++;
+    }
+    return index;
+}
+
+void $name$_randArray(int Array[], int size)
+{
+	int t;
+	int k;
+	for(int i = 0;i<size;i++)
+	{
+		k = rand() % size;
+		if(k < size - 1 )
+		{
+			t = Array[size-1];
+			Array[size-1] = Array[k];
+			Array[k] = t;
+		}
+	}
+	//for(int i = 0;i<size;i++)
+	//	printf("%d%s", Array[i], i+1==size?"\n":", ");
+	//printf("%d\n", time(NULL));
+}
+
+void $name$_addRewriteObjects()
+{
+	int pOld, pNew;
+	for(int i = 0;i<NEWBAG.bag.size;i++)
+	{
+		//pNew = findObjectInTree(objectsNewTree, &NEWBAG, &NEWBAG->bag.array[i], compareObject);
+		pOld = $name$_findObjectInBag(&BAG, NEWBAG.bag.array[i].id);
+		if(pOld >= 0)
+		{
+			BAG.bag.array[pOld].n += NEWBAG.bag.array[i].n;
+		}
+		else
+		{
+			Object *o = &NEWBAG.bag.array[i];
+			add_Object(&BAG.bag, o->id, o->n);
+			//printf("\n  (ID - %d)   %d*%d \n", ID, o->id, o->n);
+			//printf("\n  %d*%d \n", NEWBAG.bag.array[i].id, NEWBAG.bag.array[i].n);
+			//pOld = bagOld->bag.size - 1;
+			//objectsTree = addObjectInTree(objectsTree, pOld, bagOld, &NEWBAG->bag.array[i], compareObject);
+		}
+	}
+}
+
+int $name$_numberOfRuleToApply(int RulesParameter[], int i)
+{
+	int min = 0;
+	if(i < RulesParameter[0])
+	{
+		int current = RulesParameter[i + 1];
+		int bagSize = RulesParameter[current++];
+		if(bagSize > 0)
+		{
+		    int objectId, objectMultiplicity, index, n;
+			int j = 0;
+			do{
+                objectId = RulesParameter[current++];
+                objectMultiplicity = RulesParameter[current++];
+				n = 0;
+				index = $name$_findObjectInBag(&BAG, objectId);
+				if(index >= 0)
+					n = BAG.bag.array[index].n / objectMultiplicity;
+                if(j == 0)
+                    min = n;
+				min = n < min?n:min;
+				j++;
+			}while(j<bagSize && min > 0);
+			if(min > 0 && RulesParameter[current++] == 1)
+            {
+                int size = RulesParameter[current++];
+                int target, b;
+                for(j = 0;j<size && min > 0;j++)
+                {
+                    bagSize = RulesParameter[current++];
+                    current += bagSize * 2;
+                    target = RulesParameter[current++];
+                    if(target >= 0)
+                    {
+                        b = 0;
+                        for(int k = 0;k<CONNECTIONS.size && b == 0;k++)
+                        {
+                            if(target == CONNECTIONS.array[k].typeId)
+                                b = CONNECTIONS.array[k].instanceIds.size > 0;
+                        }
+                        if(b == 0)
+                            min = 0;
+                    }
+                }
+            }
+		}
+	}
+	return min;
+}
+
+int $name$_applyRule(int RulesParameter[], int i, int number)
+{
+	int ruleType = -1;
+	if(i < RulesParameter[0])
+	{
+		int current = RulesParameter[i + 1];
+		int bagSize = RulesParameter[current++];
+		if(bagSize > 0)
+		{
+		    int objectId, objectMultiplicity, index, n;
+			for(int j = 0;j<bagSize;j++)
+            {
+                objectId = RulesParameter[current++];
+                objectMultiplicity = RulesParameter[current++];
+                index = $name$_findObjectInBag(&BAG, objectId);
+                BAG.bag.array[index].n -= objectMultiplicity * number;
+            }
+            ruleType = RulesParameter[current++];
+            switch(ruleType)
+            {
+                case 0 : {
+                    bagSize = RulesParameter[current++];
+                    for(int j = 0;j<bagSize;j++)
+                    {
+                        objectId = RulesParameter[current++];
+                        objectMultiplicity = RulesParameter[current++];
+                        index = $name$_findObjectInBag(&NEWBAG, objectId);
+                        if(index == -1)
+                        {
+                            add_Object(&NEWBAG.bag, objectId, objectMultiplicity * number);
+                        }
+                        else
+                            NEWBAG.bag.array[index].n += objectMultiplicity * number;
+                    }
+                    break;
+                }
+                case 1 : {
+                    int size = RulesParameter[current++];
+                    int target, b;
+                    for(int j = 0;j<size;j++)
+                    {
+                        bagSize = RulesParameter[current++];
+                        target = RulesParameter[current + bagSize * 2];
+                        if(target == -1)
+                        {
+                            for(int k = 0;k<bagSize;k++)
+                            {
+                                objectId = RulesParameter[current++];
+                                objectMultiplicity = RulesParameter[current++];
+                                index = $name$_findObjectInBag(&NEWBAG, objectId);
+                                if(index == -1)
+                                {
+                                    add_Object(&NEWBAG.bag, objectId, objectMultiplicity * number);
+                                }
+                                else
+                                    NEWBAG.bag.array[index].n += objectMultiplicity * number;
+                            }
+                        }
+                        else
+                        {
+                            b = 1;
+                            int p = 0;
+                            int targetInstanceId = 0;
+                            while(p<CONNECTIONS.size && b)
+                            {
+                                if(target == CONNECTIONS.array[p].typeId)
+                                    b = 0;
+                                else
+                                    p++;
+                            }
+                            index = rand() % CONNECTIONS.array[p].instanceIds.size;
+                            targetInstanceId = CONNECTIONS.array[p].instanceIds.array[index];
+                            for(int k = 0;k<bagSize;k++)
+                            {
+                                objectId = RulesParameter[current++];
+                                objectMultiplicity = RulesParameter[current++];
+                                add_msgSendObject_message(ID, INSTANCEID, target, targetInstanceId, objectId, objectMultiplicity);
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+		}
+	}
+	return ruleType;
+}
+
+void $name$_copyRule(int RulesParameter[], int i)
+{
+	if(i < RulesParameter[0])
+	{
+		int current = RulesParameter[i + 1];
+		int bagSize = RulesParameter[current++];
+		if(bagSize > 0)
+		{
+			init_int_array(&RULE);
+			add_int(&RULE, bagSize);
+            for(int o = 0;o<bagSize;o++){
+				add_int(&RULE, RulesParameter[current++]);
+				add_int(&RULE, RulesParameter[current++]);
+			}
+            int ruleType = RulesParameter[current++];
+			add_int(&RULE, ruleType);
+            int size = RulesParameter[current++];
+			add_int(&RULE, size);
+            for(int j = 0;j<size;j++){
+                bagSize = RulesParameter[current++];
+                add_int(&RULE, bagSize);
+                for(int o = 0;o<bagSize;o++){
+					add_int(&RULE, RulesParameter[current++]);
+					add_int(&RULE, RulesParameter[current++]);
+				}
+            }
+		}
+	}
+}
+
+int $name$_checkGuards(int GuardsParameter[], int i)
+{
+	int bTest = 1;
+	if(i < GuardsParameter[0])
+	{
+		if(GuardsParameter[i + 1] > 0)
+		{
+			int bTestAnd = 1;
+			int bTestOr = 0;
+			int current = GuardsParameter[i + 1];
+			while(GuardsParameter[current] != -1 && bTest)
+			{
+				int rel = GuardsParameter[current++];
+				int guardObject = GuardsParameter[current++];
+				int guardObjectMultiplicity = GuardsParameter[current++];
+				int p = $name$_findObjectInBag(&BAG, guardObject);
+				int bagObjectMultiplicity = 0;
+				if(p >= 0)
+				{
+					bagObjectMultiplicity = BAG.bag.array[p].n;
+				}
+				int bTemp;
+				switch(rel % 8)
+				{
+					case 0 : bTemp = bagObjectMultiplicity < guardObjectMultiplicity;break;
+					case 1 : bTemp = bagObjectMultiplicity <= guardObjectMultiplicity;break;
+					case 2 : bTemp = bagObjectMultiplicity == guardObjectMultiplicity;break;
+					case 3 : bTemp = bagObjectMultiplicity != guardObjectMultiplicity;break;
+					case 4 : bTemp = bagObjectMultiplicity > guardObjectMultiplicity;break;
+					case 5 : bTemp = bagObjectMultiplicity >= guardObjectMultiplicity;break;
+				}
+				if(rel > 7)
+					bTemp = !bTemp;
+				bTestAnd = bTestAnd && bTemp;
+				if(GuardsParameter[current] == -1)
+					bTestOr = bTestOr || bTestAnd;
+				else
+				{
+					if(GuardsParameter[current++] == 1)
+					{
+						bTestOr = bTestOr || bTestAnd;
+						bTestAnd = 1;
+					}
+				}
+			}
+			bTest = bTestOr;
+		}
+	}
+	return bTest;
+}
+
+void $name$_applyRules_Sequence(int RulesParameter[], int GuardsParameter[])
+{
+	int b = 0;
+	int index;
+	int size = RulesParameter[0];
+	for(int i = 0;i < size;i++)
+	{
+		int n = $name$_numberOfRuleToApply(RulesParameter, i);
+		int bTest = 1;
+		bTest = $name$_checkGuards(GuardsParameter, i);
+		if(n > 0 && bTest == 1)
+		{
+			n = 1;
+			int ruleType = $name$_applyRule(RulesParameter, i, n);
+			if(b == 0)
+				printf("\nApply rules in membrane %d, instance %d in sequence mode\n", ID, INSTANCEID);
+			$name$_showRule(RulesParameter, GuardsParameter, i);
+			printf(" * %d\n", n);
+			b = 1;
+			if(ruleType == 2 || ruleType == 3)
+			{
+				if(ruleType == 2)
+					$name$_copyRule(RulesParameter, i);
+				STRUCTURE_RULE = i;
+				RULE_TYPE_SELECTED = ruleType;
+				STOP = 2;
+				break;
+			}
+		}
+		else
+		{
+			STOP = 1;
+			break;
+		}
+	}
+}
+
+void $name$_applyRules_Choice(int RulesParameter[], int GuardsParameter[])
+{
+	int size = RulesParameter[0];
+	int IndexArray[size];
+	for(int i = 0;i < size;i++)
+		IndexArray[i] = i;
+	int b = 0;
+	if(size > 0)
+		$name$_randArray(IndexArray, size);
+	int index;
+	int i;
+	while(b == 0 && size > 0)
+	{
+		i = 0;
+		if(size > 1)
+			i = rand() % size;
+		index = IndexArray[i];
+		int n = $name$_numberOfRuleToApply(RulesParameter, index);
+		int bTest = 1;
+		bTest = $name$_checkGuards(GuardsParameter, index);
+		if(n > 0 && bTest == 1)
+		{
+			n = 1;
+			int ruleType = $name$_applyRule(RulesParameter, index, n);
+			printf("\nApply rules in membrane %d, instance %d in choice mode\n", ID, INSTANCEID);
+			$name$_showRule(RulesParameter, GuardsParameter, index);
+			printf(" * %d\n", n);
+			b = 1;
+			if(ruleType == 2 || ruleType == 3)
+			{
+				if(ruleType == 2)
+					$name$_copyRule(RulesParameter, index);
+				STRUCTURE_RULE = index;
+				RULE_TYPE_SELECTED = ruleType;
+				STOP = 2;
+				break;
+			}
+		}
+		else
+		{
+			if(size > 1)
+				IndexArray[i] = IndexArray[size-1];
+			size--;
+		}
+	}
+}
+
+void $name$_applyRules_Arbitrary_Parallel(int RulesParameter[], int GuardsParameter[])
+{
+	int size = RulesParameter[0];
+	int IndexArray[size];
+	for(int i = 0;i < size;i++)
+		IndexArray[i] = i;
+
+	int b = 0;
+	if(size > 0)
+		$name$_randArray(IndexArray, size);
+	int index;
+	for(int i=0;i<size;i++)
+	{
+		index = IndexArray[i];
+		int n = $name$_numberOfRuleToApply(RulesParameter, index);
+		int bTest = 1;
+		bTest = $name$_checkGuards(GuardsParameter, index);
+		if(n > 0 && bTest == 1)
+		{
+			n = (rand() % n) + 1;
+			int ruleType = $name$_applyRule(RulesParameter, index, n);
+			if(ruleType == 2 || ruleType == 3)
+			{
+				if(ruleType == 2)
+					$name$_copyRule(RulesParameter, index);
+				STRUCTURE_RULE = index;
+				RULE_TYPE_SELECTED = ruleType;
+				STOP = 2;
+				break;
+			}
+			if(b == 0)
+				printf("\nApply rules in membrane %d, instance %d in arbitrary parallel mode\n", ID, INSTANCEID);
+			$name$_showRule(RulesParameter, GuardsParameter, index);
+			printf(" * %d\n", n);
+			b = 1;
+		}
+	}
+}
+
+void $name$_applyRules_Maximal_Parallel(int RulesParameter[], int GuardsParameter[])
+{
+	int size = RulesParameter[0];
+	int IndexArray[size];
+	for(int i = 0;i < size;i++)
+		IndexArray[i] = i;
+
+	int b = 0;
+	if(size > 0)
+		$name$_randArray(IndexArray, size);
+	int index;
+	for(int i=0;i<size;i++)
+	{
+		index = IndexArray[i];
+		int n = $name$_numberOfRuleToApply(RulesParameter, index);
+		int bTest = 1;
+		bTest = $name$_checkGuards(GuardsParameter, index);
+		if(n > 0 && bTest == 1)
+		{
+			int ruleType = $name$_applyRule(RulesParameter, index, n);
+			if(ruleType == 2 || ruleType == 3)
+			{
+				if(ruleType == 2)
+					$name$_copyRule(RulesParameter, index);
+				STRUCTURE_RULE = index;
+				RULE_TYPE_SELECTED = ruleType;
+				STOP = 2;
+				break;
+			}
+			if(b == 0)
+				printf("\nApply rules in membrane %d, instance %d in maximal parallel mode\n", ID, INSTANCEID);
+			$name$_showRule(RulesParameter, GuardsParameter, index);
+			printf(" * %d\n", n);
+			b = 1;
+		}
+	}
+}
+
+void $name$_showObjects()
+{
+	printf("Objects from membrane %d, instance %d = [", ID, INSTANCEID);
+	for(int i = 0;i<BAG.bag.size;i++)
+		printf("#%d*%d%s", BAG.bag.array[i].id, BAG.bag.array[i].n, i+1==BAG.bag.size?"":", ");
+	printf("]\n");
+}
+
+void $name$_showGuards(int GuardsParameter[], int i)
+{
+	if(i < GuardsParameter[0])
+	{
+		if(GuardsParameter[i + 1] > 0)
+		{
+		    int current = GuardsParameter[i + 1];
+			printf(" {");
+			while(GuardsParameter[current] != -1)
+			{
+				int rel = GuardsParameter[current++];
+				if(rel > 7)
+					printf("!");
+				rel %= 8;
+				switch(rel)
+				{
+					case 0 : printf("<");break;
+					case 1 : printf("<=");break;
+					case 2 : printf("==");break;
+					case 3 : printf("!=");break;
+					case 4 : printf(">");break;
+					case 5 : printf(">=");break;
+				}
+				printf("#%d*%d", GuardsParameter[current], GuardsParameter[current + 1]);
+				current += 2;
+				if(GuardsParameter[current] != -1)
+					printf("%s", GuardsParameter[current++] == 0?" & ":" | ");
+			}
+			printf("}");
+		}
+	}
+}
+
+void $name$_showRule(int RulesParameter[], int GuardsParameter[], int i)
+{
+	if(i < RulesParameter[0])
+	{
+		int current = RulesParameter[i + 1];
+        int bagSize = RulesParameter[current++];
+        printf("[");
+        for(int o = 0;o<bagSize;o++, current += 2)
+            printf("#%d*%d%s", RulesParameter[current], RulesParameter[current + 1], o+1==bagSize?"":", ");
+        printf("]");
+		printf(" -> ");
+		switch(RulesParameter[current++]) {
+            case 0 : {
+                bagSize = RulesParameter[current++];
+                printf("[");
+                for(int o = 0;o<bagSize;o++, current += 2)
+                    printf("#%d*%d%s", RulesParameter[current], RulesParameter[current + 1], o+1==bagSize?"":", ");
+                printf("]");
+                break;
+            }
+            case 1 : {
+                int size = RulesParameter[current++];
+                for(int j = 0;j<size;j++){
+                    bagSize = RulesParameter[current++];
+                    printf("[");
+                    for(int o = 0;o<bagSize;o++, current += 2)
+                        printf("#%d*%d%s", RulesParameter[current], RulesParameter[current + 1], o+1==bagSize?"":", ");
+                    printf("]");
+                    if(RulesParameter[current++] != -1)
+                        printf("%d%s", RulesParameter[current - 1], j+1==size?"":", ");
+                }
+                break;
+            }
+            case 2 : {
+                int size = RulesParameter[current++];
+                for(int j = 0;j<size;j++){
+                    bagSize = RulesParameter[current++];
+                    printf("[");
+                    for(int o = 0;o<bagSize;o++, current += 2)
+                        printf("#%d*%d%s", RulesParameter[current], RulesParameter[current + 1], o+1==bagSize?"":", ");
+                    printf("]");
+                }
+                break;
+            }
+            case 3 :
+                printf("#");
+                break;
+		}
+		$name$_showGuards(GuardsParameter, i);
+	}
+}
+
+void $name$_showRules(int RulesParameter[], int GuardsParameter[])
+{
+    if(RulesParameter[0] > 0){
+        int n = RulesParameter[0];
+        for(int i = 0;i<n;i++){
+            $name$_showRule(RulesParameter, GuardsParameter, i);
+            printf("\n");
+        }
+    }
+}
+
+void $name$_deleteObjects()
+{
+	int i = 0;
+	for(i=BAG.bag.size-1;i>=0;i--)
+	{
+		if(BAG.bag.array[i].n == 0)
+			remove_Object(&BAG.bag, i);
+		//printf("\n %d \n", BAG.bag.size);
+	}
+}
+>>

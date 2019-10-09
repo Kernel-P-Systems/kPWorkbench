@@ -1,0 +1,9 @@
+delimiters "$", "$"
+Headers(name) ::= <<
+#include "header.h"
+#include "$name$_agent_header.h"
+#include "$name$InstanceManager_agent_header.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+>>

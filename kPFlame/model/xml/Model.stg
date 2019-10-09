@@ -1,0 +1,16 @@
+delimiters "$", "$"
+import "Environment.stg"
+import "Agents.stg"
+import "Messages.stg"
+Model(model) ::= <<
+<?xml version="1.0" encoding="UTF-8"?>
+<xmodel version="2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://flame.ac.uk/schema/xmml_v2.xsd">
+    <name>kPsystem</name>
+    <version>2</version>
+    <author>Ionut</author>
+    <description>kPsystem</description>
+$Environment(model.Agents)$
+$Agents(model.Agents)$
+$Messages()$
+</xmodel>
+>>

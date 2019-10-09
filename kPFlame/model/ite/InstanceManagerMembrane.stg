@@ -1,0 +1,8 @@
+delimiters "$", "$"
+InstanceManagerMembrane(m) ::= <<
+
+<xagent>
+<name>$m.Name$InstanceManager</name>
+<instance_number>$m.InstanceNumbers$</instance_number>
+</xagent>
+>>

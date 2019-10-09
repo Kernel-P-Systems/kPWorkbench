@@ -1,0 +1,10 @@
+delimiters "$", "$"
+import "Environment.stg"
+import "Membranes.stg"
+InitialConfiguration(model) ::= <<
+<states>
+<itno>1</itno>
+$Environment()$
+$Membranes(model.Membranes)$
+</states>
+>>

@@ -1,0 +1,27 @@
+delimiters "$", "$"
+import "InstanceManagerMembrane.stg"
+Membranes(membranes) ::= <<
+
+$membranes:Membrane()$
+>>
+
+Membrane(m) ::= <<
+$m.Instances:Instance()$
+$InstanceManagerMembrane(m)$
+>>
+
+Instance(instance) ::= <<
+
+<xagent>
+<name>$instance.Membrane.Name$</name>
+<bag>$instance.Multiset$</bag>
+<id>$instance.Membrane.Id$</id>
+<instanceId>$instance.Id$</instanceId>
+<connections>{$instance.Connections:InstanceIDs(); separator = ", "$}</connections>
+<structure_rule>-1</structure_rule>
+</xagent>
+>>
+
+InstanceIDs(i) ::= <<
+{$i.Id$, {$i.Connections; separator = ", "$}}
+>>
