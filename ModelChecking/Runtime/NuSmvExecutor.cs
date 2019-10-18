@@ -4,6 +4,7 @@ using KpExperiment.Model.Verification;
 using KpLingua;
 using NuSMV;
 using KpSpin;
+using KpUtil;
 using kpw;
 using System;
 using System.Collections.Generic;
@@ -64,7 +65,7 @@ namespace KpExperiment.Verification.Runtime
             {
                 UseShellExecute = false,
                 WorkingDirectory = verificationDirectory.FullName,
-                FileName = "nusmv",
+                FileName = AppSettings.Instance.NuSmvPath,
                 Arguments = verificationModelFileName,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KpUtil;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,6 +21,9 @@ namespace KpUi
 
         private void SettingsForm_Shown(object sender, EventArgs e)
         {
+            tbSpinPath.Text = AppSettings.Instance.SpinPath;
+            tbGccPath.Text = AppSettings.Instance.GccPath;
+            tbNusmvPath.Text = AppSettings.Instance.NuSmvPath;
             tbXparserPath.Text = AppSettings.Instance.FlameXparserPath + (AppSettings.Instance.FlameXparserName ?? "");
             tbLibmboardPath.Text = AppSettings.Instance.FlameLibmboardPath;
         }
@@ -27,8 +31,6 @@ namespace KpUi
         private void bBrowseXparserPath_Click(object sender, EventArgs e)
         {
             var opd = new OpenFileDialog();
-            opd.Filter = "Xparser (xparser.exe)|xparser.exe";
-
             if (opd.ShowDialog() == DialogResult.OK)
             {
                 tbXparserPath.Text = opd.FileName;
@@ -37,47 +39,91 @@ namespace KpUi
 
         private void bBrowseLibmboardPath_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            var fbd = new FolderBrowserDialog();
             if (fbd.ShowDialog(this) == DialogResult.OK)
             {
                 tbLibmboardPath.Text = fbd.SelectedPath;
             }
         }
 
+        private void bBrowseNusmvPath_Click(object sender, EventArgs e)
+        {
+            var opd = new OpenFileDialog();
+            if (opd.ShowDialog() == DialogResult.OK)
+            {
+                tbNusmvPath.Text = opd.FileName;
+            }
+        }
+
+        private void bBrowseSpinPath_Click(object sender, EventArgs e)
+        {
+            var opd = new OpenFileDialog();
+            if (opd.ShowDialog() == DialogResult.OK)
+            {
+                tbSpinPath.Text = opd.FileName;
+            }
+        }
+
+        private void bBrowseGccPath_Click(object sender, EventArgs e)
+        {
+            var opd = new OpenFileDialog();
+            if (opd.ShowDialog() == DialogResult.OK)
+            {
+                tbGccPath.Text = opd.FileName;
+            }
+        }
+
         private void bOK_Click(object sender, EventArgs e)
         {
-            bool bFlameXparserPath = tbXparserPath.Text.Length > 0;
-            bool bFlameLibmboardPath = tbLibmboardPath.Text.Length > 0;
-            if (!bFlameXparserPath || !bFlameLibmboardPath)
+            var missingSettings = new List<String>();
+
+            if (String.IsNullOrEmpty(tbSpinPath.Text))
             {
-                int n = !bFlameXparserPath && !bFlameLibmboardPath ? 2 : 1;
-                string s = "";
-                if (n == 2)
-                    s = "The Xparser and Libmboard paths are not set. ";
-                else
-                    s = string.Format("The {0} paths path is not set. ", !bFlameXparserPath ? "Xparser" : "Libmboard");
-                s += "Do you want to leave the settings anyway?";
-                if (MessageBox.Show(this, s, "Flame", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
+                missingSettings.Add("Spin");
+            }
+
+            if (String.IsNullOrEmpty(tbGccPath.Text))
+            {
+                missingSettings.Add("GCC");
+            }
+
+            if (String.IsNullOrEmpty(tbNusmvPath.Text))
+            {
+                missingSettings.Add("NuSMV");
+            }
+
+            if (String.IsNullOrEmpty(tbXparserPath.Text))
+            {
+                missingSettings.Add("XParser");
+            }
+
+            if (String.IsNullOrEmpty(tbLibmboardPath.Text))
+            {
+                missingSettings.Add("Libmboard");
+            }
+
+
+            if (missingSettings.Count > 0)
+            {
+                string message = String.Format("The paths for the following external tools have not been configured: {0}. \nDo you want to leave the Settings anyway?", String.Join(", ", missingSettings));
+
+
+                if (MessageBox.Show(this, message, "Paths not set", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
                 {
                     Close();
                 }
             }
-            else
-            {              
-                string stbXparserPath = tbXparserPath.Text;
-                string sXparserPath = stbXparserPath.Substring(0, stbXparserPath.LastIndexOf(Path.DirectorySeparatorChar) + 1);
-                string sXparserName = stbXparserPath.Substring(sXparserPath.Length, stbXparserPath.Length - sXparserPath.Length);
-                
-                AppSettings.Instance.FlameXparserPath = sXparserPath;
-                AppSettings.Instance.FlameXparserName = sXparserName;
+
+                string xParserPath = tbXparserPath.Text.Substring(0, tbXparserPath.Text.LastIndexOf(Path.DirectorySeparatorChar) + 1);
+                string xParserName = tbXparserPath.Text.Substring(xParserPath.Length, tbXparserPath.Text.Length - xParserPath.Length);
+
+                AppSettings.Instance.SpinPath = tbSpinPath.Text;
+                AppSettings.Instance.GccPath = tbGccPath.Text;
+                AppSettings.Instance.NuSmvPath = tbNusmvPath.Text;
                 AppSettings.Instance.FlameLibmboardPath = tbLibmboardPath.Text;
+                AppSettings.Instance.FlameXparserPath = xParserPath;
+                AppSettings.Instance.FlameXparserName = xParserName;
                 Close();
-            }
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

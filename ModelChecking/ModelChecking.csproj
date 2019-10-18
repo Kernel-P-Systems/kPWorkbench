@@ -10,6 +10,7 @@
     <ProjectReference Include="..\kPExperiment\kPExperiment.csproj" />
     <ProjectReference Include="..\kPLingua\kPLingua.csproj" />
     <ProjectReference Include="..\kPSpin\kPSpin.csproj" />
+    <ProjectReference Include="..\kPUtil\kPUtil.csproj" />
     <ProjectReference Include="..\kpw\kpw.csproj" />
     <ProjectReference Include="..\NuSMV\NuSMV.csproj" />
   </ItemGroup>

@@ -16,6 +16,7 @@
     <ProjectReference Include="..\kPExperiment\kPExperiment.csproj" />
     <ProjectReference Include="..\kPFlame\kPFlame.csproj" />
     <ProjectReference Include="..\kPLingua\kPLingua.csproj" />
+    <ProjectReference Include="..\kPUtil\kPUtil.csproj" />
     <ProjectReference Include="..\kpw\kpw.csproj" />
     <ProjectReference Include="..\ModelChecking\ModelChecking.csproj" />
   </ItemGroup>

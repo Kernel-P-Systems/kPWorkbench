@@ -36,15 +36,23 @@
             this.bBrowseLibmboardPath = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.tbLibmboardPath = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.bBrowseNusmvPath = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tbNusmvPath = new System.Windows.Forms.TextBox();
+            this.bBrowseSpinPath = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tbSpinPath = new System.Windows.Forms.TextBox();
+            this.bBrowseGccPath = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tbGccPath = new System.Windows.Forms.TextBox();
+            this.SuspendLayout();
             // 
             // bOK
             // 
-            this.bOK.Location = new System.Drawing.Point(329, 182);
-            this.bOK.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.bOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.bOK.Location = new System.Drawing.Point(358, 342);
             this.bOK.Name = "bOK";
-            this.bOK.Size = new System.Drawing.Size(88, 27);
+            this.bOK.Size = new System.Drawing.Size(75, 23);
             this.bOK.TabIndex = 0;
             this.bOK.Text = "OK";
             this.bOK.UseVisualStyleBackColor = true;
@@ -52,11 +60,11 @@
             // 
             // bCancel
             // 
+            this.bCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.bCancel.Location = new System.Drawing.Point(436, 182);
-            this.bCancel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.bCancel.Location = new System.Drawing.Point(449, 342);
             this.bCancel.Name = "bCancel";
-            this.bCancel.Size = new System.Drawing.Size(88, 27);
+            this.bCancel.Size = new System.Drawing.Size(75, 23);
             this.bCancel.TabIndex = 1;
             this.bCancel.Text = "Cancel";
             this.bCancel.UseVisualStyleBackColor = true;
@@ -64,10 +72,9 @@
             // bBrowseXparserPath
             // 
             this.bBrowseXparserPath.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.bBrowseXparserPath.Location = new System.Drawing.Point(524, 47);
-            this.bBrowseXparserPath.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.bBrowseXparserPath.Location = new System.Drawing.Point(449, 222);
             this.bBrowseXparserPath.Name = "bBrowseXparserPath";
-            this.bBrowseXparserPath.Size = new System.Drawing.Size(88, 28);
+            this.bBrowseXparserPath.Size = new System.Drawing.Size(75, 24);
             this.bBrowseXparserPath.TabIndex = 17;
             this.bBrowseXparserPath.Text = "Browse...";
             this.bBrowseXparserPath.UseVisualStyleBackColor = true;
@@ -76,28 +83,25 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 29);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(12, 205);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 15);
+            this.label1.Size = new System.Drawing.Size(69, 13);
             this.label1.TabIndex = 16;
-            this.label1.Text = "Xparser path";
+            this.label1.Text = "XParser Path";
             // 
             // tbXparserPath
             // 
-            this.tbXparserPath.Location = new System.Drawing.Point(12, 51);
-            this.tbXparserPath.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tbXparserPath.Location = new System.Drawing.Point(12, 224);
             this.tbXparserPath.Name = "tbXparserPath";
-            this.tbXparserPath.Size = new System.Drawing.Size(504, 23);
+            this.tbXparserPath.Size = new System.Drawing.Size(421, 20);
             this.tbXparserPath.TabIndex = 15;
             // 
             // bBrowseLibmboardPath
             // 
             this.bBrowseLibmboardPath.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.bBrowseLibmboardPath.Location = new System.Drawing.Point(524, 115);
-            this.bBrowseLibmboardPath.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.bBrowseLibmboardPath.Location = new System.Drawing.Point(449, 281);
             this.bBrowseLibmboardPath.Name = "bBrowseLibmboardPath";
-            this.bBrowseLibmboardPath.Size = new System.Drawing.Size(88, 28);
+            this.bBrowseLibmboardPath.Size = new System.Drawing.Size(75, 24);
             this.bBrowseLibmboardPath.TabIndex = 20;
             this.bBrowseLibmboardPath.Text = "Browse...";
             this.bBrowseLibmboardPath.UseVisualStyleBackColor = true;
@@ -106,39 +110,116 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 97);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(12, 264);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(92, 15);
+            this.label2.Size = new System.Drawing.Size(81, 13);
             this.label2.TabIndex = 19;
-            this.label2.Text = "Libmboard path";
+            this.label2.Text = "Libmboard Path";
             // 
             // tbLibmboardPath
             // 
-            this.tbLibmboardPath.Location = new System.Drawing.Point(12, 119);
-            this.tbLibmboardPath.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tbLibmboardPath.Location = new System.Drawing.Point(12, 283);
             this.tbLibmboardPath.Name = "tbLibmboardPath";
-            this.tbLibmboardPath.Size = new System.Drawing.Size(504, 23);
+            this.tbLibmboardPath.Size = new System.Drawing.Size(421, 20);
             this.tbLibmboardPath.TabIndex = 18;
             // 
-            // pictureBox1
+            // bBrowseNusmvPath
             // 
-            this.pictureBox1.ImageLocation = "Resources/xImage.png";
-            this.pictureBox1.Location = new System.Drawing.Point(178, 182);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 50);
-            this.pictureBox1.TabIndex = 21;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.bBrowseNusmvPath.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.bBrowseNusmvPath.Location = new System.Drawing.Point(449, 160);
+            this.bBrowseNusmvPath.Name = "bBrowseNusmvPath";
+            this.bBrowseNusmvPath.Size = new System.Drawing.Size(75, 24);
+            this.bBrowseNusmvPath.TabIndex = 23;
+            this.bBrowseNusmvPath.Text = "Browse...";
+            this.bBrowseNusmvPath.UseVisualStyleBackColor = true;
+            this.bBrowseNusmvPath.Click += new System.EventHandler(this.bBrowseNusmvPath_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 143);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(69, 13);
+            this.label3.TabIndex = 22;
+            this.label3.Text = "NuSMV Path";
+            // 
+            // tbNusmvPath
+            // 
+            this.tbNusmvPath.Location = new System.Drawing.Point(12, 162);
+            this.tbNusmvPath.Name = "tbNusmvPath";
+            this.tbNusmvPath.Size = new System.Drawing.Size(421, 20);
+            this.tbNusmvPath.TabIndex = 21;
+            // 
+            // bBrowseSpinPath
+            // 
+            this.bBrowseSpinPath.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.bBrowseSpinPath.Location = new System.Drawing.Point(449, 36);
+            this.bBrowseSpinPath.Name = "bBrowseSpinPath";
+            this.bBrowseSpinPath.Size = new System.Drawing.Size(75, 24);
+            this.bBrowseSpinPath.TabIndex = 26;
+            this.bBrowseSpinPath.Text = "Browse...";
+            this.bBrowseSpinPath.UseVisualStyleBackColor = true;
+            this.bBrowseSpinPath.Click += new System.EventHandler(this.bBrowseSpinPath_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 19);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 13);
+            this.label4.TabIndex = 25;
+            this.label4.Text = "Spin Path";
+            // 
+            // tbSpinPath
+            // 
+            this.tbSpinPath.Location = new System.Drawing.Point(12, 38);
+            this.tbSpinPath.Name = "tbSpinPath";
+            this.tbSpinPath.Size = new System.Drawing.Size(421, 20);
+            this.tbSpinPath.TabIndex = 24;
+            // 
+            // bBrowseGccPath
+            // 
+            this.bBrowseGccPath.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.bBrowseGccPath.Location = new System.Drawing.Point(449, 97);
+            this.bBrowseGccPath.Name = "bBrowseGccPath";
+            this.bBrowseGccPath.Size = new System.Drawing.Size(75, 24);
+            this.bBrowseGccPath.TabIndex = 29;
+            this.bBrowseGccPath.Text = "Browse...";
+            this.bBrowseGccPath.UseVisualStyleBackColor = true;
+            this.bBrowseGccPath.Click += new System.EventHandler(this.bBrowseGccPath_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 80);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(52, 13);
+            this.label5.TabIndex = 28;
+            this.label5.Text = "Gcc Path";
+            // 
+            // tbGccPath
+            // 
+            this.tbGccPath.Location = new System.Drawing.Point(12, 99);
+            this.tbGccPath.Name = "tbGccPath";
+            this.tbGccPath.Size = new System.Drawing.Size(421, 20);
+            this.tbGccPath.TabIndex = 27;
             // 
             // SettingsForm
             // 
             this.AcceptButton = this.bOK;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.bCancel;
-            this.ClientSize = new System.Drawing.Size(634, 241);
-            this.Controls.Add(this.pictureBox1);
+            this.ClientSize = new System.Drawing.Size(543, 377);
+            this.Controls.Add(this.bBrowseGccPath);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.tbGccPath);
+            this.Controls.Add(this.bBrowseSpinPath);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.tbSpinPath);
+            this.Controls.Add(this.bBrowseNusmvPath);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.tbNusmvPath);
             this.Controls.Add(this.bBrowseLibmboardPath);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tbLibmboardPath);
@@ -148,7 +229,6 @@
             this.Controls.Add(this.bCancel);
             this.Controls.Add(this.bOK);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SettingsForm";
@@ -157,7 +237,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Settings";
             this.Shown += new System.EventHandler(this.SettingsForm_Shown);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -171,6 +252,14 @@
         private System.Windows.Forms.Button bBrowseLibmboardPath;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbLibmboardPath;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button bBrowseNusmvPath;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox tbNusmvPath;
+        private System.Windows.Forms.Button bBrowseSpinPath;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox tbSpinPath;
+        private System.Windows.Forms.Button bBrowseGccPath;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox tbGccPath;
     }
 }

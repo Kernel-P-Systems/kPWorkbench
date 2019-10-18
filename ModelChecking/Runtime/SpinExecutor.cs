@@ -4,6 +4,7 @@ using KpExperiment.Model.Verification;
 using KpLingua;
 using KpSpin;
 using KpSpin.SpinVerificationModel;
+using KpUtil;
 using kpw;
 using System;
 using System.Collections.Generic;
@@ -90,8 +91,7 @@ namespace KpExperiment.Verification.Runtime
             {
                 UseShellExecute = false,
                 WorkingDirectory = verificationDirectory.FullName,
-                //FileName = "spin",
-                FileName = "spin64",
+                FileName = AppSettings.Instance.SpinPath,
                 Arguments = string.Format("-a {0}", Path.GetFileName(verificationModelFileName)),
                 RedirectStandardError = true,
                 CreateNoWindow = true,
@@ -115,11 +115,14 @@ namespace KpExperiment.Verification.Runtime
             var startInfo = new ProcessStartInfo
             {
                 UseShellExecute = false,
+                ErrorDialog = true,
                 WorkingDirectory = verificationDirectory.FullName,
-                FileName = "gcc",
-                //Arguments = "-o pan -DVECTORSZ=10000000 -DBITSTATE pan.c",
-                Arguments = "-DWIN64 -DVECTORSZ=99999999 pan.c -Fepan",
+                FileName = AppSettings.Instance.GccPath,
+                //Arguments = "-o a -DVECTORSZ=10000000 -DBITSTATE pan.c",
+                //Arguments = "-DWIN64 -DVECTORSZ=99999999 pan.c -Fepan",
+                Arguments = "-DVECTORSZ=99999999 pan.c -Fepan",
                 RedirectStandardError = true,
+                RedirectStandardOutput=true,
                 CreateNoWindow = true,
                 WindowStyle = ProcessWindowStyle.Hidden,
             };
@@ -189,7 +192,7 @@ namespace KpExperiment.Verification.Runtime
             {
                 UseShellExecute = false,
                 WorkingDirectory = verificationDirectory.FullName,
-                FileName = "spin",
+                FileName = AppSettings.Instance.SpinPath,
                 Arguments = string.Format("-t -u {0}", Path.GetFileName(verificationModelFileName)),
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,

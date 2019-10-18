@@ -11,6 +11,7 @@ using KpLingua.Input;
 using KpFLAME;
 using KpCore;
 using KpLingua;
+using KpUtil;
 
 namespace KpUi.Runtime
 {
