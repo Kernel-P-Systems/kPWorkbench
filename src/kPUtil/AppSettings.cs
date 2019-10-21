@@ -14,6 +14,7 @@ namespace KpUtil
         private System.Configuration.Configuration config;
         private string spinPath = null;
         private string gccPath = null;
+        private string spinOptions = null;
         private string nuSmvPath = null;
         private string flameXparserPath = null;
         private string flameXparserName = null;
@@ -70,6 +71,33 @@ namespace KpUtil
                 else
                 {
                     config.AppSettings.Settings["SpinPath"].Value = spinPath;
+                }
+                config.Save();
+            }
+        }
+
+        public string SpinOptions
+        {
+            get
+            {
+                if (spinOptions == null)
+                {
+                    KeyValueConfigurationElement setting = config.AppSettings.Settings["SpinOptions"];
+                    spinOptions = setting?.Value;
+                }
+
+                return spinOptions;
+            }
+            set
+            {
+                spinOptions = value;
+                if (config.AppSettings.Settings["SpinOptions"] == null)
+                {
+                    config.AppSettings.Settings.Add("SpinOptions", spinOptions);
+                }
+                else
+                {
+                    config.AppSettings.Settings["SpinOptions"].Value = spinOptions;
                 }
                 config.Save();
             }
