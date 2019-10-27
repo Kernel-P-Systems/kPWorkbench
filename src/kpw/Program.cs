@@ -171,8 +171,6 @@ namespace kpw
                 }
             }
 
-            Console.ReadKey();
-
             return 0;
         }
 
