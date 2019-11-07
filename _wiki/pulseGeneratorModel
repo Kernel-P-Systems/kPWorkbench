@@ -1,0 +1,60 @@
+ /*1x10 1 Sender and 10 PulseGen*/
+ type PulsingCell {
+ 	choice {
+	 	/* rule r1 and r2 */
+	 	PluxL_geneLuxR -> PluxL_geneLuxR, proteinLuxR . 	
+	 	/* rule r3 */
+	 	proteinLuxR -> {} .
+	 	/* rule r4 */
+	 	proteinLuxR, signalAHL -> proteinLuxR_AHL .
+	 	/* rule r5 */
+	 	//proteinLuxR_AHL -> {} .
+	 		 	
+	 	/* rule r6*/
+	 	proteinLuxR_AHL, PluxPR_geneGFP -> PluxPR_LuxR2_geneGFP .
+	 			
+	 	/* rule r7 */
+	 	PluxPR_LuxR2_geneGFP -> PluxPR_LuxR2_geneGFP, proteinGFP .
+		
+	 	/* rule r8 */
+	 	//proteinGFP -> {} .
+	 	/* rule r9 */
+	 	signalAHL -> signalAHL (PulsingCell) .
+	 	/* rule r10 */
+	 	/* signalAHL -> signalAHL (SenderCell) . */
+	 		
+	 }
+ }
+
+ type SenderCell {
+ 	choice {
+ 		/* rule r1 */
+	     PLtetO1_geneLuxI -> PLtetO1_geneLuxI, proteinLuxI .
+	 			
+	    /* rule r2 */
+	    proteinLuxI -> {} .
+	    /* rule r3 */
+	    proteinLuxI -> proteinLuxI, signalAHL .
+	    /* rule r4 */
+	    signalAHL -> signalAHL (PulsingCell) .
+	    /* rule r5 */
+	    /* signalAHL -> signalAHL (SenderCell) . */
+	}
+
+ }
+/*Instances*/
+ puls1 {PluxL_geneLuxR, PluxR_geneCI, PluxPR_geneGFP} (PulsingCell) .
+ puls2 {PluxL_geneLuxR, PluxR_geneCI, PluxPR_geneGFP} (PulsingCell) .
+ puls3 {PluxL_geneLuxR, PluxR_geneCI, PluxPR_geneGFP} (PulsingCell) .
+ puls4 {PluxL_geneLuxR, PluxR_geneCI, PluxPR_geneGFP} (PulsingCell) .
+ puls5 {PluxL_geneLuxR, PluxR_geneCI, PluxPR_geneGFP} (PulsingCell) .
+ puls6 {PluxL_geneLuxR, PluxR_geneCI, PluxPR_geneGFP} (PulsingCell) .
+ puls7 {PluxL_geneLuxR, PluxR_geneCI, PluxPR_geneGFP} (PulsingCell) .
+ puls8 {PluxL_geneLuxR, PluxR_geneCI, PluxPR_geneGFP} (PulsingCell) .
+ puls9 {PluxL_geneLuxR, PluxR_geneCI, PluxPR_geneGFP} (PulsingCell) .
+ puls10 {PluxL_geneLuxR, PluxR_geneCI, PluxPR_geneGFP} (PulsingCell) .
+
+ send1 {PLtetO1_geneLuxI} (SenderCell) .
+
+/*Connections*/
+ send1 - puls1 - puls2 - puls3 - puls4 - puls5 - puls6 - puls7 - puls8 - puls9 - puls10 .
