@@ -1,0 +1,9 @@
+ctl: eventually puls10.proteinGFP > 0;
+
+ctl: eventually puls10.signalAHL > 0;
+
+ctl: send1.signalAHL > 0 followed-by puls10.proteinGFP > 0;
+
+ctl: puls1.signalAHL > 0 followed-by puls10.signalAHL > 0;
+
+ctl: puls10.proteinGFP > 0 preceded-by puls9.signalAHL > 0;
