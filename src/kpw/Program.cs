@@ -545,7 +545,7 @@ namespace kpw
             KPsystemXMLWriter kPsystemXML = new KPsystemXMLWriter(kpModel.KPsystem);
             try
             {
-                Directory.CreateDirectory(outPathName + @"\ite");
+                Directory.CreateDirectory(outPathName + @"/ite");
             }
             catch (KplParseException kplException)
             {
@@ -556,11 +556,11 @@ namespace kpw
                 writer.Write(kPsystemXML.ToXML());
             }
             kPsystemXML.SaveCFiles(outPathName);
-            using (StreamWriter writer = new StreamWriter(outPathName + @"ite\0.xml"))
+            using (StreamWriter writer = new StreamWriter(outPathName + @"ite/0.xml"))
             {
                 writer.Write(kPsystemXML.ToAgentsInitialConfiguration());
             }
-            using (StreamWriter writer = new StreamWriter(outPathName + @"ite\map.txt"))
+            using (StreamWriter writer = new StreamWriter(outPathName + @"ite/map.txt"))
             {
                 writer.Write(kPsystemXML.MapObjectIds);
             }

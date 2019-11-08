@@ -93,7 +93,7 @@ namespace KpUi.Runtime
             try
             {
                 Directory.CreateDirectory(tempFolder.FullName);
-                tempFolder = new FileInfo(tempFolder + @"\");
+                tempFolder = new FileInfo(tempFolder + @"/");
             }
             catch (KplParseException kplException)
             {
@@ -104,11 +104,11 @@ namespace KpUi.Runtime
                 writer.Write(kPsystemXML.ToXML());
             }
             kPsystemXML.SaveCFiles(tempFolder.FullName);
-            using (StreamWriter writer = new StreamWriter(outputPathName + @"ite\0.xml"))
+            using (StreamWriter writer = new StreamWriter(outputPathName + @"ite/0.xml"))
             {
                 writer.Write(kPsystemXML.ToAgentsInitialConfiguration());
             }
-            using (StreamWriter writer = new StreamWriter(outputPathName + @"ite\map.txt"))
+            using (StreamWriter writer = new StreamWriter(outputPathName + @"ite/map.txt"))
             {
                 writer.Write(kPsystemXML.MapObjectIds);
             }
@@ -154,9 +154,9 @@ namespace KpUi.Runtime
         private void Clean(FileInfo fileName)
         {
             DirectoryInfo parent = Directory.GetParent(Directory.GetParent(fileName.FullName).FullName);
-            if (File.Exists(parent.FullName + @"\" + executableFileName))
-                File.Delete(parent.FullName + @"\" + executableFileName);
-            Directory.Move(fileName.FullName + executableFileName, parent.FullName + @"\" + executableFileName);
+            if (File.Exists(parent.FullName + @"/" + executableFileName))
+                File.Delete(parent.FullName + @"/" + executableFileName);
+            Directory.Move(fileName.FullName + executableFileName, parent.FullName + @"/" + executableFileName);
             Directory.Delete(Directory.GetParent(fileName.FullName).FullName, true);
         }
 
