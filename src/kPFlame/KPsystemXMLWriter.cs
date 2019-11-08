@@ -73,7 +73,7 @@ namespace KpFLAME
 
         private string SaveCFile(Agent agent)
         {
-            string modelTemplate = @"model\c\Functions.stg";
+            string modelTemplate = @"model/c/Functions.stg";
             string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, modelTemplate);
             TemplateGroup templateGroup = new TemplateGroupFile(path);
             Template st = templateGroup.GetInstanceOf("Functions");
@@ -83,7 +83,7 @@ namespace KpFLAME
 
         public string ToXML()
         {
-            string modelTemplate = @"model\xml\Model.stg";
+            string modelTemplate = @"model/xml/Model.stg";
             string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, modelTemplate);
             TemplateGroup templateGroup = new TemplateGroupFile(path);
             Template st = templateGroup.GetInstanceOf("Model");
@@ -93,7 +93,7 @@ namespace KpFLAME
 
         public string ToAgentsInitialConfiguration()
         {
-            string modelTemplate = @"model\ite\InitialConfiguration.stg";
+            string modelTemplate = @"model/ite/InitialConfiguration.stg";
             string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, modelTemplate);
             TemplateGroup templateGroup = new TemplateGroupFile(path);
             Template st = templateGroup.GetInstanceOf("InitialConfiguration");
