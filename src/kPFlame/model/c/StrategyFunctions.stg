@@ -87,7 +87,7 @@ int $a.Name$_CreateNewMembrane()
 					newBag.bag.array[index].n += objectMultiplicity;
 			}
 			//printf("\n %d - %d \n", INSTANCEID, start_from + j);
-			add_main_agent($a.TypeId$, start_from + i, newBag, emptyBag, &RULE, &CONNECTIONS, -1, 0, 0, SEED + 1);
+			//add_main_agent($a.TypeId$, start_from + i, newBag, emptyBag, &RULE, &CONNECTIONS, -1, 0, 0, SEED + 1);
 		}
 		printf("\nApply division rule in membrane %d, instance %d\n", ID, INSTANCEID);
 		//main_showRule(i);
