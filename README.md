@@ -26,7 +26,7 @@ Moreover, performing end-to-end expriments using kPWorkbench requires the follow
 3. [NuSMV](http://nusmv.fbk.eu/NuSMV/download/getting_bin-v2.html)
 4. [FLAME](http://flame.ac.uk/docs/install.html)
 
-## Build
+## Download
 The kPWorkbench binaries for various platforms can be downloaded from the [releases](https://github.com/Kernel-P-Systems/kPWorkbench/releases) section.
 
 ## Build
