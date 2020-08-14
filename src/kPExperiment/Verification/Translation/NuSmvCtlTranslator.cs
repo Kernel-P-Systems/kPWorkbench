@@ -30,12 +30,12 @@ namespace KpExperiment.Verification.Translation
 
             switch (expression.Operator)
             {
-                case TemporalOperator.Next: translation = string.Format("EX {0}", operand); break;
-                case TemporalOperator.Eventually: translation = string.Format("EF {0}", operand); break;
-                case TemporalOperator.Always: translation = string.Format("AG {0}", operand); break;
-                case TemporalOperator.Never: translation = string.Format("!(EF {0})", operand); break;
-                case TemporalOperator.InfinitelyOften: translation = string.Format("AG (EF {0})", operand); break;
-                case TemporalOperator.SteadyState: translation = string.Format("AF (AG {0})", operand); break;
+                case TemporalOperator.Next: translation = string.Format("EX (!pInS U ({0} & pInS))", operand); break;
+                case TemporalOperator.Eventually: translation = string.Format("EF ({0} & pInS)", operand); break;
+                case TemporalOperator.Always: translation = string.Format("AG ({0} | !pInS)", operand); break;
+                case TemporalOperator.Never: translation = string.Format("!(EF ({0} & pInS))", operand); break;
+                case TemporalOperator.InfinitelyOften: translation = string.Format("AG (EF ({0} & pInS) | !pInS)", operand); break;
+                case TemporalOperator.SteadyState: translation = string.Format("AF (AG ({0} | !pInS) & pInS)", operand); break;
             }
 
             return translation;
@@ -49,12 +49,11 @@ namespace KpExperiment.Verification.Translation
 
             switch (expression.Operator)
             {
-                case TemporalOperator.Until: translation = string.Format("A [{0} U {1}]", leftOperand, rightOperand); break;
-                case TemporalOperator.FollowedBy: translation = string.Format("AG ({0} -> EF {1})", leftOperand, rightOperand); break;
-                // Mehmet has commented the following line, it has changed to the following line which I believe the correct form of preceded-by
-                // you can revert it if you disagree
-                //case TemporalOperator.PrecededBy: translation = string.Format("!(E [!({0}) U (!({0}) & {1})])", leftOperand, rightOperand); break;
-                case TemporalOperator.PrecededBy: translation = string.Format("!(E [!({1}) U (!({1}) & {0})])", leftOperand, rightOperand); break;
+                case TemporalOperator.Until: translation = string.Format("A [({0} & !pInS) U ({1} & pInS)]", leftOperand, rightOperand); break;
+                case TemporalOperator.FollowedBy: translation = string.Format("AG (({0} -> EF ({1} & pInS)) | !pInS)", leftOperand, rightOperand); break;
+                // Mehmet has changed to the following line which he believes the correct form of preceded-by is
+                //case TemporalOperator.PrecededBy: translation = string.Format("!(E [!({1}) U (!({1}) & {0})])", leftOperand, rightOperand); break;
+                case TemporalOperator.PrecededBy: translation = string.Format("!(E [(!({0}) | !pInS) U (!({0}) & {1} & pInS)])", leftOperand, rightOperand); break;
             }
 
             return translation;
