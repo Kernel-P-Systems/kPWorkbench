@@ -1,0 +1,187 @@
+Simulation started.
+Initial Configuration
+-------------------------------------------------
+TYPE C1
+#0 NC1 [Active] {6a} Links to #: 1
+TYPE C2
+#1 NC2 [Active] {} Links to #: 0, 2
+TYPE C3
+#2 NC3 [Active] {} Links to #: 1
+-------------------------------------------------
+
+STEP 1
+
+Rule #0 * >=a: a -> {a}(C2) * applied in instance #0 NC1.
+Selected instance #1 as target of type C2 for rule #0.
+
+Configuration #1
+-------------------------------------------------
+TYPE C1
+#0 NC1 [Active] {5a} Links to #: 1
+TYPE C2
+#1 NC2 [Active] {a} Links to #: 0, 2
+TYPE C3
+#2 NC3 [Active] {} Links to #: 1
+-------------------------------------------------
+
+STEP 2
+
+Rule #0 * >=a: a -> {a}(C2) * applied in instance #0 NC1.
+Selected instance #1 as target of type C2 for rule #0.
+Rule #1 * >=a: a -> {a}(C3) * applied in instance #1 NC2.
+Selected instance #2 as target of type C3 for rule #1.
+
+Configuration #2
+-------------------------------------------------
+TYPE C1
+#0 NC1 [Active] {4a} Links to #: 1
+TYPE C2
+#1 NC2 [Active] {a} Links to #: 0, 2
+TYPE C3
+#2 NC3 [Active] {a} Links to #: 1
+-------------------------------------------------
+
+STEP 3
+
+Rule #1 * >=a: a -> {a}(C3) * applied in instance #1 NC2.
+Selected instance #2 as target of type C3 for rule #1.
+Rule #0 * >=a: a -> {a}(C2) * applied in instance #0 NC1.
+Selected instance #1 as target of type C2 for rule #0.
+Rule #2 * >=a: a -> {a}(C2) * applied in instance #2 NC3.
+Selected instance #1 as target of type C2 for rule #2.
+
+Configuration #3
+-------------------------------------------------
+TYPE C1
+#0 NC1 [Active] {3a} Links to #: 1
+TYPE C2
+#1 NC2 [Active] {2a} Links to #: 0, 2
+TYPE C3
+#2 NC3 [Active] {a} Links to #: 1
+-------------------------------------------------
+
+STEP 4
+
+Rule #1 * >=a: a -> {a}(C3) * applied in instance #1 NC2.
+Selected instance #2 as target of type C3 for rule #1.
+Rule #2 * >=a: a -> {a}(C2) * applied in instance #2 NC3.
+Selected instance #1 as target of type C2 for rule #2.
+Rule #0 * >=a: a -> {a}(C2) * applied in instance #0 NC1.
+Selected instance #1 as target of type C2 for rule #0.
+
+Configuration #4
+-------------------------------------------------
+TYPE C1
+#0 NC1 [Active] {2a} Links to #: 1
+TYPE C2
+#1 NC2 [Active] {3a} Links to #: 0, 2
+TYPE C3
+#2 NC3 [Active] {a} Links to #: 1
+-------------------------------------------------
+
+STEP 5
+
+Rule #1 * >=a: a -> {a}(C3) * applied in instance #1 NC2.
+Selected instance #2 as target of type C3 for rule #1.
+Rule #2 * >=a: a -> {a}(C2) * applied in instance #2 NC3.
+Selected instance #1 as target of type C2 for rule #2.
+Rule #0 * >=a: a -> {a}(C2) * applied in instance #0 NC1.
+Selected instance #1 as target of type C2 for rule #0.
+
+Configuration #5
+-------------------------------------------------
+TYPE C1
+#0 NC1 [Active] {a} Links to #: 1
+TYPE C2
+#1 NC2 [Active] {4a} Links to #: 0, 2
+TYPE C3
+#2 NC3 [Active] {a} Links to #: 1
+-------------------------------------------------
+
+STEP 6
+
+Rule #1 * >=a: a -> {a}(C3) * applied in instance #1 NC2.
+Selected instance #2 as target of type C3 for rule #1.
+Rule #2 * >=a: a -> {a}(C2) * applied in instance #2 NC3.
+Selected instance #1 as target of type C2 for rule #2.
+Rule #0 * >=a: a -> {a}(C2) * applied in instance #0 NC1.
+Selected instance #1 as target of type C2 for rule #0.
+
+Configuration #6
+-------------------------------------------------
+TYPE C1
+#0 NC1 [Active] {} Links to #: 1
+TYPE C2
+#1 NC2 [Active] {5a} Links to #: 0, 2
+TYPE C3
+#2 NC3 [Active] {a} Links to #: 1
+-------------------------------------------------
+
+STEP 7
+
+Rule #1 * >=a: a -> {a}(C3) * applied in instance #1 NC2.
+Selected instance #2 as target of type C3 for rule #1.
+Rule #2 * >=a: a -> {a}(C2) * applied in instance #2 NC3.
+Selected instance #1 as target of type C2 for rule #2.
+
+Configuration #7
+-------------------------------------------------
+TYPE C1
+#0 NC1 [Active] {} Links to #: 1
+TYPE C2
+#1 NC2 [Active] {5a} Links to #: 0, 2
+TYPE C3
+#2 NC3 [Active] {a} Links to #: 1
+-------------------------------------------------
+
+STEP 8
+
+Rule #2 * >=a: a -> {a}(C2) * applied in instance #2 NC3.
+Selected instance #1 as target of type C2 for rule #2.
+Rule #1 * >=a: a -> {a}(C3) * applied in instance #1 NC2.
+Selected instance #2 as target of type C3 for rule #1.
+
+Configuration #8
+-------------------------------------------------
+TYPE C1
+#0 NC1 [Active] {} Links to #: 1
+TYPE C2
+#1 NC2 [Active] {5a} Links to #: 0, 2
+TYPE C3
+#2 NC3 [Active] {a} Links to #: 1
+-------------------------------------------------
+
+STEP 9
+
+Rule #2 * >=a: a -> {a}(C2) * applied in instance #2 NC3.
+Selected instance #1 as target of type C2 for rule #2.
+Rule #1 * >=a: a -> {a}(C3) * applied in instance #1 NC2.
+Selected instance #2 as target of type C3 for rule #1.
+
+Configuration #9
+-------------------------------------------------
+TYPE C1
+#0 NC1 [Active] {} Links to #: 1
+TYPE C2
+#1 NC2 [Active] {5a} Links to #: 0, 2
+TYPE C3
+#2 NC3 [Active] {a} Links to #: 1
+-------------------------------------------------
+
+STEP 10
+
+Rule #1 * >=a: a -> {a}(C3) * applied in instance #1 NC2.
+Selected instance #2 as target of type C3 for rule #1.
+Rule #2 * >=a: a -> {a}(C2) * applied in instance #2 NC3.
+Selected instance #1 as target of type C2 for rule #2.
+
+Configuration #10
+-------------------------------------------------
+TYPE C1
+#0 NC1 [Active] {} Links to #: 1
+TYPE C2
+#1 NC2 [Active] {5a} Links to #: 0, 2
+TYPE C3
+#2 NC3 [Active] {a} Links to #: 1
+-------------------------------------------------
+Simulation complete at step 10.

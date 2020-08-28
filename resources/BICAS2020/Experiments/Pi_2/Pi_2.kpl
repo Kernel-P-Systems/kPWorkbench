@@ -1,0 +1,21 @@
+type C1 {
+  choice {
+    >=a : a -> a (C2) .
+  }
+} 
+
+type C2 {
+  choice {
+    >=a : a -> a (C3) .
+ }
+} 
+
+type C3 {
+  choice {
+    >=a : a -> a (C2) .
+ }
+} 
+
+NC1 {6a} (C1) - NC2 {} (C2) .
+NC2 - NC3 {} (C3) .
+

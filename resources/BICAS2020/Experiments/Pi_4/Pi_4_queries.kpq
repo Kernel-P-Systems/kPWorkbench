@@ -1,0 +1,5 @@
+ltl: eventually (NC9.a > 0 and NC11.a > 0) and (NC12.a > 0 and NEnv.a > 0);
+ltl: steady-state NEnv.a > 0 ; 
+ltl: always ((NC8.a <= 5 and NC10.a <= 5) and (NC9.a <= 5 and NC11.a <= 5) ) and NC12.a <=5 ; 
+ltl: never NC1.a < 3 or NC1.a > 3 ; 
+ 

@@ -1,0 +1,5 @@
+ltl: never NC1.a > 6;
+ltl: eventually (NC1.a = 0 and NC2.a = 5) and NC3.a = 1 ; 
+ltl: steady-state (NC1.a = 0 and NC2.a = 5) and NC3.a = 1  ; 
+ltl: always (NC1.a <= 6 and NC2.a <= 5) and NC3.a <= 1 ; 
+/* ltl: always (NC1.a + NC2.a) + NC3.a = 6 ;  */
