@@ -1,0 +1,26 @@
+type C1 {
+  choice {
+    =2a : a -> a (C2), a (C3) .
+    =2a : 2a -> a (C2), a (C3) .
+  }
+} 
+	
+type C2 {
+  choice {
+    =a : a -> a (C1), a (C3) .
+  }
+} 
+	
+type C3 {
+  choice {
+    =a:  a -> a (Env) .
+    =2a: 2a -> {} .
+  }
+} 
+	
+type Env {}
+	
+NC1 {2a} (C1) - NC2 {a} (C2) .
+NC1 - NC3 {a} (C3) .
+NC2 - NC3 .
+NC3 - NEnv {} (Env) . 

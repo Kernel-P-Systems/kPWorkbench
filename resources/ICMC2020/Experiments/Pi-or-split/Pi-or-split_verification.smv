@@ -1,0 +1,438 @@
+MODULE NC1_C1 (p_a, _sync )
+VAR
+_turn : {_CHO0,_READY};
+_cho0 : 0 .. 1;
+	a : 0 .. 6;
+	a_NC2 : 0 .. 6;
+	a_NC3 : 0 .. 6;
+
+INVAR case 
+	((_turn = _CHO0) & ((a >= 1) & (a >= 1))) : _cho0 != 0;
+	TRUE : _cho0 = 0;
+esac;
+
+ASSIGN
+init (_turn) := _READY;
+_cho0 := case 
+	(_turn = _CHO0) : case 
+		((a >= 1) & (a >= 1)) : 1;
+		TRUE : 0;
+	esac;
+	TRUE : 0;
+esac;
+init (a) := p_a;
+init (a_NC2) := 0;
+init (a_NC3) := 0;
+
+next (_turn) := case 
+	((_turn = _READY)) : case 
+		(_sync = _BUSY) : _READY;
+		(_sync = _EXCH) : _CHO0;
+		TRUE : _turn;
+	esac;
+	(_turn = _CHO0) : _READY;
+	TRUE : _turn;
+esac;
+next (a) := case 
+	(((_turn = _CHO0) & (_cho0 = 1)) & (((a - 1 >= 0) & (a - 1 <= 6)) & ((a >= 1) & (a >= 1)))) : a - 1;
+	TRUE : a;
+esac;
+next (a_NC2) := case 
+	(((_turn = _CHO0) & ((_cho0 = 1) & ((a_NC2 + 1 >= 0) & (a_NC2 + 1 <= 6)))) & ((a >= 1) & (a >= 1))) : a_NC2 + 1;
+	((_sync = _EXCH)) : 0;
+	TRUE : a_NC2;
+esac;
+next (a_NC3) := case 
+	(((_turn = _CHO0) & ((_cho0 = 1) & ((a_NC3 + 1 >= 0) & (a_NC3 + 1 <= 6)))) & ((a >= 1) & (a >= 1))) : a_NC3 + 1;
+	((_sync = _EXCH)) : 0;
+	TRUE : a_NC3;
+esac;
+
+ ----------------------- C2 ----------------------- 
+MODULE NC2_C2 (_sync )
+VAR
+_turn : {_CHO0,_READY};
+_cho0 : 0 .. 1;
+	a : 0 .. 6;
+	a_NC4 : 0 .. 6;
+
+INVAR case 
+	((_turn = _CHO0) & ((a = 1) & (a >= 1))) : _cho0 != 0;
+	TRUE : _cho0 = 0;
+esac;
+
+ASSIGN
+init (_turn) := _READY;
+_cho0 := case 
+	(_turn = _CHO0) : case 
+		((a = 1) & (a >= 1)) : 1;
+		TRUE : 0;
+	esac;
+	TRUE : 0;
+esac;
+init (a) := 0;
+init (a_NC4) := 0;
+
+next (_turn) := case 
+	((_turn = _READY)) : case 
+		(_sync = _BUSY) : _READY;
+		(_sync = _EXCH) : _CHO0;
+		TRUE : _turn;
+	esac;
+	(_turn = _CHO0) : _READY;
+	TRUE : _turn;
+esac;
+next (a_NC4) := case 
+	(((_turn = _CHO0) & ((_cho0 = 1) & ((a_NC4 + 1 >= 0) & (a_NC4 + 1 <= 6)))) & ((a = 1) & (a >= 1))) : a_NC4 + 1;
+	((_sync = _EXCH)) : 0;
+	TRUE : a_NC4;
+esac;
+
+ ----------------------- C3 ----------------------- 
+MODULE NC3_C3 (_sync )
+VAR
+_turn : {_CHO0,_READY};
+_cho0 : 0 .. 1;
+	a : 0 .. 6;
+	a_NC4 : 0 .. 6;
+
+INVAR case 
+	((_turn = _CHO0) & ((a = 1) & (a >= 1))) : _cho0 != 0;
+	TRUE : _cho0 = 0;
+esac;
+
+ASSIGN
+init (_turn) := _READY;
+_cho0 := case 
+	(_turn = _CHO0) : case 
+		((a = 1) & (a >= 1)) : 1;
+		TRUE : 0;
+	esac;
+	TRUE : 0;
+esac;
+init (a) := 0;
+init (a_NC4) := 0;
+
+next (_turn) := case 
+	((_turn = _READY)) : case 
+		(_sync = _BUSY) : _READY;
+		(_sync = _EXCH) : _CHO0;
+		TRUE : _turn;
+	esac;
+	(_turn = _CHO0) : _READY;
+	TRUE : _turn;
+esac;
+next (a_NC4) := case 
+	(((_turn = _CHO0) & ((_cho0 = 1) & ((a_NC4 + 1 >= 0) & (a_NC4 + 1 <= 6)))) & ((a = 1) & (a >= 1))) : a_NC4 + 1;
+	((_sync = _EXCH)) : 0;
+	TRUE : a_NC4;
+esac;
+
+ ----------------------- C4 ----------------------- 
+MODULE NC4_C4 (_sync )
+VAR
+_turn : {_CHO0,_READY};
+_cho0 : 0 .. 2;
+	a : 0 .. 6;
+	a_NC5 : 0 .. 6;
+	a_NC6 : 0 .. 6;
+
+INVAR case 
+	((_turn = _CHO0) & (((a = 2) & (a >= 2)) |
+		 ((a = 2) & (a >= 2)))) : _cho0 != 0;
+	TRUE : _cho0 = 0;
+esac;
+
+ASSIGN
+init (_turn) := _READY;
+_cho0 := case 
+	(_turn = _CHO0) : case 
+		((a = 2) & (a >= 2)) : 1;
+		TRUE : 0;
+	esac union case 
+		((a = 2) & (a >= 2)) : 2;
+		TRUE : 0;
+	esac;
+	TRUE : 0;
+esac;
+init (a) := 0;
+init (a_NC5) := 0;
+init (a_NC6) := 0;
+
+next (_turn) := case 
+	((_turn = _READY)) : case 
+		(_sync = _BUSY) : _READY;
+		(_sync = _EXCH) : _CHO0;
+		TRUE : _turn;
+	esac;
+	(_turn = _CHO0) : _READY;
+	TRUE : _turn;
+esac;
+next (a_NC5) := case 
+	(((_turn = _CHO0) & ((_cho0 = 1) & ((a_NC5 + 1 >= 0) & (a_NC5 + 1 <= 6)))) & ((a = 2) & (a >= 2))) : a_NC5 + 1;
+	(((_turn = _CHO0) & ((_cho0 = 2) & ((a_NC5 + 2 >= 0) & (a_NC5 + 2 <= 6)))) & ((a = 2) & (a >= 2))) : a_NC5 + 2;
+	((_sync = _EXCH)) : 0;
+	TRUE : a_NC5;
+esac;
+next (a_NC6) := case 
+	(((_turn = _CHO0) & ((_cho0 = 1) & ((a_NC6 + 1 >= 0) & (a_NC6 + 1 <= 6)))) & ((a = 2) & (a >= 2))) : a_NC6 + 1;
+	(((_turn = _CHO0) & ((_cho0 = 2) & ((a_NC6 + 2 >= 0) & (a_NC6 + 2 <= 6)))) & ((a = 2) & (a >= 2))) : a_NC6 + 2;
+	((_sync = _EXCH)) : 0;
+	TRUE : a_NC6;
+esac;
+
+ ----------------------- C5 ----------------------- 
+MODULE NC5_C5 (_sync )
+VAR
+_turn : {_CHO0,_READY};
+_cho0 : 0 .. 2;
+	a : 0 .. 6;
+	a_NC7 : 0 .. 6;
+
+INVAR case 
+	((_turn = _CHO0) & (((a = 1) & (a >= 1)) |
+		 ((a = 2) & (a >= 2)))) : _cho0 != 0;
+	TRUE : _cho0 = 0;
+esac;
+
+ASSIGN
+init (_turn) := _READY;
+_cho0 := case 
+	(_turn = _CHO0) : case 
+		((a = 1) & (a >= 1)) : 1;
+		TRUE : 0;
+	esac union case 
+		((a = 2) & (a >= 2)) : 2;
+		TRUE : 0;
+	esac;
+	TRUE : 0;
+esac;
+init (a) := 0;
+init (a_NC7) := 0;
+
+next (_turn) := case 
+	((_turn = _READY)) : case 
+		(_sync = _BUSY) : _READY;
+		(_sync = _EXCH) : _CHO0;
+		TRUE : _turn;
+	esac;
+	(_turn = _CHO0) : _READY;
+	TRUE : _turn;
+esac;
+next (a_NC7) := case 
+	(((_turn = _CHO0) & ((_cho0 = 1) & ((a_NC7 + 1 >= 0) & (a_NC7 + 1 <= 6)))) & ((a = 1) & (a >= 1))) : a_NC7 + 1;
+	((_sync = _EXCH)) : 0;
+	TRUE : a_NC7;
+esac;
+
+ ----------------------- C6 ----------------------- 
+MODULE NC6_C6 (_sync )
+VAR
+_turn : {_CHO0,_READY};
+_cho0 : 0 .. 2;
+	a : 0 .. 6;
+	a_NC8 : 0 .. 6;
+
+INVAR case 
+	((_turn = _CHO0) & (((a = 2) & (a >= 2)) |
+		 ((a = 1) & (a >= 1)))) : _cho0 != 0;
+	TRUE : _cho0 = 0;
+esac;
+
+ASSIGN
+init (_turn) := _READY;
+_cho0 := case 
+	(_turn = _CHO0) : case 
+		((a = 2) & (a >= 2)) : 1;
+		TRUE : 0;
+	esac union case 
+		((a = 1) & (a >= 1)) : 2;
+		TRUE : 0;
+	esac;
+	TRUE : 0;
+esac;
+init (a) := 0;
+init (a_NC8) := 0;
+
+next (_turn) := case 
+	((_turn = _READY)) : case 
+		(_sync = _BUSY) : _READY;
+		(_sync = _EXCH) : _CHO0;
+		TRUE : _turn;
+	esac;
+	(_turn = _CHO0) : _READY;
+	TRUE : _turn;
+esac;
+next (a_NC8) := case 
+	(((_turn = _CHO0) & ((_cho0 = 1) & ((a_NC8 + 1 >= 0) & (a_NC8 + 1 <= 6)))) & ((a = 2) & (a >= 2))) : a_NC8 + 1;
+	((_sync = _EXCH)) : 0;
+	TRUE : a_NC8;
+esac;
+
+ ----------------------- C7 ----------------------- 
+MODULE NC7_C7 (_sync )
+VAR
+_turn : {_SEQ0,_READY};
+_count : 0 .. 3;
+_seq0 : 0 .. 1;
+	a : 0 .. 6;
+
+
+ASSIGN
+init (_turn) := _READY;
+init (_count) := 0;
+_seq0 := case 
+	(_turn = _SEQ0) : case 
+		TRUE : 0;
+	esac;
+	TRUE : 0;
+esac;
+init (a) := 0;
+
+next (_turn) := case 
+	((_turn = _READY)) : case 
+		(_sync = _BUSY) : _READY;
+		(_sync = _EXCH) : _SEQ0;
+		TRUE : _turn;
+	esac;
+	(_turn = _SEQ0) : case 
+		(_seq0 != 0) : _SEQ0;
+		TRUE : _READY;
+	esac;
+	TRUE : _turn;
+esac;
+next (_count) := case 
+	((_turn = _SEQ0) & (_count < 0)) : case 
+		(_seq0 != 0) : _count + 1;
+		TRUE : 0;
+	esac;
+	((next(_turn) = _SEQ0)) : 1;
+	TRUE : 0;
+esac;
+
+ ----------------------- C8 ----------------------- 
+MODULE NC8_C8 (_sync )
+VAR
+_turn : {_SEQ0,_READY};
+_count : 0 .. 3;
+_seq0 : 0 .. 1;
+	a : 0 .. 6;
+
+
+ASSIGN
+init (_turn) := _READY;
+init (_count) := 0;
+_seq0 := case 
+	(_turn = _SEQ0) : case 
+		TRUE : 0;
+	esac;
+	TRUE : 0;
+esac;
+init (a) := 0;
+
+next (_turn) := case 
+	((_turn = _READY)) : case 
+		(_sync = _BUSY) : _READY;
+		(_sync = _EXCH) : _SEQ0;
+		TRUE : _turn;
+	esac;
+	(_turn = _SEQ0) : case 
+		(_seq0 != 0) : _SEQ0;
+		TRUE : _READY;
+	esac;
+	TRUE : _turn;
+esac;
+next (_count) := case 
+	((_turn = _SEQ0) & (_count < 0)) : case 
+		(_seq0 != 0) : _count + 1;
+		TRUE : 0;
+	esac;
+	((next(_turn) = _SEQ0)) : 1;
+	TRUE : 0;
+esac;
+
+ ----------------------- MAIN ----------------------- 
+MODULE main
+VAR
+_sync : {_BUSY,_EXCH};
+pInS : boolean;
+	NC1 : NC1_C1(6,_sync);
+	NC2 : NC2_C2(_sync);
+	NC3 : NC3_C3(_sync);
+	NC4 : NC4_C4(_sync);
+	NC5 : NC5_C5(_sync);
+	NC6 : NC6_C6(_sync);
+	NC7 : NC7_C7(_sync);
+	NC8 : NC8_C8(_sync);
+ASSIGN
+init (_sync) := _EXCH;
+init (pInS) := TRUE;
+next (_sync) := case 
+	(((((((((next(NC1._turn) = _READY)) 
+	& (next(NC2._turn) = _READY)) 
+	& (next(NC3._turn) = _READY)) 
+	& (next(NC4._turn) = _READY)) 
+	& (next(NC5._turn) = _READY)) 
+	& (next(NC6._turn) = _READY)) 
+	& (next(NC7._turn) = _READY)) 
+	& (next(NC8._turn) = _READY)) : _EXCH;
+	TRUE : _BUSY;
+esac;
+next (pInS) := case 
+	(_sync = _EXCH) : TRUE;
+	TRUE : FALSE;
+esac;
+
+next (NC2.a) := case
+(((_sync = _EXCH)) & ((NC2.a + NC1.a_NC2 >= 0) & (NC2.a + NC1.a_NC2 <= 6))) : NC2.a + NC1.a_NC2;
+(((NC2._turn = _CHO0) & (NC2._cho0 = 1)) & (((NC2.a - 1 >= 0) & (NC2.a - 1 <= 6)) & ((NC2.a = 1) & (NC2.a >= 1)))) : NC2.a - 1;
+TRUE : NC2.a;
+esac;
+next (NC3.a) := case
+(((_sync = _EXCH)) & ((NC3.a + NC1.a_NC3 >= 0) & (NC3.a + NC1.a_NC3 <= 6))) : NC3.a + NC1.a_NC3;
+(((NC3._turn = _CHO0) & (NC3._cho0 = 1)) & (((NC3.a - 1 >= 0) & (NC3.a - 1 <= 6)) & ((NC3.a = 1) & (NC3.a >= 1)))) : NC3.a - 1;
+TRUE : NC3.a;
+esac;
+next (NC4.a) := case
+(((_sync = _EXCH)) & ((NC4.a + NC2.a_NC4 + NC3.a_NC4 >= 0) & (NC4.a + NC2.a_NC4 + NC3.a_NC4 <= 6))) : NC4.a + NC2.a_NC4 + NC3.a_NC4;
+(((NC4._turn = _CHO0) & (NC4._cho0 = 1)) & (((NC4.a - 2 >= 0) & (NC4.a - 2 <= 6)) & ((NC4.a = 2) & (NC4.a >= 2)))) : NC4.a - 2;
+(((NC4._turn = _CHO0) & (NC4._cho0 = 2)) & (((NC4.a - 2 >= 0) & (NC4.a - 2 <= 6)) & ((NC4.a = 2) & (NC4.a >= 2)))) : NC4.a - 2;
+TRUE : NC4.a;
+esac;
+next (NC5.a) := case
+(((_sync = _EXCH)) & ((NC5.a + NC4.a_NC5 >= 0) & (NC5.a + NC4.a_NC5 <= 6))) : NC5.a + NC4.a_NC5;
+(((NC5._turn = _CHO0) & (NC5._cho0 = 1)) & (((NC5.a - 1 >= 0) & (NC5.a - 1 <= 6)) & ((NC5.a = 1) & (NC5.a >= 1)))) : NC5.a - 1;
+(((NC5._turn = _CHO0) & (NC5._cho0 = 2)) & (((NC5.a - 2 >= 0) & (NC5.a - 2 <= 6)) & ((NC5.a = 2) & (NC5.a >= 2)))) : NC5.a - 2;
+TRUE : NC5.a;
+esac;
+next (NC6.a) := case
+(((_sync = _EXCH)) & ((NC6.a + NC4.a_NC6 >= 0) & (NC6.a + NC4.a_NC6 <= 6))) : NC6.a + NC4.a_NC6;
+(((NC6._turn = _CHO0) & (NC6._cho0 = 1)) & (((NC6.a - 2 >= 0) & (NC6.a - 2 <= 6)) & ((NC6.a = 2) & (NC6.a >= 2)))) : NC6.a - 2;
+(((NC6._turn = _CHO0) & (NC6._cho0 = 2)) & (((NC6.a - 1 >= 0) & (NC6.a - 1 <= 6)) & ((NC6.a = 1) & (NC6.a >= 1)))) : NC6.a - 1;
+TRUE : NC6.a;
+esac;
+next (NC7.a) := case
+(((_sync = _EXCH)) & ((NC7.a + NC5.a_NC7 >= 0) & (NC7.a + NC5.a_NC7 <= 6))) : NC7.a + NC5.a_NC7;
+TRUE : NC7.a;
+esac;
+next (NC8.a) := case
+(((_sync = _EXCH)) & ((NC8.a + NC6.a_NC8 >= 0) & (NC8.a + NC6.a_NC8 <= 6))) : NC8.a + NC6.a_NC8;
+TRUE : NC8.a;
+esac;
+
+-- LTL Properties
+LTLSPEC G ((NC1.a >= 0 & NC1.a <= 6) | !pInS)
+LTLSPEC G ((NC2.a >= 0 & NC2.a <= 1) | !pInS)
+LTLSPEC G ((NC3.a >= 0 & NC3.a <= 1) | !pInS)
+LTLSPEC G ((NC4.a >= 0 & NC4.a <= 2) | !pInS)
+LTLSPEC G ((NC5.a >= 0 & NC5.a <= 2) | !pInS)
+LTLSPEC G ((NC6.a >= 0 & NC6.a <= 2) | !pInS)
+LTLSPEC G (((NC2.a <= 1 & NC3.a <= 1) & (NC4.a <= 2 & (NC5.a <= 2 & NC6.a <= 2))) | !pInS)
+LTLSPEC G ((NC1.a = 3 -> X (!pInS U (NC1.a = 2 & pInS))) | !pInS)
+LTLSPEC G ((NC7.a >= 0 & NC7.a <= 6) | !pInS)
+LTLSPEC G ((NC8.a >= 0 & NC8.a <= 6) | !pInS)
+LTLSPEC F ((NC7.a + NC8.a = 6 & ((((NC1.a + NC2.a) + NC3.a) + NC4.a) + NC5.a) + NC6.a = 0) & pInS)
+LTLSPEC G (((NC7.a + NC8.a = 3 & pInS) -> X (!pInS U (NC7.a + NC8.a = 4 & pInS))) | !pInS)
+LTLSPEC G (((NC7.a + NC8.a = 6 & pInS) -> X (!pInS U (NC7.a + NC8.a = 6 & pInS))) | !pInS)
+LTLSPEC G (((((((NC1.a + NC2.a) + NC3.a) + NC4.a) + NC5.a) + NC6.a) + NC7.a) + NC8.a = 6 | !pInS)
+

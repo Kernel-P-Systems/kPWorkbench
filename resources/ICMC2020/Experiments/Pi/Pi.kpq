@@ -1,0 +1,7 @@
+ltl: eventually (NEnv.a >0);
+ltl: always (NC1.a <= 2 and (NC2.a <= 1 and NC3.a <= 2));
+ltl: never (NC3.a > 2);
+ltl: eventually (NC1.a = 1 and (NC2.a = 0 and NC3.a = 0));
+ltl: always ((NC1.a = 1 and (NC2.a = 1 and NC3.a = 1)) implies (next (NC1.a = 2 and (NC2.a = 0 and NC3.a = 1))));
+ltl: always ((NC1.a = 2 and (NC2.a = 0 and NC3.a = 1)) implies (next (NC1.a = 1 and (NC2.a = 1 and NC3.a = 1))));
+ltl: always (NC1.a = 0) implies (eventually (NC1.a = 1 and (NC2.a = 0 and NC3.a = 0)));

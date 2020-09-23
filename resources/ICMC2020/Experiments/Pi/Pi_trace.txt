@@ -1,0 +1,175 @@
+Simulation started.
+Initial Configuration
+-------------------------------------------------
+TYPE C1
+#0 NC1 [Active] {2a} Links to #: 1, 2
+TYPE C2
+#1 NC2 [Active] {a} Links to #: 0, 2
+TYPE C3
+#2 NC3 [Active] {a} Links to #: 0, 1, 3
+TYPE Env
+#3 NEnv [Active] {} Links to #: 2
+-------------------------------------------------
+
+STEP 1
+
+Rule #2 * =a: a -> {a}(C1), {a}(C3),  * applied in instance #1 NC2.
+Selected instance #0 as target of type C1 for rule #2.
+Selected instance #2 as target of type C3 for rule #2.
+Rule #0 * =2a: a -> {a}(C2), {a}(C3),  * applied in instance #0 NC1.
+Selected instance #1 as target of type C2 for rule #0.
+Selected instance #2 as target of type C3 for rule #0.
+Rule #3 * =a: a -> {a}(Env) * applied in instance #2 NC3.
+Selected instance #3 as target of type Env for rule #3.
+
+Configuration #1
+-------------------------------------------------
+TYPE C1
+#0 NC1 [Active] {2a} Links to #: 1, 2
+TYPE C2
+#1 NC2 [Active] {a} Links to #: 0, 2
+TYPE C3
+#2 NC3 [Active] {2a} Links to #: 0, 1, 3
+TYPE Env
+#3 NEnv [Active] {a} Links to #: 2
+-------------------------------------------------
+
+STEP 2
+
+Rule #4 * =2a: 2a -> {} * applied in instance #2 NC3.
+Rule #1 * =2a: 2a -> {a}(C2), {a}(C3),  * applied in instance #0 NC1.
+Selected instance #1 as target of type C2 for rule #1.
+Selected instance #2 as target of type C3 for rule #1.
+Rule #2 * =a: a -> {a}(C1), {a}(C3),  * applied in instance #1 NC2.
+Selected instance #0 as target of type C1 for rule #2.
+Selected instance #2 as target of type C3 for rule #2.
+
+Configuration #2
+-------------------------------------------------
+TYPE C1
+#0 NC1 [Active] {a} Links to #: 1, 2
+TYPE C2
+#1 NC2 [Active] {a} Links to #: 0, 2
+TYPE C3
+#2 NC3 [Active] {2a} Links to #: 0, 1, 3
+TYPE Env
+#3 NEnv [Active] {a} Links to #: 2
+-------------------------------------------------
+
+STEP 3
+
+Rule #2 * =a: a -> {a}(C1), {a}(C3),  * applied in instance #1 NC2.
+Selected instance #0 as target of type C1 for rule #2.
+Selected instance #2 as target of type C3 for rule #2.
+Rule #4 * =2a: 2a -> {} * applied in instance #2 NC3.
+
+Configuration #3
+-------------------------------------------------
+TYPE C1
+#0 NC1 [Active] {2a} Links to #: 1, 2
+TYPE C2
+#1 NC2 [Active] {} Links to #: 0, 2
+TYPE C3
+#2 NC3 [Active] {a} Links to #: 0, 1, 3
+TYPE Env
+#3 NEnv [Active] {a} Links to #: 2
+-------------------------------------------------
+
+STEP 4
+
+Rule #0 * =2a: a -> {a}(C2), {a}(C3),  * applied in instance #0 NC1.
+Selected instance #1 as target of type C2 for rule #0.
+Selected instance #2 as target of type C3 for rule #0.
+Rule #3 * =a: a -> {a}(Env) * applied in instance #2 NC3.
+Selected instance #3 as target of type Env for rule #3.
+
+Configuration #4
+-------------------------------------------------
+TYPE C1
+#0 NC1 [Active] {a} Links to #: 1, 2
+TYPE C2
+#1 NC2 [Active] {a} Links to #: 0, 2
+TYPE C3
+#2 NC3 [Active] {a} Links to #: 0, 1, 3
+TYPE Env
+#3 NEnv [Active] {2a} Links to #: 2
+-------------------------------------------------
+
+STEP 5
+
+Rule #3 * =a: a -> {a}(Env) * applied in instance #2 NC3.
+Selected instance #3 as target of type Env for rule #3.
+Rule #2 * =a: a -> {a}(C1), {a}(C3),  * applied in instance #1 NC2.
+Selected instance #0 as target of type C1 for rule #2.
+Selected instance #2 as target of type C3 for rule #2.
+
+Configuration #5
+-------------------------------------------------
+TYPE C1
+#0 NC1 [Active] {2a} Links to #: 1, 2
+TYPE C2
+#1 NC2 [Active] {} Links to #: 0, 2
+TYPE C3
+#2 NC3 [Active] {a} Links to #: 0, 1, 3
+TYPE Env
+#3 NEnv [Active] {3a} Links to #: 2
+-------------------------------------------------
+
+STEP 6
+
+Rule #3 * =a: a -> {a}(Env) * applied in instance #2 NC3.
+Selected instance #3 as target of type Env for rule #3.
+Rule #1 * =2a: 2a -> {a}(C2), {a}(C3),  * applied in instance #0 NC1.
+Selected instance #1 as target of type C2 for rule #1.
+Selected instance #2 as target of type C3 for rule #1.
+
+Configuration #6
+-------------------------------------------------
+TYPE C1
+#0 NC1 [Active] {} Links to #: 1, 2
+TYPE C2
+#1 NC2 [Active] {a} Links to #: 0, 2
+TYPE C3
+#2 NC3 [Active] {a} Links to #: 0, 1, 3
+TYPE Env
+#3 NEnv [Active] {4a} Links to #: 2
+-------------------------------------------------
+
+STEP 7
+
+Rule #2 * =a: a -> {a}(C1), {a}(C3),  * applied in instance #1 NC2.
+Selected instance #0 as target of type C1 for rule #2.
+Selected instance #2 as target of type C3 for rule #2.
+Rule #3 * =a: a -> {a}(Env) * applied in instance #2 NC3.
+Selected instance #3 as target of type Env for rule #3.
+
+Configuration #7
+-------------------------------------------------
+TYPE C1
+#0 NC1 [Active] {a} Links to #: 1, 2
+TYPE C2
+#1 NC2 [Active] {} Links to #: 0, 2
+TYPE C3
+#2 NC3 [Active] {a} Links to #: 0, 1, 3
+TYPE Env
+#3 NEnv [Active] {5a} Links to #: 2
+-------------------------------------------------
+
+STEP 8
+
+Rule #3 * =a: a -> {a}(Env) * applied in instance #2 NC3.
+Selected instance #3 as target of type Env for rule #3.
+
+Configuration #8
+-------------------------------------------------
+TYPE C1
+#0 NC1 [Active] {a} Links to #: 1, 2
+TYPE C2
+#1 NC2 [Active] {} Links to #: 0, 2
+TYPE C3
+#2 NC3 [Active] {} Links to #: 0, 1, 3
+TYPE Env
+#3 NEnv [Active] {6a} Links to #: 2
+-------------------------------------------------
+System halted at step 8 (no further rule could be applied, i.e. reached a deadlock).
+Simulation complete at step 8.

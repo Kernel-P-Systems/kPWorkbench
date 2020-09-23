@@ -1,0 +1,14 @@
+ltl: always (NC1.a >= 0 and NC1.a <= 6);
+ltl: always (NC2.a >= 0 and NC2.a <= 1);
+ltl: always (NC3.a >= 0 and NC3.a <= 1);
+ltl: always (NC4.a >= 0 and NC4.a <= 2);
+ltl: always (NC5.a >= 0 and NC5.a <= 2);
+ltl: always (NC6.a >= 0 and NC6.a <= 2);
+ltl: always ((NC2.a <= 1 and NC3.a <= 1) and (NC4.a <= 2 and (NC5.a <= 2 and NC6.a <= 2)));
+ltl: always (NC1.a = 3 implies (next (NC1.a = 2)));
+ltl: always (NC7.a >= 0 and NC7.a <= 6);
+ltl: always (NC8.a >= 0 and NC8.a <= 6);
+/* ltl: eventually ((NC7.a  + NC8.a = 6) and (NC1.a + NC2.a + NC3.a + NC4.a + NC5.a + NC6.a = 0)) */
+/* ltl: always ((NC7.a + NC8.a = 3) implies (next (NC7.a + NC8.a = 4))) */
+/* ltl: always ((NC7.a + NC8.a = 6) implies  (next (NC7.a + NC8.a = 6))) */
+/* ltl: always (NC1.a + NC2.a + NC3.a + NC4.a + NC5.a + NC6.a + NC7.a + NC8.a = 6) */
