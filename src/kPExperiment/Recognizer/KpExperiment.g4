@@ -120,7 +120,7 @@ andExpression
 ltlExpressionOperand
     :	'(' ltlExpression ')'
 	|	'(' equivalenceExpression ')'
-    |   atomicExpression
+    |   relationalExpression
     |   notExpression
     ;
 
@@ -128,8 +128,28 @@ notExpression
     :   'not' '(' equivalenceExpression ')'
     ;
 	
-atomicExpression
-    :   objectMultiplicity RelationalOperator (objectMultiplicity | NumericLiteral)
+relationalExpression
+    :   arithmeticExpression RelationalOperator arithmeticExpression
+    ;
+
+arithmeticExpression
+    :   arithmeticAddition
+    |   arithmeticMultiplication
+    |   arithmeticOperand
+    ;
+
+arithmeticAddition
+    :   arithmeticOperand '+' arithmeticOperand
+    ;
+
+arithmeticMultiplication
+    :   arithmeticOperand '*' arithmeticOperand
+    ;
+
+arithmeticOperand
+    :   objectMultiplicity
+    |   NumericLiteral
+    |   '(' arithmeticExpression ')'
     ;
 
 objectMultiplicity

@@ -5,6 +5,8 @@ using KpExperiment.Model.Verification;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Antlr4.Runtime.Misc;
+using KpExperiment.Recognizer;
 
 namespace KpLingua.Input
 {
@@ -389,7 +391,7 @@ namespace KpLingua.Input
         {
             var ltlExpressionCotext = context.ltlExpression();
             var equivalenceExpressionContext = context.equivalenceExpression();
-            var atomicPredicateContext = context.atomicExpression();
+            var relationalExpressionContext = context.relationalExpression();
             var notExpressionContext = context.notExpression();
 
             var result = default(IPredicate);
@@ -402,9 +404,9 @@ namespace KpLingua.Input
             {
                 result = VisitEquivalenceExpression(equivalenceExpressionContext) as IPredicate;
             }
-            else if (atomicPredicateContext != null)
+            else if (relationalExpressionContext != null)
             {
-                result = VisitAtomicExpression(atomicPredicateContext) as IPredicate;
+                result = VisitRelationalExpression(relationalExpressionContext) as IPredicate;
             }
             else
             {
@@ -424,19 +426,96 @@ namespace KpLingua.Input
             };
         }
 
-        public object VisitAtomicExpression(KpExperimentParser.AtomicExpressionContext context)
+        public object VisitRelationalExpression(KpExperimentParser.RelationalExpressionContext context)
         {
-            var leftObjectMultiplicityContext = context.objectMultiplicity().FirstOrDefault();
-            var rightObjectMultiplicityContext = context.objectMultiplicity().Skip(1).FirstOrDefault();
-            var rightNumericLiteralTerminal = context.NumericLiteral();
+            var leftArithmeticExpressionContext = context.arithmeticExpression().FirstOrDefault();
+            var rightArithmeticExpressionContext = context.arithmeticExpression().Skip(1).FirstOrDefault();
             var relationalOperatorTerminal = context.RelationalOperator();
 
             var result = new RelationalExpression
             {
-                LeftOperand = VisitObjectMultiplicity(leftObjectMultiplicityContext) as IAtomicOperand,
-                RightOperand = (rightObjectMultiplicityContext != null ? VisitObjectMultiplicity(rightObjectMultiplicityContext) : GetNumericLiteral(rightNumericLiteralTerminal)) as IAtomicOperand,
+                LeftOperand = VisitArithmeticExpression(leftArithmeticExpressionContext) as IArithmeticOperand,
+                RightOperand = VisitArithmeticExpression(rightArithmeticExpressionContext) as IArithmeticOperand,
                 Operator = GetRelationalOperator(relationalOperatorTerminal),
             };
+
+            return result;
+        }
+
+        public object VisitArithmeticExpression([NotNull] KpExperimentParser.ArithmeticExpressionContext context)
+        {
+            var arithmeticAdditionContext = context.arithmeticAddition();
+            var arithmeticMultiplicationContext = context.arithmeticMultiplication();
+            var arithmeticOperandContext = context.arithmeticOperand();
+
+            var result = default(IArithmeticOperand);
+
+            if (arithmeticAdditionContext != null)
+            {
+                result = VisitArithmeticAddition(arithmeticAdditionContext) as IArithmeticOperand;
+            }
+            else if (arithmeticMultiplicationContext != null)
+            {
+                result = VisitArithmeticMultiplication(arithmeticMultiplicationContext) as IArithmeticOperand;
+            }
+            else if (arithmeticOperandContext != null)
+            {
+                result = VisitArithmeticOperand(arithmeticOperandContext) as IArithmeticOperand;
+            }
+
+            return result;
+        }
+
+        public object VisitArithmeticAddition([NotNull] KpExperimentParser.ArithmeticAdditionContext context)
+        {
+            var leftArithmeticOperandContext = context.arithmeticOperand().FirstOrDefault();
+            var rightArithmeticOperandContext = context.arithmeticOperand().Skip(1).FirstOrDefault();
+
+            var result = new ArithmeticExpression
+            {
+                LeftOperand = VisitArithmeticOperand(leftArithmeticOperandContext) as IArithmeticOperand,
+                RightOperand = VisitArithmeticOperand(rightArithmeticOperandContext) as IArithmeticOperand,
+                Operator = ArithmeticOperator.ADDITION,
+            };
+
+            return result;
+        }
+
+        public object VisitArithmeticMultiplication([NotNull] KpExperimentParser.ArithmeticMultiplicationContext context)
+        {
+            var leftArithmeticOperandContext = context.arithmeticOperand().FirstOrDefault();
+            var rightArithmeticOperandContext = context.arithmeticOperand().Skip(1).FirstOrDefault();
+
+            var result = new ArithmeticExpression
+            {
+                LeftOperand = VisitArithmeticOperand(leftArithmeticOperandContext) as IArithmeticOperand,
+                RightOperand = VisitArithmeticOperand(rightArithmeticOperandContext) as IArithmeticOperand,
+                Operator = ArithmeticOperator.MULTIPLICATION,
+            };
+
+            return result;
+        }
+
+        public object VisitArithmeticOperand([NotNull] KpExperimentParser.ArithmeticOperandContext context)
+        {
+            var objectMultiplicityContext = context.objectMultiplicity();
+            var numericLiteralTerminal = context.NumericLiteral();
+            var arithmeticExpressionContext = context.arithmeticExpression();
+
+            var result = default(IArithmeticOperand);
+
+            if (objectMultiplicityContext != null)
+            {
+                result = VisitObjectMultiplicity(objectMultiplicityContext) as IArithmeticOperand;
+            }
+            else if (numericLiteralTerminal != null)
+            {
+                result = GetNumericLiteral(numericLiteralTerminal);
+            }
+            else if (arithmeticExpressionContext != null)
+            {
+                result = VisitArithmeticExpression(arithmeticExpressionContext) as IArithmeticOperand;
+            }
 
             return result;
         }

@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace KpExperiment.Model.Verification
 {
-    public class RelationalExpression : IPredicate
+    public class ArithmeticExpression : IArithmeticOperand
     {
         public IArithmeticOperand LeftOperand { get; set; }
 
         public IArithmeticOperand RightOperand { get; set; }
 
-        public RelationalOperator Operator { get; set; }
+        public ArithmeticOperator Operator { get; set; }
 
         public TResult Accept<TResult>(IVisitor<TResult> visitor)
         {

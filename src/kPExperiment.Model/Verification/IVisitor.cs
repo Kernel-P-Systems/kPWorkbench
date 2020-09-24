@@ -20,6 +20,8 @@ namespace KpExperiment.Model.Verification
 
         TResult Visit(NotExpression expression);
 
+        TResult Visit(ArithmeticExpression expression);
+
         TResult Visit(ObjectMultiplicity expression);
 
         TResult Visit(NumericLiteral expression);

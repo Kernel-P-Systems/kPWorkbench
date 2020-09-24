@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KpExperiment.Model.Verification
 {
-    public class ObjectMultiplicity : IAtomicOperand
+    public class ObjectMultiplicity : IArithmeticOperand
     {
         public string MembraneId { get; set; }
 

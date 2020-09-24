@@ -1,6 +1,7 @@
 ﻿using Antlr4.Runtime;
 using KpCore;
 using KpExperiment.Model;
+using KpExperiment.Recognizer;
 using KpLingua.Input;
 using System;
 using System.Collections.Generic;

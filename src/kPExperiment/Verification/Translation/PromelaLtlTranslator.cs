@@ -67,6 +67,11 @@ namespace KpExperiment.Verification.Translation
             return string.Format("{0} {1} {2}", expression.LeftOperand.Accept(this), TranslateOperator(expression.Operator), expression.RightOperand.Accept(this));
         }
 
+        public string Visit(ArithmeticExpression expression)
+        {
+            return string.Format("({0} {1} {2})", expression.LeftOperand.Accept(this), TranslateOperator(expression.Operator), expression.RightOperand.Accept(this));
+        }
+
         public string Visit(Model.Verification.BooleanExpression expression)
         {
             return string.Format("({0} {1} {2})", expression.LeftOperand.Accept(this), TranslateOperator(expression.Operator), expression.RightOperand.Accept(this));
@@ -132,6 +137,16 @@ namespace KpExperiment.Verification.Translation
                 case BooleanOperator.Or: return "||";
                 case BooleanOperator.Implication: return "->";
                 case BooleanOperator.Equivalence: return "<->";
+                default: return string.Empty;
+            }
+        }
+
+        private string TranslateOperator(ArithmeticOperator op)
+        {
+            switch (op)
+            {
+                case ArithmeticOperator.ADDITION: return "+";
+                case ArithmeticOperator.MULTIPLICATION: return "*";
                 default: return string.Empty;
             }
         }

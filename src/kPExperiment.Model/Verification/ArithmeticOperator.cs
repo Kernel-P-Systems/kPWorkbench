@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace KpExperiment.Model.Verification
 {
-    public interface IAtomicOperand : IVisitable
+    public enum ArithmeticOperator
     {
+        ADDITION,
+        MULTIPLICATION,
     }
 }

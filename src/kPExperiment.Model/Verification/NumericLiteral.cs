@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KpExperiment.Model.Verification
 {
-    public class NumericLiteral : IAtomicOperand
+    public class NumericLiteral : IArithmeticOperand
     {
         public int Value { get; set; }
 
