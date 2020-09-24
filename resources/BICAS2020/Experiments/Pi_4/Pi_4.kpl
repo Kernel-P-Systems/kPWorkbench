@@ -1,0 +1,96 @@
+type C1 {
+  choice {
+     =3a : 3a -> 3a (C2), 3a (C3) .
+  }
+} 
+
+type C2 {
+  choice {
+     =3a : 3a -> 3a (C1) .
+  }
+} 
+
+type C3 {
+  choice {
+    >=3a: 3a -> 3a (C4), 3a (C5), 3a (C6), 3a (C7) .
+    >=3a: 3a -> 2a (C4), 2a (C5), 2a (C6), 2a (C7) .
+    >=3a: 3a -> a (C4), a (C5), a (C6), a (C7) .
+  }
+} 
+
+type C4 {
+  choice {
+    >=3a: 3a -> 3a (C3) .
+  }
+} 
+
+type C5 {
+  choice {
+    =3a : 3a -> a (C8) .
+    =2a : 2a -> {} .
+    =a  :  a -> {} .
+  }
+} 
+
+type C6 {
+  choice {
+     =3a : 3a -> {} .
+     =2a : 2a -> a (C9) .
+     =a  :  a -> {} .
+  }
+} 
+type C7 {
+  choice {
+     =3a : 3a -> {} .
+     =2a : 2a -> {} .
+     =a  :  a -> a (C10) .
+  }
+} 
+
+type C8 {
+  choice {
+   >4a : a -> a (C11) .
+  }
+} 
+
+type C10 {
+  choice {
+   >4a : a -> a (C12) .
+  }
+} 
+
+type C9 {
+  choice {
+   >4a : a -> a (Env) .
+  }
+} 
+
+type C11 {
+  choice {
+     >4a : a -> a (Env) .
+  }
+}
+
+type C12 {
+  choice {
+     >4a : a -> a (Env) .
+  }
+}
+
+
+NC1 {3a} (C1) - NC2 {3a} (C2) .
+NC1 - NC3 {} (C3) .
+NC3 - NC4 {} (C4) .
+NC3 - NC5 {} (C5) .
+NC3 - NC6 {} (C6) .
+NC3 - NC7 {} (C7) .
+NC5 - NC8 {} (C8) .
+NC6 - NC9 {} (C9) .
+NC7 - NC10 {} (C10) .
+NC8 - NC11 {} (C11) .
+NC10 - NC12 {} (C12) .
+NC11 - NEnv {} (Env) .
+NC9 - NEnv .
+NC12 - NEnv .
+
+

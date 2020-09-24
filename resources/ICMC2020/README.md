@@ -1,0 +1,5 @@
+# Spiking Neural P Systems - Matrix Representation and Formal Verification
+
+Spiking Neural P Systems (SN P systems, for short) are a particular class of P Systems abstracting ideas from neurobiology. In a recently submitted paper (Spiking Neural P Systems - Matrix Representation and Formal Verification), we present the matrix representation notation for spiking neural P systems allowing to investigate various properties of these systems. Some Petri net-like properties are specified in this context. A method based on the translation of spiking neural P systems into kernel
+P systems is used to formally verify such properties, using the kPWORKBENCH tool. We illustrate the applicability of our approach in some examples.  For more details you can see the experiment files for each model [here](https://github.com/Kernel-P-Systems/kPWorkbench/tree/master/resources/ICMC2020/Experiments), or directly download an [archive](https://github.com/Kernel-P-Systems/kPWorkbench/raw/master/resources/ICMC2020/ICMC_2020.zip)  with all the corresponding kP-Lingua models, the NuSMV translation files and the result of the properties verification.
+

@@ -1,0 +1,53 @@
+type C1 {
+  choice {
+    >=a : a -> a (C2), a (C3) .
+  }
+} 
+	
+type C2 {
+  choice {
+    =a : a -> a (C4) .
+  }
+} 
+	
+type C3 {
+  choice {
+    =a : a -> a (C4) .
+  }
+} 
+	
+type C4 {
+  choice {
+    =2a : 2a -> a (C5), a (C6).
+    =2a : 2a -> 2a (C5), 2a (C6).
+  }
+} 
+	
+	
+type C5 {
+  choice {
+    =a  : a -> a (C7) .
+    =2a : 2a -> {} .
+  }
+} 
+	
+type C6 {
+  choice {
+    =2a : 2a -> a (C8) .
+    =a  : a -> {} .
+  }
+} 
+	
+type C7 {}
+	
+type C8 {}
+	
+	
+NC1 {6a} (C1) - NC2 {} (C2) .
+NC1 - NC3 {} (C3) .
+NC2 - NC4 {} (C4) .
+NC3 - NC4 .
+NC4 - NC5 {} (C5) .
+NC4 - NC6 {} (C6) .
+NC5 - NC7 {} (C7).
+NC6 - NC8 {} (C8).

@@ -1,1 +1,4 @@
-# BICAS 2020 : Third Biologically Inspired Parallel and Distributed Computing, Algorithms and Solutions 2020
+# Spiking Neural P Systems Simulation and Verification
+
+Spiking Neural P Systems (SN P systems, for short) are a particular class of P Systems abstracting ideas from neurobiology. In a recently submitted paper, we present a methodology that maps some classes of SN P systems to equivalent kernel P systems, which allows analysing SN P systems dynamics using the kPWORKBENCH tool. We illustrate the applicability of our approach in some case studies, including an example system from synthetic biology. For more details you can see the experiment files for each model [here](https://github.com/Kernel-P-Systems/kPWorkbench/tree/master/resources/BICAS2020/Experiments), or directly download an [archive](https://github.com/Kernel-P-Systems/kPWorkbench/raw/master/resources/BICAS2020/BICAS_2020.zip)  with all the corresponding kP-Lingua models, the NuSMV translation files and the result of the properties verification.
+
