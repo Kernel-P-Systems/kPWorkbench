@@ -155,9 +155,9 @@ TRUE : NC3.a;
 esac;
 
 -- LTL Properties
-LTLSPEC !( F NC1.a > 6 & pInS)
-LTLSPEC F (((NC1.a = 0 & NC2.a = 5) & NC3.a = 1) | !pInS)
-LTLSPEC F ( G (((NC1.a = 0 & NC2.a = 5) & NC3.a = 1) | !pInS) & pInS)
+LTLSPEC !(F (NC1.a > 6 & pInS))
+LTLSPEC F (((NC1.a = 0 & NC2.a = 5) & NC3.a = 1) & pInS)
+LTLSPEC F (G (((NC1.a = 0 & NC2.a = 5) & NC3.a = 1) | !pInS) & pInS)
 LTLSPEC G (((NC1.a <= 6 & NC2.a <= 5) & NC3.a <= 1) | !pInS)
-LTLSPEC G ((NC1.a + NC2.a) + NC3.a = 6 | !pInS)
+LTLSPEC G (((NC1.a + NC2.a) + NC3.a) = 6 | !pInS)
 

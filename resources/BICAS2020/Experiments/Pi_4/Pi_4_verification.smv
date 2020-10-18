@@ -702,8 +702,8 @@ TRUE : NEnv.a;
 esac;
 
 -- LTL Properties
-LTLSPEC F ((NC9.a > 0 & NC11.a > 0 & NC12.a > 0 & NEnv.a > 0) | !pInS)
+LTLSPEC F (((NC9.a > 0 & NC11.a > 0) & (NC12.a > 0 & NEnv.a > 0)) & pInS)
 LTLSPEC F (G (NEnv.a > 0 | !pInS ) & pInS) 
-LTLSPEC G (( NC8.a <= 5 & NC10.a <= 5 & NC9.a <= 5 & NC11.a <= 5 & NC12.a <= 5) | !pInS)
+LTLSPEC G ((((NC8.a <= 5 & NC10.a <= 5) & (NC9.a <= 5 & NC11.a <= 5)) & NC12.a <= 5) | !pInS)
 LTLSPEC !( F ((NC1.a < 3 | NC1.a > 3) & pInS))
 
