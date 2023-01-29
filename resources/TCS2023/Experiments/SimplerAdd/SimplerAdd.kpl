@@ -1,0 +1,31 @@
+type In1 {
+  choice {
+    =a:   a  -> a  (Add).
+    >=2a: 2a -> 2a (Add).
+  }
+}
+
+type In2 {
+  choice {
+    =a:   a  -> a  (Add).
+    >=2a:  2a -> 2a (Add).
+  }
+}
+
+type Add {
+  choice {
+    =5a:  a -> a (Environment).
+  }
+}
+
+type Environment {
+}
+
+in1 {2a} (In1).
+in2 {3a} (In2).
+add {} (Add).
+environment {} (Environment).
+
+in1 - add.
+in2 - add.
+add - environment.

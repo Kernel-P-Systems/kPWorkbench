@@ -1,0 +1,219 @@
+MODULE in1_In1 (p_a, _sync )
+VAR
+_turn : {_CHO0,_READY};
+_cho0 : 0 .. 2;
+	a : 0 .. 3;
+	a_add : 0 .. 6;
+
+INVAR case 
+	((_turn = _CHO0) & (((a = 1) & (a >= 1)) |
+		 ((a >= 2) & (a >= 2)))) : _cho0 != 0;
+	TRUE : _cho0 = 0;
+esac;
+
+ASSIGN
+init (_turn) := _READY;
+_cho0 := case 
+	(_turn = _CHO0) : case 
+		((a = 1) & (a >= 1)) : 1;
+		TRUE : 0;
+	esac union case 
+		((a >= 2) & (a >= 2)) : 2;
+		TRUE : 0;
+	esac;
+	TRUE : 0;
+esac;
+init (a) := p_a;
+init (a_add) := 0;
+
+next (_turn) := case 
+	((_turn = _READY)) : case 
+		(_sync = _BUSY) : _READY;
+		(_sync = _EXCH) : _CHO0;
+		TRUE : _turn;
+	esac;
+	(_turn = _CHO0) : _READY;
+	TRUE : _turn;
+esac;
+next (a) := case 
+	(((_turn = _CHO0) & (_cho0 = 1)) & (((a - 1 >= 0) & (a - 1 <= 3)) & ((a = 1) & (a >= 1)))) : a - 1;
+	(((_turn = _CHO0) & (_cho0 = 2)) & (((a - 2 >= 0) & (a - 2 <= 3)) & ((a >= 2) & (a >= 2)))) : a - 2;
+	TRUE : a;
+esac;
+next (a_add) := case 
+	(((_turn = _CHO0) & ((_cho0 = 1) & ((a_add + 1 >= 0) & (a_add + 1 <= 6)))) & ((a = 1) & (a >= 1))) : a_add + 1;
+	(((_turn = _CHO0) & ((_cho0 = 2) & ((a_add + 2 >= 0) & (a_add + 2 <= 6)))) & ((a >= 2) & (a >= 2))) : a_add + 2;
+	((_sync = _EXCH)) : 0;
+	TRUE : a_add;
+esac;
+
+ ----------------------- ADD ----------------------- 
+MODULE add_Add (_sync )
+VAR
+_turn : {_CHO0,_READY};
+_cho0 : 0 .. 1;
+	a : 0 .. 6;
+	a_environment : 0 .. 3;
+
+INVAR case 
+	((_turn = _CHO0) & ((a = 5) & (a >= 1))) : _cho0 != 0;
+	TRUE : _cho0 = 0;
+esac;
+
+ASSIGN
+init (_turn) := _READY;
+_cho0 := case 
+	(_turn = _CHO0) : case 
+		((a = 5) & (a >= 1)) : 1;
+		TRUE : 0;
+	esac;
+	TRUE : 0;
+esac;
+init (a) := 0;
+init (a_environment) := 0;
+
+next (_turn) := case 
+	((_turn = _READY)) : case 
+		(_sync = _BUSY) : _READY;
+		(_sync = _EXCH) : _CHO0;
+		TRUE : _turn;
+	esac;
+	(_turn = _CHO0) : _READY;
+	TRUE : _turn;
+esac;
+next (a_environment) := case 
+	(((_turn = _CHO0) & ((_cho0 = 1) & ((a_environment + 1 >= 0) & (a_environment + 1 <= 3)))) & ((a = 5) & (a >= 1))) : a_environment + 1;
+	((_sync = _EXCH)) : 0;
+	TRUE : a_environment;
+esac;
+
+ ----------------------- IN2 ----------------------- 
+MODULE in2_In2 (p_a, _sync )
+VAR
+_turn : {_CHO0,_READY};
+_cho0 : 0 .. 2;
+	a : 0 .. 3;
+	a_add : 0 .. 6;
+
+INVAR case 
+	((_turn = _CHO0) & (((a = 1) & (a >= 1)) |
+		 ((a >= 2) & (a >= 2)))) : _cho0 != 0;
+	TRUE : _cho0 = 0;
+esac;
+
+ASSIGN
+init (_turn) := _READY;
+_cho0 := case 
+	(_turn = _CHO0) : case 
+		((a = 1) & (a >= 1)) : 1;
+		TRUE : 0;
+	esac union case 
+		((a >= 2) & (a >= 2)) : 2;
+		TRUE : 0;
+	esac;
+	TRUE : 0;
+esac;
+init (a) := p_a;
+init (a_add) := 0;
+
+next (_turn) := case 
+	((_turn = _READY)) : case 
+		(_sync = _BUSY) : _READY;
+		(_sync = _EXCH) : _CHO0;
+		TRUE : _turn;
+	esac;
+	(_turn = _CHO0) : _READY;
+	TRUE : _turn;
+esac;
+next (a) := case 
+	(((_turn = _CHO0) & (_cho0 = 1)) & (((a - 1 >= 0) & (a - 1 <= 3)) & ((a = 1) & (a >= 1)))) : a - 1;
+	(((_turn = _CHO0) & (_cho0 = 2)) & (((a - 2 >= 0) & (a - 2 <= 3)) & ((a >= 2) & (a >= 2)))) : a - 2;
+	TRUE : a;
+esac;
+next (a_add) := case 
+	(((_turn = _CHO0) & ((_cho0 = 1) & ((a_add + 1 >= 0) & (a_add + 1 <= 6)))) & ((a = 1) & (a >= 1))) : a_add + 1;
+	(((_turn = _CHO0) & ((_cho0 = 2) & ((a_add + 2 >= 0) & (a_add + 2 <= 6)))) & ((a >= 2) & (a >= 2))) : a_add + 2;
+	((_sync = _EXCH)) : 0;
+	TRUE : a_add;
+esac;
+
+ ----------------------- ENVIRONMENT ----------------------- 
+MODULE environment_Environment (_sync )
+VAR
+_turn : {_SEQ0,_READY};
+_count : 0 .. 3;
+_seq0 : 0 .. 1;
+	a : 0 .. 3;
+
+
+ASSIGN
+init (_turn) := _READY;
+init (_count) := 0;
+_seq0 := case 
+	(_turn = _SEQ0) : case 
+		TRUE : 0;
+	esac;
+	TRUE : 0;
+esac;
+init (a) := 0;
+
+next (_turn) := case 
+	((_turn = _READY)) : case 
+		(_sync = _BUSY) : _READY;
+		(_sync = _EXCH) : _SEQ0;
+		TRUE : _turn;
+	esac;
+	(_turn = _SEQ0) : case 
+		(_seq0 != 0) : _SEQ0;
+		TRUE : _READY;
+	esac;
+	TRUE : _turn;
+esac;
+next (_count) := case 
+	((_turn = _SEQ0) & (_count < 0)) : case 
+		(_seq0 != 0) : _count + 1;
+		TRUE : 0;
+	esac;
+	((next(_turn) = _SEQ0)) : 1;
+	TRUE : 0;
+esac;
+
+ ----------------------- MAIN ----------------------- 
+MODULE main
+VAR
+_sync : {_BUSY,_EXCH};
+pInS : boolean;
+	in1 : in1_In1(2,_sync);
+	add : add_Add(_sync);
+	in2 : in2_In2(3,_sync);
+	environment : environment_Environment(_sync);
+ASSIGN
+init (_sync) := _EXCH;
+init (pInS) := TRUE;
+next (_sync) := case 
+	(((((next(in1._turn) = _READY)) 
+	& (next(add._turn) = _READY)) 
+	& (next(in2._turn) = _READY)) 
+	& (next(environment._turn) = _READY)) : _EXCH;
+	TRUE : _BUSY;
+esac;
+next (pInS) := case 
+	(_sync = _EXCH) : TRUE;
+	TRUE : FALSE;
+esac;
+
+next (add.a) := case
+(((_sync = _EXCH)) & ((add.a + in1.a_add + in2.a_add >= 0) & (add.a + in1.a_add + in2.a_add <= 6))) : add.a + in1.a_add + in2.a_add;
+(((add._turn = _CHO0) & (add._cho0 = 1)) & (((add.a - 1 >= 0) & (add.a - 1 <= 6)) & ((add.a = 5) & (add.a >= 1)))) : add.a - 1;
+TRUE : add.a;
+esac;
+next (environment.a) := case
+(((_sync = _EXCH)) & ((environment.a + add.a_environment >= 0) & (environment.a + add.a_environment <= 3))) : environment.a + add.a_environment;
+TRUE : environment.a;
+esac;
+
+-- LTL Properties
+LTLSPEC F ((in2.a > 0 -> X (!pInS U (in2.a = 0 & pInS))) & pInS)
+LTLSPEC G (((in1.a = 0 & (in2.a = 0 & add.a = ((1 + 2) + 2))) -> X (!pInS U ((in1.a = 0 & (in2.a = 0 & (add.a = ((1 + 2) + 1) & environment.a = 1))) & pInS))) | !pInS)
+LTLSPEC G (((in1.a > 0 & in2.a > 0) -> F ((in1.a = 0 & (in2.a = 0 & environment.a = 1)) & pInS)) | !pInS)
+

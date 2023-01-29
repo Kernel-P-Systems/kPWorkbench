@@ -1,0 +1,67 @@
+Simulation started.
+Initial Configuration
+-------------------------------------------------
+TYPE In1
+#0 in1 [Active] {2a} Links to #: 1
+TYPE Add
+#1 add [Active] {} Links to #: 0, 2, 3
+TYPE In2
+#2 in2 [Active] {3a} Links to #: 1
+TYPE Environment
+#3 environment [Active] {} Links to #: 1
+-------------------------------------------------
+
+STEP 1
+
+Rule #1 * >=2a: 2a -> {2a}(Add) * applied in instance #0 in1.
+Selected instance #1 as target of type Add for rule #1.
+Rule #4 * >=2a: 2a -> {2a}(Add) * applied in instance #2 in2.
+Selected instance #1 as target of type Add for rule #4.
+
+Configuration #1
+-------------------------------------------------
+TYPE In1
+#0 in1 [Active] {} Links to #: 1
+TYPE Add
+#1 add [Active] {4a} Links to #: 0, 2, 3
+TYPE In2
+#2 in2 [Active] {a} Links to #: 1
+TYPE Environment
+#3 environment [Active] {} Links to #: 1
+-------------------------------------------------
+
+STEP 2
+
+Rule #3 * =a: a -> {a}(Add) * applied in instance #2 in2.
+Selected instance #1 as target of type Add for rule #3.
+
+Configuration #2
+-------------------------------------------------
+TYPE In1
+#0 in1 [Active] {} Links to #: 1
+TYPE Add
+#1 add [Active] {5a} Links to #: 0, 2, 3
+TYPE In2
+#2 in2 [Active] {} Links to #: 1
+TYPE Environment
+#3 environment [Active] {} Links to #: 1
+-------------------------------------------------
+
+STEP 3
+
+Rule #2 * =5a: a -> {a}(Environment) * applied in instance #1 add.
+Selected instance #3 as target of type Environment for rule #2.
+
+Configuration #3
+-------------------------------------------------
+TYPE In1
+#0 in1 [Active] {} Links to #: 1
+TYPE Add
+#1 add [Active] {4a} Links to #: 0, 2, 3
+TYPE In2
+#2 in2 [Active] {} Links to #: 1
+TYPE Environment
+#3 environment [Active] {a} Links to #: 1
+-------------------------------------------------
+System halted at step 3 (no further rule could be applied, i.e. reached a deadlock).
+Simulation complete at step 3.
