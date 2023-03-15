@@ -25,7 +25,7 @@ namespace kpw
         public static KpModel FromKpl(string fileName)
         {
             return new KpLinguaReader(fileName).Read();
-            //return KPLinguaManager.Instance.Read(fileName);
+            //return new KpModel(KPLinguaManager.Instance.Read(fileName));
         }
 
         public static Experiment FromKpx(string fileName)

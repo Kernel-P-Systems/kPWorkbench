@@ -772,6 +772,12 @@ namespace KpLingua {
             ParseResult<Multiset> lhs = parsePossiblyBracedMultiset(input, out input);
             if (lhs.Success) {
                 ms = lhs.Outcome;
+                if(ms.Count == 0)
+                {
+                    pr.Error = "The left hand side multiset of the rule can't be empty at line " + line + ".";
+                    line = l;
+                    return pr;
+                }
             } else {
                 pr.Error = lhs.Error;
                 line = l;
