@@ -1,0 +1,89 @@
+
+
+type T1 {
+  choice {
+    =223a:  a -> a_2_1 (Environment).  
+    =133a:  a -> a_1_2 (Environment).  
+    =144a:  a -> a_1_3 (Environment).  
+    =245a:  a -> a_2_3 (Environment).  
+    =155a:  a -> a_1_4 (Environment).  
+    =256a:  a -> a_2_4 (Environment).  
+    =166a:  a -> a_1_5 (Environment).  
+    =267a:  a -> a_2_5 (Environment).  
+    =177a:  a -> a_1_6 (Environment).  
+    =278a:  a -> a_2_6 (Environment).  
+    =188a:  a -> a_1_7 (Environment).  
+    =289a:  a -> a_2_7 (Environment).  
+    =199a:  a -> a_1_8 (Environment).  
+    =300a:  a -> a_2_8 (Environment).  
+    =210a:  a -> a_1_9 (Environment).  
+    =311a:  a -> a_2_9 (Environment).  
+    =221a:  a -> a_1_10 (Environment).  
+    =322a:  a -> a_2_10 (Environment).  
+    =5a:  a -> a_1 (Environment).  
+    =5a:  a -> a_2 (Environment).  
+  }
+}
+
+type T2 {
+  choice {
+    =5a:  a -> a_2 (Environment).  
+    =5a:  a -> a_3 (Environment).  
+    =5a:  a -> a_4 (Environment).  
+  }
+  choice {
+   a -> a_i_1_j_2 .  
+   a -> a_i_1_j_3 .  
+   a -> a_i_2_j_3 .  
+   a -> a_i_1_j_4 .  
+   a -> a_i_2_j_4 .  
+   a -> a_i_3_j_4 .  
+   a -> a_i_1_j_5 .  
+   a -> a_i_2_j_5 .  
+   a -> a_i_3_j_5 .  
+   a -> a_i_4_j_5 .  
+   a -> a_i_1_j_6 .  
+   a -> a_i_2_j_6 .  
+   a -> a_i_3_j_6 .  
+   a -> a_i_4_j_6 .  
+   a -> a_i_5_j_6 .  
+   a -> a_i_1_j_7 .  
+   a -> a_i_2_j_7 .  
+   a -> a_i_3_j_7 .  
+   a -> a_i_4_j_7 .  
+   a -> a_i_5_j_7 .  
+   a -> a_i_6_j_7 .  
+   a -> a_i_1_j_8 .  
+   a -> a_i_2_j_8 .  
+   a -> a_i_3_j_8 .  
+   a -> a_i_4_j_8 .  
+   a -> a_i_5_j_8 .  
+   a -> a_i_6_j_8 .  
+   a -> a_i_7_j_8 .  
+   a -> a_i_1_j_9 .  
+   a -> a_i_2_j_9 .  
+   a -> a_i_3_j_9 .  
+   a -> a_i_4_j_9 .  
+   a -> a_i_5_j_9 .  
+   a -> a_i_6_j_9 .  
+   a -> a_i_7_j_9 .  
+   a -> a_i_8_j_9 .  
+   a -> a_i_1_j_10 .  
+   a -> a_i_2_j_10 .  
+   a -> a_i_3_j_10 .  
+   a -> a_i_4_j_10 .  
+   a -> a_i_5_j_10 .  
+   a -> a_i_6_j_10 .  
+   a -> a_i_7_j_10 .  
+   a -> a_i_8_j_10 .  
+   a -> a_i_9_j_10 .  
+  }
+}
+
+add {} (Environment).
+
+in1 - add2.  
+in2 - add3.  
+in1 - add3.  
+in2 - add4.  
+add - environment.
