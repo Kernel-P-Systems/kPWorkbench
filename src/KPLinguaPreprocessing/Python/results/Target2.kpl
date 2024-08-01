@@ -1,8 +1,0 @@
-type T2 {
-  choice {
-    =5a:  a -> a_0 (Environment).      =5a:  a -> a_1 (Environment).      =5a:  a -> a_2 (Environment).  
-  }
-  choice {
-
-  }
-}

@@ -1,14 +1,20 @@
-﻿namespace KPLinguaPreprocessing
+﻿using System;
+using System.IO;
+
+namespace KPLinguaPreprocessing
 {
     class Program
     {
-        private static string source = @"C:\kPWorkbench\src\KPLinguaPreprocessing\Python\source\Source include.kplt";
-        private static string destination = @"C:\kPWorkbench\src\KPLinguaPreprocessing\Python\results\Target2.kpl";
+        private static string source = "Source.kplt";
+        private static string destination = "Target2.kpl";
 
         static void Main(string[] args)
         {
+            string workingDirectory = Environment.CurrentDirectory;
+            string sourceFilePath = Path.Combine(workingDirectory,source);
+            string destinationFilePath = Path.Combine(workingDirectory, @"Python\results", destination);
             Parser parser = new Parser();
-            parser.Execute(source, destination);
+            parser.Execute(sourceFilePath, destinationFilePath);
         }
     }
 }
