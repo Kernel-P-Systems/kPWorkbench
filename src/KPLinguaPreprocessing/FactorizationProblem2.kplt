@@ -1,0 +1,25 @@
+#define n = 10, m = 2
+
+type T2 {
+a_$j$ X_$j$ -> X_$j$ (Environment). : 0 <= j <= n
+
+a_1_$j$_$s$ -> a_1_$j$_$s+1$ (Environment). : 0 <= j <= n , 0 <= s < j
+
+a_2_$j$_$s$ -> a_2_$j$_$s+1$ (Environment). : 0 <= j <= n , 0 <= s < n+1+j
+ 
+B_1_$j$_$k$ -> B1_$j$_$k+1$ (Environment). : 0 <= j <= n, 0 <= k <= 3n+5
+B_2_$j$_$k$ -> B2_$j$_$k+1$ (Environment). : 0 <= j <= n, 0 <= k <= 3n+5
+
+P_$j$_$k$ -> P_$j$_$k+1$ (Environment). : 0 <= j <= 2n+1, 0 <= k <= 5n+7
+
+P_$i$,$j$ -> P_$i$_$j+1$ (Environment). : 0 <= i <= n, 0 <= j <= 5n+9
+
+T_$j$_$k$ -> T_$j$_$k+1$ (Environment). : 0 <= j <= n, 0 <= k <= 14n+11
+
+o_$j$_$k$ -> o_$j$_$k+1$ (Environment). : 0 <= j <= n, 0 <= k <= 15n+21
+
+o_$i$_$j$ -> o_$i$_$j+1$, (Environment). : 0 <= i <= n, 0 <= j <= 17n+25
+}
+
+add {} (Environment).
+add {} (T2).

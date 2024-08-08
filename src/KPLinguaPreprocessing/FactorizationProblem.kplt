@@ -1,0 +1,19 @@
+#define n = 10 m = 2
+
+type T2 {
+	a_0_$i$ b_0_$j$ $i$_$j$ -> c_0_$i+j$ a_0_$i$ b_0_$j$ (Environment). : 1<=i<=n, 1<=j<=n,i<j
+
+	a_0_$i$ b_1_$i$ $i$_$j$ -> c_0_$i+j$ a_0_$i$ _b _1 _$j$ (Environment). : 1<=i<=n,1<=j<=n,i<j
+
+	a_1_$i$ b_0_$j$ $i$_$j$ -> c_0_$i+j$ a_1_$i$ _b _0 _$j$ (Environment). : 1<=i<=n,1<=j<=n,i<j
+
+	a_1_$i$ b_1_$j$ $i$_$j$ -> c_1_$i+j$ a_1_$i$ b_1_$j$ (Environment). : 1<=i<=n,1<=j<=n,i<j
+
+	c_0_$l$ c_0_$l$ -> c_0_$l$ (Environment). : 1<=l<=n
+	c_0_$l$ c_1_$l$ -> c_1_$l$ (Environment). : 1<=l<=n
+	c_1_$l$ c_1_$l$ -> c_0_$l$ c_1_$l+1$ (Environment). : 1<=l<=n
+
+}
+
+add {} (Environment).
+add {} (T2).

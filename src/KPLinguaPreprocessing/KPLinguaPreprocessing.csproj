@@ -10,7 +10,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="FactorizationProblem.kplt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="FactorizationProblem2.kplt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Python\results\Target2.kpl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SatCellDivision.kplt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Source include.kplt">

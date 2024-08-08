@@ -126,7 +126,7 @@ namespace KPLinguaPreprocessing
                 if (executeIterator.IsValid())
                 {
                     string newRules = GetRules(rulesWithParameters, expressions);
-                    content.Add(newRules);
+                    content.Add(newRules + Environment.NewLine);
                 }
                 isValid = executeIterator.HasNext();
                 if (isValid)
