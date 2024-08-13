@@ -20,7 +20,7 @@ namespace KPLinguaPreprocessing
         public Parser()
         {
             iteratorRegex = new Regex(@"(?<rule>.*(\.|\{|\})\s*)(?<iterator>:.*)(?<n>\n)?");
-            iteratorContinuationRegex = new Regex(@"(?<rule>.*(\.|\{|\})\s*)(?<iterator>:\s*)(?<n>\n)?$");
+            iteratorContinuationRegex = new Regex(@"(?<rule>.*(\.|\{|\}).*(\.|\[|\])\s*)(?<iterator>:\s*)(?<n>\n)?$");
             commentRegex = new Regex(@"^\s*//");
             variableRegex = new Regex(@"\$(([a-z]+|\d+)(\+|-|\*)?([a-z]+|\d+)?)+\$");
             globalVariableRegex = new Regex(@"^\s*#define\s(?<content>.+)");
