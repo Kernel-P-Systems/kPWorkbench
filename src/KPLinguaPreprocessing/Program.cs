@@ -11,12 +11,13 @@ namespace KPLinguaPreprocessing
         private static string factorizationProblem2 = "FactorizationProblem2.kplt";
         private static string subsetSum = "subset_sum_index.kplt";
         private static string subsetSumSkPSystems = "skPSystems_subset_sum.kplt";
+        private static string partitionProblem = "PartitionProblem.kplt";
         private static string destination = "Target2.kpl";
 
         static void Main(string[] args)
         {
             string workingDirectory = Environment.CurrentDirectory;
-            string sourceFilePath = Path.Combine(workingDirectory, subsetSumSkPSystems);
+            string sourceFilePath = Path.Combine(workingDirectory, partitionProblem);
             string destinationFilePath = Path.Combine(workingDirectory, @"Python\results", destination);
             Parser parser = new Parser();
             parser.Execute(sourceFilePath, destinationFilePath);

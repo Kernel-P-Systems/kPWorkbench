@@ -1,0 +1,34 @@
+#define n = 6, k = 101
+type T0 {
+}
+
+type T1 {
+	max {
+		>=t : s -> yes (T0) .
+		>=f & <t : s -> no (T0) .
+	}
+}
+
+type T2 {
+	max {
+		a_$i$ -> [b_$i$, a_$i+1$][a_$i+1$] . : 1<=i<n
+		a_$n$ -> [b_$n$, x][x] . : n<=i<=n
+	}
+	max { 
+		=b_$i$ & =x : v_$i$ -> v . : 1<=i<=n 
+	}
+	max {
+		=b_$i$ & !=v_$i$ & =x | !=b_$i$ & =x : x -> y . : 1<=i<=n
+	}
+	max { 
+		=$k$v: y -> t (T1) .  : n<=i<=n 
+		<$k$v : y -> f (T1) .  : n<=i<=n 
+	}
+}
+
+
+t0 {} (T0) .
+t1 {s} (T1) .
+t2 {a_1, v_1, 2v_2, 4v_3, 3v_4, 50v_5, 50v_6} (T2) .
+
+t0 - t1 - t2 .

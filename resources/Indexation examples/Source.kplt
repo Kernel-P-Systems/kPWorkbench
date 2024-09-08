@@ -1,0 +1,16 @@
+
+#define n = 10, m = 2
+
+type T1 {
+  choice {
+    =$i*100+j*10+i+j+n$a:  a -> a_$i$_$j$ (Environment).  : 1<=i<=2,1<=j<=n,i!=j
+    =5a:  a -> a_$ii$ (Environment).  : 1<=ii<=2
+  }
+}
+
+#include "Source include.kplt"
+
+add {} (Environment).
+
+in$i1$ - add$i1+j$.  :1<=i1<=2,1<=j<=2
+add - environment.

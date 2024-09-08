@@ -1,0 +1,18 @@
+#define n=10, s=12
+
+type Main {
+  choice {
+	 = $s$x: a -> {yes, halt} (Output) . : 1<i<2
+	 > $s$x: a -> # . : 1<i<2
+  }
+  choice {
+	 !r_$i$: a -> [a, r_$i$][$i*2+1$x, a, r_$i$] . : 1<=i<=n
+  }
+
+}
+type Output {
+  step -> 2step.
+  !yes: 9step -> no, halt .
+}
+
+main {a} (Main) - output {step} (Output).

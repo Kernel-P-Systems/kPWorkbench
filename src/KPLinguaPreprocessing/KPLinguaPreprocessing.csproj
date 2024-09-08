@@ -16,6 +16,9 @@
     <None Update="FactorizationProblem2.kplt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="PartitionProblem.kplt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Python\results\Target2.kpl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

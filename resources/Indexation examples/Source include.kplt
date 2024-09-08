@@ -1,0 +1,8 @@
+type T2 {
+  choice {
+    =5a:  a -> a_$i$ (Environment).  : m<=i<=m+2
+  }
+  choice {
+   a -> a_i_$i$_j_$j$ .  : 1<=i<=n,1<=j<=n,i<j
+  }
+}

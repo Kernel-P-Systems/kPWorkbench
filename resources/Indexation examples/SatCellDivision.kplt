@@ -1,0 +1,22 @@
+﻿#define n = 10, m = 2
+
+type T1 {
+    d_$k$ -> d_$k$  (Environment). : 1 <= k <= n
+    d_$k$ -> d_$k$  (Environment). : 1 <= k <= n
+    x_$i$_$j$ -> x_$i$_$j-1$ (Environment). : 1 <= i <= m, 2 <= j <= n
+    ax_$i$_$j$ -> nx_$i$_$j-1$ (Environment). : 1 <= i <= m, 2 <= j <= n
+    ax_$i$_$j$ -> nx_$i$_$j-1$ (Environment). : 1 <= i <= m, 2 <= j <= n
+   choice {
+        =$i*100+1$a:  x_$i$_1 -> r_$i$_1$ (Environment). : 1 <= i <= m
+        =$i*100+2$a:  ax_$i$_1 -> r_$i$_1$ (Environment). : 1 <= i <= m
+        =$i*100+3$a:  x_$i$_1 -> a (Environment). : 1 <= i <= m
+        =$i*100+4$a:  ax_$i$_1 -> a (Environment). : 1 <= i <= m
+         
+        =$i*10+j*1+1$a:  x_$i$_$j$ -> x_$i$_$j-1$ (Environment). : 1 <= i <= m, 2 <= j <= n
+        =$k*1000+1$a:  d_$k$ -> d_$k+1$  (Environment). : 1 <= k <= n    
+        }
+}
+
+add {} (Environment).
+add {} (T21).
+ 
