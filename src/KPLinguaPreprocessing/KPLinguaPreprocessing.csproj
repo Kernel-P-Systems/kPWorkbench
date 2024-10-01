@@ -10,10 +10,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="AddBits.kplt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="FactorizationProblem.kplt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="FactorizationProblem2.kplt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="MultisetIterator.kplt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="PartitionProblem.kplt">

@@ -9,24 +9,17 @@ namespace KPLinguaPreprocessing
 {
     public class Parser
     {
-        private Regex iteratorRegex;
-        private Regex iteratorContinuationRegex;
-        private Regex commentRegex;
-        private Regex variableRegex;
-        private Regex globalVariableRegex;
-        private Regex includeRegex;
-        private Dictionary<string, Variable> variables;
-
-        public Parser()
-        {
-            iteratorRegex = new Regex(@"(?<rule>.*(\.|\{|\})\s*)(?<iterator>:.*)(?<n>\n)?");
-            iteratorContinuationRegex = new Regex(@"(?<rule>.*(\.|\{|\}).*(\.|\[|\])\s*)(?<iterator>:\s*)(?<n>\n)?$");
-            commentRegex = new Regex(@"^\s*//");
-            variableRegex = new Regex(@"\$(([a-z]+|\d+)(\+|-|\*)?([a-z]+|\d+)?)+\$");
-            globalVariableRegex = new Regex(@"^\s*#define\s(?<content>.+)");
-            includeRegex = new Regex(@"^\s*#include\s+""(?<fileName>.+)""");
-            variables = new Dictionary<string, Variable>();
-        }
+        private Regex iteratorRegex = new Regex(@"(?<rule>.*(\.|\{|\})\s*)(?<iterator>:.*)(?<n>\n)?");
+        private Regex iteratorContinuationRegex = new Regex(@"(?<rule>.*(\.|\{|\}).*(\.|\[|\])\s*)(?<iterator>:\s*)(?<n>\n)?$");
+        private Regex commentRegex = new Regex(@"^\s*//");
+        private Regex variableRegex = new Regex(@"\$(([a-z]+|\d+)(\+|-|\*)?([a-z]+|\d+)?)+\$");
+        private Regex globalVariableRegex = new Regex(@"^\s*#define\s(?<content>.+)");
+        private Regex includeRegex = new Regex(@"^\s*#include\s+""(?<fileName>.+)""");
+        private Regex multisetIteratorRegexPattern = new Regex(@"[a-z]+ \{@(?<multisetIterator>.*?)@\}\s+\([a-z0-9]+\) \.", RegexOptions.IgnoreCase);
+        //new Regex(@"[a-z]+ \{@[a-z0-9]+_\$[a-z0-9]+\$:[0-9]+(<=|>=|<|>|==|!=)[a-z0-9]+(<=|>=|<|>|==|!=)bits@\}\s+\([a-z0-9]+\) \.", RegexOptions.IgnoreCase);
+        private Regex iteratorPatternInMultisetRegex = new Regex(@"(?<rule>.*?(\$|\{|\})?\s*)(?<iterator>:\S+)(?<n>\n)?");
+        private string multisetIteratorPattern = @"@(.+?)@";
+        private Dictionary<string, Variable> variables = new Dictionary<string, Variable>();
 
         public List<string> ReadKpl(string filename)
         {
@@ -107,7 +100,7 @@ namespace KPLinguaPreprocessing
             return (expressions, rulesWithParameters);
         }
 
-        public string BuildIterator(string rules, string iteratorText)
+        public string BuildIterator(string rules, string iteratorText, string variableSeparator)
         {
             iteratorText = Regex.Replace(iteratorText, @"^\s*:\s*", "");
 
@@ -126,7 +119,7 @@ namespace KPLinguaPreprocessing
                 if (executeIterator.IsValid())
                 {
                     string newRules = GetRules(rulesWithParameters, expressions);
-                    content.Add(newRules + Environment.NewLine);
+                    content.Add(newRules);
                 }
                 isValid = executeIterator.HasNext();
                 if (isValid)
@@ -135,7 +128,7 @@ namespace KPLinguaPreprocessing
                 }
             }
 
-            return string.Join("", content);
+            return string.Join(variableSeparator, content);
         }
 
         public void Execute(string sourceFileName, string destinationFileName)
@@ -161,18 +154,16 @@ namespace KPLinguaPreprocessing
                 string line = lines[indexLines];
                 if (!commentRegex.IsMatch(line))
                 {
+                    var multisetIterator = multisetIteratorRegexPattern.Match(line);
                     var iterator = iteratorRegex.Match(line);
-                    if (iterator.Success)
+                    if (multisetIterator.Success)
                     {
-                        var groups = iterator.Groups;
-                        string rules = groups["rule"].Value;
-                        string iteratorText = groups["iterator"].Value;
-                        if (groups["n"].Success)
-                        {
-                            rules += groups["n"].Value;
-                        }
-                        string content = BuildIterator(rules, iteratorText);
-                        newLines.Add(content);
+                        TryToBuildMultisetIterators(multisetIterator, newLines);
+                    }
+                    else if (iterator.Success)
+                    {
+                        string newLine = TryToBuildIterator(iterator, Environment.NewLine);
+                        newLines.Add(newLine);
                     }
                     else
                     {
@@ -217,6 +208,37 @@ namespace KPLinguaPreprocessing
             }
 
             return newLines;
+        }
+
+        private void TryToBuildMultisetIterators(Match multisetIterator, List<string> newLines)
+        {
+            var groups = multisetIterator.Groups;
+            string multisetIteratorText = groups["multisetIterator"].Value;
+            var iterator = iteratorPatternInMultisetRegex.Match(multisetIteratorText);
+            if (iterator.Success)
+            {
+                string newLine = TryToBuildIterator(iterator, ",");
+                string originalText = multisetIterator.Value;
+                string resultedLine = Regex.Replace(originalText, multisetIteratorPattern, newLine);
+                newLines.Add(resultedLine);
+
+            }
+            else
+            {
+                Console.WriteLine("The multiset does not have an iterator or a rule in it");
+            }
+        }
+
+        private string TryToBuildIterator(Match iterator, string variableSeparator)
+        {
+            var groups = iterator.Groups;
+            string rules = groups["rule"].Value;
+            string iteratorText = groups["iterator"].Value;
+            if (groups["n"].Success)
+            {
+                rules += groups["n"].Value;
+            }
+            return BuildIterator(rules, iteratorText, variableSeparator);
         }
     }
 }
