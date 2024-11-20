@@ -2,7 +2,7 @@
 {
     public class RelationalExpressionTrue : Base
     {
-        public override double Evaluate()
+        public override int Evaluate()
         {
             return 1;
         }

@@ -1,0 +1,43 @@
+#define n = 2, k = 4
+
+type T0 {
+}
+
+type T1 {
+	max {
+		>=t : s -> yes (T0) .
+		>=f & <t : s -> no (T0) .
+	}
+}
+
+type T2 {
+	max {
+		a_$i$ -> [b_$i$, a_$i+1$][a_$i+1$] . : 1<=i<n
+		a_$n$ -> [b_$n$, x][x] . : n<=i<=n
+	}
+	max {
+		=b_$i$ & !=b_$j$ & =x | =b_$j$ & !=b_$i$ & =x : v_$i$, v_$j$ -> v . : 1<=i<=n, 1<=j<=n, i<j
+	}
+	max { 
+		x -> $n+1$y, s_1 . : n<=i<=n 
+	} 
+	choice { 
+		<v_$i$ & =s_1 : y -> s . : 1<=i<=n 
+	}  
+	choice { 
+		=$k$v  & =s_1: y -> s . : n<=i<=n 
+	}  
+	choice {
+		s_1 -> s_2 . 
+		<y : $n+1$s, s_2 -> t (T1) . : n<=i<=n
+		>=y : y, s_2 -> f (T1) .
+	}
+}
+
+
+t0 {} (T0) .
+t1 {s} (T1) .
+t2 {a_1, 2v_1, 2v_2} (T2) .
+
+t0 - t1 - t2 .
+

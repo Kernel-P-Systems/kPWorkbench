@@ -1,0 +1,195 @@
+Simulation started.
+Initial Configuration
+-------------------------------------------------
+TYPE L0
+#0 [Active] {10a} Links to #: 1, 2, 3
+TYPE L1
+#1 m10 [Active] {c} Links to #: 0, 4
+#2 m11 [Active] {c} Links to #: 0, 5, 6, 7
+#3 m12 [Active] {c} Links to #: 0, 8, 9
+TYPE L2
+#4 m20 [Active] {c} Links to #: 1, 10, 11
+#5 m21 [Active] {c} Links to #: 2, 12, 13
+#6 m22 [Active] {c} Links to #: 2
+#7 m23 [Active] {c} Links to #: 2
+#8 m24 [Active] {c} Links to #: 3
+#9 m25 [Active] {c} Links to #: 3, 14, 15, 16, 17
+TYPE L3
+#10 m30 [Active] {c} Links to #: 4
+#11 m31 [Active] {c} Links to #: 4
+#12 m32 [Active] {c} Links to #: 5
+#13 m33 [Active] {c} Links to #: 5
+#14 m34 [Active] {c} Links to #: 9
+#15 m35 [Active] {c} Links to #: 9
+#16 m36 [Active] {c} Links to #: 9
+#17 m37 [Active] {c} Links to #: 9
+-------------------------------------------------
+
+STEP 1
+
+Rule #0 * a -> {a}(L1) * applied in instance #0 .
+Selected instance #3 as target of type L1 for rule #0.
+Rule #0 * a -> {a}(L1) * applied in instance #0 .
+Selected instance #3 as target of type L1 for rule #0.
+Rule #0 * a -> {a}(L1) * applied in instance #0 .
+Selected instance #1 as target of type L1 for rule #0.
+Rule #0 * a -> {a}(L1) * applied in instance #0 .
+Selected instance #3 as target of type L1 for rule #0.
+Rule #0 * a -> {a}(L1) * applied in instance #0 .
+Selected instance #2 as target of type L1 for rule #0.
+Rule #0 * a -> {a}(L1) * applied in instance #0 .
+Selected instance #1 as target of type L1 for rule #0.
+Rule #0 * a -> {a}(L1) * applied in instance #0 .
+Selected instance #2 as target of type L1 for rule #0.
+Rule #0 * a -> {a}(L1) * applied in instance #0 .
+Selected instance #3 as target of type L1 for rule #0.
+Rule #0 * a -> {a}(L1) * applied in instance #0 .
+Selected instance #1 as target of type L1 for rule #0.
+Rule #0 * a -> {a}(L1) * applied in instance #0 .
+Selected instance #3 as target of type L1 for rule #0.
+
+Configuration #1
+-------------------------------------------------
+TYPE L0
+#0 [Active] {} Links to #: 1, 2, 3
+TYPE L1
+#1 m10 [Active] {c, 3a} Links to #: 0, 4
+#2 m11 [Active] {c, 2a} Links to #: 0, 5, 6, 7
+#3 m12 [Active] {c, 5a} Links to #: 0, 8, 9
+TYPE L2
+#4 m20 [Active] {c} Links to #: 1, 10, 11
+#5 m21 [Active] {c} Links to #: 2, 12, 13
+#6 m22 [Active] {c} Links to #: 2
+#7 m23 [Active] {c} Links to #: 2
+#8 m24 [Active] {c} Links to #: 3
+#9 m25 [Active] {c} Links to #: 3, 14, 15, 16, 17
+TYPE L3
+#10 m30 [Active] {c} Links to #: 4
+#11 m31 [Active] {c} Links to #: 4
+#12 m32 [Active] {c} Links to #: 5
+#13 m33 [Active] {c} Links to #: 5
+#14 m34 [Active] {c} Links to #: 9
+#15 m35 [Active] {c} Links to #: 9
+#16 m36 [Active] {c} Links to #: 9
+#17 m37 [Active] {c} Links to #: 9
+-------------------------------------------------
+
+STEP 2
+
+Rule #3 * a -> {b}(L0), {a}(L2),  * applied in instance #1 m10.
+Selected instance #0 as target of type L0 for rule #3.
+Selected instance #4 as target of type L2 for rule #3.
+Rule #3 * a -> {b}(L0), {a}(L2),  * applied in instance #2 m11.
+Selected instance #0 as target of type L0 for rule #3.
+Selected instance #6 as target of type L2 for rule #3.
+Rule #4 * a -> {} * applied in instance #1 m10.
+Rule #4 * a -> {} * applied in instance #1 m10.
+Rule #3 * a -> {b}(L0), {a}(L2),  * applied in instance #3 m12.
+Selected instance #0 as target of type L0 for rule #3.
+Selected instance #8 as target of type L2 for rule #3.
+Rule #4 * a -> {} * applied in instance #3 m12.
+Rule #4 * a -> {} * applied in instance #2 m11.
+Rule #4 * a -> {} * applied in instance #3 m12.
+Rule #4 * a -> {} * applied in instance #3 m12.
+Rule #5 * c -> \- (L0) * applied in instance #1 m10.
+Selected instance #0 as target of type L0 for rule #5.
+Rule #4 * a -> {} * applied in instance #3 m12.
+Rule #5 * c -> \- (L0) * applied in instance #2 m11.
+Selected instance #0 as target of type L0 for rule #5.
+Rule #5 * c -> \- (L0) * applied in instance #3 m12.
+Selected instance #0 as target of type L0 for rule #5.
+
+Configuration #2
+-------------------------------------------------
+TYPE L0
+#0 [Active] {3b} Links to #: none
+TYPE L1
+#1 m10 [Active] {} Links to #: 4
+#2 m11 [Active] {} Links to #: 5, 6, 7
+#3 m12 [Active] {} Links to #: 8, 9
+TYPE L2
+#4 m20 [Active] {c, a} Links to #: 1, 10, 11
+#5 m21 [Active] {c} Links to #: 2, 12, 13
+#6 m22 [Active] {c, a} Links to #: 2
+#7 m23 [Active] {c} Links to #: 2
+#8 m24 [Active] {c, a} Links to #: 3
+#9 m25 [Active] {c} Links to #: 3, 14, 15, 16, 17
+TYPE L3
+#10 m30 [Active] {c} Links to #: 4
+#11 m31 [Active] {c} Links to #: 4
+#12 m32 [Active] {c} Links to #: 5
+#13 m33 [Active] {c} Links to #: 5
+#14 m34 [Active] {c} Links to #: 9
+#15 m35 [Active] {c} Links to #: 9
+#16 m36 [Active] {c} Links to #: 9
+#17 m37 [Active] {c} Links to #: 9
+-------------------------------------------------
+
+STEP 3
+
+Rule #7 * a -> {b}(L1), {a}(L3),  * applied in instance #4 m20.
+Selected instance #1 as target of type L1 for rule #7.
+Selected instance #10 as target of type L3 for rule #7.
+Rule #9 * c -> \- (L1) * applied in instance #4 m20.
+Selected instance #1 as target of type L1 for rule #9.
+
+Configuration #3
+-------------------------------------------------
+TYPE L0
+#0 [Active] {3b} Links to #: none
+TYPE L1
+#1 m10 [Active] {b} Links to #: none
+#2 m11 [Active] {} Links to #: 5, 6, 7
+#3 m12 [Active] {} Links to #: 8, 9
+TYPE L2
+#4 m20 [Active] {} Links to #: 10, 11
+#5 m21 [Active] {c} Links to #: 2, 12, 13
+#6 m22 [Active] {c, a} Links to #: 2
+#7 m23 [Active] {c} Links to #: 2
+#8 m24 [Active] {c, a} Links to #: 3
+#9 m25 [Active] {c} Links to #: 3, 14, 15, 16, 17
+TYPE L3
+#10 m30 [Active] {c, a} Links to #: 4
+#11 m31 [Active] {c} Links to #: 4
+#12 m32 [Active] {c} Links to #: 5
+#13 m33 [Active] {c} Links to #: 5
+#14 m34 [Active] {c} Links to #: 9
+#15 m35 [Active] {c} Links to #: 9
+#16 m36 [Active] {c} Links to #: 9
+#17 m37 [Active] {c} Links to #: 9
+-------------------------------------------------
+
+STEP 4
+
+Rule #10 * a -> {b}(L2) * applied in instance #10 m30.
+Selected instance #4 as target of type L2 for rule #10.
+Rule #12 * c -> \- (L2) * applied in instance #10 m30.
+Selected instance #4 as target of type L2 for rule #12.
+
+Configuration #4
+-------------------------------------------------
+TYPE L0
+#0 [Active] {3b} Links to #: none
+TYPE L1
+#1 m10 [Active] {b} Links to #: none
+#2 m11 [Active] {} Links to #: 5, 6, 7
+#3 m12 [Active] {} Links to #: 8, 9
+TYPE L2
+#4 m20 [Active] {b} Links to #: 11
+#5 m21 [Active] {c} Links to #: 2, 12, 13
+#6 m22 [Active] {c, a} Links to #: 2
+#7 m23 [Active] {c} Links to #: 2
+#8 m24 [Active] {c, a} Links to #: 3
+#9 m25 [Active] {c} Links to #: 3, 14, 15, 16, 17
+TYPE L3
+#10 m30 [Active] {} Links to #: none
+#11 m31 [Active] {c} Links to #: 4
+#12 m32 [Active] {c} Links to #: 5
+#13 m33 [Active] {c} Links to #: 5
+#14 m34 [Active] {c} Links to #: 9
+#15 m35 [Active] {c} Links to #: 9
+#16 m36 [Active] {c} Links to #: 9
+#17 m37 [Active] {c} Links to #: 9
+-------------------------------------------------
+System halted at step 4 (no further rule could be applied, i.e. reached a deadlock).
+Simulation complete at step 4.

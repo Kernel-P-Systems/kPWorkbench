@@ -20,7 +20,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="MultisetIterator.kplt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="PartitionProblem.kplt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

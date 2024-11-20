@@ -1,0 +1,132 @@
+Simulation started.
+Initial Configuration
+-------------------------------------------------
+TYPE T0
+#0 t0 [Active] {} Links to #: 1
+TYPE T1
+#1 t1 [Active] {s} Links to #: 0, 2
+TYPE T2
+#2 t2 [Active] {a_1, v_1, 2v_2} Links to #: 1
+-------------------------------------------------
+
+STEP 1
+
+Rule #2 * a_1 -> [b_1, a_2](T2)[a_2](T2) * applied in instance #2 t2.
+Instance #3 of type T2 created.
+Instance #4 of type T2 created.
+
+Configuration #1
+-------------------------------------------------
+TYPE T0
+#0 t0 [Active] {} Links to #: 1
+TYPE T1
+#1 t1 [Active] {s} Links to #: 0, 3, 4
+TYPE T2
+#2 t2 [Divided] {v_1, 2v_2} Links to #: none
+#3 [Created, Active] {v_1, 2v_2, b_1, a_2} Links to #: 1
+#4 [Created, Active] {v_1, 2v_2, a_2} Links to #: 1
+-------------------------------------------------
+
+STEP 2
+
+Rule #3 * a_2 -> [b_2, x](T2)[x](T2) * applied in instance #3 .
+Rule #3 * a_2 -> [b_2, x](T2)[x](T2) * applied in instance #4 .
+Instance #5 of type T2 created.
+Instance #6 of type T2 created.
+Instance #7 of type T2 created.
+Instance #8 of type T2 created.
+
+Configuration #2
+-------------------------------------------------
+TYPE T0
+#0 t0 [Active] {} Links to #: 1
+TYPE T1
+#1 t1 [Active] {s} Links to #: 0, 5, 6, 7, 8
+TYPE T2
+#2 t2 [Divided] {v_1, 2v_2} Links to #: none
+#3 [Created, Divided] {v_1, 2v_2, b_1} Links to #: none
+#4 [Created, Divided] {v_1, 2v_2} Links to #: none
+#5 [Created, Active] {v_1, 2v_2, b_1, b_2, x} Links to #: 1
+#6 [Created, Active] {v_1, 2v_2, b_1, x} Links to #: 1
+#7 [Created, Active] {v_1, 2v_2, b_2, x} Links to #: 1
+#8 [Created, Active] {v_1, 2v_2, x} Links to #: 1
+-------------------------------------------------
+
+STEP 3
+
+Rule #4 * =b_1 & =x: v_1 -> v * applied in instance #6 .
+Rule #6 * (=b_1 & !v_1 & =x) | (!b_1 & =x): x -> y * applied in instance #6 .
+Rule #5 * =b_2 & =x: v_2 -> v * applied in instance #7 .
+Rule #5 * =b_2 & =x: v_2 -> v * applied in instance #7 .
+Rule #6 * (=b_1 & !v_1 & =x) | (!b_1 & =x): x -> y * applied in instance #8 .
+Rule #6 * (=b_1 & !v_1 & =x) | (!b_1 & =x): x -> y * applied in instance #7 .
+Rule #4 * =b_1 & =x: v_1 -> v * applied in instance #5 .
+Rule #5 * =b_2 & =x: v_2 -> v * applied in instance #5 .
+Rule #5 * =b_2 & =x: v_2 -> v * applied in instance #5 .
+Rule #7 * (=b_2 & !v_2 & =x) | (!b_2 & =x): x -> y * applied in instance #5 .
+
+Configuration #3
+-------------------------------------------------
+TYPE T0
+#0 t0 [Active] {} Links to #: 1
+TYPE T1
+#1 t1 [Active] {s} Links to #: 0, 5, 6, 7, 8
+TYPE T2
+#2 t2 [Divided] {v_1, 2v_2} Links to #: none
+#3 [Created, Divided] {v_1, 2v_2, b_1} Links to #: none
+#4 [Created, Divided] {v_1, 2v_2} Links to #: none
+#5 [Created, Active] {y, b_1, b_2, 3v} Links to #: 1
+#6 [Created, Active] {y, 2v_2, b_1, v} Links to #: 1
+#7 [Created, Active] {v_1, y, b_2, 2v} Links to #: 1
+#8 [Created, Active] {v_1, 2v_2, y} Links to #: 1
+-------------------------------------------------
+
+STEP 4
+
+Rule #8 * =3v: y -> {t}(T1) * applied in instance #5 .
+Selected instance #1 as target of type T1 for rule #8.
+Rule #9 * <3v: y -> {f}(T1) * applied in instance #6 .
+Selected instance #1 as target of type T1 for rule #9.
+Rule #9 * <3v: y -> {f}(T1) * applied in instance #8 .
+Selected instance #1 as target of type T1 for rule #9.
+Rule #9 * <3v: y -> {f}(T1) * applied in instance #7 .
+Selected instance #1 as target of type T1 for rule #9.
+
+Configuration #4
+-------------------------------------------------
+TYPE T0
+#0 t0 [Active] {} Links to #: 1
+TYPE T1
+#1 t1 [Active] {s, t, 3f} Links to #: 0, 5, 6, 7, 8
+TYPE T2
+#2 t2 [Divided] {v_1, 2v_2} Links to #: none
+#3 [Created, Divided] {v_1, 2v_2, b_1} Links to #: none
+#4 [Created, Divided] {v_1, 2v_2} Links to #: none
+#5 [Created, Active] {b_1, b_2, 3v} Links to #: 1
+#6 [Created, Active] {2v_2, b_1, v} Links to #: 1
+#7 [Created, Active] {v_1, b_2, 2v} Links to #: 1
+#8 [Created, Active] {v_1, 2v_2} Links to #: 1
+-------------------------------------------------
+
+STEP 5
+
+Rule #0 * >=t: s -> {yes}(T0) * applied in instance #1 t1.
+Selected instance #0 as target of type T0 for rule #0.
+
+Configuration #5
+-------------------------------------------------
+TYPE T0
+#0 t0 [Active] {yes} Links to #: 1
+TYPE T1
+#1 t1 [Active] {t, 3f} Links to #: 0, 5, 6, 7, 8
+TYPE T2
+#2 t2 [Divided] {v_1, 2v_2} Links to #: none
+#3 [Created, Divided] {v_1, 2v_2, b_1} Links to #: none
+#4 [Created, Divided] {v_1, 2v_2} Links to #: none
+#5 [Created, Active] {b_1, b_2, 3v} Links to #: 1
+#6 [Created, Active] {2v_2, b_1, v} Links to #: 1
+#7 [Created, Active] {v_1, b_2, 2v} Links to #: 1
+#8 [Created, Active] {v_1, 2v_2} Links to #: 1
+-------------------------------------------------
+System halted at step 5 (no further rule could be applied, i.e. reached a deadlock).
+Simulation complete at step 5.

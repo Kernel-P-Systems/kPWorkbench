@@ -7,9 +7,9 @@
         private readonly string minSign;
         private readonly Base maxValue;
         private readonly string maxSign;
-        private readonly double increment;
+        private readonly int increment;
 
-        public Iterator(Variable variable, Base minValue, string minSign, Base maxValue, string maxSign, double increment = 1)
+        public Iterator(Variable variable, Base minValue, string minSign, Base maxValue, string maxSign, int increment = 1)
         {
             this.variable = variable;
             this.minValue = minValue;
@@ -48,7 +48,7 @@
             variable.SetValue(variable.Evaluate() + increment);
         }
 
-        public override double Evaluate()
+        public override int Evaluate()
         {
             return variable.Evaluate();
         }

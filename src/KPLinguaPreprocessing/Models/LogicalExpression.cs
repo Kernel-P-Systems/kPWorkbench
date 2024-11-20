@@ -5,7 +5,7 @@ namespace KPLinguaPreprocessing.Models
 {
     public class LogicalExpression : Base
     {
-        private static readonly Dictionary<string, Func<double, double, bool>> Expressions = new Dictionary<string, Func<double, double, bool>>
+        private static readonly Dictionary<string, Func<int, int, bool>> Expressions = new Dictionary<string, Func<int, int, bool>>
         {
             { LogicalOperators.Greater, (v1, v2) => v1 > v2 },
             { LogicalOperators.GreaterOrEqual, (v1, v2) => v1 >= v2 },
@@ -26,7 +26,7 @@ namespace KPLinguaPreprocessing.Models
             this.value2 = value2;
         }
 
-        public override double Evaluate()
+        public override int Evaluate()
         {
             return Expressions[operation](value1.Evaluate(), value2.Evaluate()) ? 1 : 0;
         }

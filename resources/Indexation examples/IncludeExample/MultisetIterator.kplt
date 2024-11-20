@@ -10,7 +10,9 @@ type Add {
     2a_$i$ -> a_$i+1$ . :0<=i<=bits
 }
 
-termA {@a_$i$:0<=i<=bits@} (Term) .
+#include "MultisetIterator.kplt"
+
+termA {@a_$i$:0<=i<=bits@, a, b, @c_$j$:1<=j<=9@} (Term) .
 
 termB {@a_$i$:0<=i<=bits@} (Term) .
 
@@ -18,3 +20,4 @@ add {} (Add) .
 
 termA - add .
 termB - add .
+term_$i$ - term_$i+1$ . : 0<=i<=2

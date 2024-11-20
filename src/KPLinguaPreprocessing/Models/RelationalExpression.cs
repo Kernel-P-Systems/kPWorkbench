@@ -22,7 +22,7 @@ namespace KPLinguaPreprocessing.Models
             this.value2 = value2;
         }
 
-        public override double Evaluate()
+        public override int Evaluate()
         {
             return Expressions[operation](value1.Evaluate() != 0, value2.Evaluate() != 0) ? 1 : 0;
         }

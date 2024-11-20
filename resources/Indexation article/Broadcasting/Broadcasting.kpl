@@ -1,0 +1,84 @@
+/* Counting the number of descendants in a tree like structure of nodes */
+
+/* Each level of nodes in the hierarchy is a associated a unique type with communication rules to neighbouring (lower and upper) levels. This is the only way we can simulate signaling with kP systems such that we do not hard-wire the target membranes in communication rules, i.e. assume we do not know how many child-nodes are connected to each parent as long as we group them by the same type; evidently, this only applies to tree structures */
+
+
+/* structure is:
+
+l0:					m0
+			  /		 |		    \
+l1:			m10		m11		     m12
+		/        /   |   \     /     \
+l2:    m20	   m21	m22  m23  m24    m25
+	  /	  \     |  \              /  |  \  \
+l3:  m30  m31  m32  m33         m34 m35 m36 m37 
+
+*/
+
+
+type L0 {
+	max {
+		a -> a (L1) .
+	}
+	max {
+		a -> {} .
+	}
+}
+
+type L1 {
+	max {
+		b -> b, b (L0) .
+	}
+	a -> b (L0), a (L2) .
+	max {
+		a -> {} .
+	}
+	c -> \- (L0) .
+}
+
+type L2 {
+	max {
+		b -> b, b (L1) .
+	}
+	a -> b (L1), a (L3) .
+	max {
+		a -> {} .
+	}
+	c -> \- (L1) .
+}
+
+type L3 {
+	a -> b (L2) .
+	max {
+		a -> {} .
+	}
+	c -> \- (L2) .
+}
+
+
+m10 {c} (L1) .
+m11 {c} (L1) .
+m12 {c} (L1) .
+
+{10 a} (L0) - * (L1) .
+
+m20 {c} (L2) - m10 .
+m21 {c} (L2) - m11 .
+m22 {c} (L2) - m11 .
+m23 {c} (L2) - m11 .
+m24 {c} (L2) - m12 .
+m25 {c} (L2) - m12 .
+
+m30 {c} (L3) - m20 .
+m31 {c} (L3) - m20 .
+
+m32 {c} (L3) - m21 .
+m33 {c} (L3) - m21 .
+
+m34 {c} (L3)
+m34 - m25 .
+m35 {c} (L3) - m25 .
+m36 {c} (L3) - m25 .
+m37 {c} (L3) - m25 .
+
+

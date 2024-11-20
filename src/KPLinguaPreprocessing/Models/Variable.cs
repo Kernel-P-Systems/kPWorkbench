@@ -3,20 +3,20 @@
     public class Variable : Base
     {
         public string Name { get; set; }
-        public double Value { get; set; }
+        public int Value { get; set; }
 
-        public Variable(string name, double value = 0)
+        public Variable(string name, int value = 0)
         {
             Name = name;
             Value = value;
         }
 
-        public void SetValue(double value)
+        public void SetValue(int value)
         {
             Value = value;
         }
 
-        public override double Evaluate()
+        public override int Evaluate()
         {
             return Value;
         }

@@ -5,7 +5,7 @@ namespace KPLinguaPreprocessing.Models
 {
     public class ArithmeticExpression : Base
     {
-        private static readonly Dictionary<string, Func<double, double, double>> Operations = new Dictionary<string, Func<double, double, double>>
+        private static readonly Dictionary<string, Func<int, int, int>> Operations = new Dictionary<string, Func<int, int, int>>
         {
             { ArithmeticOperations.Addition, (v1, v2) => v1 + v2 },
             { ArithmeticOperations.Subtraction, (v1, v2) => v1 - v2 },
@@ -23,7 +23,7 @@ namespace KPLinguaPreprocessing.Models
             this.value2 = value2;
         }
 
-        public override double Evaluate()
+        public override int Evaluate()
         {
             return Operations[operation](value1.Evaluate(), value2.Evaluate());
         }

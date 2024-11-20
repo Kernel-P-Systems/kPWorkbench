@@ -2,6 +2,6 @@
 {
     public abstract class Base
     {
-        public abstract double Evaluate();
+        public abstract int Evaluate();
     }
 }

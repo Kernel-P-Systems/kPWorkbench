@@ -4,14 +4,14 @@ namespace KPLinguaPreprocessing.Models
 {
     public class Number : Base
     {
-        private readonly double value;
+        private readonly int value;
 
-        public Number(double value)
+        public Number(int value)
         {
             this.value = value;
         }
 
-        public override double Evaluate()
+        public override int Evaluate()
         {
             return value;
         }

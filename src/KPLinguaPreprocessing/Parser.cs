@@ -166,16 +166,16 @@ namespace KPLinguaPreprocessing
         public void Execute(string sourceFileName, string destinationFileName)
         {
             var lines = ReadKpl(sourceFileName);
-            var newLines = Execute(lines);
+            var newLines = Execute(lines, Path.GetDirectoryName(sourceFileName));
             WriteKpl(newLines, destinationFileName);
         }
 
         public void ExecuteLines(List<string> lines, string destinationFileName)
         {
-            Execute(lines);
+            //Execute(lines);
         }
 
-        private List<string> Execute(List<string> lines)
+        private List<string> Execute(List<string> lines, string filePath)
         {
             List<string> newLines = new List<string>();
             int indexLines = 0;
@@ -215,7 +215,7 @@ namespace KPLinguaPreprocessing
                             var include = includeRegex.Match(line);
                             if (include.Success)
                             {
-                                ProcessInclude(include, newLines);
+                                ProcessInclude(include, newLines, filePath);
                             }
                             else
                             {
@@ -249,12 +249,12 @@ namespace KPLinguaPreprocessing
             }
         }
 
-        private void ProcessInclude(Match include, List<string> newLines)
+        private void ProcessInclude(Match include, List<string> newLines, string filePath)
         {
             var groups = include.Groups;
             string fileName = groups["fileName"].Value;
-            var includeLines = ReadKpl(fileName);
-            var includeNewLines = Execute(includeLines);
+            var includeLines = ReadKpl(Path.Combine(filePath, fileName));
+            var includeNewLines = Execute(includeLines, filePath);
             newLines.AddRange(includeNewLines);
         }
 
