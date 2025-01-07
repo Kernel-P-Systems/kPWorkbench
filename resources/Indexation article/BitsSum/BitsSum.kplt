@@ -1,0 +1,20 @@
+#define bits=20
+
+type Term {
+  max {
+    a_$i$ -> a_$i$ (Add) . :0<=i<=bits
+  }
+}
+
+type Add {
+    2a_$i$ -> a_$i+1$ . :0<=i<=bits
+}
+
+termA {@a_$i$:0<=i<=bits@} (Term) .
+
+termB {@a_$i$:0<=i<=bits@} (Term) .
+
+add {} (Add) .
+
+termA - add .
+termB - add .

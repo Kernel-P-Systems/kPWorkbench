@@ -1,0 +1,514 @@
+Simulation started.
+Initial Configuration
+-------------------------------------------------
+TYPE T0
+#0 t0 [Active] {} Links to #: 1
+TYPE T1
+#1 t1 [Active] {s} Links to #: 0, 2
+TYPE T2
+#2 t2 [Active] {a1, v1, 5v2, 10v3, 4v4} Links to #: 1
+-------------------------------------------------
+
+STEP 1
+
+Rule #2 * a1 -> [b1, a2](T2)[a2](T2) * applied in instance #2 t2.
+Instance #3 of type T2 created.
+Instance #4 of type T2 created.
+
+Configuration #1
+-------------------------------------------------
+TYPE T0
+#0 t0 [Active] {} Links to #: 1
+TYPE T1
+#1 t1 [Active] {s} Links to #: 0, 3, 4
+TYPE T2
+#2 t2 [Divided] {v1, 5v2, 10v3, 4v4} Links to #: none
+#3 [Created, Active] {v1, 5v2, 10v3, 4v4, b1, a2} Links to #: 1
+#4 [Created, Active] {v1, 5v2, 10v3, 4v4, a2} Links to #: 1
+-------------------------------------------------
+
+STEP 2
+
+Rule #3 * a2 -> [b2, a3](T2)[a3](T2) * applied in instance #4 .
+Rule #3 * a2 -> [b2, a3](T2)[a3](T2) * applied in instance #3 .
+Instance #5 of type T2 created.
+Instance #6 of type T2 created.
+Instance #7 of type T2 created.
+Instance #8 of type T2 created.
+
+Configuration #2
+-------------------------------------------------
+TYPE T0
+#0 t0 [Active] {} Links to #: 1
+TYPE T1
+#1 t1 [Active] {s} Links to #: 0, 5, 6, 7, 8
+TYPE T2
+#2 t2 [Divided] {v1, 5v2, 10v3, 4v4} Links to #: none
+#3 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1} Links to #: none
+#4 [Created, Divided] {v1, 5v2, 10v3, 4v4} Links to #: none
+#5 [Created, Active] {v1, 5v2, 10v3, 4v4, b1, b2, a3} Links to #: 1
+#6 [Created, Active] {v1, 5v2, 10v3, 4v4, b1, a3} Links to #: 1
+#7 [Created, Active] {v1, 5v2, 10v3, 4v4, b2, a3} Links to #: 1
+#8 [Created, Active] {v1, 5v2, 10v3, 4v4, a3} Links to #: 1
+-------------------------------------------------
+
+STEP 3
+
+Rule #4 * a3 -> [b3, a4](T2)[a4](T2) * applied in instance #7 .
+Rule #4 * a3 -> [b3, a4](T2)[a4](T2) * applied in instance #6 .
+Rule #4 * a3 -> [b3, a4](T2)[a4](T2) * applied in instance #5 .
+Rule #4 * a3 -> [b3, a4](T2)[a4](T2) * applied in instance #8 .
+Instance #9 of type T2 created.
+Instance #10 of type T2 created.
+Instance #11 of type T2 created.
+Instance #12 of type T2 created.
+Instance #13 of type T2 created.
+Instance #14 of type T2 created.
+Instance #15 of type T2 created.
+Instance #16 of type T2 created.
+
+Configuration #3
+-------------------------------------------------
+TYPE T0
+#0 t0 [Active] {} Links to #: 1
+TYPE T1
+#1 t1 [Active] {s} Links to #: 0, 9, 10, 11, 12, 13, 14, 15, 16
+TYPE T2
+#2 t2 [Divided] {v1, 5v2, 10v3, 4v4} Links to #: none
+#3 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1} Links to #: none
+#4 [Created, Divided] {v1, 5v2, 10v3, 4v4} Links to #: none
+#5 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1, b2} Links to #: none
+#6 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1} Links to #: none
+#7 [Created, Divided] {v1, 5v2, 10v3, 4v4, b2} Links to #: none
+#8 [Created, Divided] {v1, 5v2, 10v3, 4v4} Links to #: none
+#9 [Created, Active] {v1, 5v2, 10v3, 4v4, b1, b2, b3, a4} Links to #: 1
+#10 [Created, Active] {v1, 5v2, 10v3, 4v4, b1, b2, a4} Links to #: 1
+#11 [Created, Active] {v1, 5v2, 10v3, 4v4, b1, b3, a4} Links to #: 1
+#12 [Created, Active] {v1, 5v2, 10v3, 4v4, b1, a4} Links to #: 1
+#13 [Created, Active] {v1, 5v2, 10v3, 4v4, b2, b3, a4} Links to #: 1
+#14 [Created, Active] {v1, 5v2, 10v3, 4v4, b2, a4} Links to #: 1
+#15 [Created, Active] {v1, 5v2, 10v3, 4v4, b3, a4} Links to #: 1
+#16 [Created, Active] {v1, 5v2, 10v3, 4v4, a4} Links to #: 1
+-------------------------------------------------
+
+STEP 4
+
+Rule #5 * a4 -> [b4, x](T2)[x](T2) * applied in instance #14 .
+Rule #5 * a4 -> [b4, x](T2)[x](T2) * applied in instance #13 .
+Rule #5 * a4 -> [b4, x](T2)[x](T2) * applied in instance #15 .
+Rule #5 * a4 -> [b4, x](T2)[x](T2) * applied in instance #12 .
+Rule #5 * a4 -> [b4, x](T2)[x](T2) * applied in instance #11 .
+Rule #5 * a4 -> [b4, x](T2)[x](T2) * applied in instance #10 .
+Rule #5 * a4 -> [b4, x](T2)[x](T2) * applied in instance #9 .
+Rule #5 * a4 -> [b4, x](T2)[x](T2) * applied in instance #16 .
+Instance #17 of type T2 created.
+Instance #18 of type T2 created.
+Instance #19 of type T2 created.
+Instance #20 of type T2 created.
+Instance #21 of type T2 created.
+Instance #22 of type T2 created.
+Instance #23 of type T2 created.
+Instance #24 of type T2 created.
+Instance #25 of type T2 created.
+Instance #26 of type T2 created.
+Instance #27 of type T2 created.
+Instance #28 of type T2 created.
+Instance #29 of type T2 created.
+Instance #30 of type T2 created.
+Instance #31 of type T2 created.
+Instance #32 of type T2 created.
+
+Configuration #4
+-------------------------------------------------
+TYPE T0
+#0 t0 [Active] {} Links to #: 1
+TYPE T1
+#1 t1 [Active] {s} Links to #: 0, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32
+TYPE T2
+#2 t2 [Divided] {v1, 5v2, 10v3, 4v4} Links to #: none
+#3 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1} Links to #: none
+#4 [Created, Divided] {v1, 5v2, 10v3, 4v4} Links to #: none
+#5 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1, b2} Links to #: none
+#6 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1} Links to #: none
+#7 [Created, Divided] {v1, 5v2, 10v3, 4v4, b2} Links to #: none
+#8 [Created, Divided] {v1, 5v2, 10v3, 4v4} Links to #: none
+#9 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1, b2, b3} Links to #: none
+#10 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1, b2} Links to #: none
+#11 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1, b3} Links to #: none
+#12 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1} Links to #: none
+#13 [Created, Divided] {v1, 5v2, 10v3, 4v4, b2, b3} Links to #: none
+#14 [Created, Divided] {v1, 5v2, 10v3, 4v4, b2} Links to #: none
+#15 [Created, Divided] {v1, 5v2, 10v3, 4v4, b3} Links to #: none
+#16 [Created, Divided] {v1, 5v2, 10v3, 4v4} Links to #: none
+#17 [Created, Active] {v1, 5v2, 10v3, 4v4, b1, b2, b4, x} Links to #: 1
+#18 [Created, Active] {v1, 5v2, 10v3, 4v4, b1, b2, x} Links to #: 1
+#19 [Created, Active] {v1, 5v2, 10v3, 4v4, b1, b2, b3, b4, x} Links to #: 1
+#20 [Created, Active] {v1, 5v2, 10v3, 4v4, b1, b2, b3, x} Links to #: 1
+#21 [Created, Active] {v1, 5v2, 10v3, 4v4, b1, b3, b4, x} Links to #: 1
+#22 [Created, Active] {v1, 5v2, 10v3, 4v4, b1, b3, x} Links to #: 1
+#23 [Created, Active] {v1, 5v2, 10v3, 4v4, b1, b4, x} Links to #: 1
+#24 [Created, Active] {v1, 5v2, 10v3, 4v4, b1, x} Links to #: 1
+#25 [Created, Active] {v1, 5v2, 10v3, 4v4, b2, b3, b4, x} Links to #: 1
+#26 [Created, Active] {v1, 5v2, 10v3, 4v4, b2, b3, x} Links to #: 1
+#27 [Created, Active] {v1, 5v2, 10v3, 4v4, b2, b4, x} Links to #: 1
+#28 [Created, Active] {v1, 5v2, 10v3, 4v4, b2, x} Links to #: 1
+#29 [Created, Active] {v1, 5v2, 10v3, 4v4, b3, b4, x} Links to #: 1
+#30 [Created, Active] {v1, 5v2, 10v3, 4v4, b3, x} Links to #: 1
+#31 [Created, Active] {v1, 5v2, 10v3, 4v4, b4, x} Links to #: 1
+#32 [Created, Active] {v1, 5v2, 10v3, 4v4, x} Links to #: 1
+-------------------------------------------------
+
+STEP 5
+
+Rule #7 * (=b1 & !b3 & =x) | (=b3 & !b1 & =x): v1, v3 -> v * applied in instance #25 .
+Rule #11 * (=b3 & !b4 & =x) | (=b4 & !b3 & =x): v3, v4 -> v * applied in instance #20 .
+Rule #10 * (=b2 & !b4 & =x) | (=b4 & !b2 & =x): v2, v4 -> v * applied in instance #20 .
+Rule #11 * (=b3 & !b4 & =x) | (=b4 & !b3 & =x): v3, v4 -> v * applied in instance #26 .
+Rule #11 * (=b3 & !b4 & =x) | (=b4 & !b3 & =x): v3, v4 -> v * applied in instance #31 .
+Rule #10 * (=b2 & !b4 & =x) | (=b4 & !b2 & =x): v2, v4 -> v * applied in instance #31 .
+Rule #10 * (=b2 & !b4 & =x) | (=b4 & !b2 & =x): v2, v4 -> v * applied in instance #18 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #28 .
+Rule #7 * (=b1 & !b3 & =x) | (=b3 & !b1 & =x): v1, v3 -> v * applied in instance #18 .
+Rule #11 * (=b3 & !b4 & =x) | (=b4 & !b3 & =x): v3, v4 -> v * applied in instance #23 .
+Rule #10 * (=b2 & !b4 & =x) | (=b4 & !b2 & =x): v2, v4 -> v * applied in instance #26 .
+Rule #7 * (=b1 & !b3 & =x) | (=b3 & !b1 & =x): v1, v3 -> v * applied in instance #26 .
+Rule #11 * (=b3 & !b4 & =x) | (=b4 & !b3 & =x): v3, v4 -> v * applied in instance #22 .
+Rule #9 * (=b1 & !b4 & =x) | (=b4 & !b1 & =x): v1, v4 -> v * applied in instance #27 .
+Rule #11 * (=b3 & !b4 & =x) | (=b4 & !b3 & =x): v3, v4 -> v * applied in instance #31 .
+Rule #11 * (=b3 & !b4 & =x) | (=b4 & !b3 & =x): v3, v4 -> v * applied in instance #20 .
+Rule #11 * (=b3 & !b4 & =x) | (=b4 & !b3 & =x): v3, v4 -> v * applied in instance #22 .
+Rule #9 * (=b1 & !b4 & =x) | (=b4 & !b1 & =x): v1, v4 -> v * applied in instance #31 .
+Rule #9 * (=b1 & !b4 & =x) | (=b4 & !b1 & =x): v1, v4 -> v * applied in instance #20 .
+Rule #9 * (=b1 & !b4 & =x) | (=b4 & !b1 & =x): v1, v4 -> v * applied in instance #22 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #22 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #30 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #17 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #29 .
+Rule #6 * (=b1 & !b2 & =x) | (=b2 & !b1 & =x): v1, v2 -> v * applied in instance #23 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #28 .
+Rule #11 * (=b3 & !b4 & =x) | (=b4 & !b3 & =x): v3, v4 -> v * applied in instance #23 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #28 .
+Rule #6 * (=b1 & !b2 & =x) | (=b2 & !b1 & =x): v1, v2 -> v * applied in instance #28 .
+Rule #10 * (=b2 & !b4 & =x) | (=b4 & !b2 & =x): v2, v4 -> v * applied in instance #26 .
+Rule #7 * (=b1 & !b3 & =x) | (=b3 & !b1 & =x): v1, v3 -> v * applied in instance #17 .
+Rule #10 * (=b2 & !b4 & =x) | (=b4 & !b2 & =x): v2, v4 -> v * applied in instance #23 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #29 .
+Rule #11 * (=b3 & !b4 & =x) | (=b4 & !b3 & =x): v3, v4 -> v * applied in instance #26 .
+Rule #10 * (=b2 & !b4 & =x) | (=b4 & !b2 & =x): v2, v4 -> v * applied in instance #18 .
+Rule #12 * x -> 5y, s1 * applied in instance #25 .
+Rule #10 * (=b2 & !b4 & =x) | (=b4 & !b2 & =x): v2, v4 -> v * applied in instance #23 .
+Rule #12 * x -> 5y, s1 * applied in instance #32 .
+Rule #7 * (=b1 & !b3 & =x) | (=b3 & !b1 & =x): v1, v3 -> v * applied in instance #30 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #30 .
+Rule #11 * (=b3 & !b4 & =x) | (=b4 & !b3 & =x): v3, v4 -> v * applied in instance #22 .
+Rule #7 * (=b1 & !b3 & =x) | (=b3 & !b1 & =x): v1, v3 -> v * applied in instance #24 .
+Rule #10 * (=b2 & !b4 & =x) | (=b4 & !b2 & =x): v2, v4 -> v * applied in instance #18 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #17 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #17 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #22 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #29 .
+Rule #10 * (=b2 & !b4 & =x) | (=b4 & !b2 & =x): v2, v4 -> v * applied in instance #18 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #28 .
+Rule #11 * (=b3 & !b4 & =x) | (=b4 & !b3 & =x): v3, v4 -> v * applied in instance #30 .
+Rule #12 * x -> 5y, s1 * applied in instance #23 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #21 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #21 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #18 .
+Rule #12 * x -> 5y, s1 * applied in instance #31 .
+Rule #9 * (=b1 & !b4 & =x) | (=b4 & !b1 & =x): v1, v4 -> v * applied in instance #29 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #22 .
+Rule #12 * x -> 5y, s1 * applied in instance #18 .
+Rule #10 * (=b2 & !b4 & =x) | (=b4 & !b2 & =x): v2, v4 -> v * applied in instance #21 .
+Rule #12 * x -> 5y, s1 * applied in instance #19 .
+Rule #11 * (=b3 & !b4 & =x) | (=b4 & !b3 & =x): v3, v4 -> v * applied in instance #27 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #29 .
+Rule #6 * (=b1 & !b2 & =x) | (=b2 & !b1 & =x): v1, v2 -> v * applied in instance #21 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #17 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #30 .
+Rule #12 * x -> 5y, s1 * applied in instance #24 .
+Rule #11 * (=b3 & !b4 & =x) | (=b4 & !b3 & =x): v3, v4 -> v * applied in instance #17 .
+Rule #11 * (=b3 & !b4 & =x) | (=b4 & !b3 & =x): v3, v4 -> v * applied in instance #30 .
+Rule #10 * (=b2 & !b4 & =x) | (=b4 & !b2 & =x): v2, v4 -> v * applied in instance #29 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #22 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #17 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #30 .
+Rule #12 * x -> 5y, s1 * applied in instance #28 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #27 .
+Rule #11 * (=b3 & !b4 & =x) | (=b4 & !b3 & =x): v3, v4 -> v * applied in instance #17 .
+Rule #11 * (=b3 & !b4 & =x) | (=b4 & !b3 & =x): v3, v4 -> v * applied in instance #30 .
+Rule #12 * x -> 5y, s1 * applied in instance #20 .
+Rule #12 * x -> 5y, s1 * applied in instance #26 .
+Rule #11 * (=b3 & !b4 & =x) | (=b4 & !b3 & =x): v3, v4 -> v * applied in instance #30 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #21 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #27 .
+Rule #11 * (=b3 & !b4 & =x) | (=b4 & !b3 & =x): v3, v4 -> v * applied in instance #27 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #30 .
+Rule #12 * x -> 5y, s1 * applied in instance #29 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #27 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #22 .
+Rule #11 * (=b3 & !b4 & =x) | (=b4 & !b3 & =x): v3, v4 -> v * applied in instance #27 .
+Rule #12 * x -> 5y, s1 * applied in instance #22 .
+Rule #11 * (=b3 & !b4 & =x) | (=b4 & !b3 & =x): v3, v4 -> v * applied in instance #17 .
+Rule #11 * (=b3 & !b4 & =x) | (=b4 & !b3 & =x): v3, v4 -> v * applied in instance #17 .
+Rule #12 * x -> 5y, s1 * applied in instance #17 .
+Rule #12 * x -> 5y, s1 * applied in instance #21 .
+Rule #12 * x -> 5y, s1 * applied in instance #30 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #27 .
+Rule #8 * (=b2 & !b3 & =x) | (=b3 & !b2 & =x): v2, v3 -> v * applied in instance #27 .
+Rule #12 * x -> 5y, s1 * applied in instance #27 .
+
+Configuration #5
+-------------------------------------------------
+TYPE T0
+#0 t0 [Active] {} Links to #: 1
+TYPE T1
+#1 t1 [Active] {s} Links to #: 0, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32
+TYPE T2
+#2 t2 [Divided] {v1, 5v2, 10v3, 4v4} Links to #: none
+#3 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1} Links to #: none
+#4 [Created, Divided] {v1, 5v2, 10v3, 4v4} Links to #: none
+#5 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1, b2} Links to #: none
+#6 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1} Links to #: none
+#7 [Created, Divided] {v1, 5v2, 10v3, 4v4, b2} Links to #: none
+#8 [Created, Divided] {v1, 5v2, 10v3, 4v4} Links to #: none
+#9 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1, b2, b3} Links to #: none
+#10 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1, b2} Links to #: none
+#11 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1, b3} Links to #: none
+#12 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1} Links to #: none
+#13 [Created, Divided] {v1, 5v2, 10v3, 4v4, b2, b3} Links to #: none
+#14 [Created, Divided] {v1, 5v2, 10v3, 4v4, b2} Links to #: none
+#15 [Created, Divided] {v1, 5v2, 10v3, 4v4, b3} Links to #: none
+#16 [Created, Divided] {v1, 5v2, 10v3, 4v4} Links to #: none
+#17 [Created, Active] {s1, 5y, b1, b2, b4, 10v} Links to #: 1
+#18 [Created, Active] {5y, 8v3, s1, b1, b2, 6v} Links to #: 1
+#19 [Created, Active] {v1, 5v2, 10v3, 4v4, b1, b2, b3, b4, 5y, s1} Links to #: 1
+#20 [Created, Active] {s1, 4v2, 8v3, 5y, b1, b2, b3, 4v} Links to #: 1
+#21 [Created, Active] {s1, 5y, 7v3, 3v4, b1, b3, b4, 5v} Links to #: 1
+#22 [Created, Active] {5y, 2v3, s1, b1, b3, 9v} Links to #: 1
+#23 [Created, Active] {s1, 2v2, 8v3, 5y, b1, b4, 5v} Links to #: 1
+#24 [Created, Active] {5y, 5v2, 9v3, 4v4, b1, v, s1} Links to #: 1
+#25 [Created, Active] {5y, 5v2, 9v3, 4v4, b2, b3, b4, v, s1} Links to #: 1
+#26 [Created, Active] {s1, 3v2, 7v3, 5y, b2, b3, 5v} Links to #: 1
+#27 [Created, Active] {5y, 2v3, s1, b2, b4, 9v} Links to #: 1
+#28 [Created, Active] {s1, 5y, 6v3, 4v4, b2, 5v} Links to #: 1
+#29 [Created, Active] {s1, 5y, 6v3, 2v4, b3, b4, 6v} Links to #: 1
+#30 [Created, Active] {s1, 5y, b3, 10v} Links to #: 1
+#31 [Created, Active] {s1, 4v2, 8v3, 5y, b4, 4v} Links to #: 1
+#32 [Created, Active] {v1, 5v2, 10v3, 4v4, 5y, s1} Links to #: 1
+-------------------------------------------------
+
+STEP 6
+
+Rule #13 * <v1 & =s1: y -> s * applied in instance #28 .
+Rule #13 * <v1 & =s1: y -> s * applied in instance #25 .
+Rule #14 * <v2 & =s1: y -> s * applied in instance #28 .
+Rule #13 * <v1 & =s1: y -> s * applied in instance #23 .
+Rule #13 * <v1 & =s1: y -> s * applied in instance #21 .
+Rule #13 * <v1 & =s1: y -> s * applied in instance #29 .
+Rule #14 * <v2 & =s1: y -> s * applied in instance #21 .
+Rule #13 * <v1 & =s1: y -> s * applied in instance #18 .
+Rule #14 * <v2 & =s1: y -> s * applied in instance #18 .
+Rule #13 * <v1 & =s1: y -> s * applied in instance #22 .
+Rule #13 * <v1 & =s1: y -> s * applied in instance #26 .
+Rule #16 * <v4 & =s1: y -> s * applied in instance #23 .
+Rule #13 * <v1 & =s1: y -> s * applied in instance #24 .
+Rule #14 * <v2 & =s1: y -> s * applied in instance #29 .
+Rule #18 * s1 -> s2 * applied in instance #28 .
+Rule #13 * <v1 & =s1: y -> s * applied in instance #20 .
+Rule #16 * <v4 & =s1: y -> s * applied in instance #18 .
+Rule #14 * <v2 & =s1: y -> s * applied in instance #22 .
+Rule #13 * <v1 & =s1: y -> s * applied in instance #30 .
+Rule #18 * s1 -> s2 * applied in instance #23 .
+Rule #18 * s1 -> s2 * applied in instance #29 .
+Rule #13 * <v1 & =s1: y -> s * applied in instance #27 .
+Rule #18 * s1 -> s2 * applied in instance #19 .
+Rule #13 * <v1 & =s1: y -> s * applied in instance #31 .
+Rule #18 * s1 -> s2 * applied in instance #18 .
+Rule #14 * <v2 & =s1: y -> s * applied in instance #27 .
+Rule #16 * <v4 & =s1: y -> s * applied in instance #22 .
+Rule #18 * s1 -> s2 * applied in instance #21 .
+Rule #18 * s1 -> s2 * applied in instance #25 .
+Rule #16 * <v4 & =s1: y -> s * applied in instance #31 .
+Rule #16 * <v4 & =s1: y -> s * applied in instance #26 .
+Rule #18 * s1 -> s2 * applied in instance #26 .
+Rule #16 * <v4 & =s1: y -> s * applied in instance #27 .
+Rule #14 * <v2 & =s1: y -> s * applied in instance #30 .
+Rule #13 * <v1 & =s1: y -> s * applied in instance #17 .
+Rule #18 * s1 -> s2 * applied in instance #31 .
+Rule #14 * <v2 & =s1: y -> s * applied in instance #17 .
+Rule #15 * <v3 & =s1: y -> s * applied in instance #30 .
+Rule #16 * <v4 & =s1: y -> s * applied in instance #30 .
+Rule #16 * <v4 & =s1: y -> s * applied in instance #20 .
+Rule #18 * s1 -> s2 * applied in instance #32 .
+Rule #15 * <v3 & =s1: y -> s * applied in instance #17 .
+Rule #18 * s1 -> s2 * applied in instance #20 .
+Rule #16 * <v4 & =s1: y -> s * applied in instance #17 .
+Rule #18 * s1 -> s2 * applied in instance #24 .
+Rule #18 * s1 -> s2 * applied in instance #27 .
+Rule #17 * =10v & =s1: y -> s * applied in instance #30 .
+Rule #17 * =10v & =s1: y -> s * applied in instance #17 .
+Rule #18 * s1 -> s2 * applied in instance #30 .
+Rule #18 * s1 -> s2 * applied in instance #22 .
+Rule #18 * s1 -> s2 * applied in instance #17 .
+
+Configuration #6
+-------------------------------------------------
+TYPE T0
+#0 t0 [Active] {} Links to #: 1
+TYPE T1
+#1 t1 [Active] {s} Links to #: 0, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32
+TYPE T2
+#2 t2 [Divided] {v1, 5v2, 10v3, 4v4} Links to #: none
+#3 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1} Links to #: none
+#4 [Created, Divided] {v1, 5v2, 10v3, 4v4} Links to #: none
+#5 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1, b2} Links to #: none
+#6 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1} Links to #: none
+#7 [Created, Divided] {v1, 5v2, 10v3, 4v4, b2} Links to #: none
+#8 [Created, Divided] {v1, 5v2, 10v3, 4v4} Links to #: none
+#9 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1, b2, b3} Links to #: none
+#10 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1, b2} Links to #: none
+#11 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1, b3} Links to #: none
+#12 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1} Links to #: none
+#13 [Created, Divided] {v1, 5v2, 10v3, 4v4, b2, b3} Links to #: none
+#14 [Created, Divided] {v1, 5v2, 10v3, 4v4, b2} Links to #: none
+#15 [Created, Divided] {v1, 5v2, 10v3, 4v4, b3} Links to #: none
+#16 [Created, Divided] {v1, 5v2, 10v3, 4v4} Links to #: none
+#17 [Created, Active] {5s, s2, b1, b2, b4, 10v} Links to #: 1
+#18 [Created, Active] {s2, 2y, 8v3, 3s, b1, b2, 6v} Links to #: 1
+#19 [Created, Active] {v1, 5v2, 10v3, 4v4, b1, b2, b3, b4, 5y, s2} Links to #: 1
+#20 [Created, Active] {2s, 4v2, 8v3, 3y, b1, b2, b3, 4v, s2} Links to #: 1
+#21 [Created, Active] {2s, 3y, 7v3, 3v4, b1, b3, b4, 5v, s2} Links to #: 1
+#22 [Created, Active] {s2, 2y, 2v3, 3s, b1, b3, 9v} Links to #: 1
+#23 [Created, Active] {2s, 2v2, 8v3, 3y, b1, b4, 5v, s2} Links to #: 1
+#24 [Created, Active] {4y, 5v2, 9v3, 4v4, b1, v, s, s2} Links to #: 1
+#25 [Created, Active] {4y, 5v2, 9v3, 4v4, b2, b3, b4, v, s, s2} Links to #: 1
+#26 [Created, Active] {2s, 3v2, 7v3, 3y, b2, b3, 5v, s2} Links to #: 1
+#27 [Created, Active] {s2, 2y, 2v3, 3s, b2, b4, 9v} Links to #: 1
+#28 [Created, Active] {2s, 3y, 6v3, 4v4, b2, 5v, s2} Links to #: 1
+#29 [Created, Active] {2s, 3y, 6v3, 2v4, b3, b4, 6v, s2} Links to #: 1
+#30 [Created, Active] {5s, s2, b3, 10v} Links to #: 1
+#31 [Created, Active] {2s, 4v2, 8v3, 3y, b4, 4v, s2} Links to #: 1
+#32 [Created, Active] {v1, 5v2, 10v3, 4v4, 5y, s2} Links to #: 1
+-------------------------------------------------
+
+STEP 7
+
+Rule #20 * >=y: y, s2 -> {f}(T1) * applied in instance #28 .
+Selected instance #1 as target of type T1 for rule #20.
+Rule #20 * >=y: y, s2 -> {f}(T1) * applied in instance #18 .
+Selected instance #1 as target of type T1 for rule #20.
+Rule #20 * >=y: y, s2 -> {f}(T1) * applied in instance #22 .
+Selected instance #1 as target of type T1 for rule #20.
+Rule #20 * >=y: y, s2 -> {f}(T1) * applied in instance #25 .
+Selected instance #1 as target of type T1 for rule #20.
+Rule #20 * >=y: y, s2 -> {f}(T1) * applied in instance #31 .
+Selected instance #1 as target of type T1 for rule #20.
+Rule #20 * >=y: y, s2 -> {f}(T1) * applied in instance #29 .
+Selected instance #1 as target of type T1 for rule #20.
+Rule #20 * >=y: y, s2 -> {f}(T1) * applied in instance #27 .
+Selected instance #1 as target of type T1 for rule #20.
+Rule #20 * >=y: y, s2 -> {f}(T1) * applied in instance #20 .
+Selected instance #1 as target of type T1 for rule #20.
+Rule #20 * >=y: y, s2 -> {f}(T1) * applied in instance #32 .
+Selected instance #1 as target of type T1 for rule #20.
+Rule #20 * >=y: y, s2 -> {f}(T1) * applied in instance #23 .
+Selected instance #1 as target of type T1 for rule #20.
+Rule #20 * >=y: y, s2 -> {f}(T1) * applied in instance #26 .
+Selected instance #1 as target of type T1 for rule #20.
+Rule #19 * <y: 5s, s2 -> {t}(T1) * applied in instance #17 .
+Selected instance #1 as target of type T1 for rule #19.
+Rule #19 * <y: 5s, s2 -> {t}(T1) * applied in instance #30 .
+Selected instance #1 as target of type T1 for rule #19.
+Rule #20 * >=y: y, s2 -> {f}(T1) * applied in instance #21 .
+Selected instance #1 as target of type T1 for rule #20.
+Rule #20 * >=y: y, s2 -> {f}(T1) * applied in instance #19 .
+Selected instance #1 as target of type T1 for rule #20.
+Rule #20 * >=y: y, s2 -> {f}(T1) * applied in instance #24 .
+Selected instance #1 as target of type T1 for rule #20.
+
+Configuration #7
+-------------------------------------------------
+TYPE T0
+#0 t0 [Active] {} Links to #: 1
+TYPE T1
+#1 t1 [Active] {s, 14f, 2t} Links to #: 0, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32
+TYPE T2
+#2 t2 [Divided] {v1, 5v2, 10v3, 4v4} Links to #: none
+#3 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1} Links to #: none
+#4 [Created, Divided] {v1, 5v2, 10v3, 4v4} Links to #: none
+#5 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1, b2} Links to #: none
+#6 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1} Links to #: none
+#7 [Created, Divided] {v1, 5v2, 10v3, 4v4, b2} Links to #: none
+#8 [Created, Divided] {v1, 5v2, 10v3, 4v4} Links to #: none
+#9 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1, b2, b3} Links to #: none
+#10 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1, b2} Links to #: none
+#11 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1, b3} Links to #: none
+#12 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1} Links to #: none
+#13 [Created, Divided] {v1, 5v2, 10v3, 4v4, b2, b3} Links to #: none
+#14 [Created, Divided] {v1, 5v2, 10v3, 4v4, b2} Links to #: none
+#15 [Created, Divided] {v1, 5v2, 10v3, 4v4, b3} Links to #: none
+#16 [Created, Divided] {v1, 5v2, 10v3, 4v4} Links to #: none
+#17 [Created, Active] {b1, b2, b4, 10v} Links to #: 1
+#18 [Created, Active] {y, 8v3, 3s, b1, b2, 6v} Links to #: 1
+#19 [Created, Active] {v1, 5v2, 10v3, 4v4, b1, b2, b3, b4, 4y} Links to #: 1
+#20 [Created, Active] {2s, 4v2, 8v3, 2y, b1, b2, b3, 4v} Links to #: 1
+#21 [Created, Active] {2s, 2y, 7v3, 3v4, b1, b3, b4, 5v} Links to #: 1
+#22 [Created, Active] {y, 2v3, 3s, b1, b3, 9v} Links to #: 1
+#23 [Created, Active] {2s, 2v2, 8v3, 2y, b1, b4, 5v} Links to #: 1
+#24 [Created, Active] {3y, 5v2, 9v3, 4v4, b1, v, s} Links to #: 1
+#25 [Created, Active] {3y, 5v2, 9v3, 4v4, b2, b3, b4, v, s} Links to #: 1
+#26 [Created, Active] {2s, 3v2, 7v3, 2y, b2, b3, 5v} Links to #: 1
+#27 [Created, Active] {y, 2v3, 3s, b2, b4, 9v} Links to #: 1
+#28 [Created, Active] {2s, 2y, 6v3, 4v4, b2, 5v} Links to #: 1
+#29 [Created, Active] {2s, 2y, 6v3, 2v4, b3, b4, 6v} Links to #: 1
+#30 [Created, Active] {b3, 10v} Links to #: 1
+#31 [Created, Active] {2s, 4v2, 8v3, 2y, b4, 4v} Links to #: 1
+#32 [Created, Active] {v1, 5v2, 10v3, 4v4, 4y} Links to #: 1
+-------------------------------------------------
+
+STEP 8
+
+Rule #0 * >=t: s -> {yes}(T0) * applied in instance #1 t1.
+Selected instance #0 as target of type T0 for rule #0.
+
+Configuration #8
+-------------------------------------------------
+TYPE T0
+#0 t0 [Active] {yes} Links to #: 1
+TYPE T1
+#1 t1 [Active] {14f, 2t} Links to #: 0, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32
+TYPE T2
+#2 t2 [Divided] {v1, 5v2, 10v3, 4v4} Links to #: none
+#3 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1} Links to #: none
+#4 [Created, Divided] {v1, 5v2, 10v3, 4v4} Links to #: none
+#5 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1, b2} Links to #: none
+#6 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1} Links to #: none
+#7 [Created, Divided] {v1, 5v2, 10v3, 4v4, b2} Links to #: none
+#8 [Created, Divided] {v1, 5v2, 10v3, 4v4} Links to #: none
+#9 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1, b2, b3} Links to #: none
+#10 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1, b2} Links to #: none
+#11 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1, b3} Links to #: none
+#12 [Created, Divided] {v1, 5v2, 10v3, 4v4, b1} Links to #: none
+#13 [Created, Divided] {v1, 5v2, 10v3, 4v4, b2, b3} Links to #: none
+#14 [Created, Divided] {v1, 5v2, 10v3, 4v4, b2} Links to #: none
+#15 [Created, Divided] {v1, 5v2, 10v3, 4v4, b3} Links to #: none
+#16 [Created, Divided] {v1, 5v2, 10v3, 4v4} Links to #: none
+#17 [Created, Active] {b1, b2, b4, 10v} Links to #: 1
+#18 [Created, Active] {y, 8v3, 3s, b1, b2, 6v} Links to #: 1
+#19 [Created, Active] {v1, 5v2, 10v3, 4v4, b1, b2, b3, b4, 4y} Links to #: 1
+#20 [Created, Active] {2s, 4v2, 8v3, 2y, b1, b2, b3, 4v} Links to #: 1
+#21 [Created, Active] {2s, 2y, 7v3, 3v4, b1, b3, b4, 5v} Links to #: 1
+#22 [Created, Active] {y, 2v3, 3s, b1, b3, 9v} Links to #: 1
+#23 [Created, Active] {2s, 2v2, 8v3, 2y, b1, b4, 5v} Links to #: 1
+#24 [Created, Active] {3y, 5v2, 9v3, 4v4, b1, v, s} Links to #: 1
+#25 [Created, Active] {3y, 5v2, 9v3, 4v4, b2, b3, b4, v, s} Links to #: 1
+#26 [Created, Active] {2s, 3v2, 7v3, 2y, b2, b3, 5v} Links to #: 1
+#27 [Created, Active] {y, 2v3, 3s, b2, b4, 9v} Links to #: 1
+#28 [Created, Active] {2s, 2y, 6v3, 4v4, b2, 5v} Links to #: 1
+#29 [Created, Active] {2s, 2y, 6v3, 2v4, b3, b4, 6v} Links to #: 1
+#30 [Created, Active] {b3, 10v} Links to #: 1
+#31 [Created, Active] {2s, 4v2, 8v3, 2y, b4, 4v} Links to #: 1
+#32 [Created, Active] {v1, 5v2, 10v3, 4v4, 4y} Links to #: 1
+-------------------------------------------------
+System halted at step 8 (no further rule could be applied, i.e. reached a deadlock).
+Simulation complete at step 8.

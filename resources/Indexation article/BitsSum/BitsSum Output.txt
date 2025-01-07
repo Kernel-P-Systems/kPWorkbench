@@ -1,0 +1,140 @@
+Simulation started.
+Initial Configuration
+-------------------------------------------------
+TYPE Term
+#0 termA [Active] {a_0, a_1, a_2, a_3, a_4, a_5, a_6, a_7, a_8, a_9, a_10, a_11, a_12, a_13, a_14, a_15, a_16, a_17, a_18, a_19, a_20} Links to #: 2
+#1 termB [Active] {a_0, a_1, a_2, a_3, a_4, a_5, a_6, a_7, a_8, a_9, a_10, a_11, a_12, a_13, a_14, a_15, a_16, a_17, a_18, a_19, a_20} Links to #: 2
+TYPE Add
+#2 add [Active] {} Links to #: 0, 1
+-------------------------------------------------
+
+STEP 1
+
+Rule #5 * a_5 -> {a_5}(Add) * applied in instance #1 termB.
+Selected instance #2 as target of type Add for rule #5.
+Rule #6 * a_6 -> {a_6}(Add) * applied in instance #1 termB.
+Selected instance #2 as target of type Add for rule #6.
+Rule #13 * a_13 -> {a_13}(Add) * applied in instance #1 termB.
+Selected instance #2 as target of type Add for rule #13.
+Rule #12 * a_12 -> {a_12}(Add) * applied in instance #1 termB.
+Selected instance #2 as target of type Add for rule #12.
+Rule #20 * a_20 -> {a_20}(Add) * applied in instance #1 termB.
+Selected instance #2 as target of type Add for rule #20.
+Rule #9 * a_9 -> {a_9}(Add) * applied in instance #0 termA.
+Selected instance #2 as target of type Add for rule #9.
+Rule #15 * a_15 -> {a_15}(Add) * applied in instance #1 termB.
+Selected instance #2 as target of type Add for rule #15.
+Rule #0 * a_0 -> {a_0}(Add) * applied in instance #0 termA.
+Selected instance #2 as target of type Add for rule #0.
+Rule #19 * a_19 -> {a_19}(Add) * applied in instance #0 termA.
+Selected instance #2 as target of type Add for rule #19.
+Rule #1 * a_1 -> {a_1}(Add) * applied in instance #1 termB.
+Selected instance #2 as target of type Add for rule #1.
+Rule #6 * a_6 -> {a_6}(Add) * applied in instance #0 termA.
+Selected instance #2 as target of type Add for rule #6.
+Rule #9 * a_9 -> {a_9}(Add) * applied in instance #1 termB.
+Selected instance #2 as target of type Add for rule #9.
+Rule #4 * a_4 -> {a_4}(Add) * applied in instance #1 termB.
+Selected instance #2 as target of type Add for rule #4.
+Rule #3 * a_3 -> {a_3}(Add) * applied in instance #0 termA.
+Selected instance #2 as target of type Add for rule #3.
+Rule #19 * a_19 -> {a_19}(Add) * applied in instance #1 termB.
+Selected instance #2 as target of type Add for rule #19.
+Rule #5 * a_5 -> {a_5}(Add) * applied in instance #0 termA.
+Selected instance #2 as target of type Add for rule #5.
+Rule #10 * a_10 -> {a_10}(Add) * applied in instance #0 termA.
+Selected instance #2 as target of type Add for rule #10.
+Rule #7 * a_7 -> {a_7}(Add) * applied in instance #1 termB.
+Selected instance #2 as target of type Add for rule #7.
+Rule #2 * a_2 -> {a_2}(Add) * applied in instance #0 termA.
+Selected instance #2 as target of type Add for rule #2.
+Rule #18 * a_18 -> {a_18}(Add) * applied in instance #0 termA.
+Selected instance #2 as target of type Add for rule #18.
+Rule #2 * a_2 -> {a_2}(Add) * applied in instance #1 termB.
+Selected instance #2 as target of type Add for rule #2.
+Rule #12 * a_12 -> {a_12}(Add) * applied in instance #0 termA.
+Selected instance #2 as target of type Add for rule #12.
+Rule #18 * a_18 -> {a_18}(Add) * applied in instance #1 termB.
+Selected instance #2 as target of type Add for rule #18.
+Rule #15 * a_15 -> {a_15}(Add) * applied in instance #0 termA.
+Selected instance #2 as target of type Add for rule #15.
+Rule #8 * a_8 -> {a_8}(Add) * applied in instance #0 termA.
+Selected instance #2 as target of type Add for rule #8.
+Rule #13 * a_13 -> {a_13}(Add) * applied in instance #0 termA.
+Selected instance #2 as target of type Add for rule #13.
+Rule #14 * a_14 -> {a_14}(Add) * applied in instance #1 termB.
+Selected instance #2 as target of type Add for rule #14.
+Rule #17 * a_17 -> {a_17}(Add) * applied in instance #0 termA.
+Selected instance #2 as target of type Add for rule #17.
+Rule #16 * a_16 -> {a_16}(Add) * applied in instance #0 termA.
+Selected instance #2 as target of type Add for rule #16.
+Rule #0 * a_0 -> {a_0}(Add) * applied in instance #1 termB.
+Selected instance #2 as target of type Add for rule #0.
+Rule #10 * a_10 -> {a_10}(Add) * applied in instance #1 termB.
+Selected instance #2 as target of type Add for rule #10.
+Rule #11 * a_11 -> {a_11}(Add) * applied in instance #0 termA.
+Selected instance #2 as target of type Add for rule #11.
+Rule #7 * a_7 -> {a_7}(Add) * applied in instance #0 termA.
+Selected instance #2 as target of type Add for rule #7.
+Rule #17 * a_17 -> {a_17}(Add) * applied in instance #1 termB.
+Selected instance #2 as target of type Add for rule #17.
+Rule #3 * a_3 -> {a_3}(Add) * applied in instance #1 termB.
+Selected instance #2 as target of type Add for rule #3.
+Rule #11 * a_11 -> {a_11}(Add) * applied in instance #1 termB.
+Selected instance #2 as target of type Add for rule #11.
+Rule #20 * a_20 -> {a_20}(Add) * applied in instance #0 termA.
+Selected instance #2 as target of type Add for rule #20.
+Rule #1 * a_1 -> {a_1}(Add) * applied in instance #0 termA.
+Selected instance #2 as target of type Add for rule #1.
+Rule #16 * a_16 -> {a_16}(Add) * applied in instance #1 termB.
+Selected instance #2 as target of type Add for rule #16.
+Rule #14 * a_14 -> {a_14}(Add) * applied in instance #0 termA.
+Selected instance #2 as target of type Add for rule #14.
+Rule #4 * a_4 -> {a_4}(Add) * applied in instance #0 termA.
+Selected instance #2 as target of type Add for rule #4.
+Rule #8 * a_8 -> {a_8}(Add) * applied in instance #1 termB.
+Selected instance #2 as target of type Add for rule #8.
+
+Configuration #1
+-------------------------------------------------
+TYPE Term
+#0 termA [Active] {} Links to #: 2
+#1 termB [Active] {} Links to #: 2
+TYPE Add
+#2 add [Active] {2a_5, 2a_6, 2a_13, 2a_12, 2a_20, 2a_9, 2a_15, 2a_0, 2a_19, 2a_1, 2a_4, 2a_3, 2a_10, 2a_7, 2a_2, 2a_18, 2a_8, 2a_14, 2a_17, 2a_16, 2a_11} Links to #: 0, 1
+-------------------------------------------------
+
+STEP 2
+
+Rule #21 * 2a_0 -> a_1 * applied in instance #2 add.
+Rule #22 * 2a_1 -> a_2 * applied in instance #2 add.
+Rule #23 * 2a_2 -> a_3 * applied in instance #2 add.
+Rule #24 * 2a_3 -> a_4 * applied in instance #2 add.
+Rule #25 * 2a_4 -> a_5 * applied in instance #2 add.
+Rule #26 * 2a_5 -> a_6 * applied in instance #2 add.
+Rule #27 * 2a_6 -> a_7 * applied in instance #2 add.
+Rule #28 * 2a_7 -> a_8 * applied in instance #2 add.
+Rule #29 * 2a_8 -> a_9 * applied in instance #2 add.
+Rule #30 * 2a_9 -> a_10 * applied in instance #2 add.
+Rule #31 * 2a_10 -> a_11 * applied in instance #2 add.
+Rule #32 * 2a_11 -> a_12 * applied in instance #2 add.
+Rule #33 * 2a_12 -> a_13 * applied in instance #2 add.
+Rule #34 * 2a_13 -> a_14 * applied in instance #2 add.
+Rule #35 * 2a_14 -> a_15 * applied in instance #2 add.
+Rule #36 * 2a_15 -> a_16 * applied in instance #2 add.
+Rule #37 * 2a_16 -> a_17 * applied in instance #2 add.
+Rule #38 * 2a_17 -> a_18 * applied in instance #2 add.
+Rule #39 * 2a_18 -> a_19 * applied in instance #2 add.
+Rule #40 * 2a_19 -> a_20 * applied in instance #2 add.
+Rule #41 * 2a_20 -> a_21 * applied in instance #2 add.
+
+Configuration #2
+-------------------------------------------------
+TYPE Term
+#0 termA [Active] {} Links to #: 2
+#1 termB [Active] {} Links to #: 2
+TYPE Add
+#2 add [Active] {a_16, a_15, a_8, a_9, a_1, a_12, a_6, a_21, a_2, a_20, a_17, a_18, a_11, a_14, a_19, a_3, a_13, a_7, a_4, a_5, a_10} Links to #: 0, 1
+-------------------------------------------------
+System halted at step 2 (no further rule could be applied, i.e. reached a deadlock).
+Simulation complete at step 2.

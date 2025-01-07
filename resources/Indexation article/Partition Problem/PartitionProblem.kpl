@@ -1,0 +1,45 @@
+
+type T0 {
+}
+
+type T1 {
+	max {
+		>=t : s -> yes (T0) .
+		>=f & <t : s -> no (T0) .
+	}
+}
+
+type T2 {
+	max {
+		a1 -> [b1, a2][a2] . 
+		a2 -> [b2, a3][a3] . 
+		a3 -> [b3, a4][a4] . 
+		a4 -> [b4, x][x] . 
+	}
+	max {
+		=b1 & !=b2 & =x | =b2 & !=b1 & =x : v1, v2 -> v . 
+		=b1 & !=b3 & =x | =b3 & !=b1 & =x : v1, v3 -> v . 
+		=b2 & !=b3 & =x | =b3 & !=b2 & =x : v2, v3 -> v . 
+		=b1 & !=b4 & =x | =b4 & !=b1 & =x : v1, v4 -> v . 
+		=b2 & !=b4 & =x | =b4 & !=b2 & =x : v2, v4 -> v . 
+		=b3 & !=b4 & =x | =b4 & !=b3 & =x : v3, v4 -> v . 
+	}
+	max { x -> 5y, s1 . } 
+	choice { <v1 & =s1 : y -> s . }  
+	choice { <v2 & =s1 : y -> s . }  
+	choice { <v3 & =s1 : y -> s . }  
+	choice { <v4 & =s1 : y -> s . }  
+	choice { =10v  & =s1: y -> s . }  
+	choice {
+		s1 -> s2 . 
+		<y : 5s, s2 -> t (T1) . 
+		>=y : y, s2 -> f (T1) .
+	}
+}
+
+
+t0 {} (T0) .
+t1 {s} (T1) .
+t2 {a1, v1, 5v2, 10v3, 4v4} (T2) .
+
+t0 - t1 - t2 .
