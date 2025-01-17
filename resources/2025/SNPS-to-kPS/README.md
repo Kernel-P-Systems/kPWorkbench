@@ -1,1 +1,1 @@
-# Spiking Neural P Systems and Kernel P Systems
+# Spiking Neural P Systems into Kernel P Systems
