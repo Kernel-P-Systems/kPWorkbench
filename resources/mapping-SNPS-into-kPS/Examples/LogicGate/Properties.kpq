@@ -1,0 +1,41 @@
+
+
+//False
+ltl: always ((N1.a = 0 and (N2.a = 0 and N3.a = 0)) implies (eventually N10.a = 0));
+ctl: always ((N1.a = 0 and (N2.a = 0 and N3.a = 0)) implies (eventually N10.a = 0));
+
+//False
+ltl: always ((N1.a = 0 and (N2.a = 0 and N3.a = 1)) implies (eventually N10.a = 0));
+ctl: always ((N1.a = 0 and (N2.a = 0 and N3.a = 1)) implies (eventually N10.a = 0));
+
+//False
+ltl: always ((N1.a = 0 and (N2.a = 1 and N3.a = 0)) implies (eventually N10.a = 0));
+ctl: always ((N1.a = 0 and (N2.a = 1 and N3.a = 0)) implies (eventually N10.a = 0));
+
+//True
+ltl: always ((N1.a = 0 and (N2.a = 1 and N3.a = 1)) implies (eventually N10.a = 1));
+ctl: always ((N1.a = 0 and (N2.a = 1 and N3.a = 1)) implies (eventually N10.a = 1));
+
+//False
+ltl: always ((N1.a = 1 and (N2.a = 0 and N3.a = 0)) implies (eventually N10.a = 0));
+ctl: always ((N1.a = 1 and (N2.a = 0 and N3.a = 0)) implies (eventually N10.a = 0));
+
+//True
+ltl: always ((N1.a = 1 and (N2.a = 0 and N3.a = 1)) implies (eventually N10.a = 1));
+ctl: always ((N1.a = 1 and (N2.a = 0 and N3.a = 1)) implies (eventually N10.a = 1));
+
+//False
+ltl: always ((N1.a = 1 and (N2.a = 1 and N3.a = 0)) implies (eventually N10.a = 0));
+ctl: always ((N1.a = 1 and (N2.a = 1 and N3.a = 0)) implies (eventually N10.a = 0));
+
+//True
+ltl: always ((N1.a = 1 and (N2.a = 1 and N3.a = 1)) implies (eventually N10.a = 1));
+ctl: always ((N1.a = 1 and (N2.a = 1 and N3.a = 1)) implies (eventually N10.a = 1));
+
+//True
+ltl: always ((N1.a = 1) or ((N2.a = 1) or (N3.a = 1))) implies (eventually ((N5.a > 0) or (N9.a > 0)));
+ctl: always ((N1.a = 1) or ((N2.a = 1) or (N3.a = 1))) implies (eventually ((N5.a > 0) or (N9.a > 0)));
+
+//True
+ltl: always ((N1.a = 1) or (N3.a = 1)) implies (eventually (N8.a = 1));
+ctl: always ((N1.a = 1) or (N3.a = 1)) implies (eventually (N8.a = 1));
