@@ -1,0 +1,154 @@
+Simulation started.
+Initial Configuration
+-------------------------------------------------
+TYPE SN1
+#0 N1 [Active] {a} Links to #: 3, 6
+TYPE SN2
+#1 N2 [Active] {a} Links to #: 3
+TYPE SN3
+#2 N3 [Active] {a} Links to #: 5, 6
+TYPE SN4
+#3 N4 [Active] {} Links to #: 0, 1, 4
+TYPE SN5
+#4 N5 [Active] {} Links to #: 5, 3, 8
+TYPE SN6
+#5 N6 [Active] {} Links to #: 2, 4
+TYPE SN7
+#6 N7 [Active] {} Links to #: 0, 2, 7
+TYPE SN8
+#7 N8 [Active] {} Links to #: 6, 8
+TYPE SN9
+#8 N9 [Active] {} Links to #: 4, 7, 9
+TYPE SN10
+#9 N10 [Active] {} Links to #: 8
+-------------------------------------------------
+
+STEP 1
+
+Rule #1 * =a: a -> {a}(SN4) * applied in instance #1 N2.
+Selected instance #3 as target of type SN4 for rule #1.
+Rule #0 * =a: a -> {a}(SN4), {a}(SN7),  * applied in instance #0 N1.
+Selected instance #3 as target of type SN4 for rule #0.
+Selected instance #6 as target of type SN7 for rule #0.
+Rule #2 * =a: a -> {a}(SN6), {a}(SN7),  * applied in instance #2 N3.
+Selected instance #5 as target of type SN6 for rule #2.
+Selected instance #6 as target of type SN7 for rule #2.
+
+Configuration #1
+-------------------------------------------------
+TYPE SN1
+#0 N1 [Active] {} Links to #: 3, 6
+TYPE SN2
+#1 N2 [Active] {} Links to #: 3
+TYPE SN3
+#2 N3 [Active] {} Links to #: 5, 6
+TYPE SN4
+#3 N4 [Active] {2a} Links to #: 0, 1, 4
+TYPE SN5
+#4 N5 [Active] {} Links to #: 5, 3, 8
+TYPE SN6
+#5 N6 [Active] {a} Links to #: 2, 4
+TYPE SN7
+#6 N7 [Active] {2a} Links to #: 0, 2, 7
+TYPE SN8
+#7 N8 [Active] {} Links to #: 6, 8
+TYPE SN9
+#8 N9 [Active] {} Links to #: 4, 7, 9
+TYPE SN10
+#9 N10 [Active] {} Links to #: 8
+-------------------------------------------------
+
+STEP 2
+
+Rule #7 * =a: a -> {a}(SN5) * applied in instance #5 N6.
+Selected instance #4 as target of type SN5 for rule #7.
+Rule #9 * =2a: 2a -> {a}(SN8) * applied in instance #6 N7.
+Selected instance #7 as target of type SN8 for rule #9.
+Rule #4 * =2a: 2a -> {a}(SN5) * applied in instance #3 N4.
+Selected instance #4 as target of type SN5 for rule #4.
+
+Configuration #2
+-------------------------------------------------
+TYPE SN1
+#0 N1 [Active] {} Links to #: 3, 6
+TYPE SN2
+#1 N2 [Active] {} Links to #: 3
+TYPE SN3
+#2 N3 [Active] {} Links to #: 5, 6
+TYPE SN4
+#3 N4 [Active] {} Links to #: 0, 1, 4
+TYPE SN5
+#4 N5 [Active] {2a} Links to #: 5, 3, 8
+TYPE SN6
+#5 N6 [Active] {} Links to #: 2, 4
+TYPE SN7
+#6 N7 [Active] {} Links to #: 0, 2, 7
+TYPE SN8
+#7 N8 [Active] {a} Links to #: 6, 8
+TYPE SN9
+#8 N9 [Active] {} Links to #: 4, 7, 9
+TYPE SN10
+#9 N10 [Active] {} Links to #: 8
+-------------------------------------------------
+
+STEP 3
+
+Rule #10 * =a: a -> {a}(SN9) * applied in instance #7 N8.
+Selected instance #8 as target of type SN9 for rule #10.
+Rule #5 * =2a: 2a -> {a}(SN9) * applied in instance #4 N5.
+Selected instance #8 as target of type SN9 for rule #5.
+
+Configuration #3
+-------------------------------------------------
+TYPE SN1
+#0 N1 [Active] {} Links to #: 3, 6
+TYPE SN2
+#1 N2 [Active] {} Links to #: 3
+TYPE SN3
+#2 N3 [Active] {} Links to #: 5, 6
+TYPE SN4
+#3 N4 [Active] {} Links to #: 0, 1, 4
+TYPE SN5
+#4 N5 [Active] {} Links to #: 5, 3, 8
+TYPE SN6
+#5 N6 [Active] {} Links to #: 2, 4
+TYPE SN7
+#6 N7 [Active] {} Links to #: 0, 2, 7
+TYPE SN8
+#7 N8 [Active] {} Links to #: 6, 8
+TYPE SN9
+#8 N9 [Active] {2a} Links to #: 4, 7, 9
+TYPE SN10
+#9 N10 [Active] {} Links to #: 8
+-------------------------------------------------
+
+STEP 4
+
+Rule #11 * =2a: 2a -> {a}(SN10) * applied in instance #8 N9.
+Selected instance #9 as target of type SN10 for rule #11.
+
+Configuration #4
+-------------------------------------------------
+TYPE SN1
+#0 N1 [Active] {} Links to #: 3, 6
+TYPE SN2
+#1 N2 [Active] {} Links to #: 3
+TYPE SN3
+#2 N3 [Active] {} Links to #: 5, 6
+TYPE SN4
+#3 N4 [Active] {} Links to #: 0, 1, 4
+TYPE SN5
+#4 N5 [Active] {} Links to #: 5, 3, 8
+TYPE SN6
+#5 N6 [Active] {} Links to #: 2, 4
+TYPE SN7
+#6 N7 [Active] {} Links to #: 0, 2, 7
+TYPE SN8
+#7 N8 [Active] {} Links to #: 6, 8
+TYPE SN9
+#8 N9 [Active] {} Links to #: 4, 7, 9
+TYPE SN10
+#9 N10 [Active] {a} Links to #: 8
+-------------------------------------------------
+System halted at step 4 (no further rule could be applied, i.e. reached a deadlock).
+Simulation complete at step 4.
