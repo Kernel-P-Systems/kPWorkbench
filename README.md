@@ -1,4 +1,4 @@
-This document refers to the paper **“Spiking Neural P Systems and Kernel P Systems”** and the folder **Examples/LogicalGate**, which consists of four subfolders and the file **LogicalGateModelDiagram**. This diagram corresponds to Example 1, pages 9-11, from the paper (Fig. 1 coincides with the diagram). The other examples from the paper and the experiments related to the testing and verification section are described below.
+This document refers to the paper **“Spiking Neural P Systems and Kernel P Systems”** and the folder **Examples/LogicalGate**, which consists of four subfolders and the file **LogicalGateModelDiagram**. This diagram corresponds to Example 1, pages 9-11, from the paper (Fig. 1 coincides with the Diagram 1). The other examples from the paper and the experiments related to the testing and verification section are described below.
 
 ## Example 1
 
@@ -8,7 +8,7 @@ Example 1, depicted in the diagram, refers to a spiking neural P system (SN P sy
   <img src="Examples/LogicGate/LogicalGateModelDiagram.png">
   <br?
 
-  *Figure 1*
+  *Diagram 1*
 
 </p>
 
