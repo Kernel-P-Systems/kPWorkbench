@@ -1,4 +1,4 @@
-#define bits=20
+#define bits=3
 
 type Term {
   max {

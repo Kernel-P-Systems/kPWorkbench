@@ -21,7 +21,9 @@ namespace KPLinguaPreprocessing
         //private Regex multisetIteratorRegexPattern = new Regex(@"[a-z]+ \{@(?<multisetIterator>.*?)@\}\s+\([a-z0-9]+\)(?:\s*\.\s*)*", RegexOptions.IgnoreCase);
         //new Regex(@"[a-z]+ \{@[a-z0-9]+_\$[a-z0-9]+\$:[0-9]+(<=|>=|<|>|==|!=)[a-z0-9]+(<=|>=|<|>|==|!=)bits@\}\s+\([a-z0-9]+\) \.", RegexOptions.IgnoreCase);
         private Regex iteratorPatternInMultisetRegex = new Regex(@"(?<rule>.*?(\$|\{|\})?\s*)(?<iterator>:\S+)(?<n>\n)?");
-        private string multisetIteratorPattern = @"@(.+?)@";
+        //private Regex iteratorPatternInLogicalExpressionRegex = new Regex(@"(?<rule>\(.*?\))\s*:\s*(?<iterator>:\S+)(?<n>\n)?");
+        private Regex logicalExpressionPatternRegex = new Regex(@"@[\|&]([^@]+)@");
+        //private string multisetIteratorPattern = @"@(.+?)@";
         private Dictionary<string, Variable> variables = new Dictionary<string, Variable>();
 
         public List<string> ReadKpl(string filename)
@@ -186,9 +188,14 @@ namespace KPLinguaPreprocessing
                 string line = lines[indexLines];
                 if (!commentRegex.IsMatch(line))
                 {
+                    var logicalExpressionIterator = logicalExpressionPatternRegex.Match(line);
                     var multisetIterator = multisetIteratorRegexPattern.Match(line);
                     var iterator = iteratorRegex.Match(line);
-                    if (multisetIterator.Success)
+                    if (logicalExpressionIterator.Success)
+                    {
+                        newLines.AddRange(TryToBuildLogicalExpressionIterators(line));
+                    }
+                    else if (multisetIterator.Success)
                     {
                         string newLine = TryToBuildMultisetIterators(line);
                         var newLineIterator = iteratorRegex.Match(newLine);
@@ -256,6 +263,60 @@ namespace KPLinguaPreprocessing
             var includeLines = ReadKpl(Path.Combine(filePath, fileName));
             var includeNewLines = Execute(includeLines, filePath);
             newLines.AddRange(includeNewLines);
+        }
+
+        private List<string> TryToBuildLogicalExpressionIterators(string logicalExpression)
+        {
+            List<string> lines = new List<string>();
+            string pattern = @"(?<logicalCondition>@[&|]),?\s*(?<logicalRule>\([^)]+\)(?:\s*&\s*>?\w+)?)\s*:\s*(?<firstIterator>\d+<=\w+<=\d+@?)\s*(?:\|\s*(?<secondaryRule>[^:]+)\s*:\s*(?<rewritingRule>[\w$]+ -> [\w$]+)\s*:\s*(?<rewritingIterator>\d+<=\w+<=\d+))?(?:\s*:\s*(?<finalRewriting>[\w$]+ -> [\w$]+))?";
+            Match match = Regex.Match(logicalExpression, pattern);
+            string logicalExpressionPattern = @"@.*?@";
+            var groups = match.Groups;
+            string variableSeparator = $" {groups[1].Value.Replace("@", "")} ";
+            var logicalExpressionRule = groups["logicalRule"].Value;
+            var logicalExpressionIterator = groups["firstIterator"].Value.Replace("@", "");
+            string rewritingRule;
+            string rewritingRuleIterator;
+            if (string.IsNullOrEmpty(groups["finalRewriting"].Value) ||
+                string.IsNullOrEmpty(groups["finalIterator"].Value))
+            {
+                rewritingRule = groups["rewritingRule"].Value;
+                rewritingRuleIterator = groups["rewritingIterator"].Value;
+            }
+            else
+            {
+                rewritingRule = groups["finalRewriting"].Value;
+                rewritingRuleIterator = groups["finalIterator"].Value;
+            }
+
+            string newLine = BuildIterator(logicalExpressionRule, logicalExpressionIterator, variableSeparator);
+            Match matchLocalExpression = Regex.Match(logicalExpression, logicalExpressionPattern);
+            if (matchLocalExpression.Success)
+            {
+                string resultedLine = logicalExpression.Replace(matchLocalExpression.Value, newLine);
+                logicalExpression = resultedLine.Replace("@", string.Empty);
+            }
+
+            if (string.IsNullOrEmpty(rewritingRuleIterator))
+            {
+                lines.Add(logicalExpression);
+            }
+            else
+            {
+                string[] rewritingRules = BuildIterator(rewritingRule, rewritingRuleIterator, Environment.NewLine).Split(Environment.NewLine);
+                foreach (var rule in rewritingRules)
+                {
+                    lines.Add(NormalizeLine(logicalExpression.Replace(rewritingRule, rule).Replace(rewritingRuleIterator, "")));
+                }
+            }
+
+            return lines;
+        }
+
+        private string NormalizeLine(string line)
+        {
+            string pattern = @"(.*)\s*:\s*(\.)$";
+            return Regex.Replace(line, pattern, "$1$2");
         }
 
         private string TryToBuildMultisetIterators(string multisetIterator)
