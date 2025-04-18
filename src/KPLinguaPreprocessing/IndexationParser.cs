@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace KPLinguaPreprocessing
 {
-    public class Parser
+    public class IndexationParser
     {
         private Regex iteratorRegex = new Regex(@"(?<rule>.*(\.|\{|\})\s*)(?<iterator>:.*)(?<n>\n)?");
         //private Regex iteratorContinuationRegex = new Regex(@"(?<rule>.*(\.|\{|\}).*(\.|\[|\])\s*)(?<iterator>:\s*)(?<n>\n)?$");
@@ -34,6 +34,14 @@ namespace KPLinguaPreprocessing
         public void WriteKpl(List<string> lines, string filename)
         {
             File.WriteAllLines(filename, lines);
+        }
+
+        public string GetKpl(List<string> lines)
+        {
+            string tempDir = Path.GetTempPath();
+            string tempFilePath = Path.Combine(tempDir, Guid.NewGuid() + ".kpl");
+            File.WriteAllLines(tempFilePath, lines);
+            return tempFilePath;
         }
 
         public string GetRules(string rules, List<Base> expressions)
@@ -172,6 +180,13 @@ namespace KPLinguaPreprocessing
             WriteKpl(newLines, destinationFileName);
         }
 
+        public string Execute(string sourceFileName)
+        {
+            var lines = ReadKpl(sourceFileName);
+            var newLines = Execute(lines, Path.GetDirectoryName(sourceFileName));
+            return GetKpl(newLines);
+        }
+
         public void ExecuteLines(List<string> lines, string destinationFileName)
         {
             //Execute(lines);
@@ -268,7 +283,7 @@ namespace KPLinguaPreprocessing
         private List<string> TryToBuildLogicalExpressionIterators(string logicalExpression)
         {
             List<string> lines = new List<string>();
-            string pattern = @"(?<logicalCondition>@[&|]),?\s*(?<logicalRule>\([^)]+\)(?:\s*&\s*>?\w+)?)\s*:\s*(?<firstIterator>\d+<=\w+<=\d+@?)\s*(?:\|\s*(?<secondaryRule>[^:]+)\s*:\s*(?<rewritingRule>[\w$]+ -> [\w$]+)\s*:\s*(?<rewritingIterator>\d+<=\w+<=\d+))?(?:\s*:\s*(?<finalRewriting>[\w$]+ -> [\w$]+))?";
+            string pattern = @"(?<logicalCondition>@[&|]),\s*(?<logicalRule>[^:]+)\s*:\s*(?<firstIterator>\d+<=\w+<=\d+@?)\s*(?:\|\s*(?<secondaryRule>[^:]+)\s*:\s*(?<rewritingRule>[\w$]+ -> [\w$]+)\s*:\s*(?<rewritingIterator>\d+<=\w+<=\d+))?(?:\s*:\s*(?<finalRewriting>[\w$]+ -> [\w$]+))?";
             Match match = Regex.Match(logicalExpression, pattern);
             string logicalExpressionPattern = @"@.*?@";
             var groups = match.Groups;

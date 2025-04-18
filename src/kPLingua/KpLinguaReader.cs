@@ -69,7 +69,7 @@ namespace KpLingua {
             } else {
                 instanceDeclarations.Clear();
             }
-            kpl = new StreamReader(fileName).ReadToEnd();
+            kpl = File.ReadAllText(fileName);
 
             fixed (char* x = kpl) {
                 char* input = x;

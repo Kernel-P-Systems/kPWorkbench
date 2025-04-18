@@ -10,6 +10,7 @@
     <ProjectReference Include="..\kPExperiment.Model\kPExperiment.Model.csproj" />
     <ProjectReference Include="..\kPExperiment\kPExperiment.csproj" />
     <ProjectReference Include="..\kPFlame\kPFlame.csproj" />
+    <ProjectReference Include="..\KPLinguaPreprocessing\KPLinguaPreprocessing.csproj" />
     <ProjectReference Include="..\kPLingua\kPLingua.csproj" />
     <ProjectReference Include="..\kPSimulation\kPSimulation.csproj" />
     <ProjectReference Include="..\kPSpin\kPSpin.csproj" />

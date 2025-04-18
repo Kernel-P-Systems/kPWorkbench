@@ -11,6 +11,7 @@ using System.IO;
 using System.Reflection;
 using KpXML;
 using KpFLAME;
+using KPLinguaPreprocessing;
 
 namespace kpw
 {
@@ -49,11 +50,30 @@ namespace kpw
                     return 1;
                 }
                 string outFileName = null;
+                string kpl;
+                try
+                {
+                    IndexationParser indexationParser = new IndexationParser();
+                    kpl = indexationParser.Execute(srcFileName);
+                }
+                catch(Exception exception)
+                {
+                    Console.WriteLine($"Cannot run the indexation on this file {exception}");
+                    kpl = null;
+                }
 
                 KpModel kpModel = null;
                 try
                 {
-                    kpModel = KP.FromKpl(srcFileName);
+                    if (string.IsNullOrEmpty(kpl))
+                    {
+                        kpModel = KP.FromKpl(srcFileName);
+                    }
+                    else
+                    {
+                        kpModel = KP.FromKpl(kpl);
+                        File.Delete(kpl);
+                    }
                 }
                 catch (Exception ex)
                 {

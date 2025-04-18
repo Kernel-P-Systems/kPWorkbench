@@ -20,8 +20,8 @@ namespace KPLinguaPreprocessing
                 return;
             }
 
-            Parser parser = new Parser();
-            parser.Execute(sourceFilePath, destinationFilePath);
+            IndexationParser indexationParser = new IndexationParser();
+            indexationParser.Execute(sourceFilePath, destinationFilePath);
 
             Console.WriteLine("Execution completed.");
         }
