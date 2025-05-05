@@ -50,30 +50,11 @@ namespace kpw
                     return 1;
                 }
                 string outFileName = null;
-                string kpl;
-                try
-                {
-                    IndexationParser indexationParser = new IndexationParser();
-                    kpl = indexationParser.Execute(srcFileName);
-                }
-                catch(Exception exception)
-                {
-                    Console.WriteLine($"Cannot run the indexation on this file {exception}");
-                    kpl = null;
-                }
 
                 KpModel kpModel = null;
                 try
-                {
-                    if (string.IsNullOrEmpty(kpl))
-                    {
-                        kpModel = KP.FromKpl(srcFileName);
-                    }
-                    else
-                    {
-                        kpModel = KP.FromKpl(kpl);
-                        File.Delete(kpl);
-                    }
+                { 
+                    kpModel = KP.FromKpl(srcFileName);
                 }
                 catch (Exception ex)
                 {
@@ -424,11 +405,29 @@ namespace kpw
             }
 
             Experiment kpExperiment = null;
+            string indexationResult = null;
             if (!string.IsNullOrEmpty(kpxFile))
             {
                 try
                 {
-                    kpExperiment = KP.FromKpx(kpxFile);
+                    IndexationParser indexationParser = new IndexationParser();
+                    indexationResult = indexationParser.Execute(kpxFile);
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine($"The indexation parser did not work {exception}");
+                }
+                try
+                {
+                    if (string.IsNullOrEmpty(indexationResult))
+                    {
+                        kpExperiment = KP.FromKpx(kpxFile);
+                    }
+                    else
+                    {
+                        kpExperiment = KP.FromKpx(indexationResult);
+                        File.Delete(indexationResult);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -503,13 +502,32 @@ namespace kpw
             }
 
             Experiment kpExperiment = null;
+            string indexationResult = null;
             if (!string.IsNullOrEmpty(kpxFileName))
             {
                 if (new FileInfo(kpxFileName).Exists)
                 {
                     try
                     {
-                        kpExperiment = KP.FromKpx(kpxFileName);
+                        IndexationParser indexationParser = new IndexationParser();
+                        indexationResult = indexationParser.Execute(kpxFileName);
+                    }
+                    catch (Exception exception)
+                    {
+                        Console.WriteLine($"The indexation parser did not work {exception}");
+                    }
+                    try
+                    {
+                        if (string.IsNullOrEmpty(indexationResult))
+                        {
+                            kpExperiment = KP.FromKpx(kpxFileName);
+                        }
+                        else
+                        {
+                            kpExperiment = KP.FromKpx(indexationResult);
+                            File.Delete(indexationResult);
+                        }
+                        
                     }
                     catch (Exception exception)
                     {

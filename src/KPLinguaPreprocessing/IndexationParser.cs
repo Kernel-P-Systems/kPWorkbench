@@ -23,6 +23,9 @@ namespace KPLinguaPreprocessing
         private Regex iteratorPatternInMultisetRegex = new Regex(@"(?<rule>.*?(\$|\{|\})?\s*)(?<iterator>:\S+)(?<n>\n)?");
         //private Regex iteratorPatternInLogicalExpressionRegex = new Regex(@"(?<rule>\(.*?\))\s*:\s*(?<iterator>:\S+)(?<n>\n)?");
         private Regex logicalExpressionPatternRegex = new Regex(@"@[\|&]([^@]+)@");
+        private Regex kpQueryRegexPattern = new Regex(@"^(?:(?<prefix>ltl|ctl|safety):\s*(?:(?<temporal>never|eventually|always|steady-state)\s+)?)?(?<logicalCondition>@(?:and|or|\+)),\s*(?<logicalRule>[^:]+)\s*:\s*(?<firstIterator>\d+<?=?>?\w+<?=?>?\d+)@?\s*;?");
+        string pattern = @"^(?:(?<prefix>ltl|ctl|safety):\s*(?:(?<temporal>never|eventually|always)\s+)?)?(?<logicalCondition>@(?:and|or|\+)),\s*(?<logicalRule>[^:]+)\s*:\s*(?<firstIterator>\d+<?=?>?\w+<?=?>?\d+)@?\s*;?";
+
         //private string multisetIteratorPattern = @"@(.+?)@";
         private Dictionary<string, Variable> variables = new Dictionary<string, Variable>();
 
@@ -142,7 +145,7 @@ namespace KPLinguaPreprocessing
             return (expressions, rulesWithParameters);
         }
 
-        public string BuildIterator(string rules, string iteratorText, string variableSeparator)
+        public string BuildIterator(string rules, string iteratorText, string variableSeparator, bool addParentheses = false)
         {
             iteratorText = Regex.Replace(iteratorText, @"^\s*:\s*", "");
 
@@ -161,6 +164,10 @@ namespace KPLinguaPreprocessing
                 if (executeIterator.IsValid())
                 {
                     string newRules = rule.Process(rulesWithParameters);
+                    if (addParentheses && content.Any())
+                    {
+                        newRules = $"{newRules})";
+                    }
                     content.Add(newRules);
                 }
                 isValid = executeIterator.HasNext();
@@ -206,7 +213,12 @@ namespace KPLinguaPreprocessing
                     var logicalExpressionIterator = logicalExpressionPatternRegex.Match(line);
                     var multisetIterator = multisetIteratorRegexPattern.Match(line);
                     var iterator = iteratorRegex.Match(line);
-                    if (logicalExpressionIterator.Success)
+                    var kpQueryIterator = kpQueryRegexPattern.Match(line);
+                    if (kpQueryIterator.Success)
+                    {
+                        newLines.Add(TryToBuildKpQueryIterator(line, kpQueryIterator));
+                    }
+                    else if(logicalExpressionIterator.Success)
                     {
                         newLines.AddRange(TryToBuildLogicalExpressionIterators(line));
                     }
@@ -332,6 +344,57 @@ namespace KPLinguaPreprocessing
         {
             string pattern = @"(.*)\s*:\s*(\.)$";
             return Regex.Replace(line, pattern, "$1$2");
+        }
+
+        private string TryToBuildKpQueryIterator(string line, Match match)
+        {
+            //string pattern = @"^(?:(?<prefix>ltl|ctl|safety):\s*)?(?<logicalCondition>@(?:and|or)),\s*(?<logicalRule>[^:]+)\s*:\s*(?<firstIterator>\d+<=\w+<=\d+)@?";
+            //Match match = Regex.Match(line, pattern);
+            string expressionPattern = @"@.*?@";
+            var groups = match.Groups;
+            string variableSeparator = $" {groups["logicalCondition"].Value.Replace("@", "")} ";
+            var logicalExpressionRule = groups["logicalRule"].Value;
+            var logicalExpressionIterator = groups["firstIterator"].Value.Replace("@", "");
+
+            string newLine = BuildIterator(logicalExpressionRule, logicalExpressionIterator, variableSeparator, true);
+            newLine = RemoveLastParentheses(newLine);
+            int unmatchedClosings = newLine.Count(c => c == ')');
+            string parenthesesLine = new string('(', unmatchedClosings) + newLine;
+            Match matchRuleExpression = Regex.Match(line, expressionPattern);
+            string resultedLine = line.Replace(matchRuleExpression.Value, parenthesesLine);
+            return resultedLine;
+
+            //Match matchLocalExpression = Regex.Match(logicalExpression, logicalExpressionPattern);
+            //if (matchLocalExpression.Success)
+            //{
+            //    string resultedLine = logicalExpression.Replace(matchLocalExpression.Value, newLine);
+            //    logicalExpression = resultedLine.Replace("@", string.Empty);
+            //}
+
+            //if (string.IsNullOrEmpty(rewritingRuleIterator))
+            //{
+            //    lines.Add(logicalExpression);
+            //}
+            //else
+            //{
+            //    string[] rewritingRules = BuildIterator(rewritingRule, rewritingRuleIterator, Environment.NewLine).Split(Environment.NewLine);
+            //    foreach (var rule in rewritingRules)
+            //    {
+            //        lines.Add(NormalizeLine(logicalExpression.Replace(rewritingRule, rule).Replace(rewritingRuleIterator, "")));
+            //    }
+            //}
+
+            //return lines;
+        }
+
+        private string RemoveLastParentheses(string newLine)
+        {
+            int index = newLine.LastIndexOf(')');
+            if (index != -1)
+            {
+                newLine = newLine.Remove(index, 1);
+            }
+            return newLine;
         }
 
         private string TryToBuildMultisetIterators(string multisetIterator)

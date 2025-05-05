@@ -18,6 +18,8 @@ using System.Reflection;
 using ModelChecking.Runtime;
 using KpExperiment.Verification.Translation.Base;
 using KpUtil;
+using KPLinguaPreprocessing;
+using KpExperiment;
 
 namespace KpUi
 {
@@ -155,15 +157,26 @@ namespace KpUi
             {
                 string kpxFileName = opd.FileName;
                 tbQueriesVerification.Text = opd.FileName;
-                string[] lines = File.ReadAllLines(opd.FileName);
+                string[] lines;
                 Experiment kpExperiment = null;
+                string indexationResult = null;
                 if (!string.IsNullOrEmpty(kpxFileName))
                 {
                     if (new FileInfo(kpxFileName).Exists)
                     {
+                        
                         try
                         {
-                            kpExperiment = KP.FromKpx(kpxFileName);
+                            IndexationParser indexationParser = new IndexationParser();
+                            indexationResult = indexationParser.Execute(kpxFileName);
+                        }
+                        catch (Exception exception)
+                        {
+                            Console.WriteLine($"The indexation parser did not work {exception}");
+                        }
+                        try
+                        {
+                            kpExperiment = KP.FromKpx(string.IsNullOrEmpty(indexationResult) ? kpxFileName : indexationResult);
                         }
                         catch (Exception exception)
                         {
@@ -174,6 +187,16 @@ namespace KpUi
                     {
                         throw new Exception(string.Format("File '{0}' does not exist. Please specify a valid experiment file.", kpxFileName));
                     }
+                }
+
+                if (!string.IsNullOrEmpty(indexationResult))
+                {
+                    lines = File.ReadAllLines(indexationResult);
+                    File.Delete(indexationResult);
+                }
+                else
+                {
+                    lines = File.ReadAllLines(opd.FileName);
                 }
                 properties.Load(new List<string>(lines), kpExperiment);
             }

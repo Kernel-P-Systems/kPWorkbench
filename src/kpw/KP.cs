@@ -2,16 +2,13 @@
 using KpExperiment;
 using KpExperiment.Model;
 using KpLingua;
+using KPLinguaPreprocessing;
 using KpSpin;
 using KpSpin.SpinVerificationModel;
 using KpUtil;
 using KpXML;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace kpw
 {
@@ -24,6 +21,20 @@ namespace kpw
 
         public static KpModel FromKpl(string fileName)
         {
+            try
+            {
+                IndexationParser indexationParser = new IndexationParser();
+                string afterIndexationFile = indexationParser.Execute(fileName);
+                if (!string.IsNullOrEmpty(afterIndexationFile))
+                {
+                    return new KpLinguaReader(afterIndexationFile).Read();
+                }
+            }
+            catch(Exception exception)
+            {
+                Console.WriteLine($"Cannot run the indexation on this file {exception}");
+            }
+
             return new KpLinguaReader(fileName).Read();
             //return KPLinguaManager.Instance.Read(fileName);
         }

@@ -1,0 +1,5 @@
+ltl: never @or, N$i$.a = 0: 0<=i<=4@
+ltl: eventually @and, NC$i$.a = 0 : 0<=i<=3@ ; 
+ltl: always @and, NC$i$.a <= 1: 0<=i<=3@ ;
+ltl: always @+, NC$i$.a : 0<i<=3@ = 1 ; 
+ltl: always @and, N$i$.a = 0 : 1<=i<=3@ implies (eventually N10.a = 0));

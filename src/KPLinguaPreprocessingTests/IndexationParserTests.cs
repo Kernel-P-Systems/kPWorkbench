@@ -93,7 +93,7 @@ namespace KPLinguaPreprocessingTests
         {
             // Arrange
             var tempFile = Path.GetTempFileName();
-            File.WriteAllLines(tempFile, new[] { "a -> b : 0<=i<=2" });
+            File.WriteAllLines(tempFile, ["a -> b : 0<=i<=2"]);
 
             // Act
             var outputFile = parser.Execute(tempFile);
@@ -142,7 +142,7 @@ termA {a_0,a_1,a_2,a_3} (Term) .
         private string Normalize(string text)
         {
             return string.Join("\n", text
-                    .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries)
                     .Select(line => line.TrimEnd()))
                 .Trim();
         }
@@ -154,37 +154,69 @@ termA {a_0,a_1,a_2,a_3} (Term) .
 
         public static IEnumerable<object[]> GetIndexationTestCases()
         {
-            yield return new object[]
-            {
+            yield return
+            [
                 @"@&,(=x$i$ & =y$i$) : 0<=i<=2@ : a -> b .",
                 @"(=x0 & =y0) & (=x1 & =y1) & (=x2 & =y2) : a -> b ."
-            };
+            ];
 
-            yield return new object[]
-            {
+            yield return
+            [
                 @"@|,(=p$i$ & =q$i$) : 0<=i<=3@ : r -> s .",
                 @"(=p0 & =q0) | (=p1 & =q1) | (=p2 & =q2) | (=p3 & =q3) : r -> s ."
-            };
+            ];
 
-            yield return new object[]
-            {
+            yield return
+            [
                 @"@&,(=a$i$ & =b$i$) : 0<=i<=1@ | =c : d$j$ -> e$j$ : 2<=j<=4 .",
                 @"(=a0 & =b0) & (=a1 & =b1) | =c : d2 -> e2 .
 (=a0 & =b0) & (=a1 & =b1) | =c : d3 -> e3 .
 (=a0 & =b0) & (=a1 & =b1) | =c : d4 -> e4 ."
-            };
+            ];
 
-            yield return new object[]
-            {
+            yield return
+            [
                 @"@&,(=x$i$) & >y : 0<=i<=2@ : a->b.",
                 @"(=x0) & >y & (=x1) & >y & (=x2) & >y : a->b."
-            };
+            ];
 
-            yield return new object[]
-            {
+            yield return
+            [
                 @"@&,(=x$i$) & >y & <z$i+1$ | =a$i+2$ : 0<=i<=2@ : a->b.",
                 @"(=x0) & >y & <z1 | =a2 & (=x1) & >y & <z2 | =a3 & (=x2) & >y & <z3 | =a4 : a->b."
-            };
+            ];
+
+            yield return
+            [
+                @"ltl: never @or, N$i$.a = 0: 0<=i<=4@",
+                @"ltl: never (((N0.a = 0 or N1.a = 0) or N2.a = 0) or N3.a = 0) or N4.a = 0"
+            ];
+
+            yield return
+            [
+                @"ltl: eventually @and, NC$i$.a = 0 : 0<=i<=3@ ;",
+                @"ltl: eventually ((NC0.a = 0  and NC1.a = 0 ) and NC2.a = 0 ) and NC3.a = 0  ;"
+            ];
+
+            yield return
+            [
+                @"ltl: always @and, NC$i$.a <= 1: 0<=i<=3@ ;",
+                @"ltl: always ((NC0.a <= 1 and NC1.a <= 1) and NC2.a <= 1) and NC3.a <= 1 ;"
+            ];
+
+
+            yield return
+            [
+                @"ltl: always @+, NC$i$.a : 0<i<=3@ = 1 ; ",
+                @"ltl: always (NC1.a  + NC2.a ) + NC3.a  = 1 ;"
+            ];
+
+
+            yield return
+            [
+                @"ltl: always @and, N$i$.a = 0 : 1<=i<=3@ implies (eventually N10.a = 0));",
+                @"ltl: always (N1.a = 0  and N2.a = 0 ) and N3.a = 0  implies (eventually N10.a = 0));"
+            ];
         }
     }
 }
