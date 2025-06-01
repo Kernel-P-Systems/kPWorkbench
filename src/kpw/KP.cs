@@ -32,7 +32,9 @@ namespace kpw
             }
             catch(Exception exception)
             {
-                Console.WriteLine($"Cannot run the indexation on this file {exception}");
+                string message = $"Cannot run the indexation on this file {exception}";
+                Console.WriteLine(message);
+                throw new KplParseException(message);
             }
 
             return new KpLinguaReader(fileName).Read();

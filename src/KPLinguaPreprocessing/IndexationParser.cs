@@ -23,7 +23,7 @@ namespace KPLinguaPreprocessing
         private Regex iteratorPatternInMultisetRegex = new Regex(@"(?<rule>.*?(\$|\{|\})?\s*)(?<iterator>:\S+)(?<n>\n)?");
         //private Regex iteratorPatternInLogicalExpressionRegex = new Regex(@"(?<rule>\(.*?\))\s*:\s*(?<iterator>:\S+)(?<n>\n)?");
         private Regex logicalExpressionPatternRegex = new Regex(@"@[\|&]([^@]+)@");
-        private Regex kpQueryRegexPattern = new Regex(@"^(?:(?<prefix>ltl|ctl|safety):\s*(?:(?<temporal>never|eventually|always|steady-state)\s+)?)?(?<logicalCondition>@(?:and|or|\+)),\s*(?<logicalRule>[^:]+)\s*:\s*(?<firstIterator>\d+<?=?>?\w+<?=?>?\d+)@?\s*;?");
+        private Regex kpQueryRegexPattern = new Regex(@"^(?:(?<prefix>ltl|ctl|safety):\s*(?:(?<temporal>never|eventually|always|steady-state)\s+)?)?(?<logicalCondition>@(?:and|or|\+|\-)),\s*(?<logicalRule>[^:]+)\s*:\s*(?<firstIterator>\d+<?=?>?\w+<?=?>?\d+)@?\s*;?");
         string pattern = @"^(?:(?<prefix>ltl|ctl|safety):\s*(?:(?<temporal>never|eventually|always)\s+)?)?(?<logicalCondition>@(?:and|or|\+)),\s*(?<logicalRule>[^:]+)\s*:\s*(?<firstIterator>\d+<?=?>?\w+<?=?>?\d+)@?\s*;?";
 
         //private string multisetIteratorPattern = @"@(.+?)@";
@@ -208,61 +208,74 @@ namespace KPLinguaPreprocessing
             while (indexLines < length)
             {
                 string line = lines[indexLines];
-                if (!commentRegex.IsMatch(line))
+                try
                 {
-                    var logicalExpressionIterator = logicalExpressionPatternRegex.Match(line);
-                    var multisetIterator = multisetIteratorRegexPattern.Match(line);
-                    var iterator = iteratorRegex.Match(line);
-                    var kpQueryIterator = kpQueryRegexPattern.Match(line);
-                    if (kpQueryIterator.Success)
+                    if (!commentRegex.IsMatch(line))
                     {
-                        newLines.Add(TryToBuildKpQueryIterator(line, kpQueryIterator));
-                    }
-                    else if(logicalExpressionIterator.Success)
-                    {
-                        newLines.AddRange(TryToBuildLogicalExpressionIterators(line));
-                    }
-                    else if (multisetIterator.Success)
-                    {
-                        string newLine = TryToBuildMultisetIterators(line);
-                        var newLineIterator = iteratorRegex.Match(newLine);
-                        if (newLineIterator.Success)
+                        var logicalExpressionIterator = logicalExpressionPatternRegex.Match(line);
+                        var multisetIterator = multisetIteratorRegexPattern.Match(line);
+                        var iterator = iteratorRegex.Match(line);
+                        var kpQueryIterator = kpQueryRegexPattern.Match(line);
+                        if (kpQueryIterator.Success)
                         {
-                            newLine = TryToBuildIterator(newLineIterator, Environment.NewLine);
+                            newLines.Add(TryToBuildKpQueryIterator(line, kpQueryIterator));
+                            Console.WriteLine($"Successfully applied indexation on this line: {line}");
                         }
-                        newLines.Add(newLine);
-                    }
-                    else if (iterator.Success)
-                    {
-                        string newLine = TryToBuildIterator(iterator, Environment.NewLine);
-                        newLines.Add(newLine);
-                    }
-                    else
-                    {
-                        var globalVariable = globalVariableRegex.Match(line);
-                        if (globalVariable.Success)
+                        else if (logicalExpressionIterator.Success)
                         {
-                            ProcessGlobalVariable(globalVariable);
+                            newLines.AddRange(TryToBuildLogicalExpressionIterators(line));
+                            Console.WriteLine($"Successfully applied indexation on this line: {line}");
+                        }
+                        else if (multisetIterator.Success)
+                        {
+                            string newLine = TryToBuildMultisetIterators(line);
+                            var newLineIterator = iteratorRegex.Match(newLine);
+                            if (newLineIterator.Success)
+                            {
+                                newLine = TryToBuildIterator(newLineIterator, Environment.NewLine);
+                            }
+
+                            newLines.Add(newLine);
+                            Console.WriteLine($"Successfully applied indexation on this line: {line}");
+                        }
+                        else if (iterator.Success)
+                        {
+                            string newLine = TryToBuildIterator(iterator, Environment.NewLine);
+                            newLines.Add(newLine);
+                            Console.WriteLine($"Successfully applied indexation on this line: {line}");
                         }
                         else
                         {
-                            var include = includeRegex.Match(line);
-                            if (include.Success)
+                            var globalVariable = globalVariableRegex.Match(line);
+                            if (globalVariable.Success)
                             {
-                                ProcessInclude(include, newLines, filePath);
+                                ProcessGlobalVariable(globalVariable);
                             }
                             else
                             {
-                                newLines.Add(line);
+                                var include = includeRegex.Match(line);
+                                if (include.Success)
+                                {
+                                    ProcessInclude(include, newLines, filePath);
+                                }
+                                else
+                                {
+                                    newLines.Add(line);
+                                }
                             }
                         }
                     }
+                    else
+                    {
+                        newLines.Add(line);
+                    }
+
+                    indexLines++;
                 }
-                else
+                catch (Exception exception)
                 {
-                    newLines.Add(line);
+                    throw new Exception($"Cannot process the following line: {line} because: {exception}");
                 }
-                indexLines++;
             }
 
             return newLines;
