@@ -20,7 +20,7 @@ namespace KPLinguaPreprocessing
         //private Regex multisetIteratorRegexPattern = new Regex(@"[a-zA-Z0-9_]+ \{@(?<multisetIterator>[^@]+)@\}(?:,\s*[a-zA-Z0-9_]+\s*)*(?:,\s*@(?<multisetIterator>[^@]+)@\s*)* \([a-zA-Z0-9_]+\)\s*\.", RegexOptions.IgnoreCase);
         //private Regex multisetIteratorRegexPattern = new Regex(@"[a-z]+ \{@(?<multisetIterator>.*?)@\}\s+\([a-z0-9]+\)(?:\s*\.\s*)*", RegexOptions.IgnoreCase);
         //new Regex(@"[a-z]+ \{@[a-z0-9]+_\$[a-z0-9]+\$:[0-9]+(<=|>=|<|>|==|!=)[a-z0-9]+(<=|>=|<|>|==|!=)bits@\}\s+\([a-z0-9]+\) \.", RegexOptions.IgnoreCase);
-        private Regex iteratorPatternInMultisetRegex = new Regex(@"(?<rule>.*?(\$|\{|\})?\s*)(?<iterator>:\S+)(?<n>\n)?");
+        private Regex iteratorPatternInMultisetRegex = new Regex(@"(?<rule>.*?(\$|\{|\})?\s*)(?<iterator>:\s*\S+)(?<n>\n)?");
         //private Regex iteratorPatternInLogicalExpressionRegex = new Regex(@"(?<rule>\(.*?\))\s*:\s*(?<iterator>:\S+)(?<n>\n)?");
         private Regex logicalExpressionPatternRegex = new Regex(@"@[\|&]([^@]+)@");
         private Regex kpQueryRegexPattern = new Regex(@"^(?:(?<prefix>ltl|ctl|safety):\s*(?:(?<temporal>never|eventually|always|steady-state)\s+)?)?(?<logicalCondition>@(?:and|or|\+|\-)),\s*(?<logicalRule>[^:]+)\s*:\s*(?<firstIterator>\d+<?=?>?\w+<?=?>?\d+)@?\s*;?");
@@ -192,11 +192,6 @@ namespace KPLinguaPreprocessing
             var lines = ReadKpl(sourceFileName);
             var newLines = Execute(lines, Path.GetDirectoryName(sourceFileName));
             return GetKpl(newLines);
-        }
-
-        public void ExecuteLines(List<string> lines, string destinationFileName)
-        {
-            //Execute(lines);
         }
 
         private List<string> Execute(List<string> lines, string filePath)
@@ -417,10 +412,11 @@ namespace KPLinguaPreprocessing
             foreach (Match match in matches)
             {
                 string oldValue = match.Groups[1].Value;
-                Match iterator = iteratorPatternInMultisetRegex.Match(oldValue);
+                string normalizedOldValue = new string(oldValue.Where(c => !char.IsWhiteSpace(c)).ToArray()); ;
+                Match iterator = iteratorPatternInMultisetRegex.Match(normalizedOldValue);
                 if (iterator.Success)
                 {
-                    string newLine = TryToBuildIterator(iterator, ",");
+                    string newLine = TryToBuildIterator(iterator, ", ");
                     string resultedLine = multisetIterator.Replace(oldValue, newLine);
                     multisetIterator = resultedLine;
                 }

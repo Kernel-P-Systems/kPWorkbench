@@ -1,0 +1,7 @@
+choice { <v$i$ & =s1 : y -> s . }  : 1<=i<=n
+choice { =$k$v  & =s1: y -> s . }  : n<=i<=n
+choice {
+	s1 -> s2 . 
+	<y : $n+1$s, s2 -> t (T1) . : n<=i<=n
+	>=y : y, s2 -> f (T1) .
+}

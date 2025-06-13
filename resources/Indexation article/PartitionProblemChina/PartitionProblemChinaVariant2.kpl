@@ -1,0 +1,51 @@
+type T0 {
+}
+
+type T1 {
+	max {
+		>=t : s -> yes (T0) .
+		>=f & <t : s -> no (T0) .
+	}
+}
+
+type T2 {
+	max {
+		=b1 & !=b2 & =x | =b2 & !=b1 & =x : v1, v2 -> v . 
+		=b1 & !=b3 & =x | =b3 & !=b1 & =x : v1, v3 -> v . 
+		=b2 & !=b3 & =x | =b3 & !=b2 & =x : v2, v3 -> v . 
+	}
+	max { x -> 4y, s1 . } 
+	choice { <v1 & =s1 : y -> s . }  
+	choice { <v2 & =s1 : y -> s . }  
+	choice { <v3 & =s1 : y -> s . }  
+	choice { =3v & =s1 : y -> s . }  
+	choice {
+		s1 -> s2 . 
+		<y : 4s, s2 -> t (T1) . 
+		>=y : y, s2 -> f (T1) .
+	}
+}
+
+// Initial configuration
+t0 {} (T0) .
+t1 {s} (T1) .
+
+// All combinations of {b1, b2, b3, x} with v1, 2v2, 3v3
+t2a {v1, 2v2, 3v3, b1, b2, b3, x} (T2) .
+t2b {v1, 2v2, 3v3, b1, b2, x} (T2) .
+t2c {v1, 2v2, 3v3, b1, b3, x} (T2) .
+t2d {v1, 2v2, 3v3, b1, x} (T2) .
+t2e {v1, 2v2, 3v3, b2, b3, x} (T2) .
+t2f {v1, 2v2, 3v3, b2, x} (T2) .
+t2g {v1, 2v2, 3v3, b3, x} (T2) .
+t2h {v1, 2v2, 3v3, x} (T2) .
+
+// Links
+t0 - t1 - t2a .
+t0 - t1 - t2b .
+t0 - t1 - t2c .
+t0 - t1 - t2d .
+t0 - t1 - t2e .
+t0 - t1 - t2f .
+t0 - t1 - t2g .
+t0 - t1 - t2h .
