@@ -5,10 +5,6 @@ type T0 {
 
 type T1 {
 	#include "FinalDecision.kplt"
-	max {
-		>=t : s -> yes (T0) .
-		>=f & <t : s -> no (T0) .
-	}
 }
 
 type T2 {
@@ -18,8 +14,5 @@ type T2 {
 	#include "Choices.kplt"
 }
 
-t0 {} (T0) .
-t1 {s} (T1) .
-t2 {a1, v1, 2v2, 3v3} (T2) .
-
-t0 - t1 - t2 .
+#include "CreateMultisets.kplt"
+#include "CreateLinks.kplt"

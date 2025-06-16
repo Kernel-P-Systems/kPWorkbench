@@ -26,11 +26,9 @@ type T2 {
 	}
 }
 
-// Initial configuration
 t0 {} (T0) .
 t1 {s} (T1) .
 
-// All combinations of {b1, b2, b3, x} with v1, 2v2, 3v3
 t2a {v1, 2v2, 3v3, b1, b2, b3, x} (T2) .
 t2b {v1, 2v2, 3v3, b1, b2, x} (T2) .
 t2c {v1, 2v2, 3v3, b1, b3, x} (T2) .
@@ -40,7 +38,6 @@ t2f {v1, 2v2, 3v3, b2, x} (T2) .
 t2g {v1, 2v2, 3v3, b3, x} (T2) .
 t2h {v1, 2v2, 3v3, x} (T2) .
 
-// Links
 t0 - t1 - t2a .
 t0 - t1 - t2b .
 t0 - t1 - t2c .
