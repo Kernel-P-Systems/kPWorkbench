@@ -1,0 +1,51 @@
+@model<spiking_psystems>
+
+def main()
+{
+        call init_structure();
+        call init_multiset();
+        call init_rules();
+}
+
+def init_structure()
+{
+        @mu = 1;
+        @mu += {i} : 2 <= i <= 10;
+
+        @marcs = (1,4);
+        @marcs = (1,7);
+        @marcs += (2,4);
+        @marcs += (3,6);
+        @marcs += (3,7);
+        @marcs += (4,5);
+        @marcs += (6,5);
+        @marcs += (5,9);
+        @marcs += (7,8);
+        @marcs += (8,9);
+        @marcs += (9,10);
+
+}
+
+def init_multiset()
+{
+        @ms(1) = #;
+        @ms(2) = a;
+        @ms(3) = a;
+}
+
+def init_rules()
+{
+        [a --> a]'1;
+        [a --> a]'2;
+        [a --> a]'3;
+        [a --> a]'4;
+        [a*2 --> a]'4;
+        [a*2 --> a]'5;
+        [a --> #]'5;
+        [a --> a]'6;
+        [a --> a]'7;
+        [a*2 --> a]'7;
+        [a --> a]'8;
+        [a*2 --> a]'9;
+        [a --> #]'9;
+}

@@ -1,0 +1,146 @@
+Simulation started.
+Initial Configuration
+-------------------------------------------------
+TYPE T1
+#0 N1 [Active] {} Links to #: 1, 2
+TYPE T2
+#3 N2 [Active] {a} Links to #: 1
+TYPE T3
+#4 N3 [Active] {a} Links to #: 5, 2
+TYPE T4
+#1 N4 [Active] {} Links to #: 0, 3, 6
+TYPE T5
+#6 N5 [Active] {} Links to #: 5, 1, 7
+TYPE T6
+#5 N6 [Active] {} Links to #: 4, 6
+TYPE T7
+#2 N7 [Active] {} Links to #: 0, 4, 8
+TYPE T8
+#8 N8 [Active] {} Links to #: 2, 7
+TYPE T9
+#7 N9 [Active] {} Links to #: 6, 8, 9
+TYPE T10
+#9 N10 [Active] {} Links to #: 7
+
+-------------------------------------------------
+
+STEP 1
+
+Rule #6 * =a: a -> {a}(T6), {a}(T7),  * applied in instance #4 N3.
+Rule #5 * =a: a -> {a}(T4) * applied in instance #3 N2.
+
+Configuration #1
+-------------------------------------------------
+TYPE T1
+#0 N1 [Active] {} Links to #: 1, 2
+TYPE T2
+#3 N2 [Active] {} Links to #: 1
+TYPE T3
+#4 N3 [Active] {} Links to #: 5, 2
+TYPE T4
+#1 N4 [Active] {a} Links to #: 0, 3, 6
+TYPE T5
+#6 N5 [Active] {} Links to #: 5, 1, 7
+TYPE T6
+#5 N6 [Active] {a} Links to #: 4, 6
+TYPE T7
+#2 N7 [Active] {a} Links to #: 0, 4, 8
+TYPE T8
+#8 N8 [Active] {} Links to #: 2, 7
+TYPE T9
+#7 N9 [Active] {} Links to #: 6, 8, 9
+TYPE T10
+#9 N10 [Active] {} Links to #: 7
+
+-------------------------------------------------
+
+STEP 2
+
+Rule #3 * =a: a -> {a}(T8) * applied in instance #2 N7.
+Rule #7 * =a: a -> {a}(T5) * applied in instance #5 N6.
+Rule #1 * =a: a -> {a}(T5) * applied in instance #1 N4.
+
+Configuration #2
+-------------------------------------------------
+TYPE T1
+#0 N1 [Active] {} Links to #: 1, 2
+TYPE T2
+#3 N2 [Active] {} Links to #: 1
+TYPE T3
+#4 N3 [Active] {} Links to #: 5, 2
+TYPE T4
+#1 N4 [Active] {} Links to #: 0, 3, 6
+TYPE T5
+#6 N5 [Active] {2a} Links to #: 5, 1, 7
+TYPE T6
+#5 N6 [Active] {} Links to #: 4, 6
+TYPE T7
+#2 N7 [Active] {} Links to #: 0, 4, 8
+TYPE T8
+#8 N8 [Active] {a} Links to #: 2, 7
+TYPE T9
+#7 N9 [Active] {} Links to #: 6, 8, 9
+TYPE T10
+#9 N10 [Active] {} Links to #: 7
+
+-------------------------------------------------
+
+STEP 3
+
+Rule #8 * =2a: 2a -> {a}(T9) * applied in instance #6 N5.
+Rule #12 * =a: a -> {a}(T9) * applied in instance #8 N8.
+
+Configuration #3
+-------------------------------------------------
+TYPE T1
+#0 N1 [Active] {} Links to #: 1, 2
+TYPE T2
+#3 N2 [Active] {} Links to #: 1
+TYPE T3
+#4 N3 [Active] {} Links to #: 5, 2
+TYPE T4
+#1 N4 [Active] {} Links to #: 0, 3, 6
+TYPE T5
+#6 N5 [Active] {} Links to #: 5, 1, 7
+TYPE T6
+#5 N6 [Active] {} Links to #: 4, 6
+TYPE T7
+#2 N7 [Active] {} Links to #: 0, 4, 8
+TYPE T8
+#8 N8 [Active] {} Links to #: 2, 7
+TYPE T9
+#7 N9 [Active] {2a} Links to #: 6, 8, 9
+TYPE T10
+#9 N10 [Active] {} Links to #: 7
+
+-------------------------------------------------
+
+STEP 4
+
+Rule #10 * =2a: 2a -> {a}(T10) * applied in instance #7 N9.
+
+Configuration #4
+-------------------------------------------------
+TYPE T1
+#0 N1 [Active] {} Links to #: 1, 2
+TYPE T4
+#1 N4 [Active] {} Links to #: 0, 3, 6
+TYPE T7
+#2 N7 [Active] {} Links to #: 0, 4, 8
+TYPE T2
+#3 N2 [Active] {} Links to #: 1
+TYPE T3
+#4 N3 [Active] {} Links to #: 5, 2
+TYPE T6
+#5 N6 [Active] {} Links to #: 4, 6
+TYPE T5
+#6 N5 [Active] {} Links to #: 5, 1, 7
+TYPE T9
+#7 N9 [Active] {} Links to #: 6, 8, 9
+TYPE T8
+#8 N8 [Active] {} Links to #: 2, 7
+TYPE T10
+#9 N10 [Active] {a} Links to #: 7
+-------------------------------------------------
+System halted at step 4 (no further rule could be applied, i.e. reached a deadlock).
+Simulation complete at step 4.
