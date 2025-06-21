@@ -20,33 +20,33 @@ TYPE T8
 TYPE T9
 #7 C9 [Active] {z, 2f} Links to #: 6, 8, 9
 TYPE T10
-#9 C10 [Active] {} Links to #: 7
+#9 C10 [Active] {z} Links to #: 7
 
 -------------------------------------------------
 
 STEP 1
 
 Rule #0 * (>=z & >=p & <m) | (<z & >p & <m): a -> {a, p}(T4), {a, p}(T5),  * applied in instance #0 C1.
-Rule #8 * (>=z & <p & >=m) | (<z & <p & >m): a -> {a, m}(T4) * applied in instance #1 C2.
 Rule #16 * (>=z & <p & >=m) | (<z & <p & >m): a -> {a, m}(T6) * applied in instance #2 C3.
+Rule #2 * (>=z & >=p & <m) | (<z & >p & <m): p, f -> p * applied in instance #0 C1.
+Rule #8 * (>=z & <p & >=m) | (<z & <p & >m): a -> {a, m}(T4) * applied in instance #1 C2.
 Rule #19 * (>=z & <p & >=m) | (<z & <p & >m): m, f -> m * applied in instance #2 C3.
 Rule #11 * (>=z & <p & >=m) | (<z & <p & >m): m, f -> m * applied in instance #1 C2.
 Rule #15 * =f: f -> 2f * applied in instance #1 C2.
-Rule #22 * =f: m -> {} * applied in instance #2 C3.
-Rule #2 * (>=z & >=p & <m) | (<z & >p & <m): p, f -> p * applied in instance #0 C1.
-Rule #14 * =f: m -> {} * applied in instance #1 C2.
-Rule #23 * =f: f -> 2f * applied in instance #2 C3.
-Rule #5 * =f: p -> {} * applied in instance #0 C1.
 Rule #7 * =f: f -> 2f * applied in instance #0 C1.
+Rule #5 * =f: p -> {} * applied in instance #0 C1.
+Rule #23 * =f: f -> 2f * applied in instance #2 C3.
+Rule #22 * =f: m -> {} * applied in instance #2 C3.
+Rule #14 * =f: m -> {} * applied in instance #1 C2.
 
 Configuration #1
 -------------------------------------------------
 TYPE T1
-#0 C1 [Active] {2f, p} Links to #: 3, 4
+#0 C1 [Active] {p, 2f} Links to #: 3, 4
 TYPE T2
 #1 C2 [Active] {m, 2f} Links to #: 3
 TYPE T3
-#2 C3 [Active] {2f, m} Links to #: 5
+#2 C3 [Active] {m, 2f} Links to #: 5
 TYPE T4
 #3 C4 [Active] {z, 2f, 2a, p, m} Links to #: 0, 1, 6
 TYPE T5
@@ -60,34 +60,34 @@ TYPE T8
 TYPE T9
 #7 C9 [Active] {z, 2f} Links to #: 6, 8, 9
 TYPE T10
-#9 C10 [Active] {} Links to #: 7
+#9 C10 [Active] {z} Links to #: 7
 
 -------------------------------------------------
 
 STEP 2
 
-Rule #26 * (>=z & >=p & >=m) | (<z & >=p & >=m) | (>z & <p & <m): 2a -> {a, p}(T7) * applied in instance #3 C4.
 Rule #34 * (>=z & >=p & <m) | (<z & >p & <m): a -> {a, p}(T8) * applied in instance #4 C5.
-Rule #27 * (>=z & >=p & >=m) | (<z & >=p & >=m) | (>z & <p & <m): z, f -> z * applied in instance #3 C4.
 Rule #42 * (>=z & <p & >=m) | (<z & <p & >m): a -> {a, m}(T7), {a, m}(T8),  * applied in instance #5 C6.
+Rule #45 * (>=z & <p & >=m) | (<z & <p & >m): m, f -> m * applied in instance #5 C6.
+Rule #26 * (>=z & >=p & >=m) | (<z & >=p & >=m) | (>z & <p & <m): 2a -> {a, p}(T7) * applied in instance #3 C4.
+Rule #27 * (>=z & >=p & >=m) | (<z & >=p & >=m) | (>z & <p & <m): z, f -> z * applied in instance #3 C4.
 Rule #36 * (>=z & >=p & <m) | (<z & >p & <m): p, f -> p * applied in instance #4 C5.
+Rule #39 * =f: p -> {} * applied in instance #4 C5.
 Rule #33 * =f: f -> 2f * applied in instance #3 C4.
 Rule #32 * =f: m -> {} * applied in instance #3 C4.
-Rule #45 * (>=z & <p & >=m) | (<z & <p & >m): m, f -> m * applied in instance #5 C6.
 Rule #48 * =f: m -> {} * applied in instance #5 C6.
-Rule #31 * =f: p -> {} * applied in instance #3 C4.
 Rule #49 * =f: f -> 2f * applied in instance #5 C6.
-Rule #39 * =f: p -> {} * applied in instance #4 C5.
 Rule #41 * =f: f -> 2f * applied in instance #4 C5.
+Rule #31 * =f: p -> {} * applied in instance #3 C4.
 
 Configuration #2
 -------------------------------------------------
 TYPE T1
-#0 C1 [Active] {2f, p} Links to #: 3, 4
+#0 C1 [Active] {p, 2f} Links to #: 3, 4
 TYPE T2
 #1 C2 [Active] {m, 2f} Links to #: 3
 TYPE T3
-#2 C3 [Active] {2f, m} Links to #: 5
+#2 C3 [Active] {m, 2f} Links to #: 5
 TYPE T4
 #3 C4 [Active] {z, 2f} Links to #: 0, 1, 6
 TYPE T5
@@ -95,37 +95,37 @@ TYPE T5
 TYPE T6
 #5 C6 [Active] {2f, m} Links to #: 2, 6, 8
 TYPE T7
-#6 C7 [Active] {z, 2f, 2a, p, m} Links to #: 3, 5, 7
+#6 C7 [Active] {z, 2f, 2a, m, p} Links to #: 3, 5, 7
 TYPE T8
 #8 C8 [Active] {z, 2f, 2a, p, m} Links to #: 4, 5, 7
 TYPE T9
 #7 C9 [Active] {z, 2f} Links to #: 6, 8, 9
 TYPE T10
-#9 C10 [Active] {} Links to #: 7
+#9 C10 [Active] {z} Links to #: 7
 
 -------------------------------------------------
 
 STEP 3
 
-Rule #72 * (>=z & >=p & >=m) | (<z & >=p & >=m) | (>z & <p & <m): 2a -> {a, m}(T9) * applied in instance #8 C8.
 Rule #52 * (>=z & >=p & >=m) | (<z & >=p & >=m) | (>z & <p & <m): 2a -> {a, p}(T9) * applied in instance #6 C7.
+Rule #72 * (>=z & >=p & >=m) | (<z & >=p & >=m) | (>z & <p & <m): 2a -> {a, m}(T9) * applied in instance #8 C8.
 Rule #53 * (>=z & >=p & >=m) | (<z & >=p & >=m) | (>z & <p & <m): z, f -> z * applied in instance #6 C7.
-Rule #57 * =f: p -> {} * applied in instance #6 C7.
+Rule #58 * =f: m -> {} * applied in instance #6 C7.
+Rule #59 * =f: f -> 2f * applied in instance #6 C7.
 Rule #73 * (>=z & >=p & >=m) | (<z & >=p & >=m) | (>z & <p & <m): z, f -> z * applied in instance #8 C8.
 Rule #77 * =f: p -> {} * applied in instance #8 C8.
-Rule #58 * =f: m -> {} * applied in instance #6 C7.
-Rule #78 * =f: m -> {} * applied in instance #8 C8.
-Rule #59 * =f: f -> 2f * applied in instance #6 C7.
+Rule #57 * =f: p -> {} * applied in instance #6 C7.
 Rule #79 * =f: f -> 2f * applied in instance #8 C8.
+Rule #78 * =f: m -> {} * applied in instance #8 C8.
 
 Configuration #3
 -------------------------------------------------
 TYPE T1
-#0 C1 [Active] {2f, p} Links to #: 3, 4
+#0 C1 [Active] {p, 2f} Links to #: 3, 4
 TYPE T2
 #1 C2 [Active] {m, 2f} Links to #: 3
 TYPE T3
-#2 C3 [Active] {2f, m} Links to #: 5
+#2 C3 [Active] {m, 2f} Links to #: 5
 TYPE T4
 #3 C4 [Active] {z, 2f} Links to #: 0, 1, 6
 TYPE T5
@@ -133,13 +133,13 @@ TYPE T5
 TYPE T6
 #5 C6 [Active] {2f, m} Links to #: 2, 6, 8
 TYPE T7
-#6 C7 [Active] {z, 2f} Links to #: 3, 5, 7
+#6 C7 [Active] {2f, z} Links to #: 3, 5, 7
 TYPE T8
-#8 C8 [Active] {z, 2f} Links to #: 4, 5, 7
+#8 C8 [Active] {2f, z} Links to #: 4, 5, 7
 TYPE T9
-#7 C9 [Active] {z, 2f, 2a, m, p} Links to #: 6, 8, 9
+#7 C9 [Active] {z, 2f, 2a, p, m} Links to #: 6, 8, 9
 TYPE T10
-#9 C10 [Active] {} Links to #: 7
+#9 C10 [Active] {z} Links to #: 7
 
 -------------------------------------------------
 
@@ -148,17 +148,17 @@ STEP 4
 Rule #62 * (>=z & >=p & >=m) | (<z & >=p & >=m) | (>z & <p & <m): 2a -> {a, z}(T10) * applied in instance #7 C9.
 Rule #63 * (>=z & >=p & >=m) | (<z & >=p & >=m) | (>z & <p & <m): z, f -> z * applied in instance #7 C9.
 Rule #67 * =f: p -> {} * applied in instance #7 C9.
-Rule #68 * =f: m -> {} * applied in instance #7 C9.
 Rule #69 * =f: f -> 2f * applied in instance #7 C9.
+Rule #68 * =f: m -> {} * applied in instance #7 C9.
 
 Configuration #4
 -------------------------------------------------
 TYPE T1
-#0 C1 [Active] {2f, p} Links to #: 3, 4
+#0 C1 [Active] {p, 2f} Links to #: 3, 4
 TYPE T2
 #1 C2 [Active] {m, 2f} Links to #: 3
 TYPE T3
-#2 C3 [Active] {2f, m} Links to #: 5
+#2 C3 [Active] {m, 2f} Links to #: 5
 TYPE T4
 #3 C4 [Active] {z, 2f} Links to #: 0, 1, 6
 TYPE T5
@@ -166,13 +166,13 @@ TYPE T5
 TYPE T6
 #5 C6 [Active] {2f, m} Links to #: 2, 6, 8
 TYPE T7
-#6 C7 [Active] {z, 2f} Links to #: 3, 5, 7
+#6 C7 [Active] {2f, z} Links to #: 3, 5, 7
 TYPE T9
-#7 C9 [Active] {z, 2f} Links to #: 6, 8, 9
+#7 C9 [Active] {2f, z} Links to #: 6, 8, 9
 TYPE T8
-#8 C8 [Active] {z, 2f} Links to #: 4, 5, 7
+#8 C8 [Active] {2f, z} Links to #: 4, 5, 7
 TYPE T10
-#9 C10 [Active] {a, z} Links to #: 7
+#9 C10 [Active] {2z, a} Links to #: 7
 -------------------------------------------------
 System halted at step 4 (no further rule could be applied, i.e. reached a deadlock).
 Simulation complete at step 4.
