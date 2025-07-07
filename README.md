@@ -16,13 +16,13 @@ Example 1, depicted in the diagram, refers to a spiking neural P system (SN P sy
 
 - **[Models](Examples/LogicGate/Models)**: This folder contains the three examples that appear in the paper: the first two examples, as SN P systems, written in P-Lingua, under the subfolder P-Lingua; and all of them, as kP systems, written in kP-Lingua, under the subfolder kPL.  LogicalGate corresponds to example 1, LogicalGateDelay to Example 2 and LogicalGalePolarizatio to Example 3. For each of these models two executions are provided, as traces of execution, for inputs 0,1, 1 and 1, 1, 1 in the above mentioned subfolders.
 
-- **[Traces](Examples/LogicGate/Traces)**: Contains traces of execution (running the kP systems corresponding to the SN P system represented in Fig. 1) for all possible input values of x, y, z (8 values, from 0,0,0 to 1,1,1). These are utised by the learning algorithm to infer the X-machine used for testing.
+- **[Traces](Examples/LogicGate/Traces)**: Contains traces of execution (running the kP systems corresponding to the SN P system represented in Fig. 1) for all possible input values of x, y, z (8 values, from 0,0,0 to 1,1,1). These are utilised by the learning algorithm to infer the X-machine used for testing.
 
 - **[Testing](Examples/LogicGate/Testing)**: Contains 4 files:
-  - **_Rules**: The rule and list of combination of rules occurring in the computations for the above inputs; these will be labels of the functions of the X-machine.
+  - **_Rules**: The rules and list of combination of rules occurring in the computations for the above inputs; these will be labels of the functions of the X-machine.
   - **DFA_transition_table**: Transition table of the deterministic finite automaton obtained by using the learning algorithm with bounded sequences of length up to 4; the labels "a" to "s" correspond to combinations of rules applied.
   - **DFA Diagram**: The diagram corresponding to the transition table.
-  - **Computed U set**: Test set with test sequences related to the SN P system model in Fig. 1, computed based on the DFA constructed (provided in the two files above).
+  - **Computed U set**: The test set with test sequences related to the SN P system model in Fig. 1, computed based on the DFA constructed (provided in the two files above).
   - **TestingMutants**: Contains test sequences applied in the case of errors, seeded in the implementation of the SN P system through mutations applied to rules.
 
 - **[Verification](Examples/LogicGate/Verification)**: Contains 3 files:
