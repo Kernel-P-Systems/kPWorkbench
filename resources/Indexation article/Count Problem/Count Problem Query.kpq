@@ -1,0 +1,6 @@
+ltl: always c1.c >= 0; 
+ltl: never c1.c < 0;
+ltl: always c1.c <= 10 or ((c1.b1 = 0 and c1.b2 = 0) and c1.b3 = 0);
+ltl: eventually c1.c >= 10;
+ltl: eventually ((c1.b1 = 0 and c1.b2 = 0) and c1.b3 = 0);
+ltl: always ((c1.b1 + c1.b2) + c1.b3 <= 3);
