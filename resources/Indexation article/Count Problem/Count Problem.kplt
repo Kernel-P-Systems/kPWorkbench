@@ -1,0 +1,16 @@
+#define k = 3, threshold = 10
+type t1 {
+  choice {
+	<$threshold$c : b$i$ -> a$i$ (t2) . : 1 <= i <= k
+	>=$threshold$c : b$i$ -> . : 1<= i <= k
+	}
+}
+type t2 {
+   choice {
+	a$i$ -> {b$i$, $i$c} (t1) . : 1<= i <= k
+	}
+}
+
+c1 {@b$i$:1<=i<=k@} (t1) .
+c2 {} (t2) .
+c1 - c2 .
