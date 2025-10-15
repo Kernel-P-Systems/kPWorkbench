@@ -1,4 +1,4 @@
-#define n = 3, k = 3
+#define n = 4, k = 10
 
 type T0 {
 }
@@ -16,12 +16,7 @@ type T2 {
 		a$n$ -> [b$n$, x][x] . : n<=i<=n
 	}
 	max {
-		=b1 & =b2 .. & =bn | =b$j$ & !=b$i$ & =x : v$i$, v$j$ -> v . : 1<=i<=n, 1<=j<=n, i<j
-		@&,(=b$i$ | =2c) :0<=i<=2@ | =x : a$i$ -> b$i$ : 1<i<5 
-		@|,=b$i$ :0<=i<=n@
-		(=b0 | =2c) & (=b1 | =2c) & (=b2 | =2c) | =x : a2 -> b2 .
-		(=b0 | =2c) & (=b1 | =2c) & (=b2 | =2c) | =x : a3 -> b3 .
-		(=b0 | =2c) & (=b1 | =2c) & (=b2 | =2c) | =x : a4 -> b4 .
+		=b$i$ & !=b$j$ & =x | =b$j$ & !=b$i$ & =x : v$i$, v$j$ -> v . : 1<=i<=n, 1<=j<=n, i<j
 	}
 	max { x -> $n+1$y, s1 . } : n<=i<=n
 	choice { <v$i$ & =s1 : y -> s . }  : 1<=i<=n
@@ -33,9 +28,8 @@ type T2 {
 	}
 }
 
-termB {@a_$i$:0<=i<=bits@, b , c } (Term) .
 t0 {} (T0) .
 t1 {s} (T1) .
-t2 {a1, v1, 2v2, 3v3} (T2) .
+t2 {a1, v1, 5v2, 10v3, 4v4} (T2) .
 
 t0 - t1 - t2 .

@@ -1,3 +1,4 @@
+
 type T0 {
 }
 
@@ -18,7 +19,7 @@ type T2 {
 	choice { <v1 & =s1 : y -> s . }  
 	choice { <v2 & =s1 : y -> s . }  
 	choice { <v3 & =s1 : y -> s . }  
-	choice { =3v & =s1 : y -> s . }  
+	choice { =3v  & =s1: y -> s . }  
 	choice {
 		s1 -> s2 . 
 		<y : 4s, s2 -> t (T1) . 
@@ -29,20 +30,20 @@ type T2 {
 t0 {} (T0) .
 t1 {s} (T1) .
 
-t2a {v1, 2v2, 3v3, b1, b2, b3, x} (T2) .
-t2b {v1, 2v2, 3v3, b1, b2, x} (T2) .
-t2c {v1, 2v2, 3v3, b1, b3, x} (T2) .
-t2d {v1, 2v2, 3v3, b1, x} (T2) .
-t2e {v1, 2v2, 3v3, b2, b3, x} (T2) .
-t2f {v1, 2v2, 3v3, b2, x} (T2) .
-t2g {v1, 2v2, 3v3, b3, x} (T2) .
-t2h {v1, 2v2, 3v3, x} (T2) .
+t2_1 {v1, 2v2, 3v3, b1, b2, b3, x} (T2) .
+t2_2 {v1, 2v2, 3v3, b1, b2, x} (T2) .
+t2_3 {v1, 2v2, 3v3, b1, b3, x} (T2) .
+t2_4 {v1, 2v2, 3v3, b1, x} (T2) .
+t2_5 {v1, 2v2, 3v3, b2, b3, x} (T2) .
+t2_6 {v1, 2v2, 3v3, b2, x} (T2) .
+t2_7 {v1, 2v2, 3v3, b3, x} (T2) .
+t2_8 {v1, 2v2, 3v3, x} (T2) .
 
-t0 - t1 - t2a .
-t0 - t1 - t2b .
-t0 - t1 - t2c .
-t0 - t1 - t2d .
-t0 - t1 - t2e .
-t0 - t1 - t2f .
-t0 - t1 - t2g .
-t0 - t1 - t2h .
+t0 - t1 - t2_1 . 
+t0 - t1 - t2_2 . 
+t0 - t1 - t2_3 . 
+t0 - t1 - t2_4 . 
+t0 - t1 - t2_5 . 
+t0 - t1 - t2_6 . 
+t0 - t1 - t2_7 . 
+t0 - t1 - t2_8 . 

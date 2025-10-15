@@ -23,7 +23,16 @@ namespace KPLinguaPreprocessing
         private Regex iteratorPatternInMultisetRegex = new Regex(@"(?<rule>.*?(\$|\{|\})?\s*)(?<iterator>:\s*\S+)(?<n>\n)?");
         //private Regex iteratorPatternInLogicalExpressionRegex = new Regex(@"(?<rule>\(.*?\))\s*:\s*(?<iterator>:\S+)(?<n>\n)?");
         private Regex logicalExpressionPatternRegex = new Regex(@"@[\|&]([^@]+)@");
-        private Regex kpQueryRegexPattern = new Regex(@"^(?:(?<prefix>ltl|ctl|safety):\s*(?:(?<temporal>never|eventually|always|steady-state)\s+)?)?(?<logicalCondition>@(?:and|or|\+|\-)),\s*(?<logicalRule>[^:]+)\s*:\s*(?<firstIterator>\d+<?=?>?\w+<?=?>?\d+)@?\s*;?");
+        //private Regex kpQueryRegexPattern = new Regex(@"^(?:(?<prefix>ltl|ctl|safety):\s*(?:(?<temporal>never|eventually|always|steady-state)\s+)?)?(?<logicalCondition>@(?:and|or|\+|\-)),\s*(?<logicalRule>[^:]+)\s*:\s*(?<firstIterator>\d+<?=?>?\w+<?=?>?\d+)@?\s*;?");
+        private Regex kpQueryRegexPattern = new Regex(
+            @"^(?:(?<prefix>ltl|ctl|safety):\s*(?:(?<temporal>never|eventually|always|steady-state|infinitely-often)\s+)?)?" +
+            // anything up to first @...@ block (non-greedy)
+            @"(?<beforeBlock>.*?)" +
+            // one or more @OP, rule : iterator@ blocks (rule and iterator are liberal, stop at the next @)
+            @"(?<blocks>(?:@(?:(?:and|or|\+|\-)),\s*.*?\s*:\s*[^@]+@)+)" +
+            // remainder of the line after the @...@ blocks
+            @"(?<afterBlock>.*?)\s*;?\s*$",
+            RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
         string pattern = @"^(?:(?<prefix>ltl|ctl|safety):\s*(?:(?<temporal>never|eventually|always)\s+)?)?(?<logicalCondition>@(?:and|or|\+)),\s*(?<logicalRule>[^:]+)\s*:\s*(?<firstIterator>\d+<?=?>?\w+<?=?>?\d+)@?\s*;?";
 
         //private string multisetIteratorPattern = @"@(.+?)@";
@@ -364,12 +373,36 @@ namespace KPLinguaPreprocessing
             var logicalExpressionRule = groups["logicalRule"].Value;
             var logicalExpressionIterator = groups["firstIterator"].Value.Replace("@", "");
 
-            string newLine = BuildIterator(logicalExpressionRule, logicalExpressionIterator, variableSeparator, true);
-            newLine = RemoveLastParentheses(newLine);
-            int unmatchedClosings = newLine.Count(c => c == ')');
-            string parenthesesLine = new string('(', unmatchedClosings) + newLine;
-            Match matchRuleExpression = Regex.Match(line, expressionPattern);
-            string resultedLine = line.Replace(matchRuleExpression.Value, parenthesesLine);
+            string resultedLine = line;
+
+            // Find all @...@ blocks
+            var matches = Regex.Matches(line, expressionPattern);
+
+            foreach (Match exprMatch in matches)
+            {
+                string expr = exprMatch.Value; // e.g. @and, c1.b$i$ = 0 : 1<=i<=3@
+
+                // Parse inner components again (operator, rule, iterator)
+                var inner = Regex.Match(expr,
+                    @"@(?<logicalCondition>(?:and|or|\+|\-)),\s*(?<logicalRule>[^:]+)\s*:\s*(?<firstIterator>\d+<?=?>?\w+<?=?>?\d+)@?");
+
+                if (!inner.Success)
+                    continue;
+
+                string separator = $" {inner.Groups["logicalCondition"].Value} ";
+                string rule = inner.Groups["logicalRule"].Value;
+                string iterator = inner.Groups["firstIterator"].Value;
+
+                string expanded = BuildIterator(rule, iterator, separator, true);
+                expanded = RemoveLastParentheses(expanded);
+
+                int unmatchedClosings = expanded.Count(c => c == ')');
+                string parenthesesLine = new string('(', unmatchedClosings) + expanded;
+
+                // Replace this block in the current line
+                resultedLine = resultedLine.Replace(expr, parenthesesLine);
+            }
+
             return resultedLine;
 
             //Match matchLocalExpression = Regex.Match(logicalExpression, logicalExpressionPattern);

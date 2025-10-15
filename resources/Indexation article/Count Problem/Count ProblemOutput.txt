@@ -2,135 +2,155 @@ Simulation started.
 Initial Configuration
 -------------------------------------------------
 TYPE t1
-#0 c1 [Active] {b1, b2, b3} Links to #: 1
+#0 c1 [Active] {b1, b2, b3} Links to #: 1, 2, 3
 TYPE t2
-#1 c2 [Active] {} Links to #: 0
+#1 c21 [Active] {x1} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
 -------------------------------------------------
 
 STEP 1
 
-Rule #1 * <10c: b2 -> {a2}(t2) * applied in instance #0 c1.
-Selected instance #1 as target of type t2 for rule #1.
+Rule #0 * <10c: b1 -> {a1}(t2) * applied in instance #0 c1.
+Selected instance #1 as target of type t2 for rule #0.
 
 Configuration #1
 -------------------------------------------------
 TYPE t1
-#0 c1 [Active] {b1, b3} Links to #: 1
+#0 c1 [Active] {b2, b3} Links to #: 1, 2, 3
 TYPE t2
-#1 c2 [Active] {a2} Links to #: 0
+#1 c21 [Active] {x1, a1} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
 -------------------------------------------------
 
 STEP 2
 
-Rule #7 * a2 -> {b2, 2c}(t1) * applied in instance #1 c2.
-Selected instance #0 as target of type t1 for rule #7.
-Rule #0 * <10c: b1 -> {a1}(t2) * applied in instance #0 c1.
-Selected instance #1 as target of type t2 for rule #0.
+Rule #9 * >=x1: a1 -> {b1, c}(t1) * applied in instance #1 c21.
+Selected instance #0 as target of type t1 for rule #9.
+Rule #2 * <10c: b3 -> {a3}(t2) * applied in instance #0 c1.
+Selected instance #3 as target of type t2 for rule #2.
 
 Configuration #2
 -------------------------------------------------
 TYPE t1
-#0 c1 [Active] {b2, 2c, b3} Links to #: 1
+#0 c1 [Active] {c, b2, b1} Links to #: 1, 2, 3
 TYPE t2
-#1 c2 [Active] {a1} Links to #: 0
+#1 c21 [Active] {x1} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3, a3} Links to #: 0
 -------------------------------------------------
 
 STEP 3
 
-Rule #6 * a1 -> {b1, c}(t1) * applied in instance #1 c2.
-Selected instance #0 as target of type t1 for rule #6.
-Rule #2 * <10c: b3 -> {a3}(t2) * applied in instance #0 c1.
-Selected instance #1 as target of type t2 for rule #2.
+Rule #1 * <10c: b2 -> {a2}(t2) * applied in instance #0 c1.
+Selected instance #1 as target of type t2 for rule #1.
+Rule #8 * a3 -> {b3, 3c}(t1) * applied in instance #3 c23.
+Selected instance #0 as target of type t1 for rule #8.
 
 Configuration #3
 -------------------------------------------------
 TYPE t1
-#0 c1 [Active] {b2, 3c, b1} Links to #: 1
+#0 c1 [Active] {4c, b3, b1} Links to #: 1, 2, 3
 TYPE t2
-#1 c2 [Active] {a3} Links to #: 0
+#1 c21 [Active] {x1, a2} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
 -------------------------------------------------
 
 STEP 4
 
-Rule #8 * a3 -> {b3, 3c}(t1) * applied in instance #1 c2.
-Selected instance #0 as target of type t1 for rule #8.
-Rule #1 * <10c: b2 -> {a2}(t2) * applied in instance #0 c1.
-Selected instance #1 as target of type t2 for rule #1.
+Rule #2 * <10c: b3 -> {a3}(t2) * applied in instance #0 c1.
+Selected instance #1 as target of type t2 for rule #2.
+Rule #7 * a2 -> {b2, 2c}(t1) * applied in instance #1 c21.
+Selected instance #0 as target of type t1 for rule #7.
 
 Configuration #4
 -------------------------------------------------
 TYPE t1
-#0 c1 [Active] {b3, 6c, b1} Links to #: 1
+#0 c1 [Active] {6c, b2, b1} Links to #: 1, 2, 3
 TYPE t2
-#1 c2 [Active] {a2} Links to #: 0
+#1 c21 [Active] {x1, a3} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
 -------------------------------------------------
 
 STEP 5
 
-Rule #2 * <10c: b3 -> {a3}(t2) * applied in instance #0 c1.
-Selected instance #1 as target of type t2 for rule #2.
-Rule #7 * a2 -> {b2, 2c}(t1) * applied in instance #1 c2.
-Selected instance #0 as target of type t1 for rule #7.
+Rule #0 * <10c: b1 -> {a1}(t2) * applied in instance #0 c1.
+Selected instance #1 as target of type t2 for rule #0.
+Rule #8 * a3 -> {b3, 3c}(t1) * applied in instance #1 c21.
+Selected instance #0 as target of type t1 for rule #8.
 
 Configuration #5
 -------------------------------------------------
 TYPE t1
-#0 c1 [Active] {b2, 8c, b1} Links to #: 1
+#0 c1 [Active] {9c, b2, b3} Links to #: 1, 2, 3
 TYPE t2
-#1 c2 [Active] {a3} Links to #: 0
+#1 c21 [Active] {x1, a1} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
 -------------------------------------------------
 
 STEP 6
 
-Rule #8 * a3 -> {b3, 3c}(t1) * applied in instance #1 c2.
-Selected instance #0 as target of type t1 for rule #8.
-Rule #0 * <10c: b1 -> {a1}(t2) * applied in instance #0 c1.
-Selected instance #1 as target of type t2 for rule #0.
+Rule #9 * >=x1: a1 -> {b1, c}(t1) * applied in instance #1 c21.
+Selected instance #0 as target of type t1 for rule #9.
+Rule #2 * <10c: b3 -> {a3}(t2) * applied in instance #0 c1.
+Selected instance #2 as target of type t2 for rule #2.
 
 Configuration #6
 -------------------------------------------------
 TYPE t1
-#0 c1 [Active] {b2, 11c, b3} Links to #: 1
+#0 c1 [Active] {10c, b2, b1} Links to #: 1, 2, 3
 TYPE t2
-#1 c2 [Active] {a1} Links to #: 0
+#1 c21 [Active] {x1} Links to #: 0
+#2 c22 [Active] {x2, a3} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
 -------------------------------------------------
 
 STEP 7
 
-Rule #5 * >=10c: b3 -> {} * applied in instance #0 c1.
-Rule #6 * a1 -> {b1, c}(t1) * applied in instance #1 c2.
-Selected instance #0 as target of type t1 for rule #6.
+Rule #4 * >=10c: b2 -> {} * applied in instance #0 c1.
+Rule #8 * a3 -> {b3, 3c}(t1) * applied in instance #2 c22.
+Selected instance #0 as target of type t1 for rule #8.
 
 Configuration #7
 -------------------------------------------------
 TYPE t1
-#0 c1 [Active] {b2, 12c, b1} Links to #: 1
+#0 c1 [Active] {13c, b3, b1} Links to #: 1, 2, 3
 TYPE t2
-#1 c2 [Active] {} Links to #: 0
+#1 c21 [Active] {x1} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
 -------------------------------------------------
 
 STEP 8
 
-Rule #4 * >=10c: b2 -> {} * applied in instance #0 c1.
+Rule #3 * >=10c: b1 -> {} * applied in instance #0 c1.
 
 Configuration #8
 -------------------------------------------------
 TYPE t1
-#0 c1 [Active] {12c, b1} Links to #: 1
+#0 c1 [Active] {13c, b3} Links to #: 1, 2, 3
 TYPE t2
-#1 c2 [Active] {} Links to #: 0
+#1 c21 [Active] {x1} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
 -------------------------------------------------
 
 STEP 9
 
-Rule #3 * >=10c: b1 -> {} * applied in instance #0 c1.
+Rule #5 * >=10c: b3 -> {} * applied in instance #0 c1.
 
 Configuration #9
 -------------------------------------------------
 TYPE t1
-#0 c1 [Active] {12c} Links to #: 1
+#0 c1 [Active] {13c} Links to #: 1, 2, 3
 TYPE t2
-#1 c2 [Active] {} Links to #: 0
+#1 c21 [Active] {x1} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
 -------------------------------------------------
 System halted at step 9 (no further rule could be applied, i.e. reached a deadlock).
 Simulation complete at step 9.
