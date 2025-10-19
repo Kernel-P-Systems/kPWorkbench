@@ -1,0 +1,320 @@
+#define MAX_STEPS 20
+#define A_SIZE 10
+#define C_SIZE 4
+#define L_SIZE 3
+
+int b1_ = 0;
+int b2_ = 1;
+int b3_ = 2;
+int a1_ = 3;
+int c_ = 4;
+int a2_ = 5;
+int a3_ = 6;
+int x1_ = 7;
+int x2_ = 8;
+int x3_ = 9;
+c_code {
+	int b1_ = 0;
+	int b2_ = 1;
+	int b3_ = 2;
+	int a1_ = 3;
+	int c_ = 4;
+	int a2_ = 5;
+	int a3_ = 6;
+	int x1_ = 7;
+	int x2_ = 8;
+	int x3_ = 9;
+};
+
+mtype = {initial, running, rules_applied, step_complete, finished}
+
+typedef Compartment {
+	int type;
+	int x[A_SIZE] = 0;
+	int xt[A_SIZE] = 0;
+	int links[L_SIZE] = -1;
+	int lTCount[2] = 0;
+	int lCount = 0;
+}
+
+Compartment c[C_SIZE];
+mtype state;
+int cCount = 0;
+int cTCount[2] = 0;
+int step = -1;
+int rulesAppliedThisStep = 0;
+bit deadlock = 0;
+
+/* LTL Properties */
+ltl prop1 { <> (c[0].x[c_] >= 1 && state == step_complete) }
+ltl prop2 { [] (c[0].x[c_] <= 10 || state != step_complete) }
+ltl prop3 { !(<> (c[0].x[c_] > 10 && state == step_complete)) }
+ltl prop4 { [] ((c[1].x[a1_] > 0 -> <> (c[0].x[b1_] > 0 && state == step_complete)) || state != step_complete) }
+ltl prop5 { [] ((c[1].x[a2_] > 0 -> <> (c[0].x[b2_] > 0 && state == step_complete)) || state != step_complete) }
+ltl prop6 { [] ((c[1].x[a3_] > 0 -> <> (c[0].x[b3_] > 0 && state == step_complete)) || state != step_complete) }
+ltl prop7 { <> ([] (c[0].x[c_] <= 10 || state != step_complete) && state == step_complete) }
+ltl prop8 { [] (<> (((c[0].x[b1_] > 0 || c[0].x[b2_] > 0) || c[0].x[b3_] > 0) && state == step_complete) || state != step_complete) }
+ltl prop9 { [] ((c[0].x[c_] >= 10 -> ((c[1].x[a1_] == 0 && c[1].x[a2_] == 0) && c[1].x[a3_] == 0)) || state != step_complete) }
+ltl prop10 { [] (((c[0].x[b1_] >= 0 && c[0].x[b2_] >= 0) && c[0].x[b3_] >= 0) || state != step_complete) }
+ltl prop11 { [] ((c[0].x[c_] < 10 || ((c[1].x[a1_] == 0 && c[1].x[a2_] == 0) && c[1].x[a3_] == 0)) || state != step_complete) }
+ltl prop12 { [] (((c[0].x[b1_] >= 0 && c[0].x[b2_] >= 0) && c[0].x[b3_] >= 0) || state != step_complete) }
+ltl prop13 { <> (((c[0].x[b1_] + c[0].x[b2_]) + c[0].x[b3_]) > 0 && state == step_complete) }
+ltl prop14 { [] ((c[0].x[b1_] + (c[0].x[b2_] + c[0].x[b3_])) >= 0 || state != step_complete) }
+ltl prop15 { [] ((c[0].x[c_] + (c[1].x[a1_] + (c[1].x[a2_] + c[1].x[a3_]))) <= 13 || state != step_complete) }
+ltl prop16 { [] ((c[0].x[c_] + (c[1].x[x1_] + (c[1].x[x2_] + c[1].x[x3_]))) <= 10 || state != step_complete) }
+
+c_code {
+	int selectTarget(int ntar, int ci, int ti) {
+		int cskip = -1;
+		int k = -1;
+		int link = -1;
+		while(cskip < ntar) {
+			link = now.c[ci].links[++k];
+			if(link > -1 && now.c[link].type == ti) {
+				++cskip;
+			}
+		}
+		return link;
+	}
+
+	int getApplicabilityRate(int ci, int ruleLhs[], int lhsSize) {
+		int i;
+		int app = -1;
+		for(i = 0; i < lhsSize; i += 2) {
+			int obj = ruleLhs[i];
+			int mult = ruleLhs[i + 1];
+			if(now.c[ci].x[obj] < mult) {
+				return 0;
+			} else {
+				int cap = now.c[ci].x[obj] / mult;
+				if(app == -1) {
+					app = cap;
+				} else if(cap < app) {
+					app = cap;
+				}
+			}
+		}
+		return app;
+	}
+
+};
+
+active proctype KP() {
+	atomic {
+		c[0].type = 0;
+		c[0].x[b1_] = 1;
+		c[0].x[b2_] = 1;
+		c[0].x[b3_] = 1;
+		cTCount[0] = 1;
+		c[1].type = 1;
+		c[1].x[x1_] = 1;
+		c[2].type = 1;
+		c[2].x[x2_] = 1;
+		c[3].type = 1;
+		c[3].x[x3_] = 1;
+		cTCount[1] = 3;
+		cCount = 4;
+		c[0].links[0] = 1;
+		c[0].links[1] = 2;
+		c[0].links[2] = 3;
+		c[0].lCount = 3;
+		c[0].lTCount[1] = 3;
+		c[1].links[0] = 0;
+		c[1].lCount = 1;
+		c[1].lTCount[0] = 1;
+		c[2].links[0] = 0;
+		c[2].lCount = 1;
+		c[2].lTCount[0] = 1;
+		c[3].links[0] = 0;
+		c[3].lCount = 1;
+		c[3].lTCount[0] = 1;
+
+		step = 0;
+	}
+	state = initial;
+	assert(cCount > 0);
+	int i;
+	int ntar = 0;
+
+	do :: step < MAX_STEPS && !deadlock ->
+		atomic {
+		state = running;
+		rulesAppliedThisStep = 0;
+		int cCountA = cCount - 1;
+		for(i: 0 .. cCountA) {
+			if
+				/* TYPE t1 */
+				:: c[i].type == 0 ->
+					bit g00 = c[i].x[c_] < 10;
+					bit g01 = c[i].x[c_] < 10;
+					bit g02 = c[i].x[c_] < 10;
+					bit g03 = c[i].x[c_] >= 10;
+					bit g04 = c[i].x[c_] >= 10;
+					bit g05 = c[i].x[c_] >= 10;
+					if
+						:: g00 &&
+							c[i].x[b1_] >= 1 &&
+							c[i].lTCount[1] > 0
+							 ->
+							c[i].x[b1_] = c[i].x[b1_] - 1; 
+							select(ntar: 0 .. c[i].lTCount[1] - 1);
+							c_code {
+								int j;
+								j = selectTarget(PKP->ntar, PKP->i, 1);
+								now.c[j].xt[a1_] += 1;
+							};
+							rulesAppliedThisStep++;
+						:: g01 &&
+							c[i].x[b2_] >= 1 &&
+							c[i].lTCount[1] > 0
+							 ->
+							c[i].x[b2_] = c[i].x[b2_] - 1; 
+							select(ntar: 0 .. c[i].lTCount[1] - 1);
+							c_code {
+								int j;
+								j = selectTarget(PKP->ntar, PKP->i, 1);
+								now.c[j].xt[a2_] += 1;
+							};
+							rulesAppliedThisStep++;
+						:: g02 &&
+							c[i].x[b3_] >= 1 &&
+							c[i].lTCount[1] > 0
+							 ->
+							c[i].x[b3_] = c[i].x[b3_] - 1; 
+							select(ntar: 0 .. c[i].lTCount[1] - 1);
+							c_code {
+								int j;
+								j = selectTarget(PKP->ntar, PKP->i, 1);
+								now.c[j].xt[a3_] += 1;
+							};
+							rulesAppliedThisStep++;
+						:: g03 &&
+							c[i].x[b1_] >= 1
+							 ->
+							c[i].x[b1_] = c[i].x[b1_] - 1; 
+							rulesAppliedThisStep++;
+						:: g04 &&
+							c[i].x[b2_] >= 1
+							 ->
+							c[i].x[b2_] = c[i].x[b2_] - 1; 
+							rulesAppliedThisStep++;
+						:: g05 &&
+							c[i].x[b3_] >= 1
+							 ->
+							c[i].x[b3_] = c[i].x[b3_] - 1; 
+							rulesAppliedThisStep++;
+						:: else -> skip;
+					fi;
+
+				/* TYPE t2 */
+				:: c[i].type == 1 ->
+					bit g19 = c[i].x[x1_] >= 1;
+					bit g110 = c[i].x[x2_] >= 1;
+					bit g111 = c[i].x[x3_] >= 1;
+					if
+						:: c[i].x[a1_] >= 1 &&
+							c[i].lTCount[0] > 0
+							 ->
+							c[i].x[a1_] = c[i].x[a1_] - 1; 
+							select(ntar: 0 .. c[i].lTCount[0] - 1);
+							c_code {
+								int j;
+								j = selectTarget(PKP->ntar, PKP->i, 0);
+								now.c[j].xt[b1_] += 1;
+								now.c[j].xt[c_] += 1;
+							};
+							rulesAppliedThisStep++;
+						:: c[i].x[a2_] >= 1 &&
+							c[i].lTCount[0] > 0
+							 ->
+							c[i].x[a2_] = c[i].x[a2_] - 1; 
+							select(ntar: 0 .. c[i].lTCount[0] - 1);
+							c_code {
+								int j;
+								j = selectTarget(PKP->ntar, PKP->i, 0);
+								now.c[j].xt[b2_] += 1;
+								now.c[j].xt[c_] += 2;
+							};
+							rulesAppliedThisStep++;
+						:: c[i].x[a3_] >= 1 &&
+							c[i].lTCount[0] > 0
+							 ->
+							c[i].x[a3_] = c[i].x[a3_] - 1; 
+							select(ntar: 0 .. c[i].lTCount[0] - 1);
+							c_code {
+								int j;
+								j = selectTarget(PKP->ntar, PKP->i, 0);
+								now.c[j].xt[b3_] += 1;
+								now.c[j].xt[c_] += 3;
+							};
+							rulesAppliedThisStep++;
+						:: g19 &&
+							c[i].x[a1_] >= 1 &&
+							c[i].lTCount[0] > 0
+							 ->
+							c[i].x[a1_] = c[i].x[a1_] - 1; 
+							select(ntar: 0 .. c[i].lTCount[0] - 1);
+							c_code {
+								int j;
+								j = selectTarget(PKP->ntar, PKP->i, 0);
+								now.c[j].xt[b1_] += 1;
+								now.c[j].xt[c_] += 1;
+							};
+							rulesAppliedThisStep++;
+						:: g110 &&
+							c[i].x[a2_] >= 1 &&
+							c[i].lTCount[0] > 0
+							 ->
+							c[i].x[a2_] = c[i].x[a2_] - 1; 
+							select(ntar: 0 .. c[i].lTCount[0] - 1);
+							c_code {
+								int j;
+								j = selectTarget(PKP->ntar, PKP->i, 0);
+								now.c[j].xt[b2_] += 1;
+								now.c[j].xt[c_] += 2;
+							};
+							rulesAppliedThisStep++;
+						:: g111 &&
+							c[i].x[a3_] >= 1 &&
+							c[i].lTCount[0] > 0
+							 ->
+							c[i].x[a3_] = c[i].x[a3_] - 1; 
+							select(ntar: 0 .. c[i].lTCount[0] - 1);
+							c_code {
+								int j;
+								j = selectTarget(PKP->ntar, PKP->i, 0);
+								now.c[j].xt[b3_] += 1;
+								now.c[j].xt[c_] += 3;
+							};
+							rulesAppliedThisStep++;
+						:: else -> skip;
+					fi;
+
+				:: else -> skip;
+			fi;
+			ExEnd: skip;
+		}
+
+		state = rules_applied;
+
+		c_code {
+			int i, j;
+			int cCount = now.cCount;
+			for(i = 0; i < cCount; i++) {
+				for(j = 0; j < A_SIZE; j++) {
+					now.c[i].x[j] += now.c[i].xt[j];
+					now.c[i].xt[j] = 0;
+				}
+			}
+			if(now.rulesAppliedThisStep == 0) {
+				now.deadlock = 1;
+			} else {
+				now.step++;
+			}
+		};
+		state = step_complete;
+	}
+	:: else -> break;
+	od;
+	state = finished;
+}
