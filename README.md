@@ -17,6 +17,46 @@ The framework features a native simulator, **kPWorkbench Simulator**, allowing t
 kPWorkbench’s model checking environment permits the formal verification of kernel P system models. The framework supports both *Linear Temporal Logic (LTL)* and *Computation Tree Logic (CTL)* properties by making use of the **SPIN** and **NUSMV** model checkers. 
 A property language is defined - **kP Queries**, comprising a list of natural language statements representing formal property patterns, from which the formal syntax of the SPIN and NUSMV formulas are automatically generated.
 
+## Indexation Feature
+kPWorkbench introduces a **unified indexation mechanism** that allows compact, scalable, and expressive definitions of kernel P System models.  
+The indexation layer preprocesses `.kpl/.kplt` files and expands indexed patterns into fully instantiated kP-Lingua code.
+
+The implementation is available in the repository:  
+**https://github.com/Kernel-P-Systems/kPWorkbench/tree/feature/kplingua-preprocessing**
+
+### Supported Indexed Constructs
+
+#### **1. Rule Indexation**
+Generate rule families automatically:
+```
+a$i$ -> [b$i$, a$i+1$][a$i+1$] : 1 <= i < n
+```
+#### **2. Guard Indexation**
+Compact AND/OR guard patterns:
+```
+@|, (=p$i$ & =q$i$) : 0 <= i <= 3@
+```
+#### **3. Multiset Indexation**
+Create multisets with indexed objects:
+```
+termA { @a$i$:0<=i<=n@, b, c_7 } (Term).
+```
+#### **4. Definition of Constants**
+Reusable constants:
+```
+#define k = 3, a = 10
+```
+#### **5. Link Indexation**
+Automatically generate indexed links:
+```
+m1$i$ (L1) - m2$j$ (L2) : 1<=i<=3, 1<=j<=2
+```
+#### **6. File Inclusion**
+Modularisation using include directives:
+```
+#include "rewriting_rules.kplt"
+```
+
 ## Prerequisites
 kPWorkbench is built on top of the .Net Core (3.0 or later) framework. Installation instructions for .Net Core and the different operating systems and platform types can be found [here](https://dotnet.microsoft.com/download/dotnet-core).
 
