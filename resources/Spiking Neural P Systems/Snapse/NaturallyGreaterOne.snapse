@@ -1,0 +1,43 @@
+neurons = [N0, N1, N2, O3]:
+N0{
+	spikes = 2:
+	rules = {[aa/a->a;0], [a/a->0;0]}:
+	outsynapses = [N1, N2]:
+	delay = -1:
+	storedGive = 0:
+	storedConsume = 0:
+	outputNeuron = False:
+	position = (-3,1.5,0):
+}
+N1{
+	spikes = 1:
+	rules = {[a/a->a;0], [a/a->a;1]}:
+	outsynapses = [N0, N2]:
+	delay = -1:
+	storedGive = 0:
+	storedConsume = 0:
+	outputNeuron = False:
+	position = (-3,-1.5,0):
+}
+N2{
+	spikes = 3:
+	rules = {[aaa/aaa->a;0], [a/a->a;1], [aa/aa->0;0]}:
+	outsynapses = [O3]:
+	delay = -1:
+	storedGive = 0:
+	storedConsume = 0:
+	outputNeuron = False:
+	position = (0,0,0):
+}
+N3{
+	spikes = 0:
+	rules = {[]}:
+	outsynapses = []:
+	delay = -1:
+	storedGive = 0:
+	storedConsume = 0:
+	outputNeuron = True:
+	storedReceived = 0:
+	bitString = null:
+	position = (3,0,0):
+}

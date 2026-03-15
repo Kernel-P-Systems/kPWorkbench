@@ -95,7 +95,7 @@ namespace KPLinguaPreprocessing
             return (expressions, rulesWithParameters);
         }
 
-        public (IParsingComponent rule, string rulesWithParameters) BuildRulesComponents(string rules, KplIteratorBuilder builder)
+        private (IParsingComponent rule, string rulesWithParameters) BuildRulesComponents(string rules, KplIteratorBuilder builder)
         {
             Rule ruleComponent = new Rule();
             string rulesText = rules;
@@ -154,7 +154,7 @@ namespace KPLinguaPreprocessing
             return (expressions, rulesWithParameters);
         }
 
-        public string BuildIterator(string rules, string iteratorText, string variableSeparator, bool addParentheses = false)
+        private string BuildIterator(string rules, string iteratorText, string variableSeparator, bool addParentheses = false)
         {
             iteratorText = Regex.Replace(iteratorText, @"^\s*:\s*", "");
 

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35521.163 d17.12
+VisualStudioVersion = 17.12.35521.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kPUI", "kPUI\kPUI.csproj", "{367BC9BE-33CF-4A30-BA33-300A026F9212}"
 EndProject
@@ -32,6 +32,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KPLinguaPreprocessing", "KPLinguaPreprocessing\KPLinguaPreprocessing.csproj", "{1C15F541-30A2-4E9F-A940-3CE5559303F6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KPLinguaPreprocessingTests", "KPLinguaPreprocessingTests\KPLinguaPreprocessingTests.csproj", "{8D44B418-BA16-4882-9E37-16BB45F41B6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpikingNeuralPreprocessing", "SpikingNeuralPreprocessing\SpikingNeuralPreprocessing.csproj", "{4C622EDA-3420-4BC5-B085-101F37796B76}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,6 +101,10 @@ Global
 		{8D44B418-BA16-4882-9E37-16BB45F41B6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D44B418-BA16-4882-9E37-16BB45F41B6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D44B418-BA16-4882-9E37-16BB45F41B6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C622EDA-3420-4BC5-B085-101F37796B76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C622EDA-3420-4BC5-B085-101F37796B76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C622EDA-3420-4BC5-B085-101F37796B76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C622EDA-3420-4BC5-B085-101F37796B76}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
