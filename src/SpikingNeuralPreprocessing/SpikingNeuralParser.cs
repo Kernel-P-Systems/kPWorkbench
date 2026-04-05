@@ -26,7 +26,8 @@ public class SpikingNeuralParser
             if (extension == ".snapse")
             {
                 List<Neuron> neurons = ParseSnapseFile(sourceFilePath);
-                generatedXml = GenerateSNPkPML(neurons);
+                //generatedXml = GenerateSNPkPML(neurons);
+                generatedXml = GenerateRawSnpXml(neurons);
                 generatedXml.Save(destinationFilePath);
 
                 Console.WriteLine($"Successfully parsed Snapse file and saved XML to: {destinationFilePath}");
@@ -40,7 +41,8 @@ public class SpikingNeuralParser
             else if (extension == ".txt" || extension == ".up")
             {
                 List<Neuron> neurons = ParseUPSimulatorFile(sourceFilePath);
-                generatedXml = GenerateSNPkPML(neurons);
+                //generatedXml = GenerateSNPkPML(neurons);
+                generatedXml = GenerateRawSnpXml(neurons);
                 generatedXml.Save(destinationFilePath);
                 Console.WriteLine($"Successfully parsed UPSimulator file and saved XML to: {destinationFilePath}");
             }
@@ -55,16 +57,31 @@ public class SpikingNeuralParser
             Console.WriteLine($"An error occurred during parsing: {ex.Message}");
         }
 
-        XmlToKpsGenerator kpsGenerator = new XmlToKpsGenerator();
-        kpsGenerator.TransformXmlToKps(Path.GetFullPath(@"C:\PhD\Target.kpl"),generatedXml);
+        RawXmlToKpsGenerator kpsGenerator = new RawXmlToKpsGenerator();
+        kpsGenerator.TransformXmlToKps(Path.GetFullPath(@"C:\PhD\Target.kpl"), generatedXml);
     }
 
     private List<Neuron> ParseSnapseFile(string filePath)
     {
-        var neurons = new List<Neuron>();
         string fileContent = File.ReadAllText(filePath);
+        var parsedNeurons = new Dictionary<string, Neuron>();
 
-        // FIXED REGEX: Handles the nested curly braces inside the rules line
+        var declaredNeurons = new HashSet<string>();
+        var headerRegex = new Regex(@"neurons\s*=\s*\[([^\]]+)\]", RegexOptions.IgnoreCase);
+        var headerMatch = headerRegex.Match(fileContent);
+
+        if (headerMatch.Success)
+        {
+            var names = headerMatch.Groups[1].Value.Split(',')
+                .Select(s => s.Trim())
+                .Where(s => !string.IsNullOrEmpty(s));
+
+            foreach (var name in names)
+            {
+                declaredNeurons.Add(name);
+            }
+        }
+
         var neuronBlockRegex = new Regex(@"([A-Za-z0-9_]+)\s*\{((?:[^{}]|\{[^{}]*\})*)\}");
         var matches = neuronBlockRegex.Matches(fileContent);
 
@@ -73,7 +90,6 @@ public class SpikingNeuralParser
             string neuronId = match.Groups[1].Value;
             string blockContent = match.Groups[2].Value;
 
-            // Skip the "neurons = [...]" header if it accidentally matches
             if (neuronId.ToLower() == "neurons") continue;
 
             var neuron = new Neuron { Id = neuronId };
@@ -94,7 +110,7 @@ public class SpikingNeuralParser
             var storedConsumeMatch = Regex.Match(blockContent, @"storedConsume\s*=\s*(-?\d+)");
             if (storedConsumeMatch.Success) neuron.StoredConsume = int.Parse(storedConsumeMatch.Groups[1].Value);
 
-            // Parse OutputNeuron (Robust boolean check)
+            // Parse OutputNeuron
             var outputMatch = Regex.Match(blockContent, @"outputNeuron\s*=\s*([a-zA-Z]+)", RegexOptions.IgnoreCase);
             if (outputMatch.Success)
             {
@@ -102,7 +118,7 @@ public class SpikingNeuralParser
                 neuron.IsOutput = (boolValue == "true");
             }
 
-            // Parse Rules (Extracts the raw string inside the inner curly braces)
+            // Parse Rules
             var rulesMatch = Regex.Match(blockContent, @"rules\s*=\s*\{([^}]*)\}");
             if (rulesMatch.Success)
             {
@@ -110,7 +126,7 @@ public class SpikingNeuralParser
                 var individualRules = Regex.Matches(rulesString, @"\[[^\]]+\]");
                 foreach (Match rule in individualRules)
                 {
-                    neuron.Rules.Add(rule.Value); // Adds rules like "[a+/a->a;0]"
+                    neuron.Rules.Add(rule.Value);
                 }
             }
 
@@ -128,10 +144,30 @@ public class SpikingNeuralParser
                 }
             }
 
-            neurons.Add(neuron);
+            // Store the parsed block in a dictionary for merging
+            parsedNeurons[neuronId] = neuron;
         }
 
-        return neurons;
+        var finalNeurons = new List<Neuron>();
+
+        // Iterate over the array header to guarantee order and inclusion
+        foreach (var declaredId in declaredNeurons)
+        {
+            if (parsedNeurons.TryGetValue(declaredId, out var parsedNeuron))
+            {
+                finalNeurons.Add(parsedNeuron);
+                parsedNeurons.Remove(declaredId); // Mark as processed
+            }
+            else
+            {
+                finalNeurons.Add(new Neuron { Id = declaredId, IsOutput = true });
+            }
+        }
+
+        // Add any remaining parsed blocks that were mysteriously missing from the header array
+        finalNeurons.AddRange(parsedNeurons.Values);
+
+        return finalNeurons;
     }
 
     private XDocument ParsePLingua(string file)
@@ -143,7 +179,8 @@ public class SpikingNeuralParser
         var parser = new PLinguaSNPParser(commonTokenStream);
         var tree = parser.program();
         //var visitor = new KpWorkbenchTranslatorVisitor();
-        var xmlVisitor = new PLinguaToXmlVisitor();
+        //var xmlVisitor = new PLinguaToXmlVisitor();
+        var xmlVisitor = new PLinguaToRawXmlVisitor();
         xmlVisitor.Visit(tree);
         return xmlVisitor.GenerateXmlCode();
     }
@@ -261,6 +298,98 @@ public class SpikingNeuralParser
         }
 
         return new XDocument(new XDeclaration("1.0", "utf-8", "yes"), kPSystem);
+    }
+
+    private XDocument GenerateRawSnpXml(List<Neuron> neurons)
+    {
+        // Find the designated output neuron (if any)
+        string outputNeuronId = neurons.FirstOrDefault(n => n.IsOutput)?.Id ?? "out";
+
+        var snpSystem = new XElement("snpSystem",
+            new XAttribute("type", "standard"),
+            new XAttribute("outputNeuron", outputNeuronId)
+        );
+
+        // 1. Define the Alphabet
+        var alphabet = new XElement("alphabet",
+            new XElement("spike", new XAttribute("symbol", "a"))
+        );
+        snpSystem.Add(alphabet);
+
+        // 2. Define the Neurons and their Rules
+        var neuronsElement = new XElement("neurons");
+        var synapsesElement = new XElement("synapses");
+
+        foreach (var neuron in neurons)
+        {
+            var neuronElement = new XElement("neuron",
+                new XAttribute("id", neuron.Id),
+                new XAttribute("initialSpikes", neuron.Spikes)
+            );
+
+            var rulesElement = new XElement("rules");
+            int ruleIndex = 1;
+            foreach (var ruleStr in neuron.Rules)
+            {
+                rulesElement.Add(ParseRawRule(ruleStr, ruleIndex++));
+            }
+
+            if (neuron.Rules.Count > 0)
+            {
+                neuronElement.Add(rulesElement);
+            }
+
+            neuronsElement.Add(neuronElement);
+
+            // 3. Extract Synapses
+            foreach (var target in neuron.OutSynapses)
+            {
+                synapsesElement.Add(new XElement("synapse",
+                    new XAttribute("source", neuron.Id),
+                    new XAttribute("target", target)
+                ));
+            }
+        }
+
+        snpSystem.Add(neuronsElement);
+        snpSystem.Add(synapsesElement);
+
+        return new XDocument(new XDeclaration("1.0", "utf-8", "yes"), snpSystem);
+    }
+
+    private XElement ParseRawRule(string rule, int ruleId)
+    {
+        // Clean the rule string
+        rule = rule.Trim('[', ']');
+        string[] parts = rule.Split('|');
+        string ruleCore = parts[0];
+
+        // Snapse standard format: [E/consumed->produced;delay]
+        var match = Regex.Match(ruleCore, @"^([aA-Za-z0-9_+*()]+)/([a]+)->([a]*|0);(\d+)$");
+
+        if (!match.Success)
+        {
+            return new XElement("rule", new XComment($"Failed to parse rule format: {ruleCore}"));
+        }
+
+        string regexE = match.Groups[1].Value;
+        string consumed = match.Groups[2].Value;
+        string producedStr = match.Groups[3].Value;
+        string delay = match.Groups[4].Value;
+
+        int consumedCount = consumed.Length;
+        int producedCount = (producedStr == "0" || string.IsNullOrEmpty(producedStr)) ? 0 : producedStr.Length;
+
+        string ruleType = producedCount > 0 ? "spiking" : "forgetting";
+
+        return new XElement("rule",
+            new XAttribute("id", $"r{ruleId}"),
+            new XAttribute("regex", regexE),
+            new XAttribute("consumed", consumedCount),
+            new XAttribute("produced", producedCount),
+            new XAttribute("delay", delay),
+            new XAttribute("type", ruleType)
+        );
     }
 
     private XElement ParseRule(string rule, List<string> outSynapses, int ruleId)
