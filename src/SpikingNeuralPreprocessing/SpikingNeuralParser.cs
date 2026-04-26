@@ -221,13 +221,13 @@ public class SpikingNeuralParser
 
             // Parse Rules e.g., "Rule r1= a+/ a -> ( a, go all);"
             var ruleMatches = Regex.Matches(blockContent,
-                @"Rule\s+[a-zA-Z0-9_]+\s*=\s*([a-zA-Z+]+)\s*/\s*([a-zA-Z]+)\s*->\s*\(\s*([a-zA-Z]*)\s*,\s*go\s+([^)]+)\);");
+                @"Rule\s+[a-zA-Z0-9_]+\s*=\s*([a-zA-Z0-9^+]+)\s*/\s*([a-zA-Z0-9^]+)\s*->\s*\(\s*([a-zA-Z]*)\s*,\s*go\s+([^)]+)\);");
             foreach (Match rm in ruleMatches)
             {
                 string regexE = rm.Groups[1].Value.Trim();
                 string consumed = rm.Groups[2].Value.Trim();
                 string produced = rm.Groups[3].Value.Trim();
-                if (string.IsNullOrEmpty(produced))
+                if (string.IsNullOrEmpty(produced) || produced.ToLower() == "lambda")
                 {
                     produced = "0";
                 }
@@ -359,13 +359,19 @@ public class SpikingNeuralParser
 
     private XElement ParseRawRule(string rule, int ruleId)
     {
-        // Clean the rule string
         rule = rule.Trim('[', ']');
         string[] parts = rule.Split('|');
         string ruleCore = parts[0];
 
-        // Snapse standard format: [E/consumed->produced;delay]
-        var match = Regex.Match(ruleCore, @"^([aA-Za-z0-9_+*()]+)/([a]+)->([a]*|0);(\d+)$");
+        string specificTargets = "";
+        if (parts.Length > 1 && parts[1] != "all")
+        {
+            var targetMatches = Regex.Matches(parts[1], @"[a-zA-Z0-9_]+");
+            var targetList = targetMatches.Cast<Match>().Select(m => m.Value).ToList();
+            specificTargets = string.Join(",", targetList);
+        }
+
+        var match = Regex.Match(ruleCore, @"^([aA-Za-z0-9_+*^()]+)/([aA-Za-z0-9_^]+)->([aA-Za-z0-9_^]*|0|lambda);(\d+)$");
 
         if (!match.Success)
         {
@@ -373,16 +379,17 @@ public class SpikingNeuralParser
         }
 
         string regexE = match.Groups[1].Value;
-        string consumed = match.Groups[2].Value;
+        string consumedStr = match.Groups[2].Value;
         string producedStr = match.Groups[3].Value;
         string delay = match.Groups[4].Value;
 
-        int consumedCount = consumed.Length;
-        int producedCount = (producedStr == "0" || string.IsNullOrEmpty(producedStr)) ? 0 : producedStr.Length;
+        // FIXED: Safely calculate spike amounts regardless of Snapse/UPSimulator syntax
+        int consumedCount = ParseSpikeCount(consumedStr);
+        int producedCount = ParseSpikeCount(producedStr);
 
         string ruleType = producedCount > 0 ? "spiking" : "forgetting";
 
-        return new XElement("rule",
+        var ruleElement = new XElement("rule",
             new XAttribute("id", $"r{ruleId}"),
             new XAttribute("regex", regexE),
             new XAttribute("consumed", consumedCount),
@@ -390,6 +397,13 @@ public class SpikingNeuralParser
             new XAttribute("delay", delay),
             new XAttribute("type", ruleType)
         );
+
+        if (!string.IsNullOrEmpty(specificTargets))
+        {
+            ruleElement.Add(new XAttribute("targets", specificTargets));
+        }
+
+        return ruleElement;
     }
 
     private XElement ParseRule(string rule, List<string> outSynapses, int ruleId)
@@ -455,6 +469,18 @@ public class SpikingNeuralParser
             new XAttribute("rhs", rhs),
             new XAttribute("delay", delay)
         );
+    }
+
+    private int ParseSpikeCount(string spikeStr)
+    {
+        if (string.IsNullOrEmpty(spikeStr) || spikeStr == "0" || spikeStr.ToLower() == "lambda")
+            return 0;
+
+        var match = Regex.Match(spikeStr, @"^a\^(\d+)$");
+        if (match.Success)
+            return int.Parse(match.Groups[1].Value);
+
+        return spikeStr.Length;
     }
 
     public class Neuron

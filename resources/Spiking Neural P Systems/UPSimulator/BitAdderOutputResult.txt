@@ -1,0 +1,27 @@
+Environment{
+	Membrane bit1{
+		Object a; 
+		Tunnel xor_gate, and_gate;
+		Rule r1= a+/ a -> ( a, go xor_gate & and_gate );
+	}
+	
+	Membrane bit2{
+		Object a; 
+		Tunnel xor_gate, and_gate;
+		Rule r1= a+/ a -> ( a, go xor_gate & and_gate );
+	}
+	
+	Membrane xor_gate{
+		Tunnel out_sum;
+		Rule r1= a^2/ a^2 -> ( lambda, go all );
+		Rule r2= a/ a -> ( a, go out_sum );
+	}
+	
+	Membrane and_gate{
+		Tunnel out_carry;
+		Rule r1= a^2/ a^2 -> ( a, go out_carry );
+		Rule r2= a/ a -> ( lambda, go all );
+	}
+	Membrane out_sum{}
+	Membrane out_carry{}
+}
