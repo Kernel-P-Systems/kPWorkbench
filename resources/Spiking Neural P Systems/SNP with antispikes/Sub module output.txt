@@ -1,0 +1,152 @@
+Simulation started.
+Initial Configuration
+-------------------------------------------------
+TYPE t_li
+#0 li [Active] {a} Links to #: 1, 2
+TYPE t_li1
+#1 li1 [Active] {} Links to #: 0, 3, 4
+TYPE t_li2
+#2 li2 [Active] {} Links to #: 0, 5
+TYPE t_li3
+#3 li3 [Active] {} Links to #: 1, 6, 7
+TYPE t_li4
+#4 li4 [Active] {} Links to #: 1, 6, 7
+TYPE t_r
+#5 r [Active] {a} Links to #: 2, 6, 7
+TYPE t_li5
+#6 li5 [Active] {} Links to #: 3, 4, 5, 8
+TYPE t_li6
+#7 li6 [Active] {} Links to #: 3, 4, 5, 9
+TYPE t_lj
+#8 lj [Active] {} Links to #: 6
+TYPE t_lk
+#9 lk [Active] {} Links to #: 7
+-------------------------------------------------
+
+STEP 1
+
+Rule #1 * =a: a -> {a}(t_li1), {a}(t_li2),  * applied in instance #0 li.
+Selected instance #1 as target of type t_li1 for rule #1.
+Selected instance #2 as target of type t_li2 for rule #1.
+
+Configuration #1
+-------------------------------------------------
+TYPE t_li
+#0 li [Active] {} Links to #: 1, 2
+TYPE t_li1
+#1 li1 [Active] {a} Links to #: 0, 3, 4
+TYPE t_li2
+#2 li2 [Active] {a} Links to #: 0, 5
+TYPE t_li3
+#3 li3 [Active] {} Links to #: 1, 6, 7
+TYPE t_li4
+#4 li4 [Active] {} Links to #: 1, 6, 7
+TYPE t_r
+#5 r [Active] {a} Links to #: 2, 6, 7
+TYPE t_li5
+#6 li5 [Active] {} Links to #: 3, 4, 5, 8
+TYPE t_li6
+#7 li6 [Active] {} Links to #: 3, 4, 5, 9
+TYPE t_lj
+#8 lj [Active] {} Links to #: 6
+TYPE t_lk
+#9 lk [Active] {} Links to #: 7
+-------------------------------------------------
+
+STEP 2
+
+Rule #5 * =a: a -> {A}(t_r) * applied in instance #2 li2.
+Selected instance #5 as target of type t_r for rule #5.
+Rule #3 * =a: a -> {a}(t_li3), {a}(t_li4),  * applied in instance #1 li1.
+Selected instance #3 as target of type t_li3 for rule #3.
+Selected instance #4 as target of type t_li4 for rule #3.
+
+Configuration #2
+-------------------------------------------------
+TYPE t_li
+#0 li [Active] {} Links to #: 1, 2
+TYPE t_li1
+#1 li1 [Active] {} Links to #: 0, 3, 4
+TYPE t_li2
+#2 li2 [Active] {} Links to #: 0, 5
+TYPE t_li3
+#3 li3 [Active] {a} Links to #: 1, 6, 7
+TYPE t_li4
+#4 li4 [Active] {a} Links to #: 1, 6, 7
+TYPE t_r
+#5 r [Active] {a, A} Links to #: 2, 6, 7
+TYPE t_li5
+#6 li5 [Active] {} Links to #: 3, 4, 5, 8
+TYPE t_li6
+#7 li6 [Active] {} Links to #: 3, 4, 5, 9
+TYPE t_lj
+#8 lj [Active] {} Links to #: 6
+TYPE t_lk
+#9 lk [Active] {} Links to #: 7
+-------------------------------------------------
+
+STEP 3
+
+Rule #9 * =a: a -> {a}(t_li5), {a}(t_li6),  * applied in instance #4 li4.
+Selected instance #6 as target of type t_li5 for rule #9.
+Selected instance #7 as target of type t_li6 for rule #9.
+Rule #7 * =a: a -> {a}(t_li5), {a}(t_li6),  * applied in instance #3 li3.
+Selected instance #6 as target of type t_li5 for rule #7.
+Selected instance #7 as target of type t_li6 for rule #7.
+Rule #10 * >=a & >=A: a, A -> {} * applied in instance #5 r.
+
+Configuration #3
+-------------------------------------------------
+TYPE t_li
+#0 li [Active] {} Links to #: 1, 2
+TYPE t_li1
+#1 li1 [Active] {} Links to #: 0, 3, 4
+TYPE t_li2
+#2 li2 [Active] {} Links to #: 0, 5
+TYPE t_li3
+#3 li3 [Active] {} Links to #: 1, 6, 7
+TYPE t_li4
+#4 li4 [Active] {} Links to #: 1, 6, 7
+TYPE t_r
+#5 r [Active] {} Links to #: 2, 6, 7
+TYPE t_li5
+#6 li5 [Active] {2a} Links to #: 3, 4, 5, 8
+TYPE t_li6
+#7 li6 [Active] {2a} Links to #: 3, 4, 5, 9
+TYPE t_lj
+#8 lj [Active] {} Links to #: 6
+TYPE t_lk
+#9 lk [Active] {} Links to #: 7
+-------------------------------------------------
+
+STEP 4
+
+Rule #18 * =2a: 2a -> {} * applied in instance #7 li6.
+Rule #14 * =2a: 2a -> {a}(t_lj) * applied in instance #6 li5.
+Selected instance #8 as target of type t_lj for rule #14.
+
+Configuration #4
+-------------------------------------------------
+TYPE t_li
+#0 li [Active] {} Links to #: 1, 2
+TYPE t_li1
+#1 li1 [Active] {} Links to #: 0, 3, 4
+TYPE t_li2
+#2 li2 [Active] {} Links to #: 0, 5
+TYPE t_li3
+#3 li3 [Active] {} Links to #: 1, 6, 7
+TYPE t_li4
+#4 li4 [Active] {} Links to #: 1, 6, 7
+TYPE t_r
+#5 r [Active] {} Links to #: 2, 6, 7
+TYPE t_li5
+#6 li5 [Active] {} Links to #: 3, 4, 5, 8
+TYPE t_li6
+#7 li6 [Active] {} Links to #: 3, 4, 5, 9
+TYPE t_lj
+#8 lj [Active] {a} Links to #: 6
+TYPE t_lk
+#9 lk [Active] {} Links to #: 7
+-------------------------------------------------
+System halted at step 4 (no further rule could be applied, i.e. reached a deadlock).
+Simulation complete at step 4.

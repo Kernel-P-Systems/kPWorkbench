@@ -19,6 +19,7 @@ public class SpikingNeuralParser
         }
 
         XDocument generatedXml = null;
+        RawXmlToKpsGenerator kpsGenerator = new RawXmlToKpsGenerator();
 
         try
         {
@@ -46,6 +47,11 @@ public class SpikingNeuralParser
                 generatedXml.Save(destinationFilePath);
                 Console.WriteLine($"Successfully parsed UPSimulator file and saved XML to: {destinationFilePath}");
             }
+            else if (extension == ".xml")
+            {
+                kpsGenerator.Generate(sourceFilePath, destinationFilePath);
+                return;
+            }
             else
             {
                 Console.WriteLine(
@@ -56,8 +62,6 @@ public class SpikingNeuralParser
         {
             Console.WriteLine($"An error occurred during parsing: {ex.Message}");
         }
-
-        RawXmlToKpsGenerator kpsGenerator = new RawXmlToKpsGenerator();
         kpsGenerator.TransformXmlToKps(Path.GetFullPath(@"C:\PhD\Target.kpl"), generatedXml);
     }
 

@@ -44,7 +44,6 @@ internal class XmlToKpsGenerator
             }
         }
 
-        // 2. GENERATE COMPARTMENT TYPES AND RULES
         var typesNode = xmlDoc.Root.Element("compartmentTypes");
         if (typesNode != null)
         {
@@ -78,8 +77,6 @@ internal class XmlToKpsGenerator
                             {
                                 ruleText += $"{guard} : ";
                             }
-
-                            // CHANGED: If rhs is empty, format as "lhs -> .", otherwise "lhs -> rhs ."
                             if (string.IsNullOrEmpty(rhs))
                             {
                                 ruleText += $"{lhs} -> .";
@@ -105,7 +102,6 @@ internal class XmlToKpsGenerator
             }
         }
 
-        // 3. GENERATE COMPARTMENT INSTANCES
         var compartmentsNode = xmlDoc.Root.Element("compartments");
         if (compartmentsNode != null)
         {
@@ -116,7 +112,6 @@ internal class XmlToKpsGenerator
                 string initMultiset = compElem.Attribute("initialMultiset")?.Value ?? "";
                 string loop = compElem.Attribute("loop")?.Value;
 
-                // Outputs: c2$i$ {x$i$} (t2) .
                 string compText = $"{id} {{{initMultiset}}} ({type}) .";
 
                 if (!string.IsNullOrEmpty(loop))
@@ -128,7 +123,6 @@ internal class XmlToKpsGenerator
             sb.AppendLine();
         }
 
-        // 4. GENERATE LINKS
         var linksNode = xmlDoc.Root.Element("links");
         if (linksNode != null)
         {
@@ -138,7 +132,6 @@ internal class XmlToKpsGenerator
                 string target = SanitizeId(linkElem.Attribute("target").Value);
                 string loop = linkElem.Attribute("loop")?.Value;
 
-                // Outputs: c1 - c2$i$ . 
                 string linkText = $"{source} - {target} .";
 
                 if (!string.IsNullOrEmpty(loop))
@@ -154,9 +147,11 @@ internal class XmlToKpsGenerator
     }
     private string SanitizeId(string id)
     {
-        if (string.IsNullOrEmpty(id)) return id;
+        if (string.IsNullOrEmpty(id))
+        {
+            return id;
+        }
 
-        // If the first character is a digit, prepend 'c'
         if (char.IsDigit(id[0]))
         {
             return "c" + id;

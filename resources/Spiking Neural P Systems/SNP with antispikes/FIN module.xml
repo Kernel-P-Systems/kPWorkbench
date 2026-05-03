@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<snpSystem type="antispike">
+  <alphabet>
+    <spike symbol="a" />
+    <antispike symbol="A" />
+  </alphabet>
+  
+  <neuronTypes>
+    <!-- Standard forwarding neurons (a -> a) -->
+    <neuronType id="t_forward">
+      <rules>
+        <rule regex="1a" consumed="1" produced="1" producedSymbol="a" delay="0" type="spiking" id="r1" />
+      </rules>
+    </neuronType>
+
+    <!-- Anti-spike generator (a -> A) -->
+    <neuronType id="t_antispike">
+      <rules>
+        <rule regex="1a" consumed="1" produced="1" producedSymbol="A" delay="0" type="spiking" id="r1" />
+      </rules>
+    </neuronType>
+  </neuronTypes>
+
+  <neurons>
+    <!-- Start instruction l_h. Activated by 1 initial spike -->
+    <neuron id="lh" type="t_forward" initialSpikes="1" />
+    
+    <!-- PATH A: The Delay Line targeting 'out' -->
+    <neuron id="d1" type="t_forward" initialSpikes="0" />
+    <neuron id="d2" type="t_forward" initialSpikes="0" />
+    <neuron id="d3" type="t_forward" initialSpikes="0" />
+    
+    <!-- PATH B: The Oscillator targeting 'n1' -->
+    <neuron id="h2" type="t_forward" initialSpikes="0" />
+    <neuron id="h1" type="t_forward" initialSpikes="0" />
+    <neuron id="h4" type="t_forward" initialSpikes="0" />
+    <neuron id="h5" type="t_antispike" initialSpikes="0" />
+    
+    <!-- Register 1: Starts with n+2 spikes. For n=3, initialSpikes="5" -->
+    <neuron id="n1" type="t_forward" initialSpikes="5" />
+    
+    <!-- Output neuron -->
+    <neuron id="out" type="t_forward" initialSpikes="0" />
+  </neurons>
+
+  <synapses>
+    <!-- Activate both the delay line and the oscillator -->
+    <synapse source="lh" target="d1" />
+    <synapse source="lh" target="h2" />
+
+    <!-- PATH A: Delay Line -->
+    <synapse source="d1" target="d2" />
+    <synapse source="d2" target="d3" />
+    <synapse source="d3" target="out" />
+
+    <!-- PATH B: Oscillator -->
+    <synapse source="h2" target="h1" />
+    <synapse source="h2" target="h4" />
+    
+    <!-- h1 and h4 exchange spikes to fire continuously -->
+    <synapse source="h1" target="h4" />
+    <synapse source="h4" target="h1" />
+    
+    <!-- h4 feeds the anti-spike generator every step -->
+    <synapse source="h4" target="h5" />
+    <synapse source="h5" target="n1" />
+
+    <!-- When n1 hits 1a, it fires the second spike to out -->
+    <synapse source="n1" target="out" />
+    
+    <!-- n1 ALSO floods the oscillator, stopping the module -->
+    <synapse source="n1" target="h1" />
+    <synapse source="n1" target="h4" />
+    <synapse source="n1" target="h5" />
+  </synapses>
+</snpSystem>

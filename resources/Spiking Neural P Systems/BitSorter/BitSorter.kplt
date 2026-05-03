@@ -1,0 +1,199 @@
+#define neuronNumber = 27
+type t_N0 {
+    choice {
+        >=1a : 1a -> 1a (t_N4), 1a (t_N5) .
+    }
+}
+
+type t_N1 {
+    choice {
+        >=1a : 1a -> 1a (t_N4), 1a (t_N5) .
+    }
+}
+
+type t_N2 {
+    choice {
+        >=1a : 1a -> 1a (t_N6), 1a (t_N7) .
+    }
+}
+
+type t_N3 {
+    choice {
+        >=1a : 1a -> 1a (t_N6), 1a (t_N7) .
+    }
+}
+
+type t_N4 {
+    choice {
+        =2a : 2a -> 1a (t_N8), 1a (t_N9) .
+        =1a : 1a -> .
+    }
+}
+
+type t_N5 {
+    choice {
+        =2a : 2a -> .
+        =1a : 1a -> 1a (t_N9) .
+    }
+}
+
+type t_N6 {
+    choice {
+        =2a : 2a -> 1a (t_N10), 1a (t_N11) .
+        =1a : 1a -> .
+    }
+}
+
+type t_N7 {
+    choice {
+        =2a : 2a -> .
+        =1a : 1a -> 1a (t_N10) .
+    }
+}
+
+type t_N8 {
+    choice {
+        =1a : 1a -> 1a (t_N12), 1a (t_N13) .
+    }
+}
+
+type t_N9 {
+    choice {
+        =1a : 1a -> 1a (t_N14), 1a (t_N15) .
+    }
+}
+
+type t_N10 {
+    choice {
+        =1a : 1a -> 1a (t_N12), 1a (t_N13) .
+    }
+}
+
+type t_N11 {
+    choice {
+        =1a : 1a -> 1a (t_N14), 1a (t_N15) .
+    }
+}
+
+type t_N12 {
+    choice {
+        =2a : 2a -> 1a (t_N16), 1a (t_N18) .
+        =1a : 1a -> .
+    }
+}
+
+type t_N13 {
+    choice {
+        =2a : 2a -> .
+        =1a : 1a -> 1a (t_N18) .
+    }
+}
+
+type t_N14 {
+    choice {
+        =2a : 2a -> 1a (t_N17), 1a (t_N19) .
+        =1a : 1a -> .
+    }
+}
+
+type t_N15 {
+    choice {
+        =2a : 2a -> .
+        =1a : 1a -> 1a (t_N19) .
+    }
+}
+
+type t_N16 {
+    choice {
+        =1a : 1a -> 1a (t_N20), 1a (t_N21) .
+    }
+}
+
+type t_N17 {
+    choice {
+        =1a : 1a -> 1a (t_N20), 1a (t_N21) .
+    }
+}
+
+type t_N18 {
+    choice {
+        =1a : 1a -> 1a (t_N22), 1a (t_N23) .
+    }
+}
+
+type t_N19 {
+    choice {
+        =1a : 1a -> 1a (t_N22), 1a (t_N23) .
+    }
+}
+
+type t_N20 {
+    choice {
+        =2a : 2a -> 1a (t_N24), 1a (t_N25) .
+        =1a : 1a -> .
+    }
+}
+
+type t_N21 {
+    choice {
+        =2a : 2a -> .
+        =1a : 1a -> 1a (t_N25) .
+    }
+}
+
+type t_N22 {
+    choice {
+        =2a : 2a -> 1a (t_N26), 1a (t_N27) .
+        =1a : 1a -> .
+    }
+}
+
+type t_N23 {
+    choice {
+        =2a : 2a -> .
+        =1a : 1a -> 1a (t_N27) .
+    }
+}
+
+type t_N24 {
+}
+
+type t_N25 {
+}
+
+type t_N26 {
+}
+
+type t_N27 {
+}
+
+N0 {8a} (t_N0) .
+N1 {5a} (t_N1) .
+N2 {1a} (t_N2) .
+N3 {3a} (t_N3) .
+N$i$ {} (t_N$i$) . : 4<=i<=neuronNumber
+
+N0 - N4 .
+N0 - N5 .
+N1 - N$j$ . : 4<=j<=5
+N$i$ - N$j$ . : 2<=i<=3, 6<=j<=7
+N4 - N$j$ . : 8<=j<=9
+N5 - N9 .
+N6 - N$j$ . : 10<=j<=11
+N7 - N10 .
+N8 - N$j$ . : 12<=j<=13
+N10 - N$j$ . : 12<=j<=13
+N9 - N$j$ . : 14<=j<=15
+N11 - N$j$ . : 14<=j<=15
+N12 - N16 .
+N12 - N18 .
+N13 - N18 .
+N14 - N17 .
+N14 - N19 .
+N15 - N19 .
+N$i$ - N$j$ . : 16<=i<=17, 20<=j<=21
+N$i$ - N$j$ . : 18<=i<=19, 22<=j<=23
+N20 - N$j$ . : 24<=j<=25
+N21 - N25 .
+N22 - N$j$ . : 26<=j<=27
+N23 - N27 .

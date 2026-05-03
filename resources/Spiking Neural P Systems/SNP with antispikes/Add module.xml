@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<snpSystem type="antispike">
+  <alphabet>
+    <spike symbol="a" />
+    <antispike symbol="A" />
+  </alphabet>
+  
+  <neuronTypes>
+    <!-- Standard forwarding neurons (a -> a) -->
+    <neuronType id="t_forward">
+      <rules>
+        <rule regex="1a" consumed="1" produced="1" producedSymbol="a" delay="0" type="spiking" id="r1" />
+      </rules>
+    </neuronType>
+
+    <!-- Nondeterministic choice neuron producing spikes or anti-spikes -->
+    <neuronType id="t_li3">
+      <rules>
+        <!-- Rule 1: a -> a -->
+        <rule regex="1a" consumed="1" produced="1" producedSymbol="a" delay="0" type="spiking" id="r1" />
+        <!-- Rule 2: a -> A (Anti-spike) -->
+        <rule regex="1a" consumed="1" produced="1" producedSymbol="A" delay="0" type="spiking" id="r2" />
+      </rules>
+    </neuronType>
+
+    <!-- Evaluation neuron targeting l_j -->
+    <neuronType id="t_li4">
+      <rules>
+        <!-- Rule: a^2 -> a -->
+        <rule regex="2a" consumed="2" produced="1" producedSymbol="a" delay="0" type="spiking" id="r1" />
+      </rules>
+    </neuronType>
+
+    <!-- Evaluation neuron targeting l_k -->
+    <neuronType id="t_li5">
+      <rules>
+        <!-- Rule 1: a -> a -->
+        <rule regex="1a" consumed="1" produced="1" producedSymbol="a" delay="0" type="spiking" id="r1" />
+        <!-- Rule 2: a^3 -> \lambda (Forgetting rule) -->
+        <rule regex="3a" consumed="3" produced="0" delay="0" type="forgetting" id="r2" />
+      </rules>
+    </neuronType>
+    
+    <!-- Empty types for the target registers/instructions -->
+    <neuronType id="t_empty">
+      <rules />
+    </neuronType>
+  </neuronTypes>
+
+  <neurons>
+    <!-- Start instruction l_i. Activated by 1 initial spike -->
+    <neuron id="li" type="t_forward" initialSpikes="1" />
+    
+    <!-- Register r -->
+    <neuron id="r" type="t_empty" initialSpikes="0" />
+    
+    <!-- Intermediate processing neurons -->
+    <neuron id="li1" type="t_forward" initialSpikes="0" />
+    <neuron id="li2" type="t_forward" initialSpikes="0" />
+    <neuron id="li3" type="t_li3" initialSpikes="0" />
+    <neuron id="li4" type="t_li4" initialSpikes="0" />
+    <neuron id="li5" type="t_li5" initialSpikes="0" />
+    
+    <!-- Next instruction targets -->
+    <neuron id="lj" type="t_empty" initialSpikes="0" />
+    <neuron id="lk" type="t_empty" initialSpikes="0" />
+  </neurons>
+
+  <synapses>
+    <!-- Step 1: l_i broadcasts to intermediates and the register -->
+    <synapse source="li" target="li1" />
+    <synapse source="li" target="li2" />
+    <synapse source="li" target="li3" />
+    <synapse source="li" target="r" />
+
+    <!-- Step 2: Intermediates broadcast to evaluation neurons -->
+    <synapse source="li1" target="li4" />
+    <synapse source="li1" target="li5" />
+    
+    <synapse source="li2" target="li4" />
+    <synapse source="li2" target="li5" />
+    
+    <synapse source="li3" target="li4" />
+    <synapse source="li3" target="li5" />
+
+    <!-- Step 3: Evaluation neurons trigger the next instruction -->
+    <synapse source="li4" target="lj" />
+    <synapse source="li5" target="lk" />
+  </synapses>
+</snpSystem>

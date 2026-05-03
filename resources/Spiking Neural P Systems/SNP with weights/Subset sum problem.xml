@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<snpSystem type="weighted">
+  <alphabet>
+    <spike symbol="a" />
+  </alphabet>
+  
+  <neuronTypes>
+    <!-- Type for a_i and b_i -->
+	<neuronType id="t_a_b" threshold="1">
+      <rules>
+        <rule regex="1a" consumed="1" produced="1" delay="0" type="spiking" id="r1" />
+      </rules>
+    </neuronType>
+    
+    <!-- Type for c_i (Nondeterministic Choice) -->
+    <neuronType id="t_c" threshold="2">
+      <rules>
+        <rule regex="2a" consumed="2" produced="1" delay="0" type="spiking" id="r1" />
+        <rule regex="2a" consumed="1" produced="1" delay="0" type="spiking" id="r2" />
+      </rules>
+    </neuronType>
+    
+    <!-- Type for d_i and e_i -->
+    <neuronType id="t_d_e" threshold="2">
+      <rules>
+        <rule regex="2a" consumed="2" produced="1" delay="0" type="spiking" id="r1" />
+      </rules>
+    </neuronType>
+    
+    <!-- Type for v1 = 2 -->
+    <neuronType id="t_v1" threshold="2">
+      <rules>
+        <rule regex="2a" consumed="2" produced="1" delay="0" type="spiking" id="r1" />
+      </rules>
+    </neuronType>
+
+    <!-- Type for v2 = 3 -->
+    <neuronType id="t_v2" threshold="3">
+      <rules>
+        <rule regex="3a" consumed="3" produced="1" delay="0" type="spiking" id="r1" />
+      </rules>
+    </neuronType>
+
+    <!-- Type for Output Neuron (S = 5) -->
+    <neuronType id="t_out" threshold="5">
+      <rules>
+        <rule regex="5a" consumed="5" produced="1" delay="0" type="spiking" id="r1" />
+      </rules>
+    </neuronType>
+  </neuronTypes>
+
+  <neurons>
+    <!-- Subset Item 1: v1 = 2 -->
+    <neuron id="a1" type="t_a_b" initialSpikes="1" />
+    <neuron id="b1" type="t_a_b" initialSpikes="1" />
+    <neuron id="c1" type="t_c" initialSpikes="2" />
+    <neuron id="d1" type="t_d_e" initialSpikes="0" />
+    <neuron id="e1" type="t_d_e" initialSpikes="0" />
+    <!-- Initial potential is v_i + 1 -->
+    <neuron id="n1" type="t_v1" initialSpikes="3" /> 
+
+    <!-- Subset Item 2: v2 = 3 -->
+    <neuron id="a2" type="t_a_b" initialSpikes="1" />
+    <neuron id="b2" type="t_a_b" initialSpikes="1" />
+    <neuron id="c2" type="t_c" initialSpikes="2" />
+    <neuron id="d2" type="t_d_e" initialSpikes="0" />
+    <neuron id="e2" type="t_d_e" initialSpikes="0" />
+    <!-- Initial potential is v_i + 1 -->
+    <neuron id="n2" type="t_v2" initialSpikes="4" /> 
+
+    <!-- Output neuron -->
+    <neuron id="out" type="t_out" initialSpikes="0" />
+  </neurons>
+
+  <synapses>
+    <!-- Synapses for v1 = 2 -->
+    <synapse source="a1" target="d1" weight="1" />
+    <synapse source="b1" target="c1" weight="1" />
+    <synapse source="c1" target="d1" weight="1" />
+    <synapse source="c1" target="e1" weight="1" />
+    <synapse source="d1" target="e1" weight="1" />
+    <synapse source="e1" target="n1" weight="-1" />
+    <synapse source="n1" target="out" weight="2" /> <!-- Weight equals v_i -->
+
+    <!-- Synapses for v2 = 3 -->
+    <synapse source="a2" target="d2" weight="1" />
+    <synapse source="b2" target="c2" weight="1" />
+    <synapse source="c2" target="d2" weight="1" />
+    <synapse source="c2" target="e2" weight="1" />
+    <synapse source="d2" target="e2" weight="1" />
+    <synapse source="e2" target="n2" weight="-1" />
+    <synapse source="n2" target="out" weight="3" /> <!-- Weight equals v_i -->
+  </synapses>
+</snpSystem>

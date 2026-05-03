@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<SpikingNeuralSystem type="standard">
+
+  <neurons>
+    <neuron id="c1" initialSpikes="1" />
+    <neuron id="c2" initialSpikes="1" />
+    <neuron id="val1" initialSpikes="0" />
+    <neuron id="val2" initialSpikes="0" />
+    <neuron id="out" initialSpikes="0" />
+    <neuron id="success" initialSpikes="0" is_output="true" />
+  </neurons>
+
+  <synapses>
+    <synapse source="c1" target="val1" />
+    <synapse source="c2" target="val2" />
+    <synapse source="val1" target="out" />
+    <synapse source="val2" target="out" />
+    <synapse source="out" target="success" />
+  </synapses>
+
+  <rules>
+    <rule id="c1_yes" neuron_id="c1" regex="a" consumed="1" produced="2" />
+    <rule id="c1_no"  neuron_id="c1" regex="a" consumed="1" produced="0" />
+
+    <rule id="c2_yes" neuron_id="c2" regex="a" consumed="1" produced="3" />
+    <rule id="c2_no"  neuron_id="c2" regex="a" consumed="1" produced="0" />
+
+    <rule id="r_val1" neuron_id="val1" regex="2a" consumed="2" produced="2" />
+    <rule id="r_val2" neuron_id="val2" regex="3a" consumed="3" produced="3" />
+
+    <rule id="out_success" neuron_id="out" regex="5a" consumed="5" produced="1" />
+    <rule id="out_fail_1"  neuron_id="out" regex="2a" consumed="2" produced="0" />
+    <rule id="out_fail_2"  neuron_id="out" regex="3a" consumed="3" produced="0" />
+  </rules>
+
+</SpikingNeuralSystem>
