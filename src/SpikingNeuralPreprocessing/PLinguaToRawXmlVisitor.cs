@@ -209,17 +209,27 @@ internal class PLinguaToRawXmlVisitor : PLinguaSNPBaseVisitor<object>
 
     private string TranslateNeuronId(PLinguaSNPParser.NeuronIdContext context)
     {
-        if (context.ChildCount == 1) return context.GetText();
-        var exprs = context.exprList().expr().Select(e => TranslateExpr(e));
-        if (context.GetChild(0).GetText() == "{") return $"c{string.Join("_", exprs)}";
-        return $"{context.ID().GetText()}_{string.Join("_", exprs)}";
+        string id;
+        if (context.ChildCount == 1)
+        {
+            id = context.GetText();
+        }
+        else
+        {
+            var exprs = context.exprList().expr().Select(e => TranslateExpr(e));
+            if (context.GetChild(0).GetText() == "{") id = $"c{string.Join("_", exprs)}";
+            else id = $"{context.ID().GetText()}_{string.Join("_", exprs)}";
+        }
+
+        // Force the 'c' prefix for safety if it starts with a number (e.g., '0' -> 'c0')
+        if (!string.IsNullOrEmpty(id) && char.IsDigit(id[0])) return "c" + id;
+
+        return id;
     }
 
     private string TranslateNeuronBaseType(PLinguaSNPParser.NeuronIdContext context)
     {
-        if (context.ChildCount == 1) return $"t_{context.GetText()}";
-        if (context.GetChild(0).GetText() == "{") return "t_dynamic";
-        return $"t_{context.ID().GetText()}";
+        return $"t_{TranslateNeuronId(context)}";
     }
 
     private string VisitIndexLoop(PLinguaSNPParser.IndexLoopContext context)

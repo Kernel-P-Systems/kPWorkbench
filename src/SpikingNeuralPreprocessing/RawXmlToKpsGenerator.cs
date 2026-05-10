@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpikingNeuralPreprocessing.SnpToKpsTranslators;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,12 +13,7 @@ internal class RawXmlToKpsGenerator
 {
     public void Generate(string xmlFilePath, string destinationKpltPath)
     {
-        if (!File.Exists(xmlFilePath))
-        {
-            Console.WriteLine($"Error: XML file not found at {xmlFilePath}");
-            return;
-        }
-
+        if (!File.Exists(xmlFilePath)) return;
         try
         {
             XDocument xmlDoc = XDocument.Load(xmlFilePath);
@@ -35,137 +31,147 @@ internal class RawXmlToKpsGenerator
         var root = xmlDoc.Root;
         if (root == null || root.Name != "snpSystem") return;
 
-        bool isPlingua = root.Attribute("type")?.Value == "plingua";
         bool requiresLimitMacro = false;
+        string systemType = root.Attribute("type")?.Value.ToLower() ?? "standard";
 
-        // 1. Gather Instances and map them to their types
-        var instances = root.Element("neurons")?.Elements("neuron");
-        var instanceTypeMap = new Dictionary<string, string>();
-
-        if (instances != null)
+        ISnpVariantStrategy strategy = systemType switch
         {
-            foreach (var inst in instances)
+            "weighted" => new WeightedSnpStrategy(),
+            "antispike" => new AntiSpikeSnpStrategy(),
+            _ => new StandardSnpStrategy()
+        };
+
+        var instances = root.Element("neurons")?.Elements("neuron");
+        if (instances == null) return;
+
+        var typeRulesMap = new Dictionary<string, IEnumerable<XElement>>();
+        var typeThresholdMap = new Dictionary<string, int>();
+
+        // 1A. Attempt to load from global <neuronTypes> (P-Lingua Style)
+        var neuronTypesNode = root.Element("neuronTypes");
+        if (neuronTypesNode != null)
+        {
+            foreach (var nType in neuronTypesNode.Elements("neuronType"))
             {
-                string id = inst.Attribute("id").Value;
-                string type = inst.Attribute("type")?.Value ?? $"t_{SanitizeId(id)}";
-                instanceTypeMap[id] = type;
+                string tId = nType.Attribute("id").Value;
+                var rules = nType.Element("rules")?.Elements("rule");
+                if (rules != null) typeRulesMap[tId] = rules;
+
+                var thresholdAttr = nType.Attribute("threshold");
+                if (thresholdAttr != null && int.TryParse(thresholdAttr.Value, out int explicitThreshold))
+                    typeThresholdMap[tId] = explicitThreshold;
+                else if (rules != null && rules.Any())
+                    typeThresholdMap[tId] = rules.Select(r => int.Parse(r.Attribute("consumed")?.Value ?? "1")).Min();
+                else
+                    typeThresholdMap[tId] = 1;
             }
         }
 
-        // 2. Build Connectivity Maps from Synapses
-        var synapses = root.Element("synapses")?.Elements("synapse");
-        var typeTargetTypes = new Dictionary<string, HashSet<string>>(); // For P-Lingua
-        var instanceTargets = new Dictionary<string, List<string>>();    // For Snapse
-
-        if (synapses != null)
+        // 1B. Fallback: Load inline <rules> directly from instances (Snapse Style)
+        foreach (var inst in instances)
         {
+            string id = SanitizeId(inst.Attribute("id").Value);
+            string typeAttr = inst.Attribute("type")?.Value;
+            string tId = string.IsNullOrEmpty(typeAttr) ? $"t_{id}" : typeAttr;
+
+            var rules = inst.Element("rules")?.Elements("rule");
+            if (rules != null && rules.Any())
+            {
+                if (!typeRulesMap.ContainsKey(tId))
+                {
+                    typeRulesMap[tId] = rules;
+                    typeThresholdMap[tId] = rules.Select(r => int.Parse(r.Attribute("consumed")?.Value ?? "1")).Min();
+                }
+            }
+            else if (!typeRulesMap.ContainsKey(tId))
+            {
+                typeRulesMap[tId] = new List<XElement>();
+                typeThresholdMap[tId] = 1;
+            }
+        }
+
+        var synapses = root.Element("synapses")?.Elements("synapse");
+        var instanceTargets = new Dictionary<string, List<(string Target, int Weight)>>();
+        bool hasTopologicalLinks = false;
+
+        // 2. EVALUATE ALL SYNAPSES
+        if (synapses != null && synapses.Any())
+        {
+            hasTopologicalLinks = true;
             foreach (var syn in synapses)
             {
                 string sourceId = syn.Attribute("source").Value;
                 string targetId = syn.Attribute("target").Value;
+                int weight = 1;
+                var weightAttr = syn.Attribute("weight");
+                if (weightAttr != null) int.TryParse(weightAttr.Value, out weight);
+                string loop = syn.Attribute("loop")?.Value;
 
-                // Map for Snapse (Instance -> Instance)
-                if (!instanceTargets.ContainsKey(sourceId)) instanceTargets[sourceId] = new List<string>();
-                instanceTargets[sourceId].Add(SanitizeId(targetId));
-
-                // Map for P-Lingua (Type -> Type)
-                if (instanceTypeMap.TryGetValue(sourceId, out string sourceType) &&
-                    instanceTypeMap.TryGetValue(targetId, out string targetType))
-                {
-                    if (!typeTargetTypes.ContainsKey(sourceType)) typeTargetTypes[sourceType] = new HashSet<string>();
-                    typeTargetTypes[sourceType].Add(targetType);
-                }
+                EvaluateLoopAndAddTargets(sourceId, targetId, loop, weight, instanceTargets);
             }
         }
 
-        // 3. GENERATE COMPARTMENT TYPES & RULES
-        var neuronTypesNode = root.Element("neuronTypes");
-
-        if (isPlingua && neuronTypesNode != null)
+        // 3. GENERATE RULE TYPES
+        var allTypes = new HashSet<string>(typeRulesMap.Keys);
+        foreach (string kplTypeId in allTypes)
         {
-            // --- P-LINGUA MODE (Typed AST) ---
-            foreach (var nType in neuronTypesNode.Elements("neuronType"))
-            {
-                string typeId = nType.Attribute("id").Value;
-                var rules = nType.Element("rules")?.Elements("rule");
+            if (kplTypeId.Contains("$")) continue;
 
-                if (rules == null || !rules.Any())
-                {
-                    sb.AppendLine($"type {typeId} {{}}");
-                    sb.AppendLine();
-                    continue;
-                }
+            string instanceId = kplTypeId.StartsWith("t_") ? kplTypeId.Substring(2) : kplTypeId;
 
-                sb.AppendLine($"type {typeId} {{");
-                sb.AppendLine("    choice {");
+            // --- THE FIX ---
+            // We NO LONGER clear the targets if hasTopologicalLinks is true.
+            // kPWorkbench needs BOTH the explicit rule targets AND the topological links.
+            var targets = instanceTargets.ContainsKey(instanceId) ? instanceTargets[instanceId] : new List<(string Target, int Weight)>();
 
-                var targetTypes = typeTargetTypes.ContainsKey(typeId) ? typeTargetTypes[typeId].ToList() : new List<string>();
-
-                foreach (var rule in rules)
-                {
-                    sb.AppendLine(GenerateRuleString(rule, targetTypes, true, ref requiresLimitMacro));
-                }
-
-                sb.AppendLine("    }");
-                sb.AppendLine("}");
-                sb.AppendLine();
-            }
+            strategy.GenerateTypeDefinition(
+                sb, kplTypeId, kplTypeId, typeRulesMap, typeThresholdMap, targets,
+                (rule, ruleTargets, isPlingua) => GenerateRuleString(rule, ruleTargets, isPlingua, ref requiresLimitMacro)
+            );
         }
-        else if (instances != null)
+
+        // 4. GENERATE EXPLICIT COMPARTMENTS
+        var explicitCompartments = new Dictionary<string, string>();
+        foreach (var inst in instances)
         {
-            // --- SNAPSE MODE (Flat AST) ---
-            foreach (var inst in instances)
+            string loop = inst.Attribute("loop")?.Value;
+            string idTemplate = inst.Attribute("id").Value;
+            string tId = inst.Attribute("type")?.Value ?? $"t_{SanitizeId(idTemplate)}";
+
+            int.TryParse(inst.Attribute("initialSpikes")?.Value, out int initSpikes);
+            string multiset = initSpikes > 0 ? $"{initSpikes}a" : "";
+
+            if (string.IsNullOrEmpty(loop))
             {
-                string id = inst.Attribute("id").Value;
-                string typeId = $"t_{SanitizeId(id)}";
-                var rules = inst.Element("rules")?.Elements("rule");
-
-                if (rules == null || !rules.Any())
+                explicitCompartments[SanitizeId(idTemplate)] = $"{multiset}|{tId}";
+            }
+            else
+            {
+                var combos = EvaluateLoopToCombos(loop);
+                foreach (var combo in combos)
                 {
-                    sb.AppendLine($"type {typeId} {{}}");
-                    sb.AppendLine();
-                    continue;
+                    string concreteId = idTemplate;
+                    foreach (var kvp in combo)
+                        concreteId = concreteId.Replace($"${kvp.Key}$", kvp.Value).Replace($"{{{kvp.Key}}}", kvp.Value);
+
+                    concreteId = SanitizeId(concreteId);
+                    if (!explicitCompartments.ContainsKey(concreteId))
+                        explicitCompartments[concreteId] = $"{multiset}|{tId}";
                 }
-
-                sb.AppendLine($"type {typeId} {{");
-                sb.AppendLine("    choice {");
-
-                var targets = instanceTargets.ContainsKey(id) ? instanceTargets[id] : new List<string>();
-
-                foreach (var rule in rules)
-                {
-                    sb.AppendLine(GenerateRuleString(rule, targets, false, ref requiresLimitMacro));
-                }
-
-                sb.AppendLine("    }");
-                sb.AppendLine("}");
-                sb.AppendLine();
             }
         }
 
-        // 4. GENERATE COMPARTMENT INSTANCES
-        if (instances != null)
+        foreach (var kvp in explicitCompartments)
         {
-            foreach (var inst in instances)
-            {
-                string id = SanitizeId(inst.Attribute("id").Value);
-                string typeId = inst.Attribute("type")?.Value ?? $"t_{id}";
-
-                // Safely parse initial spikes to prevent crashes on empty strings
-                int.TryParse(inst.Attribute("initialSpikes")?.Value, out int initSpikes);
-                string multiset = initSpikes > 0 ? $"{initSpikes}a" : "";
-                string loop = inst.Attribute("loop")?.Value;
-
-                string compText = $"{id} {{{multiset}}} ({typeId}) .";
-                if (!string.IsNullOrEmpty(loop)) compText += $" : {loop}";
-
-                sb.AppendLine(compText);
-            }
-            sb.AppendLine();
+            string[] parts = kvp.Value.Split('|');
+            string multiset = parts[0];
+            string tId = parts[1];
+            sb.AppendLine($"{kvp.Key} {{{multiset}}} ({tId}) .");
         }
+        sb.AppendLine();
 
         // 5. GENERATE LINKS
-        if (synapses != null)
+        if (hasTopologicalLinks)
         {
             foreach (var syn in synapses)
             {
@@ -180,18 +186,12 @@ internal class RawXmlToKpsGenerator
             }
         }
 
-        // 6. MACROS
-        if (requiresLimitMacro)
-        {
-            sb.Insert(0, "#define limit = 1024\n\n");
-        }
+        if (requiresLimitMacro) sb.Insert(0, "#define limit = 1024\n\n");
 
         File.WriteAllText(destinationKpltPath, sb.ToString());
-        Console.WriteLine($"Successfully generated kPWorkbench file at: {destinationKpltPath}");
     }
 
-    // Helper: Formats a single rule and maps its targets
-    private string GenerateRuleString(XElement rule, List<string> targets, bool isPLinguaTargeting, ref bool requiresLimitMacro)
+    private string GenerateRuleString(XElement rule, IEnumerable<(string Target, int Weight)> targets, bool isPLinguaTargeting, ref bool requiresLimitMacro)
     {
         string regex = rule.Attribute("regex")?.Value ?? "";
         int consumed = int.Parse(rule.Attribute("consumed")?.Value ?? "0");
@@ -199,82 +199,126 @@ internal class RawXmlToKpsGenerator
         string ruleType = rule.Attribute("type")?.Value ?? "spiking";
         string loop = rule.Attribute("loop")?.Value;
 
-        string guard = ParseRegexToGuard(regex, consumed, out bool usesLimit);
+        string producedSymbol = rule.Attribute("producedSymbol")?.Value ?? "a";
+        char consumedSymbol = regex.FirstOrDefault(char.IsLetter);
+        if (consumedSymbol == '\0') consumedSymbol = 'a';
+
+        string guard = ParseRegexToGuard(regex, consumed, consumedSymbol, out bool usesLimit);
         if (usesLimit) requiresLimitMacro = true;
 
-        string lhs = $"{consumed}a";
+        string lhs = $"{consumed}{consumedSymbol}";
         string rhs = "";
 
-        // Map multiple targets dynamically
-        if (ruleType == "spiking" && produced > 0 && targets.Any())
+        if (ruleType == "spiking" && produced > 0)
         {
-            // P-Lingua routes to types "(t_2)", Snapse routes to components "(t_c2)"
-            var targetStrings = targets.Select(t => isPLinguaTargeting ? $"{produced}a ({t})" : $"{produced}a (t_{t})");
-            rhs = string.Join(", ", targetStrings);
+            if (targets.Any())
+            {
+                var targetStrings = targets.Select(t => {
+                    int actualProduced = produced * t.Weight;
+                    string symbol = actualProduced < 0 ? "n" : producedSymbol;
+                    return isPLinguaTargeting ? $"{Math.Abs(actualProduced)}{symbol} ({t.Target})" : $"{Math.Abs(actualProduced)}{symbol} (t_{t.Target})";
+                });
+                rhs = string.Join(", ", targetStrings);
+            }
+            else
+            {
+                rhs = $"{produced}{producedSymbol} (env)";
+            }
         }
 
         string ruleText = $"        {guard} : {lhs} -> ";
         ruleText += string.IsNullOrEmpty(rhs) ? "." : $"{rhs} .";
 
-        // Handle Loops
-        if (usesLimit)
-        {
-            ruleText += string.IsNullOrEmpty(loop) ? " : 1<=j<=limit" : $" : {loop}, 1<=j<=limit";
-        }
-        else if (!string.IsNullOrEmpty(loop))
-        {
-            ruleText += $" : {loop}";
-        }
+        if (usesLimit) ruleText += string.IsNullOrEmpty(loop) ? " : 1<=j<=limit" : $" : {loop}, 1<=j<=limit";
+        else if (!string.IsNullOrEmpty(loop)) ruleText += $" : {loop}";
 
         return ruleText;
     }
 
-    // Helper: Converts SN P System Regex (e.g. a*2) into kPWorkbench Boolean Guards (=2a)
-    // Helper: Converts SN P System Regex (e.g. a*2 or aaa) into kPWorkbench Boolean Guards (=2a)
-    private string ParseRegexToGuard(string regex, int consumed, out bool usesLimit)
+    private string ParseRegexToGuard(string regex, int consumed, char symbol, out bool usesLimit)
     {
         usesLimit = false;
-        if (string.IsNullOrEmpty(regex)) return $"={consumed}a";
-
-        // FIXED: Count repeating 'a's from Snapse natively (e.g., "aaa" becomes "=3a")
-        if (Regex.IsMatch(regex, @"^a+$"))
-        {
-            return $"={regex.Length}a";
-        }
-
-        // Check for specific multipliers like a*2, a^2, a{2}
-        var exactMatch = Regex.Match(regex, @"^a[\*\^\{](\d+)\}?$");
-        if (exactMatch.Success) return $"={exactMatch.Groups[1].Value}a";
-
-        // Check for pre-formatted strings like "3a"
-        var intMatch = Regex.Match(regex, @"^(\d+)a$");
-        if (intMatch.Success) return $"={intMatch.Groups[1].Value}a";
-
-        // Check for unbounded positive closure (e.g., a+)
-        if (regex == "a+") return ">=1a";
-        if (regex.Contains("+") && !regex.Contains("(")) return $">={consumed}a";
-
-        // Check for infinite multiplier (e.g., (a^2)+ or (a{2})+)
-        var infMatch = Regex.Match(regex, @"^\(a[\^{](\d+)\}\)\+$");
+        if (string.IsNullOrEmpty(regex)) return $"={consumed}{symbol}";
+        if (Regex.IsMatch(regex, $@"^{symbol}+$")) return $"={regex.Length}{symbol}";
+        var exactMatch = Regex.Match(regex, $@"^{symbol}[\*\^\{{](\d+)\}}?$");
+        if (exactMatch.Success) return $"={exactMatch.Groups[1].Value}{symbol}";
+        var intMatch = Regex.Match(regex, $@"^(\d+){symbol}$");
+        if (intMatch.Success) return $"={intMatch.Groups[1].Value}{symbol}";
+        if (regex == $"{symbol}+") return $">=1{symbol}";
+        if (regex.Contains("+") && !regex.Contains("(")) return $">={consumed}{symbol}";
+        var infMatch = Regex.Match(regex, $@"^\({symbol}[\^{{](\d+)\}}\)\+$");
         if (infMatch.Success)
         {
             usesLimit = true;
-            return $"=${infMatch.Groups[1].Value}*j$a";
+            return $"=${infMatch.Groups[1].Value}*j${symbol}";
         }
-
-        // Default fallback
-        return $"={consumed}a";
+        return $"={consumed}{symbol}";
     }
 
     private string SanitizeId(string id)
     {
         if (string.IsNullOrEmpty(id)) return id;
-
-        // If the first character is a digit, prepend 'c' to make it a valid kPW identifier
-        if (char.IsDigit(id[0]))
-        {
-            return "c" + id;
-        }
+        if (char.IsDigit(id[0])) return "c" + id;
         return id;
+    }
+
+    // --- ITERATOR EVALUATION LOGIC ---
+    private void EvaluateLoopAndAddTargets(string source, string target, string loop, int weight, Dictionary<string, List<(string, int)>> instanceTargets)
+    {
+        if (string.IsNullOrEmpty(loop))
+        {
+            string s = SanitizeId(source.Replace("$", "").Replace("{", "").Replace("}", ""));
+            string t = SanitizeId(target.Replace("$", "").Replace("{", "").Replace("}", ""));
+            if (!instanceTargets.ContainsKey(s)) instanceTargets[s] = new List<(string, int)>();
+            instanceTargets[s].Add((t, weight));
+            return;
+        }
+
+        var combos = EvaluateLoopToCombos(loop);
+        foreach (var combo in combos)
+        {
+            string concreteSource = source;
+            string concreteTarget = target;
+            foreach (var kvp in combo)
+            {
+                concreteSource = concreteSource.Replace($"${kvp.Key}$", kvp.Value).Replace($"{{{kvp.Key}}}", kvp.Value);
+                concreteTarget = concreteTarget.Replace($"${kvp.Key}$", kvp.Value).Replace($"{{{kvp.Key}}}", kvp.Value);
+            }
+            concreteSource = SanitizeId(concreteSource);
+            concreteTarget = SanitizeId(concreteTarget);
+
+            if (!instanceTargets.ContainsKey(concreteSource)) instanceTargets[concreteSource] = new List<(string, int)>();
+            instanceTargets[concreteSource].Add((concreteTarget, weight));
+        }
+    }
+
+    private List<Dictionary<string, string>> EvaluateLoopToCombos(string loop)
+    {
+        var iterators = new List<(string Var, int Min, int Max)>();
+        var parts = loop.Split(',');
+        foreach (var p in parts)
+        {
+            var m = Regex.Match(p, @"(-?\d+)\s*<=\s*([a-zA-Z0-9_]+)\s*<=\s*(-?\d+)");
+            if (m.Success) iterators.Add((m.Groups[2].Value, int.Parse(m.Groups[1].Value), int.Parse(m.Groups[3].Value)));
+        }
+
+        var combinations = new List<Dictionary<string, string>>();
+        GenerateCombinations(iterators, 0, new Dictionary<string, string>(), combinations);
+        return combinations;
+    }
+
+    private void GenerateCombinations(List<(string Var, int Min, int Max)> iterators, int index, Dictionary<string, string> current, List<Dictionary<string, string>> results)
+    {
+        if (index >= iterators.Count)
+        {
+            results.Add(new Dictionary<string, string>(current));
+            return;
+        }
+        var iter = iterators[index];
+        for (int i = iter.Min; i <= iter.Max; i++)
+        {
+            current[iter.Var] = i.ToString();
+            GenerateCombinations(iterators, index + 1, current, results);
+        }
     }
 }

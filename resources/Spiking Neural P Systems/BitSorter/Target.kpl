@@ -1,0 +1,207 @@
+type t_c0 {
+    choice {
+        >=1a : 1a -> 1a (t_c4), 1a (t_c5) .
+    }
+}
+
+type t_c1 {
+    choice {
+        >=1a : 1a -> 1a (t_c4), 1a (t_c5) .
+    }
+}
+
+type t_c2 {
+    choice {
+        >=1a : 1a -> 1a (t_c6), 1a (t_c7) .
+    }
+}
+
+type t_c3 {
+    choice {
+        >=1a : 1a -> 1a (t_c6), 1a (t_c7) .
+    }
+}
+
+type t_c4 {
+    choice {
+        =2a : 2a -> 1a (t_c8), 1a (t_c9) .
+        =1a : 1a -> .
+    }
+}
+
+type t_c5 {
+    choice {
+        =2a : 2a -> .
+        =1a : 1a -> 1a (t_c9) .
+    }
+}
+
+type t_c6 {
+    choice {
+        =2a : 2a -> 1a (t_c10), 1a (t_c11) .
+        =1a : 1a -> .
+    }
+}
+
+type t_c7 {
+    choice {
+        =2a : 2a -> .
+        =1a : 1a -> 1a (t_c10) .
+    }
+}
+
+type t_c8 {
+    choice {
+        =1a : 1a -> 1a (t_c12), 1a (t_c13) .
+    }
+}
+
+type t_c9 {
+    choice {
+        =1a : 1a -> 1a (t_c14), 1a (t_c15) .
+    }
+}
+
+type t_c10 {
+    choice {
+        =1a : 1a -> 1a (t_c12), 1a (t_c13) .
+    }
+}
+
+type t_c11 {
+    choice {
+        =1a : 1a -> 1a (t_c14), 1a (t_c15) .
+    }
+}
+
+type t_c12 {
+    choice {
+        =2a : 2a -> 1a (t_c16), 1a (t_c18) .
+        =1a : 1a -> .
+    }
+}
+
+type t_c13 {
+    choice {
+        =2a : 2a -> .
+        =1a : 1a -> 1a (t_c18) .
+    }
+}
+
+type t_c14 {
+    choice {
+        =2a : 2a -> 1a (t_c17), 1a (t_c19) .
+        =1a : 1a -> .
+    }
+}
+
+type t_c15 {
+    choice {
+        =2a : 2a -> .
+        =1a : 1a -> 1a (t_c19) .
+    }
+}
+
+type t_c16 {
+    choice {
+        =1a : 1a -> 1a (t_c20), 1a (t_c21) .
+    }
+}
+
+type t_c17 {
+    choice {
+        =1a : 1a -> 1a (t_c20), 1a (t_c21) .
+    }
+}
+
+type t_c18 {
+    choice {
+        =1a : 1a -> 1a (t_c22), 1a (t_c23) .
+    }
+}
+
+type t_c19 {
+    choice {
+        =1a : 1a -> 1a (t_c22), 1a (t_c23) .
+    }
+}
+
+type t_c20 {
+    choice {
+        =2a : 2a -> 1a (t_c24), 1a (t_c25) .
+        =1a : 1a -> .
+    }
+}
+
+type t_c21 {
+    choice {
+        =2a : 2a -> .
+        =1a : 1a -> 1a (t_c25) .
+    }
+}
+
+type t_c22 {
+    choice {
+        =2a : 2a -> 1a (t_c26), 1a (t_c27) .
+        =1a : 1a -> .
+    }
+}
+
+type t_c23 {
+    choice {
+        =2a : 2a -> .
+        =1a : 1a -> 1a (t_c27) .
+    }
+}
+
+c0 {8a} (t_c0) .
+c1 {5a} (t_c1) .
+c2 {1a} (t_c2) .
+c3 {3a} (t_c3) .
+c4 {} (t_c4) .
+c5 {} (t_c5) .
+c6 {} (t_c6) .
+c7 {} (t_c7) .
+c8 {} (t_c8) .
+c9 {} (t_c9) .
+c10 {} (t_c10) .
+c11 {} (t_c11) .
+c12 {} (t_c12) .
+c13 {} (t_c13) .
+c14 {} (t_c14) .
+c15 {} (t_c15) .
+c16 {} (t_c16) .
+c17 {} (t_c17) .
+c18 {} (t_c18) .
+c19 {} (t_c19) .
+c20 {} (t_c20) .
+c21 {} (t_c21) .
+c22 {} (t_c22) .
+c23 {} (t_c23) .
+c24 {} (t_c24) .
+c25 {} (t_c25) .
+c26 {} (t_c26) .
+c27 {} (t_c27) .
+
+c$i$ - c$j$ . : 0<=i<=1, 4<=j<=5
+c$i$ - c$j$ . : 2<=i<=3, 6<=j<=7
+c4 - c$j$ . : 8<=j<=9
+c5 - c9 .
+c6 - c$j$ . : 10<=j<=11
+c7 - c10 .
+c8 - c$j$ . : 12<=j<=13
+c10 - c$j$ . : 12<=j<=13
+c9 - c$j$ . : 14<=j<=15
+c11 - c$j$ . : 14<=j<=15
+c12 - c16 .
+c12 - c18 .
+c13 - c18 .
+c14 - c17 .
+c14 - c19 .
+c15 - c19 .
+c$i$ - c$j$ . : 16<=i<=17, 20<=j<=21
+c$i$ - c$j$ . : 18<=i<=19, 22<=j<=23
+c20 - c$j$ . : 24<=j<=25
+c21 - c25 .
+c22 - c$j$ . : 26<=j<=27
+c23 - c27 .
