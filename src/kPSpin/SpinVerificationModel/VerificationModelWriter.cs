@@ -104,6 +104,31 @@ namespace KpSpin.SpinVerificationModel
 
             if (Params.O1 || kpm.HasCommunication || kpm.HasStructureChangingRules)
             {
+                WriteLine("c_decl {");
+                indent++;
+                if (kpm.HasCommunication || kpm.HasLinkDestruction) WriteLine("int selectTarget(int ntar, int ci, int ti);");
+                if (kpm.HasLinkCreation)
+                {
+                    WriteLine("int linked(int ci1, int ci2);");
+                    WriteLine("int selectLinkFreeTarget(int ntar, int ci, int ti);");
+                }
+                if (kpm.HasLinkCreation || kpm.HasDivision)
+                {
+                    WriteLine("void addLink(int from, int to);");
+                    WriteLine("void connectBidirectional(int from, int to);");
+                }
+                if (kpm.HasLinkDestruction || kpm.HasDivision || kpm.HasDissolution) WriteLine("void removeLink(int from, int to);");
+                if (kpm.HasDivision)
+                {
+                    WriteLine("void invalidateLinks(int p);");
+                    WriteLine("void copyLinks(int from, int to);");
+                }
+                if (Params.O1) WriteLine("int getApplicabilityRate(int ci, int ruleLhs[], int lhsSize);");
+                indent--;
+                WriteLine("};");
+                WriteLine();
+                // ---------------------------------------------------------
+
                 WriteLine("c_code {");
                 indent++;
 
@@ -838,7 +863,8 @@ namespace KpSpin.SpinVerificationModel
                     {
                         owt.Write(addRhs((r as RewritingRule).Rhs));
                         WriteLine("rulesAppliedThisStep++;");
-                    } break;
+                    }
+                    break;
                 case RuleType.REWRITE_COMMUNICATION:
                     {
                         RewriteCommunicationRule rcr = r as RewriteCommunicationRule;
@@ -869,14 +895,16 @@ namespace KpSpin.SpinVerificationModel
                             }
                         }
                         WriteLine("rulesAppliedThisStep++;");
-                    } break;
+                    }
+                    break;
                 case RuleType.MEMBRANE_DISSOLUTION:
                     {
                         WriteLine("c[i].flagDissolved = 1;");
                         WriteLine("c[i].structureChanged = 1;");
                         WriteLine("rulesAppliedThisStep++;");
                         WriteLine("goto ExEnd;");
-                    } break;
+                    }
+                    break;
                 case RuleType.MEMBRANE_DIVISION:
                     {
                         DivisionRule dr = r as DivisionRule;
@@ -896,7 +924,8 @@ namespace KpSpin.SpinVerificationModel
                         WriteLine("c[i].structureChanged = 1;");
                         WriteLine("rulesAppliedThisStep++;");
                         WriteLine("goto ExEnd;");
-                    } break;
+                    }
+                    break;
                 case RuleType.LINK_CREATION:
                     {
                         LinkRule lr = r as LinkRule;
@@ -928,7 +957,8 @@ namespace KpSpin.SpinVerificationModel
                                 WriteLine("c[i].structureChanged = 1;");
                             }
                         }
-                    } break;
+                    }
+                    break;
                 case RuleType.LINK_DESTRUCTION:
                     {
                         LinkRule lr = r as LinkRule;
@@ -949,11 +979,13 @@ namespace KpSpin.SpinVerificationModel
                                 WriteLine("c[i].structureChanged = 1;");
                             }
                         }
-                    } break;
+                    }
+                    break;
                 default:
                     {
                         owt.WriteLine("skip;");
-                    } break;
+                    }
+                    break;
             }
             indent--;
         }
@@ -1044,14 +1076,8 @@ namespace KpSpin.SpinVerificationModel
         {
             foreach (string s in kpm.Alphabet.Symbols)
             {
-                owt.WriteLine("int {0} = {1};", promelaSymbol(s), kpm.Alphabet[s]);
+                owt.WriteLine("#define {0} {1}", promelaSymbol(s), kpm.Alphabet[s]);
             }
-            owt.WriteLine("c_code {");
-            foreach (string s in kpm.Alphabet.Symbols)
-            {
-                owt.WriteLine("\tint {0} = {1};", promelaSymbol(s), kpm.Alphabet[s]);
-            }
-            owt.WriteLine("};");
         }
 
         private string promelaSymbol(string symbol)
