@@ -1,0 +1,65 @@
+Simulation started.
+Initial Configuration
+-------------------------------------------------
+TYPE t_bit1
+#0 bit1 [Active] {a} Links to #: 1, 2
+TYPE t_xor_gate
+#1 xor_gate [Active] {} Links to #: 0, 3, 4
+TYPE t_and_gate
+#2 and_gate [Active] {} Links to #: 0, 3, 5
+TYPE t_bit2
+#3 bit2 [Active] {a} Links to #: 1, 2
+TYPE t_out_sum
+#4 out_sum [Active] {} Links to #: 1
+TYPE t_out_carry
+#5 out_carry [Active] {} Links to #: 2
+-------------------------------------------------
+
+STEP 1
+
+Rule #5 * >=a: a -> {a}(t_xor_gate), {a}(t_and_gate),  * applied in instance #3 bit2.
+Selected instance #1 as target of type t_xor_gate for rule #5.
+Selected instance #2 as target of type t_and_gate for rule #5.
+Rule #0 * >=a: a -> {a}(t_xor_gate), {a}(t_and_gate),  * applied in instance #0 bit1.
+Selected instance #1 as target of type t_xor_gate for rule #0.
+Selected instance #2 as target of type t_and_gate for rule #0.
+
+Configuration #1
+-------------------------------------------------
+TYPE t_bit1
+#0 bit1 [Active] {} Links to #: 1, 2
+TYPE t_xor_gate
+#1 xor_gate [Active] {2a} Links to #: 0, 3, 4
+TYPE t_and_gate
+#2 and_gate [Active] {2a} Links to #: 0, 3, 5
+TYPE t_bit2
+#3 bit2 [Active] {} Links to #: 1, 2
+TYPE t_out_sum
+#4 out_sum [Active] {} Links to #: 1
+TYPE t_out_carry
+#5 out_carry [Active] {} Links to #: 2
+-------------------------------------------------
+
+STEP 2
+
+Rule #3 * =2a: 2a -> {a}(t_out_carry) * applied in instance #2 and_gate.
+Selected instance #5 as target of type t_out_carry for rule #3.
+Rule #1 * =2a: 2a -> {} * applied in instance #1 xor_gate.
+
+Configuration #2
+-------------------------------------------------
+TYPE t_bit1
+#0 bit1 [Active] {} Links to #: 1, 2
+TYPE t_xor_gate
+#1 xor_gate [Active] {} Links to #: 0, 3, 4
+TYPE t_and_gate
+#2 and_gate [Active] {} Links to #: 0, 3, 5
+TYPE t_bit2
+#3 bit2 [Active] {} Links to #: 1, 2
+TYPE t_out_sum
+#4 out_sum [Active] {} Links to #: 1
+TYPE t_out_carry
+#5 out_carry [Active] {a} Links to #: 2
+-------------------------------------------------
+System halted at step 2 (no further rule could be applied, i.e. reached a deadlock).
+Simulation complete at step 2.

@@ -1,0 +1,1155 @@
+Simulation started.
+Initial Configuration
+-------------------------------------------------
+TYPE t_N0
+#0 N0 [Active] {8a} Links to #: 1, 2
+TYPE t_N4
+#1 N4 [Active] {} Links to #: 0, 3, 8, 9
+TYPE t_N5
+#2 N5 [Active] {} Links to #: 0, 3, 9
+TYPE t_N1
+#3 N1 [Active] {5a} Links to #: 1, 2
+TYPE t_N2
+#4 N2 [Active] {a} Links to #: 5, 6
+TYPE t_N6
+#5 N6 [Active] {} Links to #: 4, 7, 10, 11
+TYPE t_N7
+#6 N7 [Active] {} Links to #: 4, 7, 10
+TYPE t_N3
+#7 N3 [Active] {3a} Links to #: 5, 6
+TYPE t_N8
+#8 N8 [Active] {} Links to #: 1, 12, 13
+TYPE t_N9
+#9 N9 [Active] {} Links to #: 1, 2, 14, 15
+TYPE t_N10
+#10 N10 [Active] {} Links to #: 5, 6, 12, 13
+TYPE t_N11
+#11 N11 [Active] {} Links to #: 5, 14, 15
+TYPE t_N12
+#12 N12 [Active] {} Links to #: 8, 10, 16, 17
+TYPE t_N13
+#13 N13 [Active] {} Links to #: 8, 10, 17
+TYPE t_N14
+#14 N14 [Active] {} Links to #: 9, 11, 18, 19
+TYPE t_N15
+#15 N15 [Active] {} Links to #: 9, 11, 19
+TYPE t_N16
+#16 N16 [Active] {} Links to #: 12, 20, 21
+TYPE t_N18
+#17 N18 [Active] {} Links to #: 12, 13, 22, 23
+TYPE t_N17
+#18 N17 [Active] {} Links to #: 14, 20, 21
+TYPE t_N19
+#19 N19 [Active] {} Links to #: 14, 15, 22, 23
+TYPE t_N20
+#20 N20 [Active] {} Links to #: 16, 18, 24, 25
+TYPE t_N21
+#21 N21 [Active] {} Links to #: 16, 18, 25
+TYPE t_N22
+#22 N22 [Active] {} Links to #: 17, 19, 26, 27
+TYPE t_N23
+#23 N23 [Active] {} Links to #: 17, 19, 27
+TYPE t_N24
+#24 N24 [Active] {} Links to #: 20
+TYPE t_N25
+#25 N25 [Active] {} Links to #: 20, 21
+TYPE t_N26
+#26 N26 [Active] {} Links to #: 22
+TYPE t_N27
+#27 N27 [Active] {} Links to #: 22, 23
+-------------------------------------------------
+
+STEP 1
+
+Rule #11 * >=a: a -> {a}(t_N6), {a}(t_N7),  * applied in instance #7 N3.
+Selected instance #5 as target of type t_N6 for rule #11.
+Selected instance #6 as target of type t_N7 for rule #11.
+Rule #5 * >=a: a -> {a}(t_N4), {a}(t_N5),  * applied in instance #3 N1.
+Selected instance #1 as target of type t_N4 for rule #5.
+Selected instance #2 as target of type t_N5 for rule #5.
+Rule #0 * >=a: a -> {a}(t_N4), {a}(t_N5),  * applied in instance #0 N0.
+Selected instance #1 as target of type t_N4 for rule #0.
+Selected instance #2 as target of type t_N5 for rule #0.
+Rule #6 * >=a: a -> {a}(t_N6), {a}(t_N7),  * applied in instance #4 N2.
+Selected instance #5 as target of type t_N6 for rule #6.
+Selected instance #6 as target of type t_N7 for rule #6.
+
+Configuration #1
+-------------------------------------------------
+TYPE t_N0
+#0 N0 [Active] {7a} Links to #: 1, 2
+TYPE t_N4
+#1 N4 [Active] {2a} Links to #: 0, 3, 8, 9
+TYPE t_N5
+#2 N5 [Active] {2a} Links to #: 0, 3, 9
+TYPE t_N1
+#3 N1 [Active] {4a} Links to #: 1, 2
+TYPE t_N2
+#4 N2 [Active] {} Links to #: 5, 6
+TYPE t_N6
+#5 N6 [Active] {2a} Links to #: 4, 7, 10, 11
+TYPE t_N7
+#6 N7 [Active] {2a} Links to #: 4, 7, 10
+TYPE t_N3
+#7 N3 [Active] {2a} Links to #: 5, 6
+TYPE t_N8
+#8 N8 [Active] {} Links to #: 1, 12, 13
+TYPE t_N9
+#9 N9 [Active] {} Links to #: 1, 2, 14, 15
+TYPE t_N10
+#10 N10 [Active] {} Links to #: 5, 6, 12, 13
+TYPE t_N11
+#11 N11 [Active] {} Links to #: 5, 14, 15
+TYPE t_N12
+#12 N12 [Active] {} Links to #: 8, 10, 16, 17
+TYPE t_N13
+#13 N13 [Active] {} Links to #: 8, 10, 17
+TYPE t_N14
+#14 N14 [Active] {} Links to #: 9, 11, 18, 19
+TYPE t_N15
+#15 N15 [Active] {} Links to #: 9, 11, 19
+TYPE t_N16
+#16 N16 [Active] {} Links to #: 12, 20, 21
+TYPE t_N18
+#17 N18 [Active] {} Links to #: 12, 13, 22, 23
+TYPE t_N17
+#18 N17 [Active] {} Links to #: 14, 20, 21
+TYPE t_N19
+#19 N19 [Active] {} Links to #: 14, 15, 22, 23
+TYPE t_N20
+#20 N20 [Active] {} Links to #: 16, 18, 24, 25
+TYPE t_N21
+#21 N21 [Active] {} Links to #: 16, 18, 25
+TYPE t_N22
+#22 N22 [Active] {} Links to #: 17, 19, 26, 27
+TYPE t_N23
+#23 N23 [Active] {} Links to #: 17, 19, 27
+TYPE t_N24
+#24 N24 [Active] {} Links to #: 20
+TYPE t_N25
+#25 N25 [Active] {} Links to #: 20, 21
+TYPE t_N26
+#26 N26 [Active] {} Links to #: 22
+TYPE t_N27
+#27 N27 [Active] {} Links to #: 22, 23
+-------------------------------------------------
+
+STEP 2
+
+Rule #7 * =2a: 2a -> {a}(t_N10), {a}(t_N11),  * applied in instance #5 N6.
+Selected instance #10 as target of type t_N10 for rule #7.
+Selected instance #11 as target of type t_N11 for rule #7.
+Rule #11 * >=a: a -> {a}(t_N6), {a}(t_N7),  * applied in instance #7 N3.
+Selected instance #5 as target of type t_N6 for rule #11.
+Selected instance #6 as target of type t_N7 for rule #11.
+Rule #1 * =2a: 2a -> {a}(t_N8), {a}(t_N9),  * applied in instance #1 N4.
+Selected instance #8 as target of type t_N8 for rule #1.
+Selected instance #9 as target of type t_N9 for rule #1.
+Rule #5 * >=a: a -> {a}(t_N4), {a}(t_N5),  * applied in instance #3 N1.
+Selected instance #1 as target of type t_N4 for rule #5.
+Selected instance #2 as target of type t_N5 for rule #5.
+Rule #0 * >=a: a -> {a}(t_N4), {a}(t_N5),  * applied in instance #0 N0.
+Selected instance #1 as target of type t_N4 for rule #0.
+Selected instance #2 as target of type t_N5 for rule #0.
+Rule #3 * =2a: 2a -> {} * applied in instance #2 N5.
+Rule #9 * =2a: 2a -> {} * applied in instance #6 N7.
+
+Configuration #2
+-------------------------------------------------
+TYPE t_N0
+#0 N0 [Active] {6a} Links to #: 1, 2
+TYPE t_N4
+#1 N4 [Active] {2a} Links to #: 0, 3, 8, 9
+TYPE t_N5
+#2 N5 [Active] {2a} Links to #: 0, 3, 9
+TYPE t_N1
+#3 N1 [Active] {3a} Links to #: 1, 2
+TYPE t_N2
+#4 N2 [Active] {} Links to #: 5, 6
+TYPE t_N6
+#5 N6 [Active] {a} Links to #: 4, 7, 10, 11
+TYPE t_N7
+#6 N7 [Active] {a} Links to #: 4, 7, 10
+TYPE t_N3
+#7 N3 [Active] {a} Links to #: 5, 6
+TYPE t_N8
+#8 N8 [Active] {a} Links to #: 1, 12, 13
+TYPE t_N9
+#9 N9 [Active] {a} Links to #: 1, 2, 14, 15
+TYPE t_N10
+#10 N10 [Active] {a} Links to #: 5, 6, 12, 13
+TYPE t_N11
+#11 N11 [Active] {a} Links to #: 5, 14, 15
+TYPE t_N12
+#12 N12 [Active] {} Links to #: 8, 10, 16, 17
+TYPE t_N13
+#13 N13 [Active] {} Links to #: 8, 10, 17
+TYPE t_N14
+#14 N14 [Active] {} Links to #: 9, 11, 18, 19
+TYPE t_N15
+#15 N15 [Active] {} Links to #: 9, 11, 19
+TYPE t_N16
+#16 N16 [Active] {} Links to #: 12, 20, 21
+TYPE t_N18
+#17 N18 [Active] {} Links to #: 12, 13, 22, 23
+TYPE t_N17
+#18 N17 [Active] {} Links to #: 14, 20, 21
+TYPE t_N19
+#19 N19 [Active] {} Links to #: 14, 15, 22, 23
+TYPE t_N20
+#20 N20 [Active] {} Links to #: 16, 18, 24, 25
+TYPE t_N21
+#21 N21 [Active] {} Links to #: 16, 18, 25
+TYPE t_N22
+#22 N22 [Active] {} Links to #: 17, 19, 26, 27
+TYPE t_N23
+#23 N23 [Active] {} Links to #: 17, 19, 27
+TYPE t_N24
+#24 N24 [Active] {} Links to #: 20
+TYPE t_N25
+#25 N25 [Active] {} Links to #: 20, 21
+TYPE t_N26
+#26 N26 [Active] {} Links to #: 22
+TYPE t_N27
+#27 N27 [Active] {} Links to #: 22, 23
+-------------------------------------------------
+
+STEP 3
+
+Rule #3 * =2a: 2a -> {} * applied in instance #2 N5.
+Rule #0 * >=a: a -> {a}(t_N4), {a}(t_N5),  * applied in instance #0 N0.
+Selected instance #1 as target of type t_N4 for rule #0.
+Selected instance #2 as target of type t_N5 for rule #0.
+Rule #8 * =a: a -> {} * applied in instance #5 N6.
+Rule #15 * =a: a -> {a}(t_N14), {a}(t_N15),  * applied in instance #11 N11.
+Selected instance #14 as target of type t_N14 for rule #15.
+Selected instance #15 as target of type t_N15 for rule #15.
+Rule #13 * =a: a -> {a}(t_N14), {a}(t_N15),  * applied in instance #9 N9.
+Selected instance #14 as target of type t_N14 for rule #13.
+Selected instance #15 as target of type t_N15 for rule #13.
+Rule #10 * =a: a -> {a}(t_N10) * applied in instance #6 N7.
+Selected instance #10 as target of type t_N10 for rule #10.
+Rule #1 * =2a: 2a -> {a}(t_N8), {a}(t_N9),  * applied in instance #1 N4.
+Selected instance #8 as target of type t_N8 for rule #1.
+Selected instance #9 as target of type t_N9 for rule #1.
+Rule #11 * >=a: a -> {a}(t_N6), {a}(t_N7),  * applied in instance #7 N3.
+Selected instance #5 as target of type t_N6 for rule #11.
+Selected instance #6 as target of type t_N7 for rule #11.
+Rule #12 * =a: a -> {a}(t_N12), {a}(t_N13),  * applied in instance #8 N8.
+Selected instance #12 as target of type t_N12 for rule #12.
+Selected instance #13 as target of type t_N13 for rule #12.
+Rule #14 * =a: a -> {a}(t_N12), {a}(t_N13),  * applied in instance #10 N10.
+Selected instance #12 as target of type t_N12 for rule #14.
+Selected instance #13 as target of type t_N13 for rule #14.
+Rule #5 * >=a: a -> {a}(t_N4), {a}(t_N5),  * applied in instance #3 N1.
+Selected instance #1 as target of type t_N4 for rule #5.
+Selected instance #2 as target of type t_N5 for rule #5.
+
+Configuration #3
+-------------------------------------------------
+TYPE t_N0
+#0 N0 [Active] {5a} Links to #: 1, 2
+TYPE t_N4
+#1 N4 [Active] {2a} Links to #: 0, 3, 8, 9
+TYPE t_N5
+#2 N5 [Active] {2a} Links to #: 0, 3, 9
+TYPE t_N1
+#3 N1 [Active] {2a} Links to #: 1, 2
+TYPE t_N2
+#4 N2 [Active] {} Links to #: 5, 6
+TYPE t_N6
+#5 N6 [Active] {a} Links to #: 4, 7, 10, 11
+TYPE t_N7
+#6 N7 [Active] {a} Links to #: 4, 7, 10
+TYPE t_N3
+#7 N3 [Active] {} Links to #: 5, 6
+TYPE t_N8
+#8 N8 [Active] {a} Links to #: 1, 12, 13
+TYPE t_N9
+#9 N9 [Active] {a} Links to #: 1, 2, 14, 15
+TYPE t_N10
+#10 N10 [Active] {a} Links to #: 5, 6, 12, 13
+TYPE t_N11
+#11 N11 [Active] {} Links to #: 5, 14, 15
+TYPE t_N12
+#12 N12 [Active] {2a} Links to #: 8, 10, 16, 17
+TYPE t_N13
+#13 N13 [Active] {2a} Links to #: 8, 10, 17
+TYPE t_N14
+#14 N14 [Active] {2a} Links to #: 9, 11, 18, 19
+TYPE t_N15
+#15 N15 [Active] {2a} Links to #: 9, 11, 19
+TYPE t_N16
+#16 N16 [Active] {} Links to #: 12, 20, 21
+TYPE t_N18
+#17 N18 [Active] {} Links to #: 12, 13, 22, 23
+TYPE t_N17
+#18 N17 [Active] {} Links to #: 14, 20, 21
+TYPE t_N19
+#19 N19 [Active] {} Links to #: 14, 15, 22, 23
+TYPE t_N20
+#20 N20 [Active] {} Links to #: 16, 18, 24, 25
+TYPE t_N21
+#21 N21 [Active] {} Links to #: 16, 18, 25
+TYPE t_N22
+#22 N22 [Active] {} Links to #: 17, 19, 26, 27
+TYPE t_N23
+#23 N23 [Active] {} Links to #: 17, 19, 27
+TYPE t_N24
+#24 N24 [Active] {} Links to #: 20
+TYPE t_N25
+#25 N25 [Active] {} Links to #: 20, 21
+TYPE t_N26
+#26 N26 [Active] {} Links to #: 22
+TYPE t_N27
+#27 N27 [Active] {} Links to #: 22, 23
+-------------------------------------------------
+
+STEP 4
+
+Rule #12 * =a: a -> {a}(t_N12), {a}(t_N13),  * applied in instance #8 N8.
+Selected instance #12 as target of type t_N12 for rule #12.
+Selected instance #13 as target of type t_N13 for rule #12.
+Rule #5 * >=a: a -> {a}(t_N4), {a}(t_N5),  * applied in instance #3 N1.
+Selected instance #1 as target of type t_N4 for rule #5.
+Selected instance #2 as target of type t_N5 for rule #5.
+Rule #18 * =2a: 2a -> {} * applied in instance #13 N13.
+Rule #22 * =2a: 2a -> {} * applied in instance #15 N15.
+Rule #14 * =a: a -> {a}(t_N12), {a}(t_N13),  * applied in instance #10 N10.
+Selected instance #12 as target of type t_N12 for rule #14.
+Selected instance #13 as target of type t_N13 for rule #14.
+Rule #20 * =2a: 2a -> {a}(t_N17), {a}(t_N19),  * applied in instance #14 N14.
+Selected instance #18 as target of type t_N17 for rule #20.
+Selected instance #19 as target of type t_N19 for rule #20.
+Rule #3 * =2a: 2a -> {} * applied in instance #2 N5.
+Rule #0 * >=a: a -> {a}(t_N4), {a}(t_N5),  * applied in instance #0 N0.
+Selected instance #1 as target of type t_N4 for rule #0.
+Selected instance #2 as target of type t_N5 for rule #0.
+Rule #16 * =2a: 2a -> {a}(t_N16), {a}(t_N18),  * applied in instance #12 N12.
+Selected instance #16 as target of type t_N16 for rule #16.
+Selected instance #17 as target of type t_N18 for rule #16.
+Rule #10 * =a: a -> {a}(t_N10) * applied in instance #6 N7.
+Selected instance #10 as target of type t_N10 for rule #10.
+Rule #1 * =2a: 2a -> {a}(t_N8), {a}(t_N9),  * applied in instance #1 N4.
+Selected instance #8 as target of type t_N8 for rule #1.
+Selected instance #9 as target of type t_N9 for rule #1.
+Rule #13 * =a: a -> {a}(t_N14), {a}(t_N15),  * applied in instance #9 N9.
+Selected instance #14 as target of type t_N14 for rule #13.
+Selected instance #15 as target of type t_N15 for rule #13.
+Rule #8 * =a: a -> {} * applied in instance #5 N6.
+
+Configuration #4
+-------------------------------------------------
+TYPE t_N0
+#0 N0 [Active] {4a} Links to #: 1, 2
+TYPE t_N4
+#1 N4 [Active] {2a} Links to #: 0, 3, 8, 9
+TYPE t_N5
+#2 N5 [Active] {2a} Links to #: 0, 3, 9
+TYPE t_N1
+#3 N1 [Active] {a} Links to #: 1, 2
+TYPE t_N2
+#4 N2 [Active] {} Links to #: 5, 6
+TYPE t_N6
+#5 N6 [Active] {} Links to #: 4, 7, 10, 11
+TYPE t_N7
+#6 N7 [Active] {} Links to #: 4, 7, 10
+TYPE t_N3
+#7 N3 [Active] {} Links to #: 5, 6
+TYPE t_N8
+#8 N8 [Active] {a} Links to #: 1, 12, 13
+TYPE t_N9
+#9 N9 [Active] {a} Links to #: 1, 2, 14, 15
+TYPE t_N10
+#10 N10 [Active] {a} Links to #: 5, 6, 12, 13
+TYPE t_N11
+#11 N11 [Active] {} Links to #: 5, 14, 15
+TYPE t_N12
+#12 N12 [Active] {2a} Links to #: 8, 10, 16, 17
+TYPE t_N13
+#13 N13 [Active] {2a} Links to #: 8, 10, 17
+TYPE t_N14
+#14 N14 [Active] {a} Links to #: 9, 11, 18, 19
+TYPE t_N15
+#15 N15 [Active] {a} Links to #: 9, 11, 19
+TYPE t_N16
+#16 N16 [Active] {a} Links to #: 12, 20, 21
+TYPE t_N18
+#17 N18 [Active] {a} Links to #: 12, 13, 22, 23
+TYPE t_N17
+#18 N17 [Active] {a} Links to #: 14, 20, 21
+TYPE t_N19
+#19 N19 [Active] {a} Links to #: 14, 15, 22, 23
+TYPE t_N20
+#20 N20 [Active] {} Links to #: 16, 18, 24, 25
+TYPE t_N21
+#21 N21 [Active] {} Links to #: 16, 18, 25
+TYPE t_N22
+#22 N22 [Active] {} Links to #: 17, 19, 26, 27
+TYPE t_N23
+#23 N23 [Active] {} Links to #: 17, 19, 27
+TYPE t_N24
+#24 N24 [Active] {} Links to #: 20
+TYPE t_N25
+#25 N25 [Active] {} Links to #: 20, 21
+TYPE t_N26
+#26 N26 [Active] {} Links to #: 22
+TYPE t_N27
+#27 N27 [Active] {} Links to #: 22, 23
+-------------------------------------------------
+
+STEP 5
+
+Rule #23 * =a: a -> {a}(t_N19) * applied in instance #15 N15.
+Selected instance #19 as target of type t_N19 for rule #23.
+Rule #5 * >=a: a -> {a}(t_N4), {a}(t_N5),  * applied in instance #3 N1.
+Selected instance #1 as target of type t_N4 for rule #5.
+Selected instance #2 as target of type t_N5 for rule #5.
+Rule #27 * =a: a -> {a}(t_N22), {a}(t_N23),  * applied in instance #19 N19.
+Selected instance #22 as target of type t_N22 for rule #27.
+Selected instance #23 as target of type t_N23 for rule #27.
+Rule #12 * =a: a -> {a}(t_N12), {a}(t_N13),  * applied in instance #8 N8.
+Selected instance #12 as target of type t_N12 for rule #12.
+Selected instance #13 as target of type t_N13 for rule #12.
+Rule #16 * =2a: 2a -> {a}(t_N16), {a}(t_N18),  * applied in instance #12 N12.
+Selected instance #16 as target of type t_N16 for rule #16.
+Selected instance #17 as target of type t_N18 for rule #16.
+Rule #26 * =a: a -> {a}(t_N20), {a}(t_N21),  * applied in instance #18 N17.
+Selected instance #20 as target of type t_N20 for rule #26.
+Selected instance #21 as target of type t_N21 for rule #26.
+Rule #25 * =a: a -> {a}(t_N22), {a}(t_N23),  * applied in instance #17 N18.
+Selected instance #22 as target of type t_N22 for rule #25.
+Selected instance #23 as target of type t_N23 for rule #25.
+Rule #1 * =2a: 2a -> {a}(t_N8), {a}(t_N9),  * applied in instance #1 N4.
+Selected instance #8 as target of type t_N8 for rule #1.
+Selected instance #9 as target of type t_N9 for rule #1.
+Rule #3 * =2a: 2a -> {} * applied in instance #2 N5.
+Rule #24 * =a: a -> {a}(t_N20), {a}(t_N21),  * applied in instance #16 N16.
+Selected instance #20 as target of type t_N20 for rule #24.
+Selected instance #21 as target of type t_N21 for rule #24.
+Rule #13 * =a: a -> {a}(t_N14), {a}(t_N15),  * applied in instance #9 N9.
+Selected instance #14 as target of type t_N14 for rule #13.
+Selected instance #15 as target of type t_N15 for rule #13.
+Rule #0 * >=a: a -> {a}(t_N4), {a}(t_N5),  * applied in instance #0 N0.
+Selected instance #1 as target of type t_N4 for rule #0.
+Selected instance #2 as target of type t_N5 for rule #0.
+Rule #21 * =a: a -> {} * applied in instance #14 N14.
+Rule #18 * =2a: 2a -> {} * applied in instance #13 N13.
+Rule #14 * =a: a -> {a}(t_N12), {a}(t_N13),  * applied in instance #10 N10.
+Selected instance #12 as target of type t_N12 for rule #14.
+Selected instance #13 as target of type t_N13 for rule #14.
+
+Configuration #5
+-------------------------------------------------
+TYPE t_N0
+#0 N0 [Active] {3a} Links to #: 1, 2
+TYPE t_N4
+#1 N4 [Active] {2a} Links to #: 0, 3, 8, 9
+TYPE t_N5
+#2 N5 [Active] {2a} Links to #: 0, 3, 9
+TYPE t_N1
+#3 N1 [Active] {} Links to #: 1, 2
+TYPE t_N2
+#4 N2 [Active] {} Links to #: 5, 6
+TYPE t_N6
+#5 N6 [Active] {} Links to #: 4, 7, 10, 11
+TYPE t_N7
+#6 N7 [Active] {} Links to #: 4, 7, 10
+TYPE t_N3
+#7 N3 [Active] {} Links to #: 5, 6
+TYPE t_N8
+#8 N8 [Active] {a} Links to #: 1, 12, 13
+TYPE t_N9
+#9 N9 [Active] {a} Links to #: 1, 2, 14, 15
+TYPE t_N10
+#10 N10 [Active] {} Links to #: 5, 6, 12, 13
+TYPE t_N11
+#11 N11 [Active] {} Links to #: 5, 14, 15
+TYPE t_N12
+#12 N12 [Active] {2a} Links to #: 8, 10, 16, 17
+TYPE t_N13
+#13 N13 [Active] {2a} Links to #: 8, 10, 17
+TYPE t_N14
+#14 N14 [Active] {a} Links to #: 9, 11, 18, 19
+TYPE t_N15
+#15 N15 [Active] {a} Links to #: 9, 11, 19
+TYPE t_N16
+#16 N16 [Active] {a} Links to #: 12, 20, 21
+TYPE t_N18
+#17 N18 [Active] {a} Links to #: 12, 13, 22, 23
+TYPE t_N17
+#18 N17 [Active] {} Links to #: 14, 20, 21
+TYPE t_N19
+#19 N19 [Active] {a} Links to #: 14, 15, 22, 23
+TYPE t_N20
+#20 N20 [Active] {2a} Links to #: 16, 18, 24, 25
+TYPE t_N21
+#21 N21 [Active] {2a} Links to #: 16, 18, 25
+TYPE t_N22
+#22 N22 [Active] {2a} Links to #: 17, 19, 26, 27
+TYPE t_N23
+#23 N23 [Active] {2a} Links to #: 17, 19, 27
+TYPE t_N24
+#24 N24 [Active] {} Links to #: 20
+TYPE t_N25
+#25 N25 [Active] {} Links to #: 20, 21
+TYPE t_N26
+#26 N26 [Active] {} Links to #: 22
+TYPE t_N27
+#27 N27 [Active] {} Links to #: 22, 23
+-------------------------------------------------
+
+STEP 6
+
+Rule #25 * =a: a -> {a}(t_N22), {a}(t_N23),  * applied in instance #17 N18.
+Selected instance #22 as target of type t_N22 for rule #25.
+Selected instance #23 as target of type t_N23 for rule #25.
+Rule #1 * =2a: 2a -> {a}(t_N8), {a}(t_N9),  * applied in instance #1 N4.
+Selected instance #8 as target of type t_N8 for rule #1.
+Selected instance #9 as target of type t_N9 for rule #1.
+Rule #32 * =2a: 2a -> {a}(t_N26), {a}(t_N27),  * applied in instance #22 N22.
+Selected instance #26 as target of type t_N26 for rule #32.
+Selected instance #27 as target of type t_N27 for rule #32.
+Rule #34 * =2a: 2a -> {} * applied in instance #23 N23.
+Rule #0 * >=a: a -> {a}(t_N4), {a}(t_N5),  * applied in instance #0 N0.
+Selected instance #1 as target of type t_N4 for rule #0.
+Selected instance #2 as target of type t_N5 for rule #0.
+Rule #28 * =2a: 2a -> {a}(t_N24), {a}(t_N25),  * applied in instance #20 N20.
+Selected instance #24 as target of type t_N24 for rule #28.
+Selected instance #25 as target of type t_N25 for rule #28.
+Rule #21 * =a: a -> {} * applied in instance #14 N14.
+Rule #18 * =2a: 2a -> {} * applied in instance #13 N13.
+Rule #3 * =2a: 2a -> {} * applied in instance #2 N5.
+Rule #12 * =a: a -> {a}(t_N12), {a}(t_N13),  * applied in instance #8 N8.
+Selected instance #12 as target of type t_N12 for rule #12.
+Selected instance #13 as target of type t_N13 for rule #12.
+Rule #23 * =a: a -> {a}(t_N19) * applied in instance #15 N15.
+Selected instance #19 as target of type t_N19 for rule #23.
+Rule #16 * =2a: 2a -> {a}(t_N16), {a}(t_N18),  * applied in instance #12 N12.
+Selected instance #16 as target of type t_N16 for rule #16.
+Selected instance #17 as target of type t_N18 for rule #16.
+Rule #13 * =a: a -> {a}(t_N14), {a}(t_N15),  * applied in instance #9 N9.
+Selected instance #14 as target of type t_N14 for rule #13.
+Selected instance #15 as target of type t_N15 for rule #13.
+Rule #30 * =2a: 2a -> {} * applied in instance #21 N21.
+Rule #24 * =a: a -> {a}(t_N20), {a}(t_N21),  * applied in instance #16 N16.
+Selected instance #20 as target of type t_N20 for rule #24.
+Selected instance #21 as target of type t_N21 for rule #24.
+Rule #27 * =a: a -> {a}(t_N22), {a}(t_N23),  * applied in instance #19 N19.
+Selected instance #22 as target of type t_N22 for rule #27.
+Selected instance #23 as target of type t_N23 for rule #27.
+
+Configuration #6
+-------------------------------------------------
+TYPE t_N0
+#0 N0 [Active] {2a} Links to #: 1, 2
+TYPE t_N4
+#1 N4 [Active] {a} Links to #: 0, 3, 8, 9
+TYPE t_N5
+#2 N5 [Active] {a} Links to #: 0, 3, 9
+TYPE t_N1
+#3 N1 [Active] {} Links to #: 1, 2
+TYPE t_N2
+#4 N2 [Active] {} Links to #: 5, 6
+TYPE t_N6
+#5 N6 [Active] {} Links to #: 4, 7, 10, 11
+TYPE t_N7
+#6 N7 [Active] {} Links to #: 4, 7, 10
+TYPE t_N3
+#7 N3 [Active] {} Links to #: 5, 6
+TYPE t_N8
+#8 N8 [Active] {a} Links to #: 1, 12, 13
+TYPE t_N9
+#9 N9 [Active] {a} Links to #: 1, 2, 14, 15
+TYPE t_N10
+#10 N10 [Active] {} Links to #: 5, 6, 12, 13
+TYPE t_N11
+#11 N11 [Active] {} Links to #: 5, 14, 15
+TYPE t_N12
+#12 N12 [Active] {a} Links to #: 8, 10, 16, 17
+TYPE t_N13
+#13 N13 [Active] {a} Links to #: 8, 10, 17
+TYPE t_N14
+#14 N14 [Active] {a} Links to #: 9, 11, 18, 19
+TYPE t_N15
+#15 N15 [Active] {a} Links to #: 9, 11, 19
+TYPE t_N16
+#16 N16 [Active] {a} Links to #: 12, 20, 21
+TYPE t_N18
+#17 N18 [Active] {a} Links to #: 12, 13, 22, 23
+TYPE t_N17
+#18 N17 [Active] {} Links to #: 14, 20, 21
+TYPE t_N19
+#19 N19 [Active] {a} Links to #: 14, 15, 22, 23
+TYPE t_N20
+#20 N20 [Active] {a} Links to #: 16, 18, 24, 25
+TYPE t_N21
+#21 N21 [Active] {a} Links to #: 16, 18, 25
+TYPE t_N22
+#22 N22 [Active] {2a} Links to #: 17, 19, 26, 27
+TYPE t_N23
+#23 N23 [Active] {2a} Links to #: 17, 19, 27
+TYPE t_N24
+#24 N24 [Active] {a} Links to #: 20
+TYPE t_N25
+#25 N25 [Active] {a} Links to #: 20, 21
+TYPE t_N26
+#26 N26 [Active] {a} Links to #: 22
+TYPE t_N27
+#27 N27 [Active] {a} Links to #: 22, 23
+-------------------------------------------------
+
+STEP 7
+
+Rule #21 * =a: a -> {} * applied in instance #14 N14.
+Rule #12 * =a: a -> {a}(t_N12), {a}(t_N13),  * applied in instance #8 N8.
+Selected instance #12 as target of type t_N12 for rule #12.
+Selected instance #13 as target of type t_N13 for rule #12.
+Rule #17 * =a: a -> {} * applied in instance #12 N12.
+Rule #24 * =a: a -> {a}(t_N20), {a}(t_N21),  * applied in instance #16 N16.
+Selected instance #20 as target of type t_N20 for rule #24.
+Selected instance #21 as target of type t_N21 for rule #24.
+Rule #23 * =a: a -> {a}(t_N19) * applied in instance #15 N15.
+Selected instance #19 as target of type t_N19 for rule #23.
+Rule #4 * =a: a -> {a}(t_N9) * applied in instance #2 N5.
+Selected instance #9 as target of type t_N9 for rule #4.
+Rule #13 * =a: a -> {a}(t_N14), {a}(t_N15),  * applied in instance #9 N9.
+Selected instance #14 as target of type t_N14 for rule #13.
+Selected instance #15 as target of type t_N15 for rule #13.
+Rule #19 * =a: a -> {a}(t_N18) * applied in instance #13 N13.
+Selected instance #17 as target of type t_N18 for rule #19.
+Rule #34 * =2a: 2a -> {} * applied in instance #23 N23.
+Rule #25 * =a: a -> {a}(t_N22), {a}(t_N23),  * applied in instance #17 N18.
+Selected instance #22 as target of type t_N22 for rule #25.
+Selected instance #23 as target of type t_N23 for rule #25.
+Rule #27 * =a: a -> {a}(t_N22), {a}(t_N23),  * applied in instance #19 N19.
+Selected instance #22 as target of type t_N22 for rule #27.
+Selected instance #23 as target of type t_N23 for rule #27.
+Rule #2 * =a: a -> {} * applied in instance #1 N4.
+Rule #0 * >=a: a -> {a}(t_N4), {a}(t_N5),  * applied in instance #0 N0.
+Selected instance #1 as target of type t_N4 for rule #0.
+Selected instance #2 as target of type t_N5 for rule #0.
+Rule #32 * =2a: 2a -> {a}(t_N26), {a}(t_N27),  * applied in instance #22 N22.
+Selected instance #26 as target of type t_N26 for rule #32.
+Selected instance #27 as target of type t_N27 for rule #32.
+Rule #29 * =a: a -> {} * applied in instance #20 N20.
+Rule #31 * =a: a -> {a}(t_N25) * applied in instance #21 N21.
+Selected instance #25 as target of type t_N25 for rule #31.
+
+Configuration #7
+-------------------------------------------------
+TYPE t_N0
+#0 N0 [Active] {a} Links to #: 1, 2
+TYPE t_N4
+#1 N4 [Active] {a} Links to #: 0, 3, 8, 9
+TYPE t_N5
+#2 N5 [Active] {a} Links to #: 0, 3, 9
+TYPE t_N1
+#3 N1 [Active] {} Links to #: 1, 2
+TYPE t_N2
+#4 N2 [Active] {} Links to #: 5, 6
+TYPE t_N6
+#5 N6 [Active] {} Links to #: 4, 7, 10, 11
+TYPE t_N7
+#6 N7 [Active] {} Links to #: 4, 7, 10
+TYPE t_N3
+#7 N3 [Active] {} Links to #: 5, 6
+TYPE t_N8
+#8 N8 [Active] {} Links to #: 1, 12, 13
+TYPE t_N9
+#9 N9 [Active] {a} Links to #: 1, 2, 14, 15
+TYPE t_N10
+#10 N10 [Active] {} Links to #: 5, 6, 12, 13
+TYPE t_N11
+#11 N11 [Active] {} Links to #: 5, 14, 15
+TYPE t_N12
+#12 N12 [Active] {a} Links to #: 8, 10, 16, 17
+TYPE t_N13
+#13 N13 [Active] {a} Links to #: 8, 10, 17
+TYPE t_N14
+#14 N14 [Active] {a} Links to #: 9, 11, 18, 19
+TYPE t_N15
+#15 N15 [Active] {a} Links to #: 9, 11, 19
+TYPE t_N16
+#16 N16 [Active] {} Links to #: 12, 20, 21
+TYPE t_N18
+#17 N18 [Active] {a} Links to #: 12, 13, 22, 23
+TYPE t_N17
+#18 N17 [Active] {} Links to #: 14, 20, 21
+TYPE t_N19
+#19 N19 [Active] {a} Links to #: 14, 15, 22, 23
+TYPE t_N20
+#20 N20 [Active] {a} Links to #: 16, 18, 24, 25
+TYPE t_N21
+#21 N21 [Active] {a} Links to #: 16, 18, 25
+TYPE t_N22
+#22 N22 [Active] {2a} Links to #: 17, 19, 26, 27
+TYPE t_N23
+#23 N23 [Active] {2a} Links to #: 17, 19, 27
+TYPE t_N24
+#24 N24 [Active] {a} Links to #: 20
+TYPE t_N25
+#25 N25 [Active] {2a} Links to #: 20, 21
+TYPE t_N26
+#26 N26 [Active] {2a} Links to #: 22
+TYPE t_N27
+#27 N27 [Active] {2a} Links to #: 22, 23
+-------------------------------------------------
+
+STEP 8
+
+Rule #4 * =a: a -> {a}(t_N9) * applied in instance #2 N5.
+Selected instance #9 as target of type t_N9 for rule #4.
+Rule #13 * =a: a -> {a}(t_N14), {a}(t_N15),  * applied in instance #9 N9.
+Selected instance #14 as target of type t_N14 for rule #13.
+Selected instance #15 as target of type t_N15 for rule #13.
+Rule #29 * =a: a -> {} * applied in instance #20 N20.
+Rule #17 * =a: a -> {} * applied in instance #12 N12.
+Rule #19 * =a: a -> {a}(t_N18) * applied in instance #13 N13.
+Selected instance #17 as target of type t_N18 for rule #19.
+Rule #25 * =a: a -> {a}(t_N22), {a}(t_N23),  * applied in instance #17 N18.
+Selected instance #22 as target of type t_N22 for rule #25.
+Selected instance #23 as target of type t_N23 for rule #25.
+Rule #2 * =a: a -> {} * applied in instance #1 N4.
+Rule #31 * =a: a -> {a}(t_N25) * applied in instance #21 N21.
+Selected instance #25 as target of type t_N25 for rule #31.
+Rule #27 * =a: a -> {a}(t_N22), {a}(t_N23),  * applied in instance #19 N19.
+Selected instance #22 as target of type t_N22 for rule #27.
+Selected instance #23 as target of type t_N23 for rule #27.
+Rule #0 * >=a: a -> {a}(t_N4), {a}(t_N5),  * applied in instance #0 N0.
+Selected instance #1 as target of type t_N4 for rule #0.
+Selected instance #2 as target of type t_N5 for rule #0.
+Rule #23 * =a: a -> {a}(t_N19) * applied in instance #15 N15.
+Selected instance #19 as target of type t_N19 for rule #23.
+Rule #32 * =2a: 2a -> {a}(t_N26), {a}(t_N27),  * applied in instance #22 N22.
+Selected instance #26 as target of type t_N26 for rule #32.
+Selected instance #27 as target of type t_N27 for rule #32.
+Rule #21 * =a: a -> {} * applied in instance #14 N14.
+Rule #34 * =2a: 2a -> {} * applied in instance #23 N23.
+
+Configuration #8
+-------------------------------------------------
+TYPE t_N0
+#0 N0 [Active] {} Links to #: 1, 2
+TYPE t_N4
+#1 N4 [Active] {a} Links to #: 0, 3, 8, 9
+TYPE t_N5
+#2 N5 [Active] {a} Links to #: 0, 3, 9
+TYPE t_N1
+#3 N1 [Active] {} Links to #: 1, 2
+TYPE t_N2
+#4 N2 [Active] {} Links to #: 5, 6
+TYPE t_N6
+#5 N6 [Active] {} Links to #: 4, 7, 10, 11
+TYPE t_N7
+#6 N7 [Active] {} Links to #: 4, 7, 10
+TYPE t_N3
+#7 N3 [Active] {} Links to #: 5, 6
+TYPE t_N8
+#8 N8 [Active] {} Links to #: 1, 12, 13
+TYPE t_N9
+#9 N9 [Active] {a} Links to #: 1, 2, 14, 15
+TYPE t_N10
+#10 N10 [Active] {} Links to #: 5, 6, 12, 13
+TYPE t_N11
+#11 N11 [Active] {} Links to #: 5, 14, 15
+TYPE t_N12
+#12 N12 [Active] {} Links to #: 8, 10, 16, 17
+TYPE t_N13
+#13 N13 [Active] {} Links to #: 8, 10, 17
+TYPE t_N14
+#14 N14 [Active] {a} Links to #: 9, 11, 18, 19
+TYPE t_N15
+#15 N15 [Active] {a} Links to #: 9, 11, 19
+TYPE t_N16
+#16 N16 [Active] {} Links to #: 12, 20, 21
+TYPE t_N18
+#17 N18 [Active] {a} Links to #: 12, 13, 22, 23
+TYPE t_N17
+#18 N17 [Active] {} Links to #: 14, 20, 21
+TYPE t_N19
+#19 N19 [Active] {a} Links to #: 14, 15, 22, 23
+TYPE t_N20
+#20 N20 [Active] {} Links to #: 16, 18, 24, 25
+TYPE t_N21
+#21 N21 [Active] {} Links to #: 16, 18, 25
+TYPE t_N22
+#22 N22 [Active] {2a} Links to #: 17, 19, 26, 27
+TYPE t_N23
+#23 N23 [Active] {2a} Links to #: 17, 19, 27
+TYPE t_N24
+#24 N24 [Active] {a} Links to #: 20
+TYPE t_N25
+#25 N25 [Active] {3a} Links to #: 20, 21
+TYPE t_N26
+#26 N26 [Active] {3a} Links to #: 22
+TYPE t_N27
+#27 N27 [Active] {3a} Links to #: 22, 23
+-------------------------------------------------
+
+STEP 9
+
+Rule #2 * =a: a -> {} * applied in instance #1 N4.
+Rule #34 * =2a: 2a -> {} * applied in instance #23 N23.
+Rule #21 * =a: a -> {} * applied in instance #14 N14.
+Rule #23 * =a: a -> {a}(t_N19) * applied in instance #15 N15.
+Selected instance #19 as target of type t_N19 for rule #23.
+Rule #13 * =a: a -> {a}(t_N14), {a}(t_N15),  * applied in instance #9 N9.
+Selected instance #14 as target of type t_N14 for rule #13.
+Selected instance #15 as target of type t_N15 for rule #13.
+Rule #25 * =a: a -> {a}(t_N22), {a}(t_N23),  * applied in instance #17 N18.
+Selected instance #22 as target of type t_N22 for rule #25.
+Selected instance #23 as target of type t_N23 for rule #25.
+Rule #27 * =a: a -> {a}(t_N22), {a}(t_N23),  * applied in instance #19 N19.
+Selected instance #22 as target of type t_N22 for rule #27.
+Selected instance #23 as target of type t_N23 for rule #27.
+Rule #4 * =a: a -> {a}(t_N9) * applied in instance #2 N5.
+Selected instance #9 as target of type t_N9 for rule #4.
+Rule #32 * =2a: 2a -> {a}(t_N26), {a}(t_N27),  * applied in instance #22 N22.
+Selected instance #26 as target of type t_N26 for rule #32.
+Selected instance #27 as target of type t_N27 for rule #32.
+
+Configuration #9
+-------------------------------------------------
+TYPE t_N0
+#0 N0 [Active] {} Links to #: 1, 2
+TYPE t_N4
+#1 N4 [Active] {} Links to #: 0, 3, 8, 9
+TYPE t_N5
+#2 N5 [Active] {} Links to #: 0, 3, 9
+TYPE t_N1
+#3 N1 [Active] {} Links to #: 1, 2
+TYPE t_N2
+#4 N2 [Active] {} Links to #: 5, 6
+TYPE t_N6
+#5 N6 [Active] {} Links to #: 4, 7, 10, 11
+TYPE t_N7
+#6 N7 [Active] {} Links to #: 4, 7, 10
+TYPE t_N3
+#7 N3 [Active] {} Links to #: 5, 6
+TYPE t_N8
+#8 N8 [Active] {} Links to #: 1, 12, 13
+TYPE t_N9
+#9 N9 [Active] {a} Links to #: 1, 2, 14, 15
+TYPE t_N10
+#10 N10 [Active] {} Links to #: 5, 6, 12, 13
+TYPE t_N11
+#11 N11 [Active] {} Links to #: 5, 14, 15
+TYPE t_N12
+#12 N12 [Active] {} Links to #: 8, 10, 16, 17
+TYPE t_N13
+#13 N13 [Active] {} Links to #: 8, 10, 17
+TYPE t_N14
+#14 N14 [Active] {a} Links to #: 9, 11, 18, 19
+TYPE t_N15
+#15 N15 [Active] {a} Links to #: 9, 11, 19
+TYPE t_N16
+#16 N16 [Active] {} Links to #: 12, 20, 21
+TYPE t_N18
+#17 N18 [Active] {} Links to #: 12, 13, 22, 23
+TYPE t_N17
+#18 N17 [Active] {} Links to #: 14, 20, 21
+TYPE t_N19
+#19 N19 [Active] {a} Links to #: 14, 15, 22, 23
+TYPE t_N20
+#20 N20 [Active] {} Links to #: 16, 18, 24, 25
+TYPE t_N21
+#21 N21 [Active] {} Links to #: 16, 18, 25
+TYPE t_N22
+#22 N22 [Active] {2a} Links to #: 17, 19, 26, 27
+TYPE t_N23
+#23 N23 [Active] {2a} Links to #: 17, 19, 27
+TYPE t_N24
+#24 N24 [Active] {a} Links to #: 20
+TYPE t_N25
+#25 N25 [Active] {3a} Links to #: 20, 21
+TYPE t_N26
+#26 N26 [Active] {4a} Links to #: 22
+TYPE t_N27
+#27 N27 [Active] {4a} Links to #: 22, 23
+-------------------------------------------------
+
+STEP 10
+
+Rule #23 * =a: a -> {a}(t_N19) * applied in instance #15 N15.
+Selected instance #19 as target of type t_N19 for rule #23.
+Rule #27 * =a: a -> {a}(t_N22), {a}(t_N23),  * applied in instance #19 N19.
+Selected instance #22 as target of type t_N22 for rule #27.
+Selected instance #23 as target of type t_N23 for rule #27.
+Rule #13 * =a: a -> {a}(t_N14), {a}(t_N15),  * applied in instance #9 N9.
+Selected instance #14 as target of type t_N14 for rule #13.
+Selected instance #15 as target of type t_N15 for rule #13.
+Rule #32 * =2a: 2a -> {a}(t_N26), {a}(t_N27),  * applied in instance #22 N22.
+Selected instance #26 as target of type t_N26 for rule #32.
+Selected instance #27 as target of type t_N27 for rule #32.
+Rule #34 * =2a: 2a -> {} * applied in instance #23 N23.
+Rule #21 * =a: a -> {} * applied in instance #14 N14.
+
+Configuration #10
+-------------------------------------------------
+TYPE t_N0
+#0 N0 [Active] {} Links to #: 1, 2
+TYPE t_N4
+#1 N4 [Active] {} Links to #: 0, 3, 8, 9
+TYPE t_N5
+#2 N5 [Active] {} Links to #: 0, 3, 9
+TYPE t_N1
+#3 N1 [Active] {} Links to #: 1, 2
+TYPE t_N2
+#4 N2 [Active] {} Links to #: 5, 6
+TYPE t_N6
+#5 N6 [Active] {} Links to #: 4, 7, 10, 11
+TYPE t_N7
+#6 N7 [Active] {} Links to #: 4, 7, 10
+TYPE t_N3
+#7 N3 [Active] {} Links to #: 5, 6
+TYPE t_N8
+#8 N8 [Active] {} Links to #: 1, 12, 13
+TYPE t_N9
+#9 N9 [Active] {} Links to #: 1, 2, 14, 15
+TYPE t_N10
+#10 N10 [Active] {} Links to #: 5, 6, 12, 13
+TYPE t_N11
+#11 N11 [Active] {} Links to #: 5, 14, 15
+TYPE t_N12
+#12 N12 [Active] {} Links to #: 8, 10, 16, 17
+TYPE t_N13
+#13 N13 [Active] {} Links to #: 8, 10, 17
+TYPE t_N14
+#14 N14 [Active] {a} Links to #: 9, 11, 18, 19
+TYPE t_N15
+#15 N15 [Active] {a} Links to #: 9, 11, 19
+TYPE t_N16
+#16 N16 [Active] {} Links to #: 12, 20, 21
+TYPE t_N18
+#17 N18 [Active] {} Links to #: 12, 13, 22, 23
+TYPE t_N17
+#18 N17 [Active] {} Links to #: 14, 20, 21
+TYPE t_N19
+#19 N19 [Active] {a} Links to #: 14, 15, 22, 23
+TYPE t_N20
+#20 N20 [Active] {} Links to #: 16, 18, 24, 25
+TYPE t_N21
+#21 N21 [Active] {} Links to #: 16, 18, 25
+TYPE t_N22
+#22 N22 [Active] {a} Links to #: 17, 19, 26, 27
+TYPE t_N23
+#23 N23 [Active] {a} Links to #: 17, 19, 27
+TYPE t_N24
+#24 N24 [Active] {a} Links to #: 20
+TYPE t_N25
+#25 N25 [Active] {3a} Links to #: 20, 21
+TYPE t_N26
+#26 N26 [Active] {5a} Links to #: 22
+TYPE t_N27
+#27 N27 [Active] {5a} Links to #: 22, 23
+-------------------------------------------------
+
+STEP 11
+
+Rule #33 * =a: a -> {} * applied in instance #22 N22.
+Rule #23 * =a: a -> {a}(t_N19) * applied in instance #15 N15.
+Selected instance #19 as target of type t_N19 for rule #23.
+Rule #27 * =a: a -> {a}(t_N22), {a}(t_N23),  * applied in instance #19 N19.
+Selected instance #22 as target of type t_N22 for rule #27.
+Selected instance #23 as target of type t_N23 for rule #27.
+Rule #35 * =a: a -> {a}(t_N27) * applied in instance #23 N23.
+Selected instance #27 as target of type t_N27 for rule #35.
+Rule #21 * =a: a -> {} * applied in instance #14 N14.
+
+Configuration #11
+-------------------------------------------------
+TYPE t_N0
+#0 N0 [Active] {} Links to #: 1, 2
+TYPE t_N4
+#1 N4 [Active] {} Links to #: 0, 3, 8, 9
+TYPE t_N5
+#2 N5 [Active] {} Links to #: 0, 3, 9
+TYPE t_N1
+#3 N1 [Active] {} Links to #: 1, 2
+TYPE t_N2
+#4 N2 [Active] {} Links to #: 5, 6
+TYPE t_N6
+#5 N6 [Active] {} Links to #: 4, 7, 10, 11
+TYPE t_N7
+#6 N7 [Active] {} Links to #: 4, 7, 10
+TYPE t_N3
+#7 N3 [Active] {} Links to #: 5, 6
+TYPE t_N8
+#8 N8 [Active] {} Links to #: 1, 12, 13
+TYPE t_N9
+#9 N9 [Active] {} Links to #: 1, 2, 14, 15
+TYPE t_N10
+#10 N10 [Active] {} Links to #: 5, 6, 12, 13
+TYPE t_N11
+#11 N11 [Active] {} Links to #: 5, 14, 15
+TYPE t_N12
+#12 N12 [Active] {} Links to #: 8, 10, 16, 17
+TYPE t_N13
+#13 N13 [Active] {} Links to #: 8, 10, 17
+TYPE t_N14
+#14 N14 [Active] {} Links to #: 9, 11, 18, 19
+TYPE t_N15
+#15 N15 [Active] {} Links to #: 9, 11, 19
+TYPE t_N16
+#16 N16 [Active] {} Links to #: 12, 20, 21
+TYPE t_N18
+#17 N18 [Active] {} Links to #: 12, 13, 22, 23
+TYPE t_N17
+#18 N17 [Active] {} Links to #: 14, 20, 21
+TYPE t_N19
+#19 N19 [Active] {a} Links to #: 14, 15, 22, 23
+TYPE t_N20
+#20 N20 [Active] {} Links to #: 16, 18, 24, 25
+TYPE t_N21
+#21 N21 [Active] {} Links to #: 16, 18, 25
+TYPE t_N22
+#22 N22 [Active] {a} Links to #: 17, 19, 26, 27
+TYPE t_N23
+#23 N23 [Active] {a} Links to #: 17, 19, 27
+TYPE t_N24
+#24 N24 [Active] {a} Links to #: 20
+TYPE t_N25
+#25 N25 [Active] {3a} Links to #: 20, 21
+TYPE t_N26
+#26 N26 [Active] {5a} Links to #: 22
+TYPE t_N27
+#27 N27 [Active] {6a} Links to #: 22, 23
+-------------------------------------------------
+
+STEP 12
+
+Rule #35 * =a: a -> {a}(t_N27) * applied in instance #23 N23.
+Selected instance #27 as target of type t_N27 for rule #35.
+Rule #33 * =a: a -> {} * applied in instance #22 N22.
+Rule #27 * =a: a -> {a}(t_N22), {a}(t_N23),  * applied in instance #19 N19.
+Selected instance #22 as target of type t_N22 for rule #27.
+Selected instance #23 as target of type t_N23 for rule #27.
+
+Configuration #12
+-------------------------------------------------
+TYPE t_N0
+#0 N0 [Active] {} Links to #: 1, 2
+TYPE t_N4
+#1 N4 [Active] {} Links to #: 0, 3, 8, 9
+TYPE t_N5
+#2 N5 [Active] {} Links to #: 0, 3, 9
+TYPE t_N1
+#3 N1 [Active] {} Links to #: 1, 2
+TYPE t_N2
+#4 N2 [Active] {} Links to #: 5, 6
+TYPE t_N6
+#5 N6 [Active] {} Links to #: 4, 7, 10, 11
+TYPE t_N7
+#6 N7 [Active] {} Links to #: 4, 7, 10
+TYPE t_N3
+#7 N3 [Active] {} Links to #: 5, 6
+TYPE t_N8
+#8 N8 [Active] {} Links to #: 1, 12, 13
+TYPE t_N9
+#9 N9 [Active] {} Links to #: 1, 2, 14, 15
+TYPE t_N10
+#10 N10 [Active] {} Links to #: 5, 6, 12, 13
+TYPE t_N11
+#11 N11 [Active] {} Links to #: 5, 14, 15
+TYPE t_N12
+#12 N12 [Active] {} Links to #: 8, 10, 16, 17
+TYPE t_N13
+#13 N13 [Active] {} Links to #: 8, 10, 17
+TYPE t_N14
+#14 N14 [Active] {} Links to #: 9, 11, 18, 19
+TYPE t_N15
+#15 N15 [Active] {} Links to #: 9, 11, 19
+TYPE t_N16
+#16 N16 [Active] {} Links to #: 12, 20, 21
+TYPE t_N18
+#17 N18 [Active] {} Links to #: 12, 13, 22, 23
+TYPE t_N17
+#18 N17 [Active] {} Links to #: 14, 20, 21
+TYPE t_N19
+#19 N19 [Active] {} Links to #: 14, 15, 22, 23
+TYPE t_N20
+#20 N20 [Active] {} Links to #: 16, 18, 24, 25
+TYPE t_N21
+#21 N21 [Active] {} Links to #: 16, 18, 25
+TYPE t_N22
+#22 N22 [Active] {a} Links to #: 17, 19, 26, 27
+TYPE t_N23
+#23 N23 [Active] {a} Links to #: 17, 19, 27
+TYPE t_N24
+#24 N24 [Active] {a} Links to #: 20
+TYPE t_N25
+#25 N25 [Active] {3a} Links to #: 20, 21
+TYPE t_N26
+#26 N26 [Active] {5a} Links to #: 22
+TYPE t_N27
+#27 N27 [Active] {7a} Links to #: 22, 23
+-------------------------------------------------
+
+STEP 13
+
+Rule #33 * =a: a -> {} * applied in instance #22 N22.
+Rule #35 * =a: a -> {a}(t_N27) * applied in instance #23 N23.
+Selected instance #27 as target of type t_N27 for rule #35.
+
+Configuration #13
+-------------------------------------------------
+TYPE t_N0
+#0 N0 [Active] {} Links to #: 1, 2
+TYPE t_N4
+#1 N4 [Active] {} Links to #: 0, 3, 8, 9
+TYPE t_N5
+#2 N5 [Active] {} Links to #: 0, 3, 9
+TYPE t_N1
+#3 N1 [Active] {} Links to #: 1, 2
+TYPE t_N2
+#4 N2 [Active] {} Links to #: 5, 6
+TYPE t_N6
+#5 N6 [Active] {} Links to #: 4, 7, 10, 11
+TYPE t_N7
+#6 N7 [Active] {} Links to #: 4, 7, 10
+TYPE t_N3
+#7 N3 [Active] {} Links to #: 5, 6
+TYPE t_N8
+#8 N8 [Active] {} Links to #: 1, 12, 13
+TYPE t_N9
+#9 N9 [Active] {} Links to #: 1, 2, 14, 15
+TYPE t_N10
+#10 N10 [Active] {} Links to #: 5, 6, 12, 13
+TYPE t_N11
+#11 N11 [Active] {} Links to #: 5, 14, 15
+TYPE t_N12
+#12 N12 [Active] {} Links to #: 8, 10, 16, 17
+TYPE t_N13
+#13 N13 [Active] {} Links to #: 8, 10, 17
+TYPE t_N14
+#14 N14 [Active] {} Links to #: 9, 11, 18, 19
+TYPE t_N15
+#15 N15 [Active] {} Links to #: 9, 11, 19
+TYPE t_N16
+#16 N16 [Active] {} Links to #: 12, 20, 21
+TYPE t_N18
+#17 N18 [Active] {} Links to #: 12, 13, 22, 23
+TYPE t_N17
+#18 N17 [Active] {} Links to #: 14, 20, 21
+TYPE t_N19
+#19 N19 [Active] {} Links to #: 14, 15, 22, 23
+TYPE t_N20
+#20 N20 [Active] {} Links to #: 16, 18, 24, 25
+TYPE t_N21
+#21 N21 [Active] {} Links to #: 16, 18, 25
+TYPE t_N22
+#22 N22 [Active] {} Links to #: 17, 19, 26, 27
+TYPE t_N23
+#23 N23 [Active] {} Links to #: 17, 19, 27
+TYPE t_N24
+#24 N24 [Active] {a} Links to #: 20
+TYPE t_N25
+#25 N25 [Active] {3a} Links to #: 20, 21
+TYPE t_N26
+#26 N26 [Active] {5a} Links to #: 22
+TYPE t_N27
+#27 N27 [Active] {8a} Links to #: 22, 23
+-------------------------------------------------
+System halted at step 13 (no further rule could be applied, i.e. reached a deadlock).
+Simulation complete at step 13.

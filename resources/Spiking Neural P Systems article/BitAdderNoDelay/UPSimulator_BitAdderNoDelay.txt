@@ -1,0 +1,31 @@
+Environment{
+	Membrane N0{
+		Object a^2;
+		Tunnel Nd;
+		Rule r1= a^2/ a^2 -> ( a, go Nd );
+	}
+	
+	Membrane Nd{
+		Tunnel N2;
+		Rule r1= a/ a -> ( a, go N2 );
+	}
+	
+	Membrane N1{
+		Object a^3;
+		Tunnel N2;
+		Rule r1= a^3/ a^2 -> ( a, go N2 );
+		Rule r2= a/ a -> ( a, go N2 );
+	}
+	
+	Membrane N2{
+		Tunnel O3;
+		Rule r1= a^3/ a^2 -> ( a, go O3 );
+		
+		Rule r2= a^2/ a -> ( lambda, go all );
+		
+		Rule r3= a/ a -> ( a, go O3 );
+	}
+	
+	Membrane O3{
+	}
+}

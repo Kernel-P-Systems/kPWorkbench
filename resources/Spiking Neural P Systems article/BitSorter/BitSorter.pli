@@ -1,0 +1,81 @@
+@model<spiking_psystems>
+
+def main()
+{
+        call init_topology();
+        call init_rules();
+}
+
+def init_topology()
+{
+        @mu = N0, N1, N2, N3;
+        @mu += N4, N5, N6, N7, N8, N9, N10, N11;
+        @mu += N12, N13, N14, N15, N16, N17, N18, N19;
+        @mu += N20, N21, N22, N23, N24, N25, N26, N27;
+
+        @ms(N0) = a*8;
+        @ms(N1) = a*5;
+        @ms(N2) = a;
+        @ms(N3) = a*3;
+        
+        @marcs = (N0, N4); @marcs += (N0, N5);
+        @marcs += (N1, N4); @marcs += (N1, N5);
+        @marcs += (N2, N6); @marcs += (N2, N7);
+        @marcs += (N3, N6); @marcs += (N3, N7);
+
+        @marcs += (N4, N8); @marcs += (N4, N9);
+        @marcs += (N5, N9);
+        @marcs += (N6, N10); @marcs += (N6, N11);
+        @marcs += (N7, N10);
+
+        @marcs += (N8, N12); @marcs += (N8, N13);
+        @marcs += (N9, N14); @marcs += (N9, N15);
+        @marcs += (N10, N12); @marcs += (N10, N13);
+        @marcs += (N11, N14); @marcs += (N11, N15);
+
+        @marcs += (N12, N16); @marcs += (N12, N18);
+        @marcs += (N13, N18);
+        @marcs += (N14, N17); @marcs += (N14, N19);
+        @marcs += (N15, N19);
+
+        @marcs += (N16, N20); @marcs += (N16, N21);
+        @marcs += (N17, N20); @marcs += (N17, N21);
+        @marcs += (N18, N22); @marcs += (N18, N23);
+        @marcs += (N19, N22); @marcs += (N19, N23);
+
+        @marcs += (N20, N24); @marcs += (N20, N25);
+        @marcs += (N21, N25);
+        @marcs += (N22, N26); @marcs += (N22, N27);
+        @marcs += (N23, N27);
+}
+
+def init_rules()
+{
+        [a --> a]'N0 "a+";
+        [a --> a]'N1 "a+";
+        [a --> a]'N2 "a+";
+        [a --> a]'N3 "a+";
+
+        [a*2 --> a]'N4;  [a --> #]'N4;
+        [a*2 --> a]'N6;  [a --> #]'N6;
+        [a*2 --> a]'N12; [a --> #]'N12;
+        [a*2 --> a]'N14; [a --> #]'N14;
+        [a*2 --> a]'N20; [a --> #]'N20;
+        [a*2 --> a]'N22; [a --> #]'N22;
+
+        [a*2 --> #]'N5;  [a --> a]'N5;
+        [a*2 --> #]'N7;  [a --> a]'N7;
+        [a*2 --> #]'N13; [a --> a]'N13;
+        [a*2 --> #]'N15; [a --> a]'N15;
+        [a*2 --> #]'N21; [a --> a]'N21;
+        [a*2 --> #]'N23; [a --> a]'N23;
+
+        [a --> a]'N8;
+        [a --> a]'N9;
+        [a --> a]'N10;
+        [a --> a]'N11;
+        [a --> a]'N16;
+        [a --> a]'N17;
+        [a --> a]'N18;
+        [a --> a]'N19;
+}

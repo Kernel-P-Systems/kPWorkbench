@@ -1,0 +1,45 @@
+type t_bit1 {
+    choice {
+        >=1a : 1a -> 1a (t_xor_gate), 1a (t_and_gate) .
+    }
+}
+
+type t_bit2 {
+    choice {
+        >=1a : 1a -> 1a (t_xor_gate), 1a (t_and_gate) .
+    }
+}
+
+type t_xor_gate {
+    choice {
+        =2a : 2a -> .
+        =1a : 1a -> 1a (t_out_sum) .
+    }
+}
+
+type t_and_gate {
+    choice {
+        =2a : 2a -> 1a (t_out_carry) .
+        =1a : 1a -> .
+    }
+}
+
+type t_out_sum {
+}
+
+type t_out_carry {
+}
+
+bit1 {1a} (t_bit1) .
+bit2 {1a} (t_bit2) .
+xor_gate {} (t_xor_gate) .
+and_gate {} (t_and_gate) .
+out_sum {} (t_out_sum) .
+out_carry {} (t_out_carry) .
+
+bit1 - xor_gate .
+bit1 - and_gate .
+bit2 - xor_gate .
+bit2 - and_gate .
+xor_gate - out_sum .
+and_gate - out_carry .

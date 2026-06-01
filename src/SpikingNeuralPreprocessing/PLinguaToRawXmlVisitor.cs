@@ -13,9 +13,6 @@ internal class PLinguaToRawXmlVisitor : PLinguaSNPBaseVisitor<object>
     private List<XElement> Links = new List<XElement>();
     private Dictionary<string, string> InitialSpikes = new Dictionary<string, string>();
 
-    // ---------------------------------------------------------
-    // 1. GLOBAL STRUCTURE & CONSTANTS
-    // ---------------------------------------------------------
     public override object VisitFunctionDecl(PLinguaSNPParser.FunctionDeclContext context)
     {
         if (context.paramList() != null)
@@ -28,9 +25,6 @@ internal class PLinguaToRawXmlVisitor : PLinguaSNPBaseVisitor<object>
         return base.VisitFunctionDecl(context);
     }
 
-    // ---------------------------------------------------------
-    // 2. COMPARTMENTS (Neurons) & MULTISETS
-    // ---------------------------------------------------------
     public override object VisitMuStmt(PLinguaSNPParser.MuStmtContext context)
     {
         string loop = context.indexLoop() != null ? VisitIndexLoop(context.indexLoop()) : "";
@@ -74,9 +68,6 @@ internal class PLinguaToRawXmlVisitor : PLinguaSNPBaseVisitor<object>
         return null;
     }
 
-    // ---------------------------------------------------------
-    // 3. SYNAPSES
-    // ---------------------------------------------------------
     public override object VisitMarcsStmt(PLinguaSNPParser.MarcsStmtContext context)
     {
         string sourceId = TranslateNeuronId(context.neuronId(0));
@@ -99,10 +90,6 @@ internal class PLinguaToRawXmlVisitor : PLinguaSNPBaseVisitor<object>
         Links.Add(link);
         return null;
     }
-
-    // ---------------------------------------------------------
-    // 4. RULE TRANSLATION (Pure AST mapping)
-    // ---------------------------------------------------------
     public override object VisitRuleStmt(PLinguaSNPParser.RuleStmtContext context)
     {
         string lhsMultiset = TranslateMultiset(context.multiset(0));
@@ -180,9 +167,6 @@ internal class PLinguaToRawXmlVisitor : PLinguaSNPBaseVisitor<object>
         return null;
     }
 
-    // ---------------------------------------------------------
-    // UTILITY TRANSLATORS
-    // ---------------------------------------------------------
     private string TranslateMultiset(PLinguaSNPParser.MultisetContext context)
     {
         var terms = new List<string>();
@@ -245,9 +229,6 @@ internal class PLinguaToRawXmlVisitor : PLinguaSNPBaseVisitor<object>
         return $"${cleanMath}$";
     }
 
-    // ---------------------------------------------------------
-    // 5. XML GENERATION (Raw AST Format)
-    // ---------------------------------------------------------
     public XDocument GenerateXmlCode()
     {
         var snpSystem = new XElement("snpSystem", new XAttribute("type", "plingua"));
@@ -313,9 +294,6 @@ internal class PLinguaToRawXmlVisitor : PLinguaSNPBaseVisitor<object>
         return new XDocument(new XDeclaration("1.0", "utf-8", "yes"), snpSystem);
     }
 
-    // ---------------------------------------------------------
-    // AST HELPERS
-    // ---------------------------------------------------------
     private string GenerateDummyIterator(string content)
     {
         if (!content.Contains("$")) return "";

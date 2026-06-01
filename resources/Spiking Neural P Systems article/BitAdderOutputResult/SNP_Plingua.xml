@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<snpSystem type="plingua">
+  <alphabet>
+    <spike symbol="a" />
+  </alphabet>
+  <neuronTypes>
+    <neuronType id="t_bit1">
+      <rules>
+        <rule regex="a+" consumed="1" produced="1" delay="0" type="spiking" id="r1" />
+      </rules>
+    </neuronType>
+    <neuronType id="t_bit2">
+      <rules>
+        <rule regex="a+" consumed="1" produced="1" delay="0" type="spiking" id="r1" />
+      </rules>
+    </neuronType>
+    <neuronType id="t_xor_gate">
+      <rules>
+        <rule regex="2a" consumed="2" produced="0" delay="0" type="forgetting" id="r1" />
+        <rule regex="1a" consumed="1" produced="1" delay="0" type="spiking" id="r2" />
+      </rules>
+    </neuronType>
+    <neuronType id="t_and_gate">
+      <rules>
+        <rule regex="2a" consumed="2" produced="1" delay="0" type="spiking" id="r1" />
+        <rule regex="1a" consumed="1" produced="0" delay="0" type="forgetting" id="r2" />
+      </rules>
+    </neuronType>
+    <neuronType id="t_out_sum">
+      <rules />
+    </neuronType>
+    <neuronType id="t_out_carry">
+      <rules />
+    </neuronType>
+  </neuronTypes>
+  <neurons>
+    <neuron id="bit1" type="t_bit1" initialSpikes="1" />
+    <neuron id="bit2" type="t_bit2" initialSpikes="1" />
+    <neuron id="xor_gate" type="t_xor_gate" initialSpikes="" />
+    <neuron id="and_gate" type="t_and_gate" initialSpikes="" />
+    <neuron id="out_sum" type="t_out_sum" initialSpikes="" />
+    <neuron id="out_carry" type="t_out_carry" initialSpikes="" />
+  </neurons>
+  <synapses>
+    <synapse source="bit1" target="xor_gate" />
+    <synapse source="bit1" target="and_gate" />
+    <synapse source="bit2" target="xor_gate" />
+    <synapse source="bit2" target="and_gate" />
+    <synapse source="xor_gate" target="out_sum" />
+    <synapse source="and_gate" target="out_carry" />
+  </synapses>
+</snpSystem>

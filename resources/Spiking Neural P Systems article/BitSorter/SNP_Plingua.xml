@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<snpSystem type="plingua">
+  <alphabet>
+    <spike symbol="a" />
+  </alphabet>
+  <neuronTypes>
+    <neuronType id="t_N0">
+      <rules>
+        <rule regex="a+" consumed="1" produced="1" delay="0" type="spiking" id="r1" />
+      </rules>
+    </neuronType>
+    <neuronType id="t_N1">
+      <rules>
+        <rule regex="a+" consumed="1" produced="1" delay="0" type="spiking" id="r1" />
+      </rules>
+    </neuronType>
+    <neuronType id="t_N2">
+      <rules>
+        <rule regex="a+" consumed="1" produced="1" delay="0" type="spiking" id="r1" />
+      </rules>
+    </neuronType>
+    <neuronType id="t_N3">
+      <rules>
+        <rule regex="a+" consumed="1" produced="1" delay="0" type="spiking" id="r1" />
+      </rules>
+    </neuronType>
+    <neuronType id="t_N4">
+      <rules>
+        <rule regex="2a" consumed="2" produced="1" delay="0" type="spiking" id="r1" />
+        <rule regex="1a" consumed="1" produced="0" delay="0" type="forgetting" id="r2" />
+      </rules>
+    </neuronType>
+    <neuronType id="t_N5">
+      <rules>
+        <rule regex="2a" consumed="2" produced="0" delay="0" type="forgetting" id="r1" />
+        <rule regex="1a" consumed="1" produced="1" delay="0" type="spiking" id="r2" />
+      </rules>
+    </neuronType>
+    <neuronType id="t_N6">
+      <rules>
+        <rule regex="2a" consumed="2" produced="1" delay="0" type="spiking" id="r1" />
+        <rule regex="1a" consumed="1" produced="0" delay="0" type="forgetting" id="r2" />
+      </rules>
+    </neuronType>
+    <neuronType id="t_N7">
+      <rules>
+        <rule regex="2a" consumed="2" produced="0" delay="0" type="forgetting" id="r1" />
+        <rule regex="1a" consumed="1" produced="1" delay="0" type="spiking" id="r2" />
+      </rules>
+    </neuronType>
+    <neuronType id="t_N8">
+      <rules>
+        <rule regex="1a" consumed="1" produced="1" delay="0" type="spiking" id="r1" />
+      </rules>
+    </neuronType>
+    <neuronType id="t_N9">
+      <rules>
+        <rule regex="1a" consumed="1" produced="1" delay="0" type="spiking" id="r1" />
+      </rules>
+    </neuronType>
+    <neuronType id="t_N10">
+      <rules>
+        <rule regex="1a" consumed="1" produced="1" delay="0" type="spiking" id="r1" />
+      </rules>
+    </neuronType>
+    <neuronType id="t_N11">
+      <rules>
+        <rule regex="1a" consumed="1" produced="1" delay="0" type="spiking" id="r1" />
+      </rules>
+    </neuronType>
+    <neuronType id="t_N12">
+      <rules>
+        <rule regex="2a" consumed="2" produced="1" delay="0" type="spiking" id="r1" />
+        <rule regex="1a" consumed="1" produced="0" delay="0" type="forgetting" id="r2" />
+      </rules>
+    </neuronType>
+    <neuronType id="t_N13">
+      <rules>
+        <rule regex="2a" consumed="2" produced="0" delay="0" type="forgetting" id="r1" />
+        <rule regex="1a" consumed="1" produced="1" delay="0" type="spiking" id="r2" />
+      </rules>
+    </neuronType>
+    <neuronType id="t_N14">
+      <rules>
+        <rule regex="2a" consumed="2" produced="1" delay="0" type="spiking" id="r1" />
+        <rule regex="1a" consumed="1" produced="0" delay="0" type="forgetting" id="r2" />
+      </rules>
+    </neuronType>
+    <neuronType id="t_N15">
+      <rules>
+        <rule regex="2a" consumed="2" produced="0" delay="0" type="forgetting" id="r1" />
+        <rule regex="1a" consumed="1" produced="1" delay="0" type="spiking" id="r2" />
+      </rules>
+    </neuronType>
+    <neuronType id="t_N16">
+      <rules>
+        <rule regex="1a" consumed="1" produced="1" delay="0" type="spiking" id="r1" />
+      </rules>
+    </neuronType>
+    <neuronType id="t_N17">
+      <rules>
+        <rule regex="1a" consumed="1" produced="1" delay="0" type="spiking" id="r1" />
+      </rules>
+    </neuronType>
+    <neuronType id="t_N18">
+      <rules>
+        <rule regex="1a" consumed="1" produced="1" delay="0" type="spiking" id="r1" />
+      </rules>
+    </neuronType>
+    <neuronType id="t_N19">
+      <rules>
+        <rule regex="1a" consumed="1" produced="1" delay="0" type="spiking" id="r1" />
+      </rules>
+    </neuronType>
+    <neuronType id="t_N20">
+      <rules>
+        <rule regex="2a" consumed="2" produced="1" delay="0" type="spiking" id="r1" />
+        <rule regex="1a" consumed="1" produced="0" delay="0" type="forgetting" id="r2" />
+      </rules>
+    </neuronType>
+    <neuronType id="t_N21">
+      <rules>
+        <rule regex="2a" consumed="2" produced="0" delay="0" type="forgetting" id="r1" />
+        <rule regex="1a" consumed="1" produced="1" delay="0" type="spiking" id="r2" />
+      </rules>
+    </neuronType>
+    <neuronType id="t_N22">
+      <rules>
+        <rule regex="2a" consumed="2" produced="1" delay="0" type="spiking" id="r1" />
+        <rule regex="1a" consumed="1" produced="0" delay="0" type="forgetting" id="r2" />
+      </rules>
+    </neuronType>
+    <neuronType id="t_N23">
+      <rules>
+        <rule regex="2a" consumed="2" produced="0" delay="0" type="forgetting" id="r1" />
+        <rule regex="1a" consumed="1" produced="1" delay="0" type="spiking" id="r2" />
+      </rules>
+    </neuronType>
+    <neuronType id="t_N24">
+      <rules />
+    </neuronType>
+    <neuronType id="t_N25">
+      <rules />
+    </neuronType>
+    <neuronType id="t_N26">
+      <rules />
+    </neuronType>
+    <neuronType id="t_N27">
+      <rules />
+    </neuronType>
+  </neuronTypes>
+  <neurons>
+    <neuron id="N0" type="t_N0" initialSpikes="8" />
+    <neuron id="N1" type="t_N1" initialSpikes="5" />
+    <neuron id="N2" type="t_N2" initialSpikes="1" />
+    <neuron id="N3" type="t_N3" initialSpikes="3" />
+    <neuron id="N4" type="t_N4" initialSpikes="" />
+    <neuron id="N5" type="t_N5" initialSpikes="" />
+    <neuron id="N6" type="t_N6" initialSpikes="" />
+    <neuron id="N7" type="t_N7" initialSpikes="" />
+    <neuron id="N8" type="t_N8" initialSpikes="" />
+    <neuron id="N9" type="t_N9" initialSpikes="" />
+    <neuron id="N10" type="t_N10" initialSpikes="" />
+    <neuron id="N11" type="t_N11" initialSpikes="" />
+    <neuron id="N12" type="t_N12" initialSpikes="" />
+    <neuron id="N13" type="t_N13" initialSpikes="" />
+    <neuron id="N14" type="t_N14" initialSpikes="" />
+    <neuron id="N15" type="t_N15" initialSpikes="" />
+    <neuron id="N16" type="t_N16" initialSpikes="" />
+    <neuron id="N17" type="t_N17" initialSpikes="" />
+    <neuron id="N18" type="t_N18" initialSpikes="" />
+    <neuron id="N19" type="t_N19" initialSpikes="" />
+    <neuron id="N20" type="t_N20" initialSpikes="" />
+    <neuron id="N21" type="t_N21" initialSpikes="" />
+    <neuron id="N22" type="t_N22" initialSpikes="" />
+    <neuron id="N23" type="t_N23" initialSpikes="" />
+    <neuron id="N24" type="t_N24" initialSpikes="" />
+    <neuron id="N25" type="t_N25" initialSpikes="" />
+    <neuron id="N26" type="t_N26" initialSpikes="" />
+    <neuron id="N27" type="t_N27" initialSpikes="" />
+  </neurons>
+  <synapses>
+    <synapse source="N0" target="N4" />
+    <synapse source="N0" target="N5" />
+    <synapse source="N1" target="N4" />
+    <synapse source="N1" target="N5" />
+    <synapse source="N2" target="N6" />
+    <synapse source="N2" target="N7" />
+    <synapse source="N3" target="N6" />
+    <synapse source="N3" target="N7" />
+    <synapse source="N4" target="N8" />
+    <synapse source="N4" target="N9" />
+    <synapse source="N5" target="N9" />
+    <synapse source="N6" target="N10" />
+    <synapse source="N6" target="N11" />
+    <synapse source="N7" target="N10" />
+    <synapse source="N8" target="N12" />
+    <synapse source="N8" target="N13" />
+    <synapse source="N9" target="N14" />
+    <synapse source="N9" target="N15" />
+    <synapse source="N10" target="N12" />
+    <synapse source="N10" target="N13" />
+    <synapse source="N11" target="N14" />
+    <synapse source="N11" target="N15" />
+    <synapse source="N12" target="N16" />
+    <synapse source="N12" target="N18" />
+    <synapse source="N13" target="N18" />
+    <synapse source="N14" target="N17" />
+    <synapse source="N14" target="N19" />
+    <synapse source="N15" target="N19" />
+    <synapse source="N16" target="N20" />
+    <synapse source="N16" target="N21" />
+    <synapse source="N17" target="N20" />
+    <synapse source="N17" target="N21" />
+    <synapse source="N18" target="N22" />
+    <synapse source="N18" target="N23" />
+    <synapse source="N19" target="N22" />
+    <synapse source="N19" target="N23" />
+    <synapse source="N20" target="N24" />
+    <synapse source="N20" target="N25" />
+    <synapse source="N21" target="N25" />
+    <synapse source="N22" target="N26" />
+    <synapse source="N22" target="N27" />
+    <synapse source="N23" target="N27" />
+  </synapses>
+</snpSystem>

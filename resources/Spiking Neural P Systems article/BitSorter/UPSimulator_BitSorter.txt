@@ -1,0 +1,124 @@
+Environment{
+	Membrane N0{
+		Object a^8;
+		Tunnel N4, N5;
+		Rule r1 = a+/ a -> ( a, go N4 & N5 );
+	}
+	Membrane N1{
+		Object a^5;
+		Tunnel N4, N5;
+		Rule r1 = a+/ a -> ( a, go N4 & N5 );
+	}
+	Membrane N2{
+		Object a;
+		Tunnel N6, N7;
+		Rule r1 = a+/ a -> ( a, go N6 & N7 );
+	}
+	Membrane N3{
+		Object a^3;
+		Tunnel N6, N7;
+		Rule r1 = a+/ a -> ( a, go N6 & N7 );
+	}
+
+	Membrane N4{
+		Tunnel N8, N9;
+		Rule r1 = a^2/ a^2 -> ( a, go N8 & N9 );
+		Rule r2 = a/ a -> ( lambda, go all );
+	}
+	Membrane N5{
+		Tunnel N9;
+		Rule r1 = a^2/ a^2 -> ( lambda, go all );
+		Rule r2 = a/ a -> ( a, go N9 );
+	}
+	Membrane N6{
+		Tunnel N10, N11;
+		Rule r1 = a^2/ a^2 -> ( a, go N10 & N11 );
+		Rule r2 = a/ a -> ( lambda, go all );
+	}
+	Membrane N7{
+		Tunnel N10;
+		Rule r1 = a^2/ a^2 -> ( lambda, go all );
+		Rule r2 = a/ a -> ( a, go N10 );
+	}
+
+	Membrane N8{
+		Tunnel N12, N13;
+		Rule r1 = a/ a -> ( a, go N12 & N13 );
+	}
+	Membrane N9{
+		Tunnel N14, N15;
+		Rule r1 = a/ a -> ( a, go N14 & N15 );
+	}
+	Membrane N10{
+		Tunnel N12, N13;
+		Rule r1 = a/ a -> ( a, go N12 & N13 );
+	}
+	Membrane N11{
+		Tunnel N14, N15;
+		Rule r1 = a/ a -> ( a, go N14 & N15 );
+	}
+
+	Membrane N12{
+		Tunnel N16, N18;
+		Rule r1 = a^2/ a^2 -> ( a, go N16 & N18 );
+		Rule r2 = a/ a -> ( lambda, go all );
+	}
+	Membrane N13{
+		Tunnel N18;
+		Rule r1 = a^2/ a^2 -> ( lambda, go all );
+		Rule r2 = a/ a -> ( a, go N18 );
+	}
+	Membrane N14{
+		Tunnel N17, N19;
+		Rule r1 = a^2/ a^2 -> ( a, go N17 & N19 );
+		Rule r2 = a/ a -> ( lambda, go all );
+	}
+	Membrane N15{
+		Tunnel N19;
+		Rule r1 = a^2/ a^2 -> ( lambda, go all );
+		Rule r2 = a/ a -> ( a, go N19 );
+	}
+
+	Membrane N16{
+		Tunnel N20, N21;
+		Rule r1 = a/ a -> ( a, go N20 & N21 );
+	}
+	Membrane N17{
+		Tunnel N20, N21;
+		Rule r1 = a/ a -> ( a, go N20 & N21 );
+	}
+	Membrane N18{
+		Tunnel N22, N23;
+		Rule r1 = a/ a -> ( a, go N22 & N23 );
+	}
+	Membrane N19{
+		Tunnel N22, N23;
+		Rule r1 = a/ a -> ( a, go N22 & N23 );
+	}
+
+	Membrane N20{
+		Tunnel N24, N25;
+		Rule r1 = a^2/ a^2 -> ( a, go N24 & N25 );
+		Rule r2 = a/ a -> ( lambda, go all );
+	}
+	Membrane N21{
+		Tunnel N25;
+		Rule r1 = a^2/ a^2 -> ( lambda, go all );
+		Rule r2 = a/ a -> ( a, go N25 );
+	}
+	Membrane N22{
+		Tunnel N26, N27;
+		Rule r1 = a^2/ a^2 -> ( a, go N26 & N27 );
+		Rule r2 = a/ a -> ( lambda, go all );
+	}
+	Membrane N23{
+		Tunnel N27;
+		Rule r1 = a^2/ a^2 -> ( lambda, go all );
+		Rule r2 = a/ a -> ( a, go N27 );
+	}
+
+	Membrane N24{}
+	Membrane N25{}
+	Membrane N26{}
+	Membrane N27{}
+}

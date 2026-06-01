@@ -1,0 +1,28 @@
+Environment{
+	Membrane in1{
+		Object a^5;
+		Tunnel min, diff;
+		Rule r1= a+/ a -> ( a, go min & diff );
+	}
+	
+	Membrane in2{
+		Object a^3;
+		Tunnel min, diff;
+		Rule r1= a+/ a -> ( a, go min & diff );
+	}
+	
+	Membrane min{
+		Tunnel out_min, out_max;
+		Rule r1= a^2/ a^2 -> ( a, go out_min & out_max );
+		Rule r2= a/ a -> ( lambda, go all );
+	}
+	
+	Membrane diff{
+		Tunnel out_max;
+		Rule r1= a^2/ a^2 -> ( lambda, go all );
+		Rule r2= a/ a -> ( a, go out_max );
+	}
+	
+	Membrane out_min{}
+	Membrane out_max{}
+}

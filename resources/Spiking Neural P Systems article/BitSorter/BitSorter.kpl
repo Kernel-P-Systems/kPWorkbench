@@ -1,0 +1,239 @@
+type t_N0 {
+    choice {
+        >=1a : 1a -> 1a (t_N4), 1a (t_N5) .
+    }
+}
+
+type t_N1 {
+    choice {
+        >=1a : 1a -> 1a (t_N4), 1a (t_N5) .
+    }
+}
+
+type t_N2 {
+    choice {
+        >=1a : 1a -> 1a (t_N6), 1a (t_N7) .
+    }
+}
+
+type t_N3 {
+    choice {
+        >=1a : 1a -> 1a (t_N6), 1a (t_N7) .
+    }
+}
+
+type t_N4 {
+    choice {
+        =2a : 2a -> 1a (t_N8), 1a (t_N9) .
+        =1a : 1a -> .
+    }
+}
+
+type t_N5 {
+    choice {
+        =2a : 2a -> .
+        =1a : 1a -> 1a (t_N9) .
+    }
+}
+
+type t_N6 {
+    choice {
+        =2a : 2a -> 1a (t_N10), 1a (t_N11) .
+        =1a : 1a -> .
+    }
+}
+
+type t_N7 {
+    choice {
+        =2a : 2a -> .
+        =1a : 1a -> 1a (t_N10) .
+    }
+}
+
+type t_N8 {
+    choice {
+        =1a : 1a -> 1a (t_N12), 1a (t_N13) .
+    }
+}
+
+type t_N9 {
+    choice {
+        =1a : 1a -> 1a (t_N14), 1a (t_N15) .
+    }
+}
+
+type t_N10 {
+    choice {
+        =1a : 1a -> 1a (t_N12), 1a (t_N13) .
+    }
+}
+
+type t_N11 {
+    choice {
+        =1a : 1a -> 1a (t_N14), 1a (t_N15) .
+    }
+}
+
+type t_N12 {
+    choice {
+        =2a : 2a -> 1a (t_N16), 1a (t_N18) .
+        =1a : 1a -> .
+    }
+}
+
+type t_N13 {
+    choice {
+        =2a : 2a -> .
+        =1a : 1a -> 1a (t_N18) .
+    }
+}
+
+type t_N14 {
+    choice {
+        =2a : 2a -> 1a (t_N17), 1a (t_N19) .
+        =1a : 1a -> .
+    }
+}
+
+type t_N15 {
+    choice {
+        =2a : 2a -> .
+        =1a : 1a -> 1a (t_N19) .
+    }
+}
+
+type t_N16 {
+    choice {
+        =1a : 1a -> 1a (t_N20), 1a (t_N21) .
+    }
+}
+
+type t_N17 {
+    choice {
+        =1a : 1a -> 1a (t_N20), 1a (t_N21) .
+    }
+}
+
+type t_N18 {
+    choice {
+        =1a : 1a -> 1a (t_N22), 1a (t_N23) .
+    }
+}
+
+type t_N19 {
+    choice {
+        =1a : 1a -> 1a (t_N22), 1a (t_N23) .
+    }
+}
+
+type t_N20 {
+    choice {
+        =2a : 2a -> 1a (t_N24), 1a (t_N25) .
+        =1a : 1a -> .
+    }
+}
+
+type t_N21 {
+    choice {
+        =2a : 2a -> .
+        =1a : 1a -> 1a (t_N25) .
+    }
+}
+
+type t_N22 {
+    choice {
+        =2a : 2a -> 1a (t_N26), 1a (t_N27) .
+        =1a : 1a -> .
+    }
+}
+
+type t_N23 {
+    choice {
+        =2a : 2a -> .
+        =1a : 1a -> 1a (t_N27) .
+    }
+}
+
+type t_N24 {
+}
+
+type t_N25 {
+}
+
+type t_N26 {
+}
+
+type t_N27 {
+}
+
+N0 {8a} (t_N0) .
+N1 {5a} (t_N1) .
+N2 {1a} (t_N2) .
+N3 {3a} (t_N3) .
+N4 {} (t_N4) .
+N5 {} (t_N5) .
+N6 {} (t_N6) .
+N7 {} (t_N7) .
+N8 {} (t_N8) .
+N9 {} (t_N9) .
+N10 {} (t_N10) .
+N11 {} (t_N11) .
+N12 {} (t_N12) .
+N13 {} (t_N13) .
+N14 {} (t_N14) .
+N15 {} (t_N15) .
+N16 {} (t_N16) .
+N17 {} (t_N17) .
+N18 {} (t_N18) .
+N19 {} (t_N19) .
+N20 {} (t_N20) .
+N21 {} (t_N21) .
+N22 {} (t_N22) .
+N23 {} (t_N23) .
+N24 {} (t_N24) .
+N25 {} (t_N25) .
+N26 {} (t_N26) .
+N27 {} (t_N27) .
+
+N0 - N4 .
+N0 - N5 .
+N1 - N4 .
+N1 - N5 .
+N2 - N6 .
+N2 - N7 .
+N3 - N6 .
+N3 - N7 .
+N4 - N8 .
+N4 - N9 .
+N5 - N9 .
+N6 - N10 .
+N6 - N11 .
+N7 - N10 .
+N8 - N12 .
+N8 - N13 .
+N9 - N14 .
+N9 - N15 .
+N10 - N12 .
+N10 - N13 .
+N11 - N14 .
+N11 - N15 .
+N12 - N16 .
+N12 - N18 .
+N13 - N18 .
+N14 - N17 .
+N14 - N19 .
+N15 - N19 .
+N16 - N20 .
+N16 - N21 .
+N17 - N20 .
+N17 - N21 .
+N18 - N22 .
+N18 - N23 .
+N19 - N22 .
+N19 - N23 .
+N20 - N24 .
+N20 - N25 .
+N21 - N25 .
+N22 - N26 .
+N22 - N27 .
+N23 - N27 .

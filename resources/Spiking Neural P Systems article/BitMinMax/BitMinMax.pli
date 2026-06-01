@@ -1,0 +1,39 @@
+@model<spiking_psystems>
+
+def main()
+{
+        call init_topology();
+        call init_rules();
+}
+
+def init_topology()
+{
+
+        @mu = in1, in2, MIN_gate, DIFF_gate, out_min, out_max;
+
+        @ms(in1) = a*5;
+        @ms(in2) = a*3;
+
+        @marcs = (in1, MIN_gate);
+        @marcs += (in1, DIFF_gate);
+        @marcs += (in2, MIN_gate);
+        @marcs += (in2, DIFF_gate);
+        
+        @marcs += (MIN_gate, out_min);
+        @marcs += (MIN_gate, out_max);
+        
+        @marcs += (DIFF_gate, out_max);
+}
+
+def init_rules()
+{
+		[a --> a]'in1 "a+";
+		[a --> a]'in2 "a+";
+
+        [a*2 --> a]'MIN_gate;
+
+        [a --> #]'MIN_gate;
+
+        [a*2 --> #]'DIFF_gate;
+        [a --> a]'DIFF_gate;
+}

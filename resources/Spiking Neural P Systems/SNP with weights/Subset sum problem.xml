@@ -12,7 +12,6 @@
       </rules>
     </neuronType>
     
-    <!-- Type for c_i (Nondeterministic Choice) -->
     <neuronType id="t_c" threshold="2">
       <rules>
         <rule regex="2a" consumed="2" produced="1" delay="0" type="spiking" id="r1" />
