@@ -1,0 +1,55 @@
+Simulation started.
+Initial Configuration
+-------------------------------------------------
+TYPE Term
+#0 termA [Active] {a_0, a_1, a_2, a_3} Links to #: 2
+#1 termB [Active] {a_0, a_1, a_2, a_3} Links to #: 2
+TYPE Add
+#2 add [Active] {} Links to #: 0, 1
+-------------------------------------------------
+
+STEP 1
+
+Rule #0 * a_0 -> {a_0}(Add) * applied in instance #1 termB.
+Selected instance #2 as target of type Add for rule #0.
+Rule #0 * a_0 -> {a_0}(Add) * applied in instance #0 termA.
+Selected instance #2 as target of type Add for rule #0.
+Rule #1 * a_1 -> {a_1}(Add) * applied in instance #0 termA.
+Selected instance #2 as target of type Add for rule #1.
+Rule #2 * a_2 -> {a_2}(Add) * applied in instance #0 termA.
+Selected instance #2 as target of type Add for rule #2.
+Rule #2 * a_2 -> {a_2}(Add) * applied in instance #1 termB.
+Selected instance #2 as target of type Add for rule #2.
+Rule #1 * a_1 -> {a_1}(Add) * applied in instance #1 termB.
+Selected instance #2 as target of type Add for rule #1.
+Rule #3 * a_3 -> {a_3}(Add) * applied in instance #0 termA.
+Selected instance #2 as target of type Add for rule #3.
+Rule #3 * a_3 -> {a_3}(Add) * applied in instance #1 termB.
+Selected instance #2 as target of type Add for rule #3.
+
+Configuration #1
+-------------------------------------------------
+TYPE Term
+#0 termA [Active] {} Links to #: 2
+#1 termB [Active] {} Links to #: 2
+TYPE Add
+#2 add [Active] {2a_0, 2a_1, 2a_2, 2a_3} Links to #: 0, 1
+-------------------------------------------------
+
+STEP 2
+
+Rule #4 * 2a_0 -> a_1 * applied in instance #2 add.
+Rule #5 * 2a_1 -> a_2 * applied in instance #2 add.
+Rule #6 * 2a_2 -> a_3 * applied in instance #2 add.
+Rule #7 * 2a_3 -> a_4 * applied in instance #2 add.
+
+Configuration #2
+-------------------------------------------------
+TYPE Term
+#0 termA [Active] {} Links to #: 2
+#1 termB [Active] {} Links to #: 2
+TYPE Add
+#2 add [Active] {a_4, a_3, a_2, a_1} Links to #: 0, 1
+-------------------------------------------------
+System halted at step 2 (no further rule could be applied, i.e. reached a deadlock).
+Simulation complete at step 2.
