@@ -1,0 +1,105 @@
+Successfully applied indexation on this line:     <$threshold$c : b$i$ -> a$i$ (t2) . : 1 <= i <= k
+Successfully applied indexation on this line:     >=$threshold$c : b$i$ -> . : 1<= i <= k
+Successfully applied indexation on this line:     >=x$i$ : a$i$ -> {b$i$, c$i$} (t1) . : 1<= i <= k
+Successfully applied indexation on this line: c1 {@b$i$:1<=i<=k@} (t1) .
+Successfully applied indexation on this line: c2$i$ {x$i$} (t2) . : 1<= i <= k
+Successfully applied indexation on this line: c1 - c2$i$ . : 1<= i <= k
+Simulation started.
+Initial Configuration
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {b1, b2, b3, b4, b5} Links to #: 1, 2, 3, 4, 5
+TYPE t2
+#1 c21 [Active] {x1} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
+#4 c24 [Active] {x4} Links to #: 0
+#5 c25 [Active] {x5} Links to #: 0
+-------------------------------------------------
+
+STEP 1
+
+Rule #0 * <10c: b1 -> {a1}(t2) * applied in instance #0 c1.
+Selected instance #3 as target of type t2 for rule #0.
+
+Configuration #1
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {b2, b3, b4, b5} Links to #: 1, 2, 3, 4, 5
+TYPE t2
+#1 c21 [Active] {x1} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3, a1} Links to #: 0
+#4 c24 [Active] {x4} Links to #: 0
+#5 c25 [Active] {x5} Links to #: 0
+-------------------------------------------------
+
+STEP 2
+
+Rule #4 * <10c: b5 -> {a5}(t2) * applied in instance #0 c1.
+Selected instance #4 as target of type t2 for rule #4.
+
+Configuration #2
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {b2, b3, b4} Links to #: 1, 2, 3, 4, 5
+TYPE t2
+#1 c21 [Active] {x1} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3, a1} Links to #: 0
+#4 c24 [Active] {x4, a5} Links to #: 0
+#5 c25 [Active] {x5} Links to #: 0
+-------------------------------------------------
+
+STEP 3
+
+Rule #2 * <10c: b3 -> {a3}(t2) * applied in instance #0 c1.
+Selected instance #4 as target of type t2 for rule #2.
+
+Configuration #3
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {b2, b4} Links to #: 1, 2, 3, 4, 5
+TYPE t2
+#1 c21 [Active] {x1} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3, a1} Links to #: 0
+#4 c24 [Active] {x4, a5, a3} Links to #: 0
+#5 c25 [Active] {x5} Links to #: 0
+-------------------------------------------------
+
+STEP 4
+
+Rule #1 * <10c: b2 -> {a2}(t2) * applied in instance #0 c1.
+Selected instance #1 as target of type t2 for rule #1.
+
+Configuration #4
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {b4} Links to #: 1, 2, 3, 4, 5
+TYPE t2
+#1 c21 [Active] {x1, a2} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3, a1} Links to #: 0
+#4 c24 [Active] {x4, a5, a3} Links to #: 0
+#5 c25 [Active] {x5} Links to #: 0
+-------------------------------------------------
+
+STEP 5
+
+Rule #3 * <10c: b4 -> {a4}(t2) * applied in instance #0 c1.
+Selected instance #1 as target of type t2 for rule #3.
+
+Configuration #5
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {} Links to #: 1, 2, 3, 4, 5
+TYPE t2
+#1 c21 [Active] {x1, a2, a4} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3, a1} Links to #: 0
+#4 c24 [Active] {x4, a5, a3} Links to #: 0
+#5 c25 [Active] {x5} Links to #: 0
+-------------------------------------------------
+System halted at step 5 (no further rule could be applied, i.e. reached a deadlock).
+Simulation complete at step 5.

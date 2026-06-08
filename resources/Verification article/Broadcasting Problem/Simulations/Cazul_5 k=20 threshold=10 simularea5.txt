@@ -1,0 +1,743 @@
+Successfully applied indexation on this line:     <$threshold$c : b$i$ -> a$i$ (t2) . : 1 <= i <= k
+Successfully applied indexation on this line:     >=$threshold$c : b$i$ -> . : 1<= i <= k
+Successfully applied indexation on this line:     >=x$i$ : a$i$ -> {b$i$, c$i$} (t1) . : 1<= i <= k
+Successfully applied indexation on this line: c1 {@b$i$:1<=i<=k@} (t1) .
+Successfully applied indexation on this line: c2$i$ {x$i$} (t2) . : 1<= i <= k
+Successfully applied indexation on this line: c1 - c2$i$ . : 1<= i <= k
+Simulation started.
+Initial Configuration
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17, b18, b19, b20} Links to #: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+TYPE t2
+#1 c21 [Active] {x1} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
+#4 c24 [Active] {x4} Links to #: 0
+#5 c25 [Active] {x5} Links to #: 0
+#6 c26 [Active] {x6} Links to #: 0
+#7 c27 [Active] {x7} Links to #: 0
+#8 c28 [Active] {x8} Links to #: 0
+#9 c29 [Active] {x9} Links to #: 0
+#10 c210 [Active] {x10} Links to #: 0
+#11 c211 [Active] {x11} Links to #: 0
+#12 c212 [Active] {x12} Links to #: 0
+#13 c213 [Active] {x13} Links to #: 0
+#14 c214 [Active] {x14} Links to #: 0
+#15 c215 [Active] {x15} Links to #: 0
+#16 c216 [Active] {x16} Links to #: 0
+#17 c217 [Active] {x17} Links to #: 0
+#18 c218 [Active] {x18} Links to #: 0
+#19 c219 [Active] {x19} Links to #: 0
+#20 c220 [Active] {x20} Links to #: 0
+-------------------------------------------------
+
+STEP 1
+
+Rule #2 * <10c: b3 -> {a3}(t2) * applied in instance #0 c1.
+Selected instance #1 as target of type t2 for rule #2.
+
+Configuration #1
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {b1, b2, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17, b18, b19, b20} Links to #: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+TYPE t2
+#1 c21 [Active] {x1, a3} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
+#4 c24 [Active] {x4} Links to #: 0
+#5 c25 [Active] {x5} Links to #: 0
+#6 c26 [Active] {x6} Links to #: 0
+#7 c27 [Active] {x7} Links to #: 0
+#8 c28 [Active] {x8} Links to #: 0
+#9 c29 [Active] {x9} Links to #: 0
+#10 c210 [Active] {x10} Links to #: 0
+#11 c211 [Active] {x11} Links to #: 0
+#12 c212 [Active] {x12} Links to #: 0
+#13 c213 [Active] {x13} Links to #: 0
+#14 c214 [Active] {x14} Links to #: 0
+#15 c215 [Active] {x15} Links to #: 0
+#16 c216 [Active] {x16} Links to #: 0
+#17 c217 [Active] {x17} Links to #: 0
+#18 c218 [Active] {x18} Links to #: 0
+#19 c219 [Active] {x19} Links to #: 0
+#20 c220 [Active] {x20} Links to #: 0
+-------------------------------------------------
+
+STEP 2
+
+Rule #16 * <10c: b17 -> {a17}(t2) * applied in instance #0 c1.
+Selected instance #10 as target of type t2 for rule #16.
+
+Configuration #2
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {b1, b2, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b18, b19, b20} Links to #: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+TYPE t2
+#1 c21 [Active] {x1, a3} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
+#4 c24 [Active] {x4} Links to #: 0
+#5 c25 [Active] {x5} Links to #: 0
+#6 c26 [Active] {x6} Links to #: 0
+#7 c27 [Active] {x7} Links to #: 0
+#8 c28 [Active] {x8} Links to #: 0
+#9 c29 [Active] {x9} Links to #: 0
+#10 c210 [Active] {x10, a17} Links to #: 0
+#11 c211 [Active] {x11} Links to #: 0
+#12 c212 [Active] {x12} Links to #: 0
+#13 c213 [Active] {x13} Links to #: 0
+#14 c214 [Active] {x14} Links to #: 0
+#15 c215 [Active] {x15} Links to #: 0
+#16 c216 [Active] {x16} Links to #: 0
+#17 c217 [Active] {x17} Links to #: 0
+#18 c218 [Active] {x18} Links to #: 0
+#19 c219 [Active] {x19} Links to #: 0
+#20 c220 [Active] {x20} Links to #: 0
+-------------------------------------------------
+
+STEP 3
+
+Rule #12 * <10c: b13 -> {a13}(t2) * applied in instance #0 c1.
+Selected instance #6 as target of type t2 for rule #12.
+
+Configuration #3
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {b1, b2, b4, b5, b6, b7, b8, b9, b10, b11, b12, b14, b15, b16, b18, b19, b20} Links to #: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+TYPE t2
+#1 c21 [Active] {x1, a3} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
+#4 c24 [Active] {x4} Links to #: 0
+#5 c25 [Active] {x5} Links to #: 0
+#6 c26 [Active] {x6, a13} Links to #: 0
+#7 c27 [Active] {x7} Links to #: 0
+#8 c28 [Active] {x8} Links to #: 0
+#9 c29 [Active] {x9} Links to #: 0
+#10 c210 [Active] {x10, a17} Links to #: 0
+#11 c211 [Active] {x11} Links to #: 0
+#12 c212 [Active] {x12} Links to #: 0
+#13 c213 [Active] {x13} Links to #: 0
+#14 c214 [Active] {x14} Links to #: 0
+#15 c215 [Active] {x15} Links to #: 0
+#16 c216 [Active] {x16} Links to #: 0
+#17 c217 [Active] {x17} Links to #: 0
+#18 c218 [Active] {x18} Links to #: 0
+#19 c219 [Active] {x19} Links to #: 0
+#20 c220 [Active] {x20} Links to #: 0
+-------------------------------------------------
+
+STEP 4
+
+Rule #15 * <10c: b16 -> {a16}(t2) * applied in instance #0 c1.
+Selected instance #1 as target of type t2 for rule #15.
+
+Configuration #4
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {b1, b2, b4, b5, b6, b7, b8, b9, b10, b11, b12, b14, b15, b18, b19, b20} Links to #: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+TYPE t2
+#1 c21 [Active] {x1, a3, a16} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
+#4 c24 [Active] {x4} Links to #: 0
+#5 c25 [Active] {x5} Links to #: 0
+#6 c26 [Active] {x6, a13} Links to #: 0
+#7 c27 [Active] {x7} Links to #: 0
+#8 c28 [Active] {x8} Links to #: 0
+#9 c29 [Active] {x9} Links to #: 0
+#10 c210 [Active] {x10, a17} Links to #: 0
+#11 c211 [Active] {x11} Links to #: 0
+#12 c212 [Active] {x12} Links to #: 0
+#13 c213 [Active] {x13} Links to #: 0
+#14 c214 [Active] {x14} Links to #: 0
+#15 c215 [Active] {x15} Links to #: 0
+#16 c216 [Active] {x16} Links to #: 0
+#17 c217 [Active] {x17} Links to #: 0
+#18 c218 [Active] {x18} Links to #: 0
+#19 c219 [Active] {x19} Links to #: 0
+#20 c220 [Active] {x20} Links to #: 0
+-------------------------------------------------
+
+STEP 5
+
+Rule #17 * <10c: b18 -> {a18}(t2) * applied in instance #0 c1.
+Selected instance #13 as target of type t2 for rule #17.
+
+Configuration #5
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {b1, b2, b4, b5, b6, b7, b8, b9, b10, b11, b12, b14, b15, b19, b20} Links to #: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+TYPE t2
+#1 c21 [Active] {x1, a3, a16} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
+#4 c24 [Active] {x4} Links to #: 0
+#5 c25 [Active] {x5} Links to #: 0
+#6 c26 [Active] {x6, a13} Links to #: 0
+#7 c27 [Active] {x7} Links to #: 0
+#8 c28 [Active] {x8} Links to #: 0
+#9 c29 [Active] {x9} Links to #: 0
+#10 c210 [Active] {x10, a17} Links to #: 0
+#11 c211 [Active] {x11} Links to #: 0
+#12 c212 [Active] {x12} Links to #: 0
+#13 c213 [Active] {x13, a18} Links to #: 0
+#14 c214 [Active] {x14} Links to #: 0
+#15 c215 [Active] {x15} Links to #: 0
+#16 c216 [Active] {x16} Links to #: 0
+#17 c217 [Active] {x17} Links to #: 0
+#18 c218 [Active] {x18} Links to #: 0
+#19 c219 [Active] {x19} Links to #: 0
+#20 c220 [Active] {x20} Links to #: 0
+-------------------------------------------------
+
+STEP 6
+
+Rule #19 * <10c: b20 -> {a20}(t2) * applied in instance #0 c1.
+Selected instance #13 as target of type t2 for rule #19.
+
+Configuration #6
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {b1, b2, b4, b5, b6, b7, b8, b9, b10, b11, b12, b14, b15, b19} Links to #: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+TYPE t2
+#1 c21 [Active] {x1, a3, a16} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
+#4 c24 [Active] {x4} Links to #: 0
+#5 c25 [Active] {x5} Links to #: 0
+#6 c26 [Active] {x6, a13} Links to #: 0
+#7 c27 [Active] {x7} Links to #: 0
+#8 c28 [Active] {x8} Links to #: 0
+#9 c29 [Active] {x9} Links to #: 0
+#10 c210 [Active] {x10, a17} Links to #: 0
+#11 c211 [Active] {x11} Links to #: 0
+#12 c212 [Active] {x12} Links to #: 0
+#13 c213 [Active] {x13, a18, a20} Links to #: 0
+#14 c214 [Active] {x14} Links to #: 0
+#15 c215 [Active] {x15} Links to #: 0
+#16 c216 [Active] {x16} Links to #: 0
+#17 c217 [Active] {x17} Links to #: 0
+#18 c218 [Active] {x18} Links to #: 0
+#19 c219 [Active] {x19} Links to #: 0
+#20 c220 [Active] {x20} Links to #: 0
+-------------------------------------------------
+
+STEP 7
+
+Rule #1 * <10c: b2 -> {a2}(t2) * applied in instance #0 c1.
+Selected instance #8 as target of type t2 for rule #1.
+
+Configuration #7
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {b1, b4, b5, b6, b7, b8, b9, b10, b11, b12, b14, b15, b19} Links to #: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+TYPE t2
+#1 c21 [Active] {x1, a3, a16} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
+#4 c24 [Active] {x4} Links to #: 0
+#5 c25 [Active] {x5} Links to #: 0
+#6 c26 [Active] {x6, a13} Links to #: 0
+#7 c27 [Active] {x7} Links to #: 0
+#8 c28 [Active] {x8, a2} Links to #: 0
+#9 c29 [Active] {x9} Links to #: 0
+#10 c210 [Active] {x10, a17} Links to #: 0
+#11 c211 [Active] {x11} Links to #: 0
+#12 c212 [Active] {x12} Links to #: 0
+#13 c213 [Active] {x13, a18, a20} Links to #: 0
+#14 c214 [Active] {x14} Links to #: 0
+#15 c215 [Active] {x15} Links to #: 0
+#16 c216 [Active] {x16} Links to #: 0
+#17 c217 [Active] {x17} Links to #: 0
+#18 c218 [Active] {x18} Links to #: 0
+#19 c219 [Active] {x19} Links to #: 0
+#20 c220 [Active] {x20} Links to #: 0
+-------------------------------------------------
+
+STEP 8
+
+Rule #0 * <10c: b1 -> {a1}(t2) * applied in instance #0 c1.
+Selected instance #1 as target of type t2 for rule #0.
+
+Configuration #8
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {b4, b5, b6, b7, b8, b9, b10, b11, b12, b14, b15, b19} Links to #: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+TYPE t2
+#1 c21 [Active] {x1, a3, a16, a1} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
+#4 c24 [Active] {x4} Links to #: 0
+#5 c25 [Active] {x5} Links to #: 0
+#6 c26 [Active] {x6, a13} Links to #: 0
+#7 c27 [Active] {x7} Links to #: 0
+#8 c28 [Active] {x8, a2} Links to #: 0
+#9 c29 [Active] {x9} Links to #: 0
+#10 c210 [Active] {x10, a17} Links to #: 0
+#11 c211 [Active] {x11} Links to #: 0
+#12 c212 [Active] {x12} Links to #: 0
+#13 c213 [Active] {x13, a18, a20} Links to #: 0
+#14 c214 [Active] {x14} Links to #: 0
+#15 c215 [Active] {x15} Links to #: 0
+#16 c216 [Active] {x16} Links to #: 0
+#17 c217 [Active] {x17} Links to #: 0
+#18 c218 [Active] {x18} Links to #: 0
+#19 c219 [Active] {x19} Links to #: 0
+#20 c220 [Active] {x20} Links to #: 0
+-------------------------------------------------
+
+STEP 9
+
+Rule #40 * >=x1: a1 -> {b1, c1}(t1) * applied in instance #1 c21.
+Selected instance #0 as target of type t1 for rule #40.
+Rule #4 * <10c: b5 -> {a5}(t2) * applied in instance #0 c1.
+Selected instance #8 as target of type t2 for rule #4.
+
+Configuration #9
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {c1, b4, b1, b6, b7, b8, b9, b10, b11, b12, b14, b15, b19} Links to #: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+TYPE t2
+#1 c21 [Active] {x1, a3, a16} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
+#4 c24 [Active] {x4} Links to #: 0
+#5 c25 [Active] {x5} Links to #: 0
+#6 c26 [Active] {x6, a13} Links to #: 0
+#7 c27 [Active] {x7} Links to #: 0
+#8 c28 [Active] {x8, a2, a5} Links to #: 0
+#9 c29 [Active] {x9} Links to #: 0
+#10 c210 [Active] {x10, a17} Links to #: 0
+#11 c211 [Active] {x11} Links to #: 0
+#12 c212 [Active] {x12} Links to #: 0
+#13 c213 [Active] {x13, a18, a20} Links to #: 0
+#14 c214 [Active] {x14} Links to #: 0
+#15 c215 [Active] {x15} Links to #: 0
+#16 c216 [Active] {x16} Links to #: 0
+#17 c217 [Active] {x17} Links to #: 0
+#18 c218 [Active] {x18} Links to #: 0
+#19 c219 [Active] {x19} Links to #: 0
+#20 c220 [Active] {x20} Links to #: 0
+-------------------------------------------------
+
+STEP 10
+
+Rule #3 * <10c: b4 -> {a4}(t2) * applied in instance #0 c1.
+Selected instance #10 as target of type t2 for rule #3.
+
+Configuration #10
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {c1, b1, b6, b7, b8, b9, b10, b11, b12, b14, b15, b19} Links to #: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+TYPE t2
+#1 c21 [Active] {x1, a3, a16} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
+#4 c24 [Active] {x4} Links to #: 0
+#5 c25 [Active] {x5} Links to #: 0
+#6 c26 [Active] {x6, a13} Links to #: 0
+#7 c27 [Active] {x7} Links to #: 0
+#8 c28 [Active] {x8, a2, a5} Links to #: 0
+#9 c29 [Active] {x9} Links to #: 0
+#10 c210 [Active] {x10, a17, a4} Links to #: 0
+#11 c211 [Active] {x11} Links to #: 0
+#12 c212 [Active] {x12} Links to #: 0
+#13 c213 [Active] {x13, a18, a20} Links to #: 0
+#14 c214 [Active] {x14} Links to #: 0
+#15 c215 [Active] {x15} Links to #: 0
+#16 c216 [Active] {x16} Links to #: 0
+#17 c217 [Active] {x17} Links to #: 0
+#18 c218 [Active] {x18} Links to #: 0
+#19 c219 [Active] {x19} Links to #: 0
+#20 c220 [Active] {x20} Links to #: 0
+-------------------------------------------------
+
+STEP 11
+
+Rule #14 * <10c: b15 -> {a15}(t2) * applied in instance #0 c1.
+Selected instance #1 as target of type t2 for rule #14.
+
+Configuration #11
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {c1, b1, b6, b7, b8, b9, b10, b11, b12, b14, b19} Links to #: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+TYPE t2
+#1 c21 [Active] {x1, a3, a16, a15} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
+#4 c24 [Active] {x4} Links to #: 0
+#5 c25 [Active] {x5} Links to #: 0
+#6 c26 [Active] {x6, a13} Links to #: 0
+#7 c27 [Active] {x7} Links to #: 0
+#8 c28 [Active] {x8, a2, a5} Links to #: 0
+#9 c29 [Active] {x9} Links to #: 0
+#10 c210 [Active] {x10, a17, a4} Links to #: 0
+#11 c211 [Active] {x11} Links to #: 0
+#12 c212 [Active] {x12} Links to #: 0
+#13 c213 [Active] {x13, a18, a20} Links to #: 0
+#14 c214 [Active] {x14} Links to #: 0
+#15 c215 [Active] {x15} Links to #: 0
+#16 c216 [Active] {x16} Links to #: 0
+#17 c217 [Active] {x17} Links to #: 0
+#18 c218 [Active] {x18} Links to #: 0
+#19 c219 [Active] {x19} Links to #: 0
+#20 c220 [Active] {x20} Links to #: 0
+-------------------------------------------------
+
+STEP 12
+
+Rule #5 * <10c: b6 -> {a6}(t2) * applied in instance #0 c1.
+Selected instance #6 as target of type t2 for rule #5.
+
+Configuration #12
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {c1, b1, b7, b8, b9, b10, b11, b12, b14, b19} Links to #: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+TYPE t2
+#1 c21 [Active] {x1, a3, a16, a15} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
+#4 c24 [Active] {x4} Links to #: 0
+#5 c25 [Active] {x5} Links to #: 0
+#6 c26 [Active] {x6, a13, a6} Links to #: 0
+#7 c27 [Active] {x7} Links to #: 0
+#8 c28 [Active] {x8, a2, a5} Links to #: 0
+#9 c29 [Active] {x9} Links to #: 0
+#10 c210 [Active] {x10, a17, a4} Links to #: 0
+#11 c211 [Active] {x11} Links to #: 0
+#12 c212 [Active] {x12} Links to #: 0
+#13 c213 [Active] {x13, a18, a20} Links to #: 0
+#14 c214 [Active] {x14} Links to #: 0
+#15 c215 [Active] {x15} Links to #: 0
+#16 c216 [Active] {x16} Links to #: 0
+#17 c217 [Active] {x17} Links to #: 0
+#18 c218 [Active] {x18} Links to #: 0
+#19 c219 [Active] {x19} Links to #: 0
+#20 c220 [Active] {x20} Links to #: 0
+-------------------------------------------------
+
+STEP 13
+
+Rule #6 * <10c: b7 -> {a7}(t2) * applied in instance #0 c1.
+Selected instance #5 as target of type t2 for rule #6.
+Rule #45 * >=x6: a6 -> {b6, c6}(t1) * applied in instance #6 c26.
+Selected instance #0 as target of type t1 for rule #45.
+
+Configuration #13
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {c1, b1, c6, b6, b8, b9, b10, b11, b12, b14, b19} Links to #: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+TYPE t2
+#1 c21 [Active] {x1, a3, a16, a15} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
+#4 c24 [Active] {x4} Links to #: 0
+#5 c25 [Active] {x5, a7} Links to #: 0
+#6 c26 [Active] {x6, a13} Links to #: 0
+#7 c27 [Active] {x7} Links to #: 0
+#8 c28 [Active] {x8, a2, a5} Links to #: 0
+#9 c29 [Active] {x9} Links to #: 0
+#10 c210 [Active] {x10, a17, a4} Links to #: 0
+#11 c211 [Active] {x11} Links to #: 0
+#12 c212 [Active] {x12} Links to #: 0
+#13 c213 [Active] {x13, a18, a20} Links to #: 0
+#14 c214 [Active] {x14} Links to #: 0
+#15 c215 [Active] {x15} Links to #: 0
+#16 c216 [Active] {x16} Links to #: 0
+#17 c217 [Active] {x17} Links to #: 0
+#18 c218 [Active] {x18} Links to #: 0
+#19 c219 [Active] {x19} Links to #: 0
+#20 c220 [Active] {x20} Links to #: 0
+-------------------------------------------------
+
+STEP 14
+
+Rule #10 * <10c: b11 -> {a11}(t2) * applied in instance #0 c1.
+Selected instance #20 as target of type t2 for rule #10.
+
+Configuration #14
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {c1, b1, c6, b6, b8, b9, b10, b12, b14, b19} Links to #: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+TYPE t2
+#1 c21 [Active] {x1, a3, a16, a15} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
+#4 c24 [Active] {x4} Links to #: 0
+#5 c25 [Active] {x5, a7} Links to #: 0
+#6 c26 [Active] {x6, a13} Links to #: 0
+#7 c27 [Active] {x7} Links to #: 0
+#8 c28 [Active] {x8, a2, a5} Links to #: 0
+#9 c29 [Active] {x9} Links to #: 0
+#10 c210 [Active] {x10, a17, a4} Links to #: 0
+#11 c211 [Active] {x11} Links to #: 0
+#12 c212 [Active] {x12} Links to #: 0
+#13 c213 [Active] {x13, a18, a20} Links to #: 0
+#14 c214 [Active] {x14} Links to #: 0
+#15 c215 [Active] {x15} Links to #: 0
+#16 c216 [Active] {x16} Links to #: 0
+#17 c217 [Active] {x17} Links to #: 0
+#18 c218 [Active] {x18} Links to #: 0
+#19 c219 [Active] {x19} Links to #: 0
+#20 c220 [Active] {x20, a11} Links to #: 0
+-------------------------------------------------
+
+STEP 15
+
+Rule #11 * <10c: b12 -> {a12}(t2) * applied in instance #0 c1.
+Selected instance #1 as target of type t2 for rule #11.
+
+Configuration #15
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {c1, b1, c6, b6, b8, b9, b10, b14, b19} Links to #: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+TYPE t2
+#1 c21 [Active] {x1, a3, a16, a15, a12} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
+#4 c24 [Active] {x4} Links to #: 0
+#5 c25 [Active] {x5, a7} Links to #: 0
+#6 c26 [Active] {x6, a13} Links to #: 0
+#7 c27 [Active] {x7} Links to #: 0
+#8 c28 [Active] {x8, a2, a5} Links to #: 0
+#9 c29 [Active] {x9} Links to #: 0
+#10 c210 [Active] {x10, a17, a4} Links to #: 0
+#11 c211 [Active] {x11} Links to #: 0
+#12 c212 [Active] {x12} Links to #: 0
+#13 c213 [Active] {x13, a18, a20} Links to #: 0
+#14 c214 [Active] {x14} Links to #: 0
+#15 c215 [Active] {x15} Links to #: 0
+#16 c216 [Active] {x16} Links to #: 0
+#17 c217 [Active] {x17} Links to #: 0
+#18 c218 [Active] {x18} Links to #: 0
+#19 c219 [Active] {x19} Links to #: 0
+#20 c220 [Active] {x20, a11} Links to #: 0
+-------------------------------------------------
+
+STEP 16
+
+Rule #5 * <10c: b6 -> {a6}(t2) * applied in instance #0 c1.
+Selected instance #17 as target of type t2 for rule #5.
+
+Configuration #16
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {c1, b1, c6, b8, b9, b10, b14, b19} Links to #: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+TYPE t2
+#1 c21 [Active] {x1, a3, a16, a15, a12} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
+#4 c24 [Active] {x4} Links to #: 0
+#5 c25 [Active] {x5, a7} Links to #: 0
+#6 c26 [Active] {x6, a13} Links to #: 0
+#7 c27 [Active] {x7} Links to #: 0
+#8 c28 [Active] {x8, a2, a5} Links to #: 0
+#9 c29 [Active] {x9} Links to #: 0
+#10 c210 [Active] {x10, a17, a4} Links to #: 0
+#11 c211 [Active] {x11} Links to #: 0
+#12 c212 [Active] {x12} Links to #: 0
+#13 c213 [Active] {x13, a18, a20} Links to #: 0
+#14 c214 [Active] {x14} Links to #: 0
+#15 c215 [Active] {x15} Links to #: 0
+#16 c216 [Active] {x16} Links to #: 0
+#17 c217 [Active] {x17, a6} Links to #: 0
+#18 c218 [Active] {x18} Links to #: 0
+#19 c219 [Active] {x19} Links to #: 0
+#20 c220 [Active] {x20, a11} Links to #: 0
+-------------------------------------------------
+
+STEP 17
+
+Rule #8 * <10c: b9 -> {a9}(t2) * applied in instance #0 c1.
+Selected instance #5 as target of type t2 for rule #8.
+
+Configuration #17
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {c1, b1, c6, b8, b10, b14, b19} Links to #: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+TYPE t2
+#1 c21 [Active] {x1, a3, a16, a15, a12} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
+#4 c24 [Active] {x4} Links to #: 0
+#5 c25 [Active] {x5, a7, a9} Links to #: 0
+#6 c26 [Active] {x6, a13} Links to #: 0
+#7 c27 [Active] {x7} Links to #: 0
+#8 c28 [Active] {x8, a2, a5} Links to #: 0
+#9 c29 [Active] {x9} Links to #: 0
+#10 c210 [Active] {x10, a17, a4} Links to #: 0
+#11 c211 [Active] {x11} Links to #: 0
+#12 c212 [Active] {x12} Links to #: 0
+#13 c213 [Active] {x13, a18, a20} Links to #: 0
+#14 c214 [Active] {x14} Links to #: 0
+#15 c215 [Active] {x15} Links to #: 0
+#16 c216 [Active] {x16} Links to #: 0
+#17 c217 [Active] {x17, a6} Links to #: 0
+#18 c218 [Active] {x18} Links to #: 0
+#19 c219 [Active] {x19} Links to #: 0
+#20 c220 [Active] {x20, a11} Links to #: 0
+-------------------------------------------------
+
+STEP 18
+
+Rule #7 * <10c: b8 -> {a8}(t2) * applied in instance #0 c1.
+Selected instance #16 as target of type t2 for rule #7.
+
+Configuration #18
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {c1, b1, c6, b10, b14, b19} Links to #: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+TYPE t2
+#1 c21 [Active] {x1, a3, a16, a15, a12} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
+#4 c24 [Active] {x4} Links to #: 0
+#5 c25 [Active] {x5, a7, a9} Links to #: 0
+#6 c26 [Active] {x6, a13} Links to #: 0
+#7 c27 [Active] {x7} Links to #: 0
+#8 c28 [Active] {x8, a2, a5} Links to #: 0
+#9 c29 [Active] {x9} Links to #: 0
+#10 c210 [Active] {x10, a17, a4} Links to #: 0
+#11 c211 [Active] {x11} Links to #: 0
+#12 c212 [Active] {x12} Links to #: 0
+#13 c213 [Active] {x13, a18, a20} Links to #: 0
+#14 c214 [Active] {x14} Links to #: 0
+#15 c215 [Active] {x15} Links to #: 0
+#16 c216 [Active] {x16, a8} Links to #: 0
+#17 c217 [Active] {x17, a6} Links to #: 0
+#18 c218 [Active] {x18} Links to #: 0
+#19 c219 [Active] {x19} Links to #: 0
+#20 c220 [Active] {x20, a11} Links to #: 0
+-------------------------------------------------
+
+STEP 19
+
+Rule #9 * <10c: b10 -> {a10}(t2) * applied in instance #0 c1.
+Selected instance #19 as target of type t2 for rule #9.
+
+Configuration #19
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {c1, b1, c6, b14, b19} Links to #: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+TYPE t2
+#1 c21 [Active] {x1, a3, a16, a15, a12} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
+#4 c24 [Active] {x4} Links to #: 0
+#5 c25 [Active] {x5, a7, a9} Links to #: 0
+#6 c26 [Active] {x6, a13} Links to #: 0
+#7 c27 [Active] {x7} Links to #: 0
+#8 c28 [Active] {x8, a2, a5} Links to #: 0
+#9 c29 [Active] {x9} Links to #: 0
+#10 c210 [Active] {x10, a17, a4} Links to #: 0
+#11 c211 [Active] {x11} Links to #: 0
+#12 c212 [Active] {x12} Links to #: 0
+#13 c213 [Active] {x13, a18, a20} Links to #: 0
+#14 c214 [Active] {x14} Links to #: 0
+#15 c215 [Active] {x15} Links to #: 0
+#16 c216 [Active] {x16, a8} Links to #: 0
+#17 c217 [Active] {x17, a6} Links to #: 0
+#18 c218 [Active] {x18} Links to #: 0
+#19 c219 [Active] {x19, a10} Links to #: 0
+#20 c220 [Active] {x20, a11} Links to #: 0
+-------------------------------------------------
+
+STEP 20
+
+Rule #13 * <10c: b14 -> {a14}(t2) * applied in instance #0 c1.
+Selected instance #8 as target of type t2 for rule #13.
+
+Configuration #20
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {c1, b1, c6, b19} Links to #: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+TYPE t2
+#1 c21 [Active] {x1, a3, a16, a15, a12} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
+#4 c24 [Active] {x4} Links to #: 0
+#5 c25 [Active] {x5, a7, a9} Links to #: 0
+#6 c26 [Active] {x6, a13} Links to #: 0
+#7 c27 [Active] {x7} Links to #: 0
+#8 c28 [Active] {x8, a2, a5, a14} Links to #: 0
+#9 c29 [Active] {x9} Links to #: 0
+#10 c210 [Active] {x10, a17, a4} Links to #: 0
+#11 c211 [Active] {x11} Links to #: 0
+#12 c212 [Active] {x12} Links to #: 0
+#13 c213 [Active] {x13, a18, a20} Links to #: 0
+#14 c214 [Active] {x14} Links to #: 0
+#15 c215 [Active] {x15} Links to #: 0
+#16 c216 [Active] {x16, a8} Links to #: 0
+#17 c217 [Active] {x17, a6} Links to #: 0
+#18 c218 [Active] {x18} Links to #: 0
+#19 c219 [Active] {x19, a10} Links to #: 0
+#20 c220 [Active] {x20, a11} Links to #: 0
+-------------------------------------------------
+
+STEP 21
+
+Rule #18 * <10c: b19 -> {a19}(t2) * applied in instance #0 c1.
+Selected instance #17 as target of type t2 for rule #18.
+
+Configuration #21
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {c1, b1, c6} Links to #: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+TYPE t2
+#1 c21 [Active] {x1, a3, a16, a15, a12} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
+#4 c24 [Active] {x4} Links to #: 0
+#5 c25 [Active] {x5, a7, a9} Links to #: 0
+#6 c26 [Active] {x6, a13} Links to #: 0
+#7 c27 [Active] {x7} Links to #: 0
+#8 c28 [Active] {x8, a2, a5, a14} Links to #: 0
+#9 c29 [Active] {x9} Links to #: 0
+#10 c210 [Active] {x10, a17, a4} Links to #: 0
+#11 c211 [Active] {x11} Links to #: 0
+#12 c212 [Active] {x12} Links to #: 0
+#13 c213 [Active] {x13, a18, a20} Links to #: 0
+#14 c214 [Active] {x14} Links to #: 0
+#15 c215 [Active] {x15} Links to #: 0
+#16 c216 [Active] {x16, a8} Links to #: 0
+#17 c217 [Active] {x17, a6, a19} Links to #: 0
+#18 c218 [Active] {x18} Links to #: 0
+#19 c219 [Active] {x19, a10} Links to #: 0
+#20 c220 [Active] {x20, a11} Links to #: 0
+-------------------------------------------------
+
+STEP 22
+
+Rule #0 * <10c: b1 -> {a1}(t2) * applied in instance #0 c1.
+Selected instance #16 as target of type t2 for rule #0.
+
+Configuration #22
+-------------------------------------------------
+TYPE t1
+#0 c1 [Active] {c1, c6} Links to #: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+TYPE t2
+#1 c21 [Active] {x1, a3, a16, a15, a12} Links to #: 0
+#2 c22 [Active] {x2} Links to #: 0
+#3 c23 [Active] {x3} Links to #: 0
+#4 c24 [Active] {x4} Links to #: 0
+#5 c25 [Active] {x5, a7, a9} Links to #: 0
+#6 c26 [Active] {x6, a13} Links to #: 0
+#7 c27 [Active] {x7} Links to #: 0
+#8 c28 [Active] {x8, a2, a5, a14} Links to #: 0
+#9 c29 [Active] {x9} Links to #: 0
+#10 c210 [Active] {x10, a17, a4} Links to #: 0
+#11 c211 [Active] {x11} Links to #: 0
+#12 c212 [Active] {x12} Links to #: 0
+#13 c213 [Active] {x13, a18, a20} Links to #: 0
+#14 c214 [Active] {x14} Links to #: 0
+#15 c215 [Active] {x15} Links to #: 0
+#16 c216 [Active] {x16, a8, a1} Links to #: 0
+#17 c217 [Active] {x17, a6, a19} Links to #: 0
+#18 c218 [Active] {x18} Links to #: 0
+#19 c219 [Active] {x19, a10} Links to #: 0
+#20 c220 [Active] {x20, a11} Links to #: 0
+-------------------------------------------------
+System halted at step 22 (no further rule could be applied, i.e. reached a deadlock).
+Simulation complete at step 22.
