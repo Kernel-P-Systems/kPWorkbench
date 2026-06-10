@@ -18,10 +18,10 @@ type t2 {
   }
 }
 
-c1 {b1, b2, b3} (t1) .
+comp1 {b1, b2, b3} (t1) .
 c21 {x1} (t2) . 
 c22 {x2} (t2) . 
 c23 {x3} (t2) . 
-c1 - c21 . 
-c1 - c22 . 
-c1 - c23 . 
+comp1 - c21 . 
+comp1 - c22 . 
+comp1 - c23 . 
