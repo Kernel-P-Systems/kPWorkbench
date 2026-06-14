@@ -1,0 +1,38 @@
+/*
+ * Broadcasting_rafinat.kplt
+ * Refined indexed kP-Lingua model for the Broadcasting Problem.
+ *
+ * Purpose:
+ *  - Keep the indexed broadcasting pattern.
+ *  - Remove redundant receiver-side rules.
+ *  - Make threshold stopping observable through stopped_i symbols.
+ *  - Keep the model scalable by changing k and threshold.
+ */
+
+#define k = 3, threshold = 10
+
+type t1 {
+  choice {
+    /* Send message i while the accumulated counter is below threshold. */
+    <$threshold$c : b$i$ -> a$i$ (t2) . : 1 <= i <= k
+
+    /* Once the threshold is reached, mark the remaining message token as stopped. */
+    >=$threshold$c : b$i$ -> stopped$i$ . : 1 <= i <= k
+  }
+}
+
+type t2 {
+  choice {
+    /* A receiver returns the acknowledgement b_i and contributes i copies of c. */
+    a$i$ -> {b$i$, $i$c} (t1) . : 1 <= i <= k
+  }
+}
+
+/* Initial central broadcasting compartment. */
+c1 {@b$i$:1<=i<=k@} (t1) .
+
+/* Receiver compartments. */
+c2$i$ {x$i$} (t2) . : 1 <= i <= k
+
+/* Star topology: the central node is linked with each receiver. */
+c1 - c2$i$ . : 1 <= i <= k

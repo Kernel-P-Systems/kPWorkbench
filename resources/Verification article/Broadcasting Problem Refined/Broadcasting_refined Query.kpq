@@ -1,0 +1,11 @@
+ltl: eventually (c1.c >= 1);
+ltl: always (c1.c <= 12);
+ltl: never (c1.c > 12);
+ltl: (c21.a1 > 0) followed-by (c1.b1 > 0);
+ltl: (c22.a2 > 0) followed-by (c1.b2 > 0);
+ltl: (c23.a3 > 0) followed-by (c1.b3 > 0);
+ltl: always ((@or, c1.stopped$i$ > 0 : 1<=i<=3@) implies (c1.c >= 10));
+ltl: eventually (@and, c1.stopped$i$ > 0 : 1<=i<=3@);
+ltl: (c1.c >= 10) followed-by (@and, c2$i$.a$i$ = 0 : 1<=i<=3@);
+ltl: steady-state (c1.c <= 12);
+ltl: always (@and, c1.b$i$ >= 0 : 1<=i<=3@);
