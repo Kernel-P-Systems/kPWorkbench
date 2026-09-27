@@ -1,0 +1,136 @@
+Environment {
+	Membrane add_li {
+		Object a;
+		Tunnel add_li1, add_li2, add_li3, add_r;
+		Rule r1 = a/ a -> ( a, go add_li1 & add_li2 & add_li3 & add_r );
+	}
+	
+	Membrane add_li1 {
+		Tunnel add_li4, add_li5;
+		Rule r1 = a/ a -> ( a, go add_li4 & add_li5 );
+	}
+	
+	Membrane add_li2 {
+		Tunnel add_li4, add_li5;
+		Rule r1 = a/ a -> ( a, go add_li4 & add_li5 );
+	}
+	
+	Membrane add_li3 {
+		Tunnel add_li4, add_li5;
+		Rule r1 = a/ a -> ( a, go add_li4 & add_li5 );
+		Rule r2 = a/ a -> ( -a, go add_li4 & add_li5 );
+	}
+	
+	Membrane add_li4 {
+		Tunnel add_lj;
+		Rule r1 = a^2/ a^2 -> ( a, go add_lj );
+	}
+	
+	Membrane add_li5 {
+		Tunnel add_lk;
+		Rule r1 = a/ a -> ( a, go add_lk );
+		Rule r2 = a^3/ a^3 -> ( lambda, go all );
+	}
+	
+	Membrane add_r {}
+	Membrane add_lj {}
+	Membrane add_lk {}
+	
+	Membrane sub_li {
+		Object a;
+		Tunnel sub_li1, sub_li2;
+		Rule r1 = a/ a -> ( a, go sub_li1 & sub_li2 );
+	}
+	
+	Membrane sub_li1 {
+		Tunnel sub_li3, sub_li4;
+		Rule r1 = a/ a -> ( a, go sub_li3 & sub_li4 );
+	}
+	
+	Membrane sub_li2 {
+		Tunnel sub_r;
+		Rule r1 = a/ a -> ( -a, go sub_r );
+	}
+	
+	Membrane sub_li3 {
+		Tunnel sub_li5, sub_li6;
+		Rule r1 = a/ a -> ( a, go sub_li5 & sub_li6 );
+	}
+	
+	Membrane sub_li4 {
+		Tunnel sub_li5, sub_li6;
+		Rule r1 = a/ a -> ( a, go sub_li5 & sub_li6 );
+	}
+	
+	Membrane sub_r {
+		Object a; 
+		Tunnel sub_li5, sub_li6;
+		Rule r1 = -a/ -a -> ( a, go sub_li5 & sub_li6 );
+	}
+	
+	Membrane sub_li5 {
+		Tunnel sub_lj;
+		Rule r1 = a/ a -> ( lambda, go all );
+		Rule r2 = a^2/ a^2 -> ( a, go sub_lj );
+		Rule r3 = a^3/ a^3 -> ( lambda, go all );
+	}
+	
+	Membrane sub_li6 {
+		Tunnel sub_lk;
+		Rule r1 = a/ a -> ( lambda, go all );
+		Rule r2 = a^2/ a^2 -> ( lambda, go all );
+		Rule r3 = a^3/ a^3 -> ( a, go sub_lk );
+	}
+	
+	Membrane sub_lj {}
+	Membrane sub_lk {}
+	
+	Membrane fin_lh {
+		Object a;
+		Tunnel fin_d1, fin_h2;
+		Rule r1 = a/ a -> ( a, go fin_d1 & fin_h2 );
+	}
+	
+	Membrane fin_d1 {
+		Tunnel fin_d2;
+		Rule r1 = a/ a -> ( a, go fin_d2 );
+	}
+	
+	Membrane fin_d2 {
+		Tunnel fin_d3;
+		Rule r1 = a/ a -> ( a, go fin_d3 );
+	}
+	
+	Membrane fin_d3 {
+		Tunnel fin_out;
+		Rule r1 = a/ a -> ( a, go fin_out );
+	}
+	
+	Membrane fin_h2 {
+		Tunnel fin_h1, fin_h4;
+		Rule r1 = a/ a -> ( a, go fin_h1 & fin_h4 );
+	}
+	
+	Membrane fin_h1 {
+		Tunnel fin_h4;
+		Rule r1 = a/ a -> ( a, go fin_h4 );
+	}
+	
+	Membrane fin_h4 {
+		Tunnel fin_h1, fin_h5;
+		Rule r1 = a/ a -> ( a, go fin_h1 & fin_h5 );
+	}
+	
+	Membrane fin_h5 {
+		Tunnel fin_n1;
+		Rule r1 = a/ a -> ( -a, go fin_n1 );
+	}
+	
+	Membrane fin_n1 {
+		Object a^5;
+		Tunnel fin_out, fin_h1, fin_h4, fin_h5;
+		Rule r1 = a/ a -> ( a, go fin_out & fin_h1 & fin_h4 & fin_h5 );
+	}
+	
+	Membrane fin_out {}
+}

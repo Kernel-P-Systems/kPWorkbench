@@ -1,0 +1,112 @@
+type t_li {
+    max {
+        >=1a & >=1A : 1a, 1A -> .
+    }
+    choice {
+        =1a : 1a -> 1a (t_li1), 1a (t_li2) .
+    }
+}
+
+type t_li1 {
+    max {
+        >=1a & >=1A : 1a, 1A -> .
+    }
+    choice {
+        =1a : 1a -> 1a (t_li3), 1a (t_li4) .
+    }
+}
+
+type t_li2 {
+    max {
+        >=1a & >=1A : 1a, 1A -> .
+    }
+    choice {
+        =1a : 1a -> 1A (t_r) .
+    }
+}
+
+type t_li3 {
+    max {
+        >=1a & >=1A : 1a, 1A -> .
+    }
+    choice {
+        =1a : 1a -> 1a (t_li5), 1a (t_li6) .
+    }
+}
+
+type t_li4 {
+    max {
+        >=1a & >=1A : 1a, 1A -> .
+    }
+    choice {
+        =1a : 1a -> 1a (t_li5), 1a (t_li6) .
+    }
+}
+
+type t_r {
+    max {
+        >=1a & >=1A : 1a, 1A -> .
+    }
+    choice {
+        =1A : 1A -> 1a (t_li5), 1a (t_li6) .
+    }
+}
+
+type t_li5 {
+    max {
+        >=1a & >=1A : 1a, 1A -> .
+    }
+    choice {
+        =1a : 1a -> .
+        =2a : 2a -> 1a (t_lj) .
+        =3a : 3a -> .
+    }
+}
+
+type t_li6 {
+    max {
+        >=1a & >=1A : 1a, 1A -> .
+    }
+    choice {
+        =1a : 1a -> .
+        =2a : 2a -> .
+        =3a : 3a -> 1a (t_lk) .
+    }
+}
+
+type t_lj {
+    max {
+        >=1a & >=1A : 1a, 1A -> .
+    }
+}
+
+type t_lk {
+    max {
+        >=1a & >=1A : 1a, 1A -> .
+    }
+}
+
+li {1a} (t_li) .
+li1 {} (t_li1) .
+li2 {} (t_li2) .
+li3 {} (t_li3) .
+li4 {} (t_li4) .
+r {1a} (t_r) .
+li5 {} (t_li5) .
+li6 {} (t_li6) .
+lj {} (t_lj) .
+lk {} (t_lk) .
+
+li - li1 .
+li - li2 .
+li1 - li3 .
+li1 - li4 .
+li2 - r .
+li3 - li5 .
+li3 - li6 .
+li4 - li5 .
+li4 - li6 .
+r - li5 .
+r - li6 .
+li5 - lj .
+li6 - lk .

@@ -1,0 +1,24 @@
+@model<spiking_psystems>
+
+def main()
+{
+    @mu = N0, N1, N2, O3;
+    @ms(N0) = a*2;
+    @ms(N1) = a;
+    @ms(N2) = a*3;
+
+    @marcs = (N0, N1);
+    @marcs += (N0, N2);
+    @marcs += (N1, N0);
+    @marcs += (N1, N2);
+    @marcs += (N2, O3);
+    [a --> a] 'N0 "aa" :: 0;
+    [a --> #] 'N0 "a" :: 0;
+
+    [a --> a] 'N1 "a" :: 0;
+    [a --> a] 'N1 "a" :: 1;
+
+    [a*3 --> a] 'N2 "aaa" :: 0;
+    [a --> a] 'N2 "a" :: 1;
+    [a*2 --> #] 'N2 "aa" :: 0;
+}

@@ -1,0 +1,24 @@
+Membrane N0 {
+    Object a^2;
+    Tunnel N1, N2;
+    Rule r1= aa/ a -> ( a, go all);
+    Rule r2= a/ a -> ( lambda, go all);
+}
+
+Membrane N1 {
+    Object a;
+    Tunnel N0, N2;
+    Rule r1= a/ a -> ( a, go all);
+    Rule r2= a/ a -> ( a, go all);
+}
+
+Membrane N2 {
+    Object a^3;
+    Tunnel N3;
+    Rule r1= aaa/ aaa -> ( a, go all);
+    Rule r2= a/ a -> ( a, go all);
+    Rule r3= aa/ aa -> ( lambda, go all);
+}
+
+Membrane N3 {
+}

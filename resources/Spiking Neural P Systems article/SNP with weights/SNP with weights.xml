@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<SpikingNeuralSystem type="WSNP">
+
+  <neurons>
+    <neuron id="in_exc" initial_value="1" />
+    <neuron id="in_inh" initial_value="1" />
+    <neuron id="calc" initial_value="0" threshold="1" />
+    <neuron id="out" initial_value="0" is_output="true" />
+  </neurons>
+
+  <synapses>
+    <synapse source="in_exc" target="calc" weight="2" />
+    <synapse source="in_inh" target="calc" weight="-1" />
+    <synapse source="calc" target="out" weight="3" />
+  </synapses>
+
+  <rules>
+    <rule id="r_exc" neuron_id="in_exc" guard="1" consumed="1" produced="1" />
+    <rule id="r_inh" neuron_id="in_inh" guard="1" consumed="1" produced="1" />
+    <rule id="r_calc" neuron_id="calc" guard="1" consumed="1" produced="1" />
+  </rules>
+
+</SpikingNeuralSystem>

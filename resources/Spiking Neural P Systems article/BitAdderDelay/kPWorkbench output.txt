@@ -1,0 +1,97 @@
+Simulation started.
+Initial Configuration
+-------------------------------------------------
+TYPE t_N0
+#0 N0 [Active] {2a, 2f, o} Links to #: 1
+TYPE t_N2
+#1 N2 [Active] {} Links to #: 0, 2, 3
+TYPE t_N1
+#2 N1 [Active] {3a} Links to #: 1
+TYPE t_O3
+#3 O3 [Active] {} Links to #: 1
+TYPE t_N3
+#4 N3 [Active] {} Links to #: none
+-------------------------------------------------
+
+STEP 1
+
+Rule #0 * =2a & =o: 2a, o, f -> c, v_1, a_1 * applied in instance #0 N0.
+Rule #9 * =3a: 2a -> {a}(t_N2) * applied in instance #2 N1.
+Selected instance #1 as target of type t_N2 for rule #9.
+
+Configuration #1
+-------------------------------------------------
+TYPE t_N0
+#0 N0 [Active] {v_1, f, c, a_1} Links to #: 1
+TYPE t_N2
+#1 N2 [Active] {a} Links to #: 0, 2, 3
+TYPE t_N1
+#2 N1 [Active] {a} Links to #: 1
+TYPE t_O3
+#3 O3 [Active] {} Links to #: 1
+TYPE t_N3
+#4 N3 [Active] {} Links to #: none
+-------------------------------------------------
+
+STEP 2
+
+Rule #6 * =a: a -> {a}(t_O3) * applied in instance #1 N2.
+Selected instance #3 as target of type t_O3 for rule #6.
+Rule #10 * =a: a -> {a}(t_N2) * applied in instance #2 N1.
+Selected instance #1 as target of type t_N2 for rule #10.
+Rule #1 * =a_1: c, v_1 -> f, o, {a}(t_N2) * applied in instance #0 N0.
+Selected instance #1 as target of type t_N2 for rule #1.
+Rule #4 * >=a_1: a_1 -> {} * applied in instance #0 N0.
+
+Configuration #2
+-------------------------------------------------
+TYPE t_N0
+#0 N0 [Active] {2f, o} Links to #: 1
+TYPE t_N2
+#1 N2 [Active] {2a} Links to #: 0, 2, 3
+TYPE t_N1
+#2 N1 [Active] {} Links to #: 1
+TYPE t_O3
+#3 O3 [Active] {a} Links to #: 1
+TYPE t_N3
+#4 N3 [Active] {} Links to #: none
+-------------------------------------------------
+
+STEP 3
+
+Rule #7 * =2a: a -> {} * applied in instance #1 N2.
+
+Configuration #3
+-------------------------------------------------
+TYPE t_N0
+#0 N0 [Active] {2f, o} Links to #: 1
+TYPE t_N2
+#1 N2 [Active] {a} Links to #: 0, 2, 3
+TYPE t_N1
+#2 N1 [Active] {} Links to #: 1
+TYPE t_O3
+#3 O3 [Active] {a} Links to #: 1
+TYPE t_N3
+#4 N3 [Active] {} Links to #: none
+-------------------------------------------------
+
+STEP 4
+
+Rule #6 * =a: a -> {a}(t_O3) * applied in instance #1 N2.
+Selected instance #3 as target of type t_O3 for rule #6.
+
+Configuration #4
+-------------------------------------------------
+TYPE t_N0
+#0 N0 [Active] {2f, o} Links to #: 1
+TYPE t_N2
+#1 N2 [Active] {} Links to #: 0, 2, 3
+TYPE t_N1
+#2 N1 [Active] {} Links to #: 1
+TYPE t_O3
+#3 O3 [Active] {2a} Links to #: 1
+TYPE t_N3
+#4 N3 [Active] {} Links to #: none
+-------------------------------------------------
+System halted at step 4 (no further rule could be applied, i.e. reached a deadlock).
+Simulation complete at step 4.

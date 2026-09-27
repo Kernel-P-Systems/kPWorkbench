@@ -1,0 +1,96 @@
+type t_li {
+    max {
+        >=1a & >=1A : 1a, 1A -> .
+    }
+    choice {
+        =1a : 1a -> 1a (t_li1), 1a (t_li2), 1a (t_li3), 1a (t_r) .
+    }
+}
+
+type t_r {
+    max {
+        >=1a & >=1A : 1a, 1A -> .
+    }
+}
+
+type t_li1 {
+    max {
+        >=1a & >=1A : 1a, 1A -> .
+    }
+    choice {
+        =1a : 1a -> 1a (t_li4), 1a (t_li5) .
+    }
+}
+
+type t_li2 {
+    max {
+        >=1a & >=1A : 1a, 1A -> .
+    }
+    choice {
+        =1a : 1a -> 1a (t_li4), 1a (t_li5) .
+    }
+}
+
+type t_li3 {
+    max {
+        >=1a & >=1A : 1a, 1A -> .
+    }
+    choice {
+        =1a : 1a -> 1a (t_li4), 1a (t_li5) .
+        =1a : 1a -> 1A (t_li4), 1A (t_li5) .
+    }
+}
+
+type t_li4 {
+    max {
+        >=1a & >=1A : 1a, 1A -> .
+    }
+    choice {
+        =2a : 2a -> 1a (t_lj) .
+    }
+}
+
+type t_li5 {
+    max {
+        >=1a & >=1A : 1a, 1A -> .
+    }
+    choice {
+        =1a : 1a -> 1a (t_lk) .
+        =3a : 3a -> .
+    }
+}
+
+type t_lj {
+    max {
+        >=1a & >=1A : 1a, 1A -> .
+    }
+}
+
+type t_lk {
+    max {
+        >=1a & >=1A : 1a, 1A -> .
+    }
+}
+
+li {1a} (t_li) .
+r {} (t_r) .
+li1 {} (t_li1) .
+li2 {} (t_li2) .
+li3 {} (t_li3) .
+li4 {} (t_li4) .
+li5 {} (t_li5) .
+lj {} (t_lj) .
+lk {} (t_lk) .
+
+li - li1 .
+li - li2 .
+li - li3 .
+li - r .
+li1 - li4 .
+li1 - li5 .
+li2 - li4 .
+li2 - li5 .
+li3 - li4 .
+li3 - li5 .
+li4 - lj .
+li5 - lk .

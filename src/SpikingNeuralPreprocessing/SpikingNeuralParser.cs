@@ -194,7 +194,6 @@ public class SpikingNeuralParser
         var neurons = new List<Neuron>();
         string fileContent = File.ReadAllText(filePath);
 
-        // Extract Membrane blocks (e.g., Membrane a { ... })
         var membraneRegex = new Regex(@"Membrane\s+([a-zA-Z0-9_]+)\s*\{([^}]*)\}");
         var matches = membraneRegex.Matches(fileContent);
 
@@ -213,7 +212,6 @@ public class SpikingNeuralParser
                 neuron.Spikes = string.IsNullOrEmpty(countStr) ? 1 : int.Parse(countStr);
             }
 
-            // Parse Tunnels (OutSynapses) e.g., "Tunnel b,c;"
             var tunnelMatch = Regex.Match(blockContent, @"Tunnel\s+([^;]+);");
             if (tunnelMatch.Success)
             {
@@ -223,22 +221,26 @@ public class SpikingNeuralParser
                     .ToList();
             }
 
-            // Parse Rules e.g., "Rule r1= a+/ a -> ( a, go all);"
             var ruleMatches = Regex.Matches(blockContent,
-                @"Rule\s+[a-zA-Z0-9_]+\s*=\s*([a-zA-Z0-9^+]+)\s*/\s*([a-zA-Z0-9^]+)\s*->\s*\(\s*([a-zA-Z]*)\s*,\s*go\s+([^)]+)\);");
+                @"Rule\s+[a-zA-Z0-9_]+\s*=\s*([a-zA-Z0-9^+]+)\s*/\s*([a-zA-Z0-9^]+)\s*->\s*(?:delay\s*\(\s*)?\(\s*([a-zA-Z]*)\s*,\s*go\s+([^)]+)\)(?:\s*,\s*(\d+)\s*\))?\s*;",
+                RegexOptions.IgnoreCase);
+
             foreach (Match rm in ruleMatches)
             {
                 string regexE = rm.Groups[1].Value.Trim();
                 string consumed = rm.Groups[2].Value.Trim();
                 string produced = rm.Groups[3].Value.Trim();
+
                 if (string.IsNullOrEmpty(produced) || produced.ToLower() == "lambda")
                 {
                     produced = "0";
                 }
-                string targets = rm.Groups[4].Value.Trim(); // Extracts "all", "b", "b | c"
 
-                // Encode as a Snapse rule but append the targets using a pipe '|' for the XML generator to read
-                neuron.Rules.Add($"[{regexE}/{consumed}->{produced};0|{targets}]");
+                string targets = rm.Groups[4].Value.Trim();
+
+                string delay = rm.Groups[5].Success ? rm.Groups[5].Value.Trim() : "0";
+
+                neuron.Rules.Add($"[{regexE}/{consumed}->{produced};{delay}|{targets}]");
             }
 
             neurons.Add(neuron);
@@ -247,66 +249,8 @@ public class SpikingNeuralParser
         return neurons;
     }
 
-    private XDocument GenerateSNPkPML(List<Neuron> neurons)
-    {
-        var kPSystem = new XElement("kPSystem",
-            new XElement("compartmentTypes"),
-            new XElement("compartments"),
-            new XElement("links")
-        );
-
-        var compartmentTypes = kPSystem.Element("compartmentTypes");
-        var compartments = kPSystem.Element("compartments");
-        var links = kPSystem.Element("links");
-
-        foreach (var neuron in neurons)
-        {
-            // -- Build Compartment Type --
-            var typeElement = new XElement("type", new XAttribute("id", $"t_{neuron.Id}"));
-
-            // If it's not an output neuron and has rules, append the strategy block
-            if (!neuron.IsOutput && neuron.Rules.Count > 0)
-            {
-                // Using 'choice' strategy as the default non-deterministic execution map for SN P systems
-                var strategyElement = new XElement("strategy", new XAttribute("type", "choice"));
-
-                int ruleIndex = 1;
-                foreach (var ruleStr in neuron.Rules)
-                {
-                    strategyElement.Add(ParseRule(ruleStr, neuron.OutSynapses, ruleIndex++));
-                }
-
-                typeElement.Add(strategyElement);
-            }
-
-            compartmentTypes.Add(typeElement);
-
-            // -- Build Compartment Instance --
-            // Use KPL native multiset syntax (e.g., "8a" instead of "a^8")
-            string initialMultiset = neuron.Spikes > 0 ? $"{neuron.Spikes}a" : "";
-            var compartmentElement = new XElement("compartment",
-                new XAttribute("id", neuron.Id),
-                new XAttribute("type", $"t_{neuron.Id}"),
-                new XAttribute("initialMultiset", initialMultiset)
-            );
-            compartments.Add(compartmentElement);
-
-            // -- Build Links --
-            foreach (var target in neuron.OutSynapses)
-            {
-                links.Add(new XElement("link",
-                    new XAttribute("source", neuron.Id),
-                    new XAttribute("target", target)
-                ));
-            }
-        }
-
-        return new XDocument(new XDeclaration("1.0", "utf-8", "yes"), kPSystem);
-    }
-
     private XDocument GenerateRawSnpXml(List<Neuron> neurons)
     {
-        // Find the designated output neuron (if any)
         string outputNeuronId = neurons.FirstOrDefault(n => n.IsOutput)?.Id ?? "out";
 
         var snpSystem = new XElement("snpSystem",
@@ -314,13 +258,11 @@ public class SpikingNeuralParser
             new XAttribute("outputNeuron", outputNeuronId)
         );
 
-        // 1. Define the Alphabet
         var alphabet = new XElement("alphabet",
             new XElement("spike", new XAttribute("symbol", "a"))
         );
         snpSystem.Add(alphabet);
 
-        // 2. Define the Neurons and their Rules
         var neuronsElement = new XElement("neurons");
         var synapsesElement = new XElement("synapses");
 
@@ -345,7 +287,6 @@ public class SpikingNeuralParser
 
             neuronsElement.Add(neuronElement);
 
-            // 3. Extract Synapses
             foreach (var target in neuron.OutSynapses)
             {
                 synapsesElement.Add(new XElement("synapse",
@@ -387,7 +328,6 @@ public class SpikingNeuralParser
         string producedStr = match.Groups[3].Value;
         string delay = match.Groups[4].Value;
 
-        // FIXED: Safely calculate spike amounts regardless of Snapse/UPSimulator syntax
         int consumedCount = ParseSpikeCount(consumedStr);
         int producedCount = ParseSpikeCount(producedStr);
 
@@ -501,11 +441,8 @@ public class SpikingNeuralParser
 
         public int Delay { get; set; }
 
-        //storedGive is an integer that specifies the number of spikes a closed neuron produces when it fires (storedGive = 0 if the neuron
-        // is open). storedConsume is an integer that specifies the number of spikes a closed neuron consumes when it fires (storedConsume = 0 if the neuron is open)
         public int StoredGive { get; set; }
 
-        // storedConsume is an integer that specifies the number of spikes a closed neuron consumes when it fires (storedConsume = 0 if the neuron is open)
         public int StoredConsume { get; set; }
     }
 }

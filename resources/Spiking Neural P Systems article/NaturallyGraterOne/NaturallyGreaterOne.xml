@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<snpSystem type="standard" outputNeuron="O3">
+  <alphabet>
+    <spike symbol="a" />
+  </alphabet>
+  <neurons>
+    <neuron id="N0" initialSpikes="2">
+      <rules>
+        <rule id="r1" regex="aa" consumed="1" produced="1" delay="0" type="spiking" />
+        <rule id="r2" regex="a" consumed="1" produced="0" delay="0" type="forgetting" />
+      </rules>
+    </neuron>
+    <neuron id="N1" initialSpikes="1">
+      <rules>
+        <rule id="r1" regex="a" consumed="1" produced="1" delay="0" type="spiking" />
+        <rule id="r2" regex="a" consumed="1" produced="1" delay="1" type="spiking" />
+      </rules>
+    </neuron>
+    <neuron id="N2" initialSpikes="3">
+      <rules>
+        <rule id="r1" regex="aaa" consumed="3" produced="1" delay="0" type="spiking" />
+        <rule id="r2" regex="a" consumed="1" produced="1" delay="1" type="spiking" />
+        <rule id="r3" regex="aa" consumed="2" produced="0" delay="0" type="forgetting" />
+      </rules>
+    </neuron>
+    <neuron id="O3" initialSpikes="0" />
+    <neuron id="N3" initialSpikes="0" />
+  </neurons>
+  <synapses>
+    <synapse source="N0" target="N1" />
+    <synapse source="N0" target="N2" />
+    <synapse source="N1" target="N0" />
+    <synapse source="N1" target="N2" />
+    <synapse source="N2" target="O3" />
+  </synapses>
+</snpSystem>

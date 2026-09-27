@@ -1,0 +1,57 @@
+type t_N0 {
+    choice {
+        =2a : 1a -> 1a (t_N1), 1a (t_N2) .
+        =1a : 1a -> .
+    }
+}
+
+type t_N1 {
+    choice {
+        =1a & =1o : 1a -> 1a (t_N0), 1a (t_N2) .
+        =1a & =1o : 1a, 1o, 1f -> 1c, 1v_1, 1a_1 .
+        =1a_1 : 1c, 1v_1 -> 1f, 1o, 1a (t_N0), 1a (t_N2) .
+    }
+    max {
+        >=1a_1 : 1a -> .
+        =1a_1 : 1b -> 1a .
+    }
+    choice {
+        >=1a_1 : 1a_1 -> .
+    }
+    max {
+        =1f : 1a -> 1b .
+    }
+}
+
+type t_N2 {
+    choice {
+        =3a & =1o : 3a -> 1a (t_O3) .
+        =2a & =1o : 2a -> .
+        =1a & =1o : 1a, 1o, 1f -> 1c, 1v_1, 1a_1 .
+        =1a_1 : 1c, 1v_1 -> 1f, 1o, 1a (t_O3) .
+    }
+    max {
+        >=1a_1 : 1a -> .
+        =1a_1 : 1b -> 1a .
+    }
+    choice {
+        >=1a_1 : 1a_1 -> .
+    }
+    max {
+        =1f : 1a -> 1b .
+    }
+}
+
+type t_O3 { }
+type t_N3 { }
+N0 {2a} (t_N0) .
+N1 {1a, 2f, 1o} (t_N1) .
+N2 {3a, 2f, 1o} (t_N2) .
+O3 {} (t_O3) .
+N3 {} (t_N3) .
+
+N0 - N1 .
+N0 - N2 .
+N1 - N0 .
+N1 - N2 .
+N2 - O3 .

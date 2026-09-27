@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<snpSystem type="antispike">
+  <alphabet>
+    <spike symbol="a" />
+    <antispike symbol="A" />
+  </alphabet>
+  
+  <neuronTypes>
+    <neuronType id="t_forward">
+      <rules>
+        <rule regex="1a" consumed="1" produced="1" producedSymbol="a" delay="0" type="spiking" id="r1" />
+      </rules>
+    </neuronType>
+
+    <neuronType id="t_empty">
+      <rules />
+    </neuronType>
+
+    <neuronType id="t_add_li3">
+      <rules>
+        <rule regex="1a" consumed="1" produced="1" producedSymbol="a" delay="0" type="spiking" id="r1" />
+        <rule regex="1a" consumed="1" produced="1" producedSymbol="A" delay="0" type="spiking" id="r2" />
+      </rules>
+    </neuronType>
+
+    <neuronType id="t_add_li4">
+      <rules>
+        <rule regex="2a" consumed="2" produced="1" producedSymbol="a" delay="0" type="spiking" id="r1" />
+      </rules>
+    </neuronType>
+
+    <neuronType id="t_add_li5">
+      <rules>
+        <rule regex="1a" consumed="1" produced="1" producedSymbol="a" delay="0" type="spiking" id="r1" />
+        <rule regex="3a" consumed="3" produced="0" delay="0" type="forgetting" id="r2" />
+      </rules>
+    </neuronType>
+
+    <neuronType id="t_sub_li2">
+      <rules>
+        <rule regex="1a" consumed="1" produced="1" producedSymbol="A" delay="0" type="spiking" id="r1" />
+      </rules>
+    </neuronType>
+
+    <neuronType id="t_sub_r">
+      <rules>
+        <rule regex="1A" consumed="1" produced="1" producedSymbol="a" delay="0" type="spiking" id="r1" />
+      </rules>
+    </neuronType>
+
+    <neuronType id="t_sub_li5">
+      <rules>
+        <rule regex="1a" consumed="1" produced="0" delay="0" type="forgetting" id="r1" />
+        <rule regex="2a" consumed="2" produced="1" producedSymbol="a" delay="0" type="spiking" id="r2" />
+        <rule regex="3a" consumed="3" produced="0" delay="0" type="forgetting" id="r3" />
+      </rules>
+    </neuronType>
+
+    <neuronType id="t_sub_li6">
+      <rules>
+        <rule regex="1a" consumed="1" produced="0" delay="0" type="forgetting" id="r1" />
+        <rule regex="2a" consumed="2" produced="0" delay="0" type="forgetting" id="r2" />
+        <rule regex="3a" consumed="3" produced="1" producedSymbol="a" delay="0" type="spiking" id="r3" />
+      </rules>
+    </neuronType>
+
+    <neuronType id="t_antispike">
+      <rules>
+        <rule regex="1a" consumed="1" produced="1" producedSymbol="A" delay="0" type="spiking" id="r1" />
+      </rules>
+    </neuronType>
+  </neuronTypes>
+
+  <neurons>
+    <neuron id="add_li" type="t_forward" initialSpikes="1" />
+    <neuron id="add_r" type="t_empty" initialSpikes="0" />
+    <neuron id="add_li1" type="t_forward" initialSpikes="0" />
+    <neuron id="add_li2" type="t_forward" initialSpikes="0" />
+    <neuron id="add_li3" type="t_add_li3" initialSpikes="0" />
+    <neuron id="add_li4" type="t_add_li4" initialSpikes="0" />
+    <neuron id="add_li5" type="t_add_li5" initialSpikes="0" />
+    <neuron id="add_lj" type="t_empty" initialSpikes="0" />
+    <neuron id="add_lk" type="t_empty" initialSpikes="0" />
+
+    <neuron id="sub_li" type="t_forward" initialSpikes="1" />
+    <neuron id="sub_li1" type="t_forward" initialSpikes="0" />
+    <neuron id="sub_li2" type="t_sub_li2" initialSpikes="0" />
+    <neuron id="sub_li3" type="t_forward" initialSpikes="0" />
+    <neuron id="sub_li4" type="t_forward" initialSpikes="0" />
+    <neuron id="sub_r" type="t_sub_r" initialSpikes="1" />
+    <neuron id="sub_li5" type="t_sub_li5" initialSpikes="0" />
+    <neuron id="sub_li6" type="t_sub_li6" initialSpikes="0" />
+    <neuron id="sub_lj" type="t_empty" initialSpikes="0" />
+    <neuron id="sub_lk" type="t_empty" initialSpikes="0" />
+
+    <neuron id="fin_lh" type="t_forward" initialSpikes="1" />
+    <neuron id="fin_d1" type="t_forward" initialSpikes="0" />
+    <neuron id="fin_d2" type="t_forward" initialSpikes="0" />
+    <neuron id="fin_d3" type="t_forward" initialSpikes="0" />
+    <neuron id="fin_h2" type="t_forward" initialSpikes="0" />
+    <neuron id="fin_h1" type="t_forward" initialSpikes="0" />
+    <neuron id="fin_h4" type="t_forward" initialSpikes="0" />
+    <neuron id="fin_h5" type="t_antispike" initialSpikes="0" />
+    <neuron id="fin_n1" type="t_forward" initialSpikes="5" />
+    <neuron id="fin_out" type="t_forward" initialSpikes="0" />
+  </neurons>
+
+  <synapses>
+    <synapse source="add_li" target="add_li1" />
+    <synapse source="add_li" target="add_li2" />
+    <synapse source="add_li" target="add_li3" />
+    <synapse source="add_li" target="add_r" />
+
+    <synapse source="add_li1" target="add_li4" />
+    <synapse source="add_li1" target="add_li5" />
+    <synapse source="add_li2" target="add_li4" />
+    <synapse source="add_li2" target="add_li5" />
+    <synapse source="add_li3" target="add_li4" />
+    <synapse source="add_li3" target="add_li5" />
+
+    <synapse source="add_li4" target="add_lj" />
+    <synapse source="add_li5" target="add_lk" />
+
+    <synapse source="sub_li" target="sub_li1" />
+    <synapse source="sub_li" target="sub_li2" />
+    
+    <synapse source="sub_li1" target="sub_li3" />
+    <synapse source="sub_li1" target="sub_li4" />
+    <synapse source="sub_li2" target="sub_r" />
+
+    <synapse source="sub_li3" target="sub_li5" />
+    <synapse source="sub_li3" target="sub_li6" />
+    <synapse source="sub_li4" target="sub_li5" />
+    <synapse source="sub_li4" target="sub_li6" />
+    <synapse source="sub_r" target="sub_li5" />
+    <synapse source="sub_r" target="sub_li6" />
+
+    <synapse source="sub_li5" target="sub_lj" />
+    <synapse source="sub_li6" target="sub_lk" />
+
+    <synapse source="fin_lh" target="fin_d1" />
+    <synapse source="fin_lh" target="fin_h2" />
+
+    <synapse source="fin_d1" target="fin_d2" />
+    <synapse source="fin_d2" target="fin_d3" />
+    <synapse source="fin_d3" target="fin_out" />
+
+    <synapse source="fin_h2" target="fin_h1" />
+    <synapse source="fin_h2" target="fin_h4" />
+    
+    <synapse source="fin_h1" target="fin_h4" />
+    <synapse source="fin_h4" target="fin_h1" />
+    
+    <synapse source="fin_h4" target="fin_h5" />
+    <synapse source="fin_h5" target="fin_n1" />
+
+    <synapse source="fin_n1" target="fin_out" />
+    
+    <synapse source="fin_n1" target="fin_h1" />
+    <synapse source="fin_n1" target="fin_h4" />
+    <synapse source="fin_n1" target="fin_h5" />
+  </synapses>
+</snpSystem>

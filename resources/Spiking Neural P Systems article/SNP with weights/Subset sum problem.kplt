@@ -1,0 +1,199 @@
+type t_a1 {
+    max {
+        >=1a & >=1n : 1a, 1n -> .
+    }
+    max {
+        <1a : 1a -> .
+        >=1n : 1n -> .
+    }
+    choice {
+        =1a : 1a -> 1a (t_d1) .
+    }
+}
+
+type t_b1 {
+    max {
+        >=1a & >=1n : 1a, 1n -> .
+    }
+    max {
+        <1a : 1a -> .
+        >=1n : 1n -> .
+    }
+    choice {
+        =1a : 1a -> 1a (t_c1) .
+    }
+}
+
+type t_c1 {
+    max {
+        >=1a & >=1n : 1a, 1n -> .
+    }
+    max {
+        <2a : 1a -> .
+        >=1n : 1n -> .
+    }
+    choice {
+        =2a : 2a -> 1a (t_d1), 1a (t_e1) .
+        =2a : 1a -> 1a (t_d1), 1a (t_e1) .
+    }
+}
+
+type t_d1 {
+    max {
+        >=1a & >=1n : 1a, 1n -> .
+    }
+    max {
+        <2a : 1a -> .
+        >=1n : 1n -> .
+    }
+    choice {
+        =2a : 2a -> 1a (t_e1) .
+    }
+}
+
+type t_e1 {
+    max {
+        >=1a & >=1n : 1a, 1n -> .
+    }
+    max {
+        <2a : 1a -> .
+        >=1n : 1n -> .
+    }
+    choice {
+        =2a : 2a -> 1n (t_n1) .
+    }
+}
+
+type t_n1 {
+    max {
+        >=1a & >=1n : 1a, 1n -> .
+    }
+    max {
+        <2a : 1a -> .
+        >=1n : 1n -> .
+    }
+    choice {
+        =2a : 2a -> 2a (t_out) .
+    }
+}
+
+type t_a2 {
+    max {
+        >=1a & >=1n : 1a, 1n -> .
+    }
+    max {
+        <1a : 1a -> .
+        >=1n : 1n -> .
+    }
+    choice {
+        =1a : 1a -> 1a (t_d2) .
+    }
+}
+
+type t_b2 {
+    max {
+        >=1a & >=1n : 1a, 1n -> .
+    }
+    max {
+        <1a : 1a -> .
+        >=1n : 1n -> .
+    }
+    choice {
+        =1a : 1a -> 1a (t_c2) .
+    }
+}
+
+type t_c2 {
+    max {
+        >=1a & >=1n : 1a, 1n -> .
+    }
+    max {
+        <2a : 1a -> .
+        >=1n : 1n -> .
+    }
+    choice {
+        =2a : 2a -> 1a (t_d2), 1a (t_e2) .
+        =2a : 1a -> 1a (t_d2), 1a (t_e2) .
+    }
+}
+
+type t_d2 {
+    max {
+        >=1a & >=1n : 1a, 1n -> .
+    }
+    max {
+        <2a : 1a -> .
+        >=1n : 1n -> .
+    }
+    choice {
+        =2a : 2a -> 1a (t_e2) .
+    }
+}
+
+type t_e2 {
+    max {
+        >=1a & >=1n : 1a, 1n -> .
+    }
+    max {
+        <2a : 1a -> .
+        >=1n : 1n -> .
+    }
+    choice {
+        =2a : 2a -> 1n (t_n2) .
+    }
+}
+
+type t_n2 {
+    max {
+        >=1a & >=1n : 1a, 1n -> .
+    }
+    max {
+        <3a : 1a -> .
+        >=1n : 1n -> .
+    }
+    choice {
+        =3a : 3a -> 3a (t_out) .
+    }
+}
+
+type t_out {
+    max {
+        >=1a & >=1n : 1a, 1n -> .
+    }
+    max {
+        <5a : 1a -> .
+        >=1n : 1n -> .
+    }
+    choice {
+        =5a : 5a -> .
+    }
+}
+
+a1 {1a} (t_a1) .
+b1 {1a} (t_b1) .
+c1 {2a} (t_c1) .
+d1 {} (t_d1) .
+e1 {} (t_e1) .
+n1 {3a} (t_n1) .
+a2 {1a} (t_a2) .
+b2 {1a} (t_b2) .
+c2 {2a} (t_c2) .
+d2 {} (t_d2) .
+e2 {} (t_e2) .
+n2 {4a} (t_n2) .
+out {} (t_out) .
+
+a1 - d1 .
+b1 - c1 .
+c1 - d1 .
+c1 - e1 .
+d1 - e1 .
+e1 - n1 .
+n1 - out .
+a2 - d2 .
+b2 - c2 .
+c2 - d2 .
+c2 - e2 .
+d2 - e2 .
+e2 - n2 .
+n2 - out .

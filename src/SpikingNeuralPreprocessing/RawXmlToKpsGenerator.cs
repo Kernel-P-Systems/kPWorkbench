@@ -33,12 +33,14 @@ internal class RawXmlToKpsGenerator
 
         bool requiresLimitMacro = false;
         string systemType = root.Attribute("type")?.Value.ToLower() ?? "standard";
+        bool hasSystemWideDelays = root.Descendants("rule")
+            .Any(r => int.TryParse(r.Attribute("delay")?.Value, out int d) && d > 0);
 
         ISnpVariantStrategy strategy = systemType switch
         {
             "weighted" => new WeightedSnpStrategy(),
             "antispike" => new AntiSpikeSnpStrategy(),
-            _ => new StandardSnpStrategy()
+            _ => hasSystemWideDelays ? new DelayedSnpStrategy() : new StandardSnpStrategy()
         };
 
         var instances = root.Element("neurons")?.Elements("neuron");
@@ -111,39 +113,39 @@ internal class RawXmlToKpsGenerator
             }
         }
 
-        // 3. GENERATE RULE TYPES
-        var allTypes = new HashSet<string>(typeRulesMap.Keys);
-        foreach (string kplTypeId in allTypes)
-        {
-            if (kplTypeId.Contains("$")) continue;
-
-            string instanceId = kplTypeId.StartsWith("t_") ? kplTypeId.Substring(2) : kplTypeId;
-
-            // --- THE FIX ---
-            // We NO LONGER clear the targets if hasTopologicalLinks is true.
-            // kPWorkbench needs BOTH the explicit rule targets AND the topological links.
-            var targets = instanceTargets.ContainsKey(instanceId) ? instanceTargets[instanceId] : new List<(string Target, int Weight)>();
-
-            strategy.GenerateTypeDefinition(
-                sb, kplTypeId, kplTypeId, typeRulesMap, typeThresholdMap, targets,
-                (rule, ruleTargets, isPlingua) => GenerateRuleString(rule, ruleTargets, isPlingua, ref requiresLimitMacro)
-            );
-        }
-
-        // 4. GENERATE EXPLICIT COMPARTMENTS
         var explicitCompartments = new Dictionary<string, string>();
+
         foreach (var inst in instances)
         {
             string loop = inst.Attribute("loop")?.Value;
             string idTemplate = inst.Attribute("id").Value;
-            string tId = inst.Attribute("type")?.Value ?? $"t_{SanitizeId(idTemplate)}";
+
+            string xmlType = inst.Attribute("type")?.Value ?? $"t_{SanitizeId(idTemplate)}";
+
+            bool hasDelays = typeRulesMap.ContainsKey(xmlType) &&
+                             typeRulesMap[xmlType].Any(r => int.TryParse(r.Attribute("delay")?.Value, out int d) && d > 0);
 
             int.TryParse(inst.Attribute("initialSpikes")?.Value, out int initSpikes);
             string multiset = initSpikes > 0 ? $"{initSpikes}a" : "";
 
+            if (hasDelays)
+            {
+                multiset = string.IsNullOrEmpty(multiset) ? "2f, 1o" : multiset + ", 2f, 1o";
+            }
+
+
             if (string.IsNullOrEmpty(loop))
             {
-                explicitCompartments[SanitizeId(idTemplate)] = $"{multiset}|{tId}";
+                string concreteId = SanitizeId(idTemplate);
+                string kplTypeId = $"t_{concreteId}"; 
+
+                var targets = instanceTargets.ContainsKey(concreteId) ? instanceTargets[concreteId] : new List<(string Target, int Weight)>();
+                strategy.GenerateTypeDefinition(
+                    sb, kplTypeId, xmlType, typeRulesMap, typeThresholdMap, targets,
+                    (rule, ruleTargets, isPlingua) => GenerateRuleString(rule, ruleTargets, isPlingua, ref requiresLimitMacro)
+                );
+
+                explicitCompartments[concreteId] = $"{multiset}|{kplTypeId}";
             }
             else
             {
@@ -155,12 +157,25 @@ internal class RawXmlToKpsGenerator
                         concreteId = concreteId.Replace($"${kvp.Key}$", kvp.Value).Replace($"{{{kvp.Key}}}", kvp.Value);
 
                     concreteId = SanitizeId(concreteId);
+                    string kplTypeId = $"t_{concreteId}";
+
                     if (!explicitCompartments.ContainsKey(concreteId))
-                        explicitCompartments[concreteId] = $"{multiset}|{tId}";
+                    {
+                        // 3. Generate Unrolled Type
+                        var targets = instanceTargets.ContainsKey(concreteId) ? instanceTargets[concreteId] : new List<(string Target, int Weight)>();
+                        strategy.GenerateTypeDefinition(
+                            sb, kplTypeId, xmlType, typeRulesMap, typeThresholdMap, targets,
+                            (rule, ruleTargets, isPlingua) => GenerateRuleString(rule, ruleTargets, isPlingua, ref requiresLimitMacro)
+                        );
+
+                        // 4. Store Instance
+                        explicitCompartments[concreteId] = $"{multiset}|{kplTypeId}";
+                    }
                 }
             }
         }
 
+        // Print all compiled Compartments to the KPL file
         foreach (var kvp in explicitCompartments)
         {
             string[] parts = kvp.Value.Split('|');
@@ -222,7 +237,7 @@ internal class RawXmlToKpsGenerator
             }
             else
             {
-                rhs = $"{produced}{producedSymbol} (env)";
+                rhs = "";
             }
         }
 

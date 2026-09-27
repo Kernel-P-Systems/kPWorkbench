@@ -1,0 +1,24 @@
+Environment {
+    Membrane N0 {
+        Object a^2;
+        Tunnel N2;
+        Rule r1 = a^2/ a^2 -> delay(( a, go N2 ), 1);
+    }
+    
+    Membrane N1 {
+        Object a^3;
+        Tunnel N2;
+        Rule r1 = a^3/ a^2 -> ( a, go N2 );
+        Rule r2 = a/ a -> ( a, go N2 );
+    }
+    
+    Membrane N2 {
+        Tunnel N3;
+        Rule r1 = a/ a -> ( a, go N3 );
+        Rule r2 = a^2/ a -> ( lambda, go all );
+        Rule r3 = a^3/ a^2 -> ( a, go N3 );
+    }
+    
+    Membrane N3 {
+    }
+}

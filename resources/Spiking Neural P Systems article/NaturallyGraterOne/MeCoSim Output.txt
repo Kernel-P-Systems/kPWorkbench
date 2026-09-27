@@ -1,0 +1,289 @@
+
+***********************************************
+
+    CONFIGURATION: 0
+
+    NEURON ID: 0, Label: environment, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 0
+    Multiset: #
+
+    NEURON ID: 1, Label: N0, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 0
+    Multiset: a*2
+
+    NEURON ID: 2, Label: N1, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 0
+    Multiset: a
+
+    NEURON ID: 3, Label: N2, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 0
+    Multiset: a*3
+
+    NEURON ID: 4, Label: O3, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 0
+    Multiset: #
+
+-----------------------------------------------
+
+    STEP: 1
+
+    Rules selected for NEURON ID: 1, Label: N0, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 0
+    1 * #1 aa / [a]'N0 --> [a]'N0
+
+    Rules selected for NEURON ID: 2, Label: N1, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 0
+    1 * #3 a / [a]'N1 --> [a]'N1
+
+    Rules selected for NEURON ID: 3, Label: N2, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 0
+    1 * #5 aaa / [a*3]'N2 --> [a]'N2
+
+***********************************************
+
+    CONFIGURATION: 1
+
+    NEURON ID: 0, Label: environment, Skipped: false, Bound timer: -1, Open in (w/ bound 0): 0
+    Multiset: #
+
+    NEURON ID: 1, Label: N0, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 0
+    Multiset: a*2
+
+    NEURON ID: 2, Label: N1, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 0
+    Multiset: a
+
+    NEURON ID: 3, Label: N2, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 0
+    Multiset: a*2
+
+    NEURON ID: 4, Label: O3, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 0
+    Multiset: a
+
+<<----------------  SN P additional info  ----------------
+    Execution Results at step: 1
+
+    INPUT SPIKE TRAIN
+
+    Steps sending spikes: 
+    Spikes sent per step: []
+
+    OUTPUT SPIKE TRAINS
+
+    Binary Sequence:
+
+
+    Natural Sequence:
+
+
+    Configuration:
+
+    Cells: 0:[]'environment, 1:[a*2]'N0, 2:[a]'N1, 3:[a*2]'N2, 4:[a]'O3
+    Arcs: 
+    {1=[2, 3], 2=[1, 3], 3=[4]}
+    Arcs Info: 
+    {<1,2>=<edges=<1,2>,w=1,d=0,ast=[]>, <1,3>=<edges=<1,3>,w=1,d=0,ast=[]>, <2,1>=<edges=<2,1>,w=1,d=0,ast=[]>, <2,3>=<edges=<2,3>,w=1,d=0,ast=[]>, <3,4>=<edges=<3,4>,w=1,d=0,ast=[]>}
+    Dictionary: 
+    N0:[N1, N2]
+    N1:[N0, N2]
+    N2:[O3]
+    Input Membrane ID: 
+    Ouput Membranes IDs: 
+
+    Delayed Spikes:
+
+    {}
+-------------------------------------------------------->>
+
+-----------------------------------------------
+
+    STEP: 2
+
+    Rules selected for NEURON ID: 1, Label: N0, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 0
+    1 * #1 aa / [a]'N0 --> [a]'N0
+
+    Rules selected for NEURON ID: 2, Label: N1, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 1
+    1 * #4 a / [a]'N1 --> [a]'N1 ; 1    (rule firing in this step, but spiking in a latter step)
+
+    Rules selected for NEURON ID: 3, Label: N2, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 0
+    1 * #7 aa / [a*2]'N2 --> []'N2
+
+***********************************************
+
+    CONFIGURATION: 2
+
+    NEURON ID: 0, Label: environment, Skipped: false, Bound timer: -1, Open in (w/ bound 0): 0
+    Multiset: #
+
+    NEURON ID: 1, Label: N0, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 0
+    Multiset: a
+
+    NEURON ID: 2, Label: N1, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 1
+    Multiset: #
+
+    NEURON ID: 3, Label: N2, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 0
+    Multiset: a
+
+    NEURON ID: 4, Label: O3, Skipped: false, Bound timer: -1, Open in (w/ bound 0): 0
+    Multiset: a
+
+<<----------------  SN P additional info  ----------------
+    Execution Results at step: 2
+
+    INPUT SPIKE TRAIN
+
+    Steps sending spikes: 
+    Spikes sent per step: []
+
+    OUTPUT SPIKE TRAINS
+
+    Binary Sequence:
+
+
+    Natural Sequence:
+
+
+    Configuration:
+
+    Cells: 0:[]'environment, 1:[a]'N0, 2:[]'N1, 3:[a]'N2, 4:[a]'O3
+    Arcs: 
+    {1=[2, 3], 2=[1, 3], 3=[4]}
+    Arcs Info: 
+    {<1,2>=<edges=<1,2>,w=1,d=0,ast=[]>, <1,3>=<edges=<1,3>,w=1,d=0,ast=[]>, <2,1>=<edges=<2,1>,w=1,d=0,ast=[]>, <2,3>=<edges=<2,3>,w=1,d=0,ast=[]>, <3,4>=<edges=<3,4>,w=1,d=0,ast=[]>}
+    Dictionary: 
+    N0:[N1, N2]
+    N1:[N0, N2]
+    N2:[O3]
+    Input Membrane ID: 
+    Ouput Membranes IDs: 
+
+    Delayed Spikes:
+
+    {}
+-------------------------------------------------------->>
+
+-----------------------------------------------
+
+    STEP: 3
+
+    Rules selected for NEURON ID: 1, Label: N0, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 0
+    1 * #2 a / [a]'N0 --> []'N0
+
+    Rules selected for NEURON ID: 2, Label: N1, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 0
+    1 * #4 a / [a]'N1 --> [a]'N1 ; 1    (rule fired in a previous step, but spiking in this step)
+
+    Rules selected for NEURON ID: 3, Label: N2, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 1
+    1 * #6 a / [a]'N2 --> [a]'N2 ; 1    (rule firing in this step, but spiking in a latter step)
+
+***********************************************
+
+    CONFIGURATION: 3
+
+    NEURON ID: 0, Label: environment, Skipped: false, Bound timer: -1, Open in (w/ bound 0): 0
+    Multiset: #
+
+    NEURON ID: 1, Label: N0, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 0
+    Multiset: a
+
+    NEURON ID: 2, Label: N1, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 0
+    Multiset: #
+
+    NEURON ID: 3, Label: N2, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 1
+    Multiset: #
+
+    NEURON ID: 4, Label: O3, Skipped: false, Bound timer: -1, Open in (w/ bound 0): 0
+    Multiset: a
+
+<<----------------  SN P additional info  ----------------
+    Execution Results at step: 3
+
+    INPUT SPIKE TRAIN
+
+    Steps sending spikes: 
+    Spikes sent per step: []
+
+    OUTPUT SPIKE TRAINS
+
+    Binary Sequence:
+
+
+    Natural Sequence:
+
+
+    Configuration:
+
+    Cells: 0:[]'environment, 1:[a]'N0, 2:[]'N1, 3:[]'N2, 4:[a]'O3
+    Arcs: 
+    {1=[2, 3], 2=[1, 3], 3=[4]}
+    Arcs Info: 
+    {<1,2>=<edges=<1,2>,w=1,d=0,ast=[]>, <1,3>=<edges=<1,3>,w=1,d=0,ast=[]>, <2,1>=<edges=<2,1>,w=1,d=0,ast=[]>, <2,3>=<edges=<2,3>,w=1,d=0,ast=[]>, <3,4>=<edges=<3,4>,w=1,d=0,ast=[]>}
+    Dictionary: 
+    N0:[N1, N2]
+    N1:[N0, N2]
+    N2:[O3]
+    Input Membrane ID: 
+    Ouput Membranes IDs: 
+
+    Delayed Spikes:
+
+    {}
+-------------------------------------------------------->>
+
+-----------------------------------------------
+
+    STEP: 4
+
+    Rules selected for NEURON ID: 1, Label: N0, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 0
+    1 * #2 a / [a]'N0 --> []'N0
+
+    Rules selected for NEURON ID: 3, Label: N2, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 0
+    1 * #6 a / [a]'N2 --> [a]'N2 ; 1    (rule fired in a previous step, but spiking in this step)
+
+***********************************************
+
+    CONFIGURATION: 4
+
+    NEURON ID: 0, Label: environment, Skipped: false, Bound timer: -1, Open in (w/ bound 0): 0
+    Multiset: #
+
+    NEURON ID: 1, Label: N0, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 0
+    Multiset: #
+
+    NEURON ID: 2, Label: N1, Skipped: false, Bound timer: -1, Open in (w/ bound 0): 0
+    Multiset: #
+
+    NEURON ID: 3, Label: N2, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 0
+    Multiset: #
+
+    NEURON ID: 4, Label: O3, Skipped: false, Bound timer: 0, Open in (w/ bound 0): 0
+    Multiset: a*2
+
+<<----------------  SN P additional info  ----------------
+    Execution Results at step: 4
+
+    INPUT SPIKE TRAIN
+
+    Steps sending spikes: 
+    Spikes sent per step: []
+
+    OUTPUT SPIKE TRAINS
+
+    Binary Sequence:
+
+
+    Natural Sequence:
+
+
+    Configuration:
+
+    Cells: 0:[]'environment, 1:[]'N0, 2:[]'N1, 3:[]'N2, 4:[a*2]'O3
+    Arcs: 
+    {1=[2, 3], 2=[1, 3], 3=[4]}
+    Arcs Info: 
+    {<1,2>=<edges=<1,2>,w=1,d=0,ast=[]>, <1,3>=<edges=<1,3>,w=1,d=0,ast=[]>, <2,1>=<edges=<2,1>,w=1,d=0,ast=[]>, <2,3>=<edges=<2,3>,w=1,d=0,ast=[]>, <3,4>=<edges=<3,4>,w=1,d=0,ast=[]>}
+    Dictionary: 
+    N0:[N1, N2]
+    N1:[N0, N2]
+    N2:[O3]
+    Input Membrane ID: 
+    Ouput Membranes IDs: 
+
+    Delayed Spikes:
+
+    {}
+-------------------------------------------------------->>
+
+For the halting configuration, Valid Configuration
+true	
+
+Halting configuration (No rule can be selected to be executed in the next step)

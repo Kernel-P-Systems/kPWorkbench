@@ -1,0 +1,238 @@
+Simulation started.
+Initial Configuration
+-------------------------------------------------
+TYPE t_a1
+#0 a1 [Active] {a} Links to #: 1
+TYPE t_d1
+#1 d1 [Active] {} Links to #: 0, 3, 4
+TYPE t_b1
+#2 b1 [Active] {a} Links to #: 3
+TYPE t_c1
+#3 c1 [Active] {2a} Links to #: 2, 1, 4
+TYPE t_e1
+#4 e1 [Active] {} Links to #: 3, 1, 5
+TYPE t_n1
+#5 n1 [Active] {3a} Links to #: 4, 6
+TYPE t_out
+#6 out [Active] {} Links to #: 5, 12
+TYPE t_a2
+#7 a2 [Active] {a} Links to #: 8
+TYPE t_d2
+#8 d2 [Active] {} Links to #: 7, 10, 11
+TYPE t_b2
+#9 b2 [Active] {a} Links to #: 10
+TYPE t_c2
+#10 c2 [Active] {2a} Links to #: 9, 8, 11
+TYPE t_e2
+#11 e2 [Active] {} Links to #: 10, 8, 12
+TYPE t_n2
+#12 n2 [Active] {4a} Links to #: 11, 6
+-------------------------------------------------
+
+STEP 1
+
+Rule #32 * =a: a -> {a}(t_d2) * applied in instance #7 a2.
+Selected instance #8 as target of type t_d2 for rule #32.
+Rule #3 * =a: a -> {a}(t_d1) * applied in instance #0 a1.
+Selected instance #1 as target of type t_d1 for rule #3.
+Rule #11 * =a: a -> {a}(t_c1) * applied in instance #2 b1.
+Selected instance #3 as target of type t_c1 for rule #11.
+Rule #40 * =a: a -> {a}(t_c2) * applied in instance #9 b2.
+Selected instance #10 as target of type t_c2 for rule #40.
+Rule #16 * =2a: a -> {a}(t_d1), {a}(t_e1),  * applied in instance #3 c1.
+Selected instance #1 as target of type t_d1 for rule #16.
+Selected instance #4 as target of type t_e1 for rule #16.
+Rule #45 * =2a: a -> {a}(t_d2), {a}(t_e2),  * applied in instance #10 c2.
+Selected instance #8 as target of type t_d2 for rule #45.
+Selected instance #11 as target of type t_e2 for rule #45.
+
+Configuration #1
+-------------------------------------------------
+TYPE t_a1
+#0 a1 [Active] {} Links to #: 1
+TYPE t_d1
+#1 d1 [Active] {2a} Links to #: 0, 3, 4
+TYPE t_b1
+#2 b1 [Active] {} Links to #: 3
+TYPE t_c1
+#3 c1 [Active] {2a} Links to #: 2, 1, 4
+TYPE t_e1
+#4 e1 [Active] {a} Links to #: 3, 1, 5
+TYPE t_n1
+#5 n1 [Active] {3a} Links to #: 4, 6
+TYPE t_out
+#6 out [Active] {} Links to #: 5, 12
+TYPE t_a2
+#7 a2 [Active] {} Links to #: 8
+TYPE t_d2
+#8 d2 [Active] {2a} Links to #: 7, 10, 11
+TYPE t_b2
+#9 b2 [Active] {} Links to #: 10
+TYPE t_c2
+#10 c2 [Active] {2a} Links to #: 9, 8, 11
+TYPE t_e2
+#11 e2 [Active] {a} Links to #: 10, 8, 12
+TYPE t_n2
+#12 n2 [Active] {4a} Links to #: 11, 6
+-------------------------------------------------
+
+STEP 2
+
+Rule #18 * <2a: a -> {} * applied in instance #4 e1.
+Rule #7 * =2a: 2a -> {a}(t_e1) * applied in instance #1 d1.
+Selected instance #4 as target of type t_e1 for rule #7.
+Rule #45 * =2a: a -> {a}(t_d2), {a}(t_e2),  * applied in instance #10 c2.
+Selected instance #8 as target of type t_d2 for rule #45.
+Selected instance #11 as target of type t_e2 for rule #45.
+Rule #36 * =2a: 2a -> {a}(t_e2) * applied in instance #8 d2.
+Selected instance #11 as target of type t_e2 for rule #36.
+Rule #16 * =2a: a -> {a}(t_d1), {a}(t_e1),  * applied in instance #3 c1.
+Selected instance #1 as target of type t_d1 for rule #16.
+Selected instance #4 as target of type t_e1 for rule #16.
+Rule #47 * <2a: a -> {} * applied in instance #11 e2.
+
+Configuration #2
+-------------------------------------------------
+TYPE t_a1
+#0 a1 [Active] {} Links to #: 1
+TYPE t_d1
+#1 d1 [Active] {a} Links to #: 0, 3, 4
+TYPE t_b1
+#2 b1 [Active] {} Links to #: 3
+TYPE t_c1
+#3 c1 [Active] {a} Links to #: 2, 1, 4
+TYPE t_e1
+#4 e1 [Active] {2a} Links to #: 3, 1, 5
+TYPE t_n1
+#5 n1 [Active] {3a} Links to #: 4, 6
+TYPE t_out
+#6 out [Active] {} Links to #: 5, 12
+TYPE t_a2
+#7 a2 [Active] {} Links to #: 8
+TYPE t_d2
+#8 d2 [Active] {a} Links to #: 7, 10, 11
+TYPE t_b2
+#9 b2 [Active] {} Links to #: 10
+TYPE t_c2
+#10 c2 [Active] {a} Links to #: 9, 8, 11
+TYPE t_e2
+#11 e2 [Active] {2a} Links to #: 10, 8, 12
+TYPE t_n2
+#12 n2 [Active] {4a} Links to #: 11, 6
+-------------------------------------------------
+
+STEP 3
+
+Rule #42 * <2a: a -> {} * applied in instance #10 c2.
+Rule #13 * <2a: a -> {} * applied in instance #3 c1.
+Rule #5 * <2a: a -> {} * applied in instance #1 d1.
+Rule #49 * =2a: 2a -> {n}(t_n2) * applied in instance #11 e2.
+Selected instance #12 as target of type t_n2 for rule #49.
+Rule #34 * <2a: a -> {} * applied in instance #8 d2.
+Rule #20 * =2a: 2a -> {n}(t_n1) * applied in instance #4 e1.
+Selected instance #5 as target of type t_n1 for rule #20.
+
+Configuration #3
+-------------------------------------------------
+TYPE t_a1
+#0 a1 [Active] {} Links to #: 1
+TYPE t_d1
+#1 d1 [Active] {} Links to #: 0, 3, 4
+TYPE t_b1
+#2 b1 [Active] {} Links to #: 3
+TYPE t_c1
+#3 c1 [Active] {} Links to #: 2, 1, 4
+TYPE t_e1
+#4 e1 [Active] {} Links to #: 3, 1, 5
+TYPE t_n1
+#5 n1 [Active] {3a, n} Links to #: 4, 6
+TYPE t_out
+#6 out [Active] {} Links to #: 5, 12
+TYPE t_a2
+#7 a2 [Active] {} Links to #: 8
+TYPE t_d2
+#8 d2 [Active] {} Links to #: 7, 10, 11
+TYPE t_b2
+#9 b2 [Active] {} Links to #: 10
+TYPE t_c2
+#10 c2 [Active] {} Links to #: 9, 8, 11
+TYPE t_e2
+#11 e2 [Active] {} Links to #: 10, 8, 12
+TYPE t_n2
+#12 n2 [Active] {4a, n} Links to #: 11, 6
+-------------------------------------------------
+
+STEP 4
+
+Rule #50 * >=a & >=n: a, n -> {} * applied in instance #12 n2.
+Rule #21 * >=a & >=n: a, n -> {} * applied in instance #5 n1.
+Rule #53 * =3a: 3a -> {3a}(t_out) * applied in instance #12 n2.
+Selected instance #6 as target of type t_out for rule #53.
+Rule #24 * =2a: 2a -> {2a}(t_out) * applied in instance #5 n1.
+Selected instance #6 as target of type t_out for rule #24.
+
+Configuration #4
+-------------------------------------------------
+TYPE t_a1
+#0 a1 [Active] {} Links to #: 1
+TYPE t_d1
+#1 d1 [Active] {} Links to #: 0, 3, 4
+TYPE t_b1
+#2 b1 [Active] {} Links to #: 3
+TYPE t_c1
+#3 c1 [Active] {} Links to #: 2, 1, 4
+TYPE t_e1
+#4 e1 [Active] {} Links to #: 3, 1, 5
+TYPE t_n1
+#5 n1 [Active] {} Links to #: 4, 6
+TYPE t_out
+#6 out [Active] {5a} Links to #: 5, 12
+TYPE t_a2
+#7 a2 [Active] {} Links to #: 8
+TYPE t_d2
+#8 d2 [Active] {} Links to #: 7, 10, 11
+TYPE t_b2
+#9 b2 [Active] {} Links to #: 10
+TYPE t_c2
+#10 c2 [Active] {} Links to #: 9, 8, 11
+TYPE t_e2
+#11 e2 [Active] {} Links to #: 10, 8, 12
+TYPE t_n2
+#12 n2 [Active] {} Links to #: 11, 6
+-------------------------------------------------
+
+STEP 5
+
+Rule #28 * =5a: 5a -> {} * applied in instance #6 out.
+
+Configuration #5
+-------------------------------------------------
+TYPE t_a1
+#0 a1 [Active] {} Links to #: 1
+TYPE t_d1
+#1 d1 [Active] {} Links to #: 0, 3, 4
+TYPE t_b1
+#2 b1 [Active] {} Links to #: 3
+TYPE t_c1
+#3 c1 [Active] {} Links to #: 2, 1, 4
+TYPE t_e1
+#4 e1 [Active] {} Links to #: 3, 1, 5
+TYPE t_n1
+#5 n1 [Active] {} Links to #: 4, 6
+TYPE t_out
+#6 out [Active] {} Links to #: 5, 12
+TYPE t_a2
+#7 a2 [Active] {} Links to #: 8
+TYPE t_d2
+#8 d2 [Active] {} Links to #: 7, 10, 11
+TYPE t_b2
+#9 b2 [Active] {} Links to #: 10
+TYPE t_c2
+#10 c2 [Active] {} Links to #: 9, 8, 11
+TYPE t_e2
+#11 e2 [Active] {} Links to #: 10, 8, 12
+TYPE t_n2
+#12 n2 [Active] {} Links to #: 11, 6
+-------------------------------------------------
+System halted at step 5 (no further rule could be applied, i.e. reached a deadlock).
+Simulation complete at step 5.
