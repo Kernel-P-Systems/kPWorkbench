@@ -103,12 +103,13 @@ internal class PLinguaToRawXmlVisitor : PLinguaSNPBaseVisitor<object>
 
         string rawGuard = context.guard() != null ? context.guard().GetText().Trim('"') : "";
         string regex = string.IsNullOrEmpty(rawGuard) ? lhsMultiset : rawGuard;
+        string delay = context.delay()?.GetText().TrimStart('+') ?? "0";
 
         var rule = new XElement("rule",
             new XAttribute("regex", regex),
             new XAttribute("consumed", consumed),
             new XAttribute("produced", produced),
-            new XAttribute("delay", "0"),
+            new XAttribute("delay", delay),
             new XAttribute("type", ruleType)
         );
 
